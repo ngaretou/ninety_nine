@@ -10,10 +10,7 @@
 .svn/
 
 #Corey edit
-ios
 test
-android
-Web
 pubspec.lock
 
 # IntelliJ related
