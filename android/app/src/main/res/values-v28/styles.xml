@@ -18,7 +18,7 @@
     </style>
     <!-- https://developer.android.com/guide/topics/display-cutout -->
     <!-- Choices are: default, shortEdges, never -->
-    <!-- <style name="ActivityTheme">   
+    <style name="ActivityTheme">   
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
-    </style> -->
+    </style>
 </resources>

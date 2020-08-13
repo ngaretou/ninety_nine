@@ -3,7 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
-// import '../providers/names.dart';
+import '../providers/names.dart';
 import '../providers/card_prefs.dart';
 import '../locale/app_localization.dart';
 
@@ -26,7 +26,9 @@ ThemeData lightTheme = ThemeData.light().copyWith(
     primaryColor: Color(0xfff5f5f5),
     accentColor: Color(0xff40bf7a),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        foregroundColor: Colors.white, backgroundColor: Colors.black54),
+        // foregroundColor: Colors.white, backgroundColor: Colors.black54),
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.teal),
     iconTheme: IconThemeData(color: Colors.black54),
     textTheme: TextTheme(
       headline6: TextStyle(color: Colors.black54, fontFamily: 'Lato'),
@@ -50,7 +52,7 @@ ThemeData blueTheme = ThemeData.light().copyWith(
     backgroundColor: Colors.blue,
     scaffoldBackgroundColor: Colors.blue,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        foregroundColor: Colors.white, backgroundColor: Colors.blueAccent),
+        foregroundColor: Colors.white, backgroundColor: Colors.blue[700]),
     iconTheme: IconThemeData(color: Colors.white),
     textTheme: TextTheme(
         headline6: TextStyle(color: Colors.white, fontFamily: 'Lato'),
@@ -66,7 +68,7 @@ ThemeData tealTheme = ThemeData.light().copyWith(
     backgroundColor: Colors.teal,
     scaffoldBackgroundColor: Colors.teal,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        foregroundColor: Colors.teal, backgroundColor: Colors.black54),
+        foregroundColor: Colors.white, backgroundColor: Colors.teal[800]),
     textTheme: TextTheme(
         headline6: TextStyle(color: Colors.black54, fontFamily: 'Lato'),
         subtitle2: TextStyle(color: Colors.grey),
@@ -85,6 +87,7 @@ class ThemeModel extends ChangeNotifier {
   ThemeData currentTheme;
   String userLang;
 
+//Actually not doing that way anymore but leaving for reference
 //this is the constructor, it runs setup to initialize currentTheme
 //https://stackoverflow.com/questions/57662372/flutter-sharedpreferences-value-to-provider-on-applcation-start
   // ThemeModel() {
@@ -93,19 +96,17 @@ class ThemeModel extends ChangeNotifier {
   //   setupLang();
   // }
 
-  //Actually not doing that way anymore but leaving for reference
-
   Future<void> initialSetupAsync(context) async {
+    await Provider.of<DivineNames>(context, listen: false).getDivineNames();
     await Provider.of<CardPrefs>(context, listen: false).setupCardPrefs();
-    // await setupTheme();
+    await setupTheme();
     await setupLang();
-    // notifyListeners();
+    return;
   }
 
   Future<void> setupTheme() async {
     print('setupTheme');
     if (currentTheme != null) {
-      notifyListeners();
       return;
     }
     //get the prefs
@@ -192,6 +193,7 @@ class ThemeModel extends ChangeNotifier {
     prefs.setString('userThemeName', _userThemeName);
   }
 
+  //Language code:
   Future<void> setupLang() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userLang')) {

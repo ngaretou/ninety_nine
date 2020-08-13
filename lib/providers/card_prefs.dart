@@ -10,12 +10,14 @@ class CardPrefs with ChangeNotifier {
   bool imageEnabled;
   bool wolofVerseEnabled;
   bool wolofalVerseEnabled;
+  bool showFavs;
 
   CardPrefs({
     this.textDirection,
     this.imageEnabled,
     this.wolofVerseEnabled,
     this.wolofalVerseEnabled,
+    this.showFavs,
   });
 
   CardPrefs _cardPrefs;
@@ -37,6 +39,7 @@ class CardPrefs with ChangeNotifier {
         imageEnabled: true,
         wolofVerseEnabled: true,
         wolofalVerseEnabled: true,
+        showFavs: false,
       );
       //Set in-memory copy of prefs
       _cardPrefs = defaultCardPrefs;
@@ -46,6 +49,7 @@ class CardPrefs with ChangeNotifier {
         'imageEnabled': true,
         'wolofVerseEnabled': true,
         'wolofalVerseEnabled': true,
+        'showFavs': false,
       });
       prefs.setString('cardPrefs', _defaultCardPrefs);
     } else {
@@ -56,9 +60,10 @@ class CardPrefs with ChangeNotifier {
         imageEnabled: jsonResponse['imageEnabled'],
         wolofVerseEnabled: jsonResponse['wolofVerseEnabled'],
         wolofalVerseEnabled: jsonResponse['wolofalVerseEnabled'],
+        showFavs: jsonResponse['showFavs'],
       );
 
-      notifyListeners();
+      // notifyListeners();
     }
   }
 
@@ -72,6 +77,7 @@ class CardPrefs with ChangeNotifier {
       imageEnabled: jsonResponse['imageEnabled'],
       wolofVerseEnabled: jsonResponse['wolofVerseEnabled'],
       wolofalVerseEnabled: jsonResponse['wolofalVerseEnabled'],
+      showFavs: jsonResponse['showFavs'],
     );
 
     //set the incoming setting
@@ -83,17 +89,20 @@ class CardPrefs with ChangeNotifier {
       _tempCardPrefs.wolofVerseEnabled = userPref;
     } else if (setting == 'wolofalVerseEnabled') {
       _tempCardPrefs.wolofalVerseEnabled = userPref;
+    } else if (setting == 'showFavs') {
+      _tempCardPrefs.showFavs = userPref;
     }
 
     //now set it in memory
     _cardPrefs = _tempCardPrefs;
-    notifyListeners();
+    // notifyListeners();
     //now save it to disk
     final _userPrefs = json.encode({
       'textDirection': _tempCardPrefs.textDirection,
       'imageEnabled': _tempCardPrefs.imageEnabled,
       'wolofVerseEnabled': _tempCardPrefs.wolofVerseEnabled,
       'wolofalVerseEnabled': _tempCardPrefs.wolofalVerseEnabled,
+      'showFavs': _tempCardPrefs.showFavs,
     });
     prefs.setString('cardPrefs', _userPrefs);
   }

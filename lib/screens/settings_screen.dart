@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutter_localizations/flutter_localizations.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'dart:async';
-// import 'dart:convert';
-
 import '../locale/app_localization.dart';
 
+import '../providers/names.dart';
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
 
-import 'about_screen.dart';
+import './about_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings-screen';
@@ -39,8 +35,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     // var _verse;
     var userThemeName =
         Provider.of<ThemeModel>(context, listen: false).userThemeName;
+    final themeProvider = Provider.of<ThemeModel>(
+      context,
+    );
     var userLang = Provider.of<ThemeModel>(context, listen: false).userLang;
-    var cardPrefs = Provider.of<CardPrefs>(context);
+    var cardPrefs = Provider.of<CardPrefs>(context, listen: false);
     final _wolof = cardPrefs.cardPrefs.wolofVerseEnabled;
     final _wolofal = cardPrefs.cardPrefs.wolofalVerseEnabled;
 
@@ -63,8 +62,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 shape: CircleBorder(),
                 color: Colors.white,
                 onPressed: () {
-                  Provider.of<ThemeModel>(context, listen: false)
-                      .setLightTheme();
+                  themeProvider.setLightTheme();
                 },
               ),
               RaisedButton(
@@ -72,8 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 shape: CircleBorder(),
                 color: Colors.blue,
                 onPressed: () {
-                  Provider.of<ThemeModel>(context, listen: false)
-                      .setBlueTheme();
+                  themeProvider.setBlueTheme();
                 },
               ),
               RaisedButton(
@@ -82,16 +79,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   shape: CircleBorder(),
                   color: Colors.teal,
                   onPressed: () {
-                    Provider.of<ThemeModel>(context, listen: false)
-                        .setTealTheme();
+                    themeProvider.setTealTheme();
                   }),
               RaisedButton(
                 child: userThemeName == 'darkTheme' ? Icon(Icons.check) : null,
                 shape: CircleBorder(),
                 color: Colors.black,
                 onPressed: () {
-                  Provider.of<ThemeModel>(context, listen: false)
-                      .setDarkTheme();
+                  themeProvider.setDarkTheme();
                 },
               ),
             ],
@@ -219,6 +214,75 @@ class _SettingsScreenState extends State<SettingsScreen> {
               },
               // secondary: const Icon(Icons.lightbulb_outline),
             ),
+          ),
+          Divider(),
+          buildListTile("Show Favorites", Icons.favorite, null),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Wrap(
+                direction: Axis.horizontal,
+                spacing: 15,
+                children: [
+                  ChoiceChip(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    selected: cardPrefs.cardPrefs.showFavs ? true : false,
+                    avatar: Icon(Icons.favorite),
+                    label: Text(
+                      "Favorites",
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                    backgroundColor: Theme.of(context).primaryColor,
+                    selectedColor: Theme.of(context).accentColor,
+                    onSelected: (bool selected) async {
+                      print('in fav selector');
+                      if (Provider.of<DivineNames>(context, listen: false)
+                              .favoriteNames
+                              .length ==
+                          0) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("No favorites yet"),
+                              content: Text(
+                                  "Click the heart icon on your favorite names to add some."),
+                              actions: [
+                                FlatButton(
+                                    child: Text("OK"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    }),
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        setState(() {
+                          cardPrefs.savePref('showFavs', true);
+                        });
+                      }
+                    },
+                  ),
+                  ChoiceChip(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    selected: cardPrefs.cardPrefs.showFavs ? false : true,
+                    avatar: Icon(Icons.all_inclusive),
+                    label: Text(
+                      "All",
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                    backgroundColor: Theme.of(context).primaryColor,
+                    selectedColor: Theme.of(context).accentColor,
+                    onSelected: (bool selected) {
+                      setState(() {
+                        cardPrefs.savePref('showFavs', false);
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ],
           ),
           Divider(),
           buildListTile(AppLocalization.of(context).settingsLanguage,

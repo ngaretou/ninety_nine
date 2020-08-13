@@ -28,19 +28,21 @@ class DivineName with ChangeNotifier {
     @required this.wolofalVerse,
     @required this.wolofalVerseRef,
     this.img,
-    this.isFav,
+    this.isFav = false,
   });
 
   Future<void> toggleFavoriteStatus() async {
-    List<String> _favList;
+    List<dynamic> _favList;
     //Get the favorites list from disk
     final prefs = await SharedPreferences.getInstance();
     //check if this is the first time a user has set prefs - if so empty list
     if (!prefs.containsKey('favList')) {
       _favList = [];
+    } else {
+//or if not get that list in memory so we can use it
+      _favList = json.decode(prefs.getString('favList')) as List<dynamic>;
     }
-    //or if not get that list in memory so we can use it
-    _favList = json.decode(prefs.getString('favList')) as List<String>;
+
     //set the model in memory to true or false and also add the id of the current name to the list or remove it
     if (isFav) {
       isFav = false;
@@ -49,6 +51,7 @@ class DivineName with ChangeNotifier {
       isFav = true;
       _favList.add(id);
     }
+    notifyListeners();
 //Now store the list back to disk
     final favList = json.encode(_favList);
     prefs.setString('favList', favList);
@@ -64,6 +67,10 @@ class DivineNames with ChangeNotifier {
   //Work with a copy of the map, not the map itself
   List<DivineName> get names {
     return [..._names];
+  }
+
+  List<DivineName> get favoriteNames {
+    return _names.where((name) => name.isFav).toList();
   }
 
   int get lastPageViewed {
