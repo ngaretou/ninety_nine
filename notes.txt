@@ -1,0 +1,12 @@
+For computers, this can get our grid like we want it, maybe 4 x 4 or something where we have 1x1 on phones
+
+body: GridView.builder(
+        padding: const EdgeInsets.all(10),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 3 / 2, 
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10), //how the grid should be structures
+        itemBuilder: (ctx, i) => Container(),
+        itemCount: loadedProduct.length,
+      ),

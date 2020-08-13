@@ -1,0 +1,33 @@
+{
+  "@@last_modified": "2020-08-07T19:54:38.584472",
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Settings screen title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsTheme": "Theme",
+  "@settingsTheme": {
+    "description": "settings: Theme section",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsCardBackground": "Card Background",
+  "@settingsCardBackground": {
+    "description": "settings: CardBackground section",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {
+    "description": "settingsLanguage",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsAbout": "About & Copyright",
+  "@settingsAbout": {
+    "description": "settingsAbout",
+    "type": "text",
+    "placeholders": {}
+  }
+}

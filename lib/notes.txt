@@ -1,0 +1,22 @@
+return Transform.scale(
+                      scale: !_isFlipped ? 0.9 : 1.0,
+                      // .9,
+
+                      //!_isFlipped ? animation.value : animation.value,
+
+                      child: GestureDetector(
+                          onTap: () => setState(() => _isFlipped = !_isFlipped),
+                          // Flippable box:
+                          // https://dev.to/mightytechno/flutter-flip-card-animation-with-3d-effect-4i3
+                          child: FlippableBox(
+                            front: imageCard(
+                              "millet",
+                              divineNames.names[i],
+                              context,
+                            ),
+                            back: textCard(
+                              divineNames.names[i],
+                              context,
+                            ),
+                            isFlipped: _isFlipped,
+                          )));

@@ -1,0 +1,33 @@
+{
+  "@@last_modified": "2020-08-07T19:54:38.584472",
+  "settingsTitle": "Paramètres",
+  "@settingsTitle": {
+    "description": "Settings screen title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsTheme": "Thème",
+  "@settingsTheme": {
+    "description": "settings: Theme section",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsCardBackground": "Fond de carte",
+  "@settingsCardBackground": {
+    "description": "settings: CardBackground section",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsLanguage": "Langue",
+  "@settingsLanguage": {
+    "description": "settingsLanguage",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsAbout": "A propos & Copyright",
+  "@settingsAbout": {
+    "description": "settingsAbout",
+    "type": "text",
+    "placeholders": {}
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "@@last_modified": "2020-08-07T19:54:38.584472",
+  "settingsTitle": "Kërale yi",
+  "@settingsTitle": {
+    "description": "Settings screen title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsTheme": "Theme (Wolof)",
+  "@settingsTheme": {
+    "description": "settings: Theme section",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsCardBackground": "Melow kàrt yi",
+  "@settingsCardBackground": {
+    "description": "settings: CardBackground section",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsLanguage": "Làmmiñu diisookaay bi",
+  "@settingsLanguage": {
+    "description": "settingsLanguage",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsAbout": "Ci mbirum appli bi",
+  "@settingsAbout": {
+    "description": "settingsAbout",
+    "type": "text",
+    "placeholders": {}
+  }
+}
