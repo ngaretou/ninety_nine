@@ -31,36 +31,35 @@ class DivineName with ChangeNotifier {
     this.isFav = false,
   });
 
-  Future<void> toggleFavoriteStatus() async {
-    List<dynamic> _favList;
-    //Get the favorites list from disk
-    final prefs = await SharedPreferences.getInstance();
-    //check if this is the first time a user has set prefs - if so empty list
-    if (!prefs.containsKey('favList')) {
-      _favList = [];
-    } else {
-//or if not get that list in memory so we can use it
-      _favList = json.decode(prefs.getString('favList')) as List<dynamic>;
-    }
+//   Future<void> toggleFavoriteStatus() async {
+//     List<dynamic> _favList;
+//     //Get the favorites list from disk
+//     final prefs = await SharedPreferences.getInstance();
+//     //check if this is the first time a user has set prefs - if so empty list
+//     if (!prefs.containsKey('favList')) {
+//       _favList = [];
+//     } else {
+//       //or if not get that list in memory so we can use it
+//       _favList = json.decode(prefs.getString('favList')) as List<dynamic>;
+//     }
 
-    //set the model in memory to true or false and also add the id of the current name to the list or remove it
-    if (isFav) {
-      isFav = false;
-      _favList.remove(id);
-    } else if (!isFav) {
-      isFav = true;
-      _favList.add(id);
-    }
-    notifyListeners();
-//Now store the list back to disk
-    final favList = json.encode(_favList);
-    prefs.setString('favList', favList);
-  }
+//     //set the model in memory to true or false and also add the id of the current name to the list or remove it
+//     if (isFav) {
+//       isFav = false;
+//       _favList.remove(id);
+//     } else if (!isFav) {
+//       isFav = true;
+//       _favList.add(id);
+//     }
+//     notifyListeners();
+// //Now store the list back to disk
+//     final favList = json.encode(_favList);
+//     prefs.setString('favList', favList);
+//   }
 }
 
 class DivineNames with ChangeNotifier {
   int _lastPageViewed;
-  bool _showMediaPlayer = false;
 
   List<DivineName> _names = [];
 
@@ -76,12 +75,6 @@ class DivineNames with ChangeNotifier {
   int get lastPageViewed {
     return _lastPageViewed;
   }
-
-  bool get showMediaPlayer {
-    return _showMediaPlayer;
-  }
-
-  void flipCard() => _showMediaPlayer = !_showMediaPlayer;
 
   // get a random number for the image
   String get randomNumber {
@@ -153,5 +146,31 @@ class DivineNames with ChangeNotifier {
       int _lastNameViewed = int.parse(storedValue);
       return _lastNameViewed;
     }
+  }
+
+  Future<void> toggleFavoriteStatus(id) async {
+    List<dynamic> _favList;
+    //Get the favorites list from disk
+    final prefs = await SharedPreferences.getInstance();
+    //check if this is the first time a user has set prefs - if so empty list
+    if (!prefs.containsKey('favList')) {
+      _favList = [];
+    } else {
+      //or if not get that list in memory so we can use it
+      _favList = json.decode(prefs.getString('favList')) as List<dynamic>;
+    }
+    var currentName = _names.firstWhere((name) => name.id == id);
+    //set the model in memory to true or false and also add the id of the current name to the list or remove it
+    if (currentName.isFav) {
+      currentName.isFav = false;
+      _favList.remove(id);
+    } else if (!currentName.isFav) {
+      currentName.isFav = true;
+      _favList.add(id);
+    }
+    notifyListeners();
+//Now store the list back to disk
+    final favList = json.encode(_favList);
+    prefs.setString('favList', favList);
   }
 }

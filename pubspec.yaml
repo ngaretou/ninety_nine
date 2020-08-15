@@ -27,6 +27,8 @@ dependencies:
   intl: ^0.16.1
   shared_preferences: ^0.5.8
   url_launcher: ^5.5.0
+  share: ^0.6.4+3
+  audioplayers: ^0.15.1
   flutter_localizations:
     sdk: flutter
 
@@ -64,6 +66,8 @@ flutter:
     - assets/images/white-bg-1.jpg
     - assets/images/white-bg-2.jpg
 
+    - assets/audio/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
@@ -80,6 +84,9 @@ flutter:
     - family: Lato
       fonts:
         - asset: assets/fonts/Lato-Regular.ttf
+    - family: Charis
+      fonts:
+        - asset: assets/fonts/CharisSILCompact-R.ttf
   #        weight: 400
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic

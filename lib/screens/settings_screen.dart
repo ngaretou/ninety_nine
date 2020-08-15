@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../locale/app_localization.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../locale/app_localization.dart';
 import '../providers/names.dart';
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
@@ -352,6 +353,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
               () {
             Navigator.of(context).pushNamed(AboutScreen.routeName);
           }),
+          buildListTile(
+            'Contact Us',
+            Icons.email,
+            () async {
+              const url = 'mailto:equipedevmbs@gmail.com';
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+          )
         ],
       ),
     );

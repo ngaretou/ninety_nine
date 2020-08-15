@@ -11,6 +11,7 @@ class CardPrefs with ChangeNotifier {
   bool wolofVerseEnabled;
   bool wolofalVerseEnabled;
   bool showFavs;
+  bool showOnboarding;
 
   CardPrefs({
     this.textDirection,
@@ -18,6 +19,7 @@ class CardPrefs with ChangeNotifier {
     this.wolofVerseEnabled,
     this.wolofalVerseEnabled,
     this.showFavs,
+    this.showOnboarding,
   });
 
   CardPrefs _cardPrefs;
@@ -40,6 +42,7 @@ class CardPrefs with ChangeNotifier {
         wolofVerseEnabled: true,
         wolofalVerseEnabled: true,
         showFavs: false,
+        showOnboarding: true,
       );
       //Set in-memory copy of prefs
       _cardPrefs = defaultCardPrefs;
@@ -50,6 +53,7 @@ class CardPrefs with ChangeNotifier {
         'wolofVerseEnabled': true,
         'wolofalVerseEnabled': true,
         'showFavs': false,
+        'showOnboarding': true,
       });
       prefs.setString('cardPrefs', _defaultCardPrefs);
     } else {
@@ -61,6 +65,7 @@ class CardPrefs with ChangeNotifier {
         wolofVerseEnabled: jsonResponse['wolofVerseEnabled'],
         wolofalVerseEnabled: jsonResponse['wolofalVerseEnabled'],
         showFavs: jsonResponse['showFavs'],
+        showOnboarding: jsonResponse['showOnboarding'],
       );
 
       // notifyListeners();
@@ -78,6 +83,7 @@ class CardPrefs with ChangeNotifier {
       wolofVerseEnabled: jsonResponse['wolofVerseEnabled'],
       wolofalVerseEnabled: jsonResponse['wolofalVerseEnabled'],
       showFavs: jsonResponse['showFavs'],
+      showOnboarding: jsonResponse['showOnboarding'],
     );
 
     //set the incoming setting
@@ -91,6 +97,8 @@ class CardPrefs with ChangeNotifier {
       _tempCardPrefs.wolofalVerseEnabled = userPref;
     } else if (setting == 'showFavs') {
       _tempCardPrefs.showFavs = userPref;
+    } else if (setting == 'showOnboarding') {
+      _tempCardPrefs.showOnboarding = userPref;
     }
 
     //now set it in memory
@@ -103,6 +111,7 @@ class CardPrefs with ChangeNotifier {
       'wolofVerseEnabled': _tempCardPrefs.wolofVerseEnabled,
       'wolofalVerseEnabled': _tempCardPrefs.wolofalVerseEnabled,
       'showFavs': _tempCardPrefs.showFavs,
+      'showOnboarding': _tempCardPrefs.showOnboarding,
     });
     prefs.setString('cardPrefs', _userPrefs);
   }
