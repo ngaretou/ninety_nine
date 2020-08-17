@@ -419,6 +419,8 @@ class _NameCardsState extends State<NameCards>
     final divineNames = Provider.of<DivineNames>(context);
 
     final cardPrefs = Provider.of<CardPrefs>(context, listen: false);
+    //If you get this far, you've seen the onboarding, so don't show again
+    cardPrefs.savePref('showOnboarding', false);
     final namesToShow = cardPrefs.cardPrefs.showFavs
         ? divineNames.favoriteNames
         : divineNames.names ?? divineNames.names;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ninety_nine/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -353,6 +354,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               () {
             Navigator.of(context).pushNamed(AboutScreen.routeName);
           }),
+          Divider(),
           buildListTile(
             'Contact Us',
             Icons.email,
@@ -364,7 +366,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 throw 'Could not launch $url';
               }
             },
-          )
+          ),
+          Divider(),
+          buildListTile('View intro again', Icons.replay, () {
+            Navigator.of(context).pushNamed(OnboardingScreen.routeName);
+          }),
         ],
       ),
     );

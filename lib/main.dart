@@ -11,6 +11,7 @@ import './providers/theme.dart';
 import './screens/settings_screen.dart';
 import './screens/about_screen.dart';
 import './screens/cards_screen.dart';
+import './screens/onboarding_screen.dart';
 
 void main() {
   runApp(
@@ -57,14 +58,20 @@ class _MyAppState extends State<MyApp> {
         builder: (ctx, snapshot) =>
             snapshot.connectionState == ConnectionState.waiting
                 ? Center(child: CircularProgressIndicator())
-                : CardsScreen(),
+                : Provider.of<CardPrefs>(context, listen: false)
+                        .cardPrefs
+                        .showOnboarding
+                    ? OnboardingScreen()
+                    : CardsScreen(),
       ),
       theme: Provider.of<ThemeModel>(context).currentTheme != null
           ? Provider.of<ThemeModel>(context).currentTheme
           : ThemeData.dark(),
       routes: {
+        CardsScreen.routeName: (ctx) => CardsScreen(),
         SettingsScreen.routeName: (ctx) => SettingsScreen(),
         AboutScreen.routeName: (ctx) => AboutScreen(),
+        OnboardingScreen.routeName: (ctx) => OnboardingScreen(),
       },
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,

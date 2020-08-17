@@ -4,6 +4,7 @@ import './settings_screen.dart';
 import '../widgets/cards.dart';
 
 class CardsScreen extends StatelessWidget {
+  static const routeName = '/cards-screen';
   // final _showOnlyFavorites = false;
   @override
   Widget build(BuildContext context) {
