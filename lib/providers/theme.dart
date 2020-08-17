@@ -14,9 +14,11 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
         foregroundColor: Colors.white, backgroundColor: Colors.teal),
     iconTheme: IconThemeData(color: Colors.white70),
     textTheme: TextTheme(
-        headline6: TextStyle(color: Colors.white70, fontFamily: 'Lato'),
+        headline6:
+            TextStyle(color: Colors.white70, fontFamily: 'Lato', fontSize: 20),
         subtitle2: TextStyle(color: Colors.white),
-        subtitle1: TextStyle(color: Colors.white)),
+        subtitle1: TextStyle(color: Colors.white),
+        bodyText2: TextStyle(color: Colors.white)),
     appBarTheme: AppBarTheme(
       color: Color(0xff1f655d),
       iconTheme: IconThemeData(color: Colors.black54),
@@ -57,7 +59,8 @@ ThemeData blueTheme = ThemeData.light().copyWith(
     textTheme: TextTheme(
         headline6: TextStyle(color: Colors.white, fontFamily: 'Lato'),
         subtitle2: TextStyle(color: Colors.white),
-        subtitle1: TextStyle(color: Colors.white)),
+        subtitle1: TextStyle(color: Colors.white),
+        bodyText2: TextStyle(color: Colors.white)),
     appBarTheme: AppBarTheme(
         color: Colors.blueAccent,
         actionsIconTheme: IconThemeData(color: Colors.white)));
@@ -70,9 +73,11 @@ ThemeData tealTheme = ThemeData.light().copyWith(
     floatingActionButtonTheme: FloatingActionButtonThemeData(
         foregroundColor: Colors.white, backgroundColor: Colors.teal[800]),
     textTheme: TextTheme(
-        headline6: TextStyle(color: Colors.black54, fontFamily: 'Lato'),
-        subtitle2: TextStyle(color: Colors.grey),
-        subtitle1: TextStyle(color: Colors.black54)),
+      headline6: TextStyle(color: Colors.black54, fontFamily: 'Lato'),
+      subtitle2: TextStyle(color: Colors.black54),
+      subtitle1: TextStyle(color: Colors.black54),
+      bodyText2: TextStyle(color: Colors.black54),
+    ),
     appBarTheme: AppBarTheme(
         color: Color(0xff1f655d),
         actionsIconTheme: IconThemeData(color: Colors.white)));

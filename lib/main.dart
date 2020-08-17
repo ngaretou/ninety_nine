@@ -46,7 +46,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     //Don't show top status bar
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIOverlays(
+        [SystemUiOverlay.top, SystemUiOverlay.bottom]);
 
     print('main.dart build');
     return MaterialApp(

@@ -149,7 +149,8 @@ class _NameCardsState extends State<NameCards>
                         child: Text("Wolof"),
                         onPressed: () {
                           Navigator.of(context).pop();
-                          Share.share(name.wolofName +
+                          Share.share('Yàlla mooy ' +
+                              name.wolofName +
                               ":  " +
                               name.wolofVerse +
                               " -- " +
@@ -161,7 +162,8 @@ class _NameCardsState extends State<NameCards>
                                 fontFamily: "Harmattan", fontSize: 22)),
                         onPressed: () {
                           Navigator.of(context).pop();
-                          Share.share(name.wolofalName +
+                          Share.share(' يࣵلَّ مࣷويْ' +
+                              name.wolofalName +
                               ":  " +
                               name.wolofalVerse +
                               " -- " +
