@@ -28,7 +28,7 @@ class AboutScreen extends StatelessWidget {
     TextStyle defaultStyle = Theme.of(context).textTheme.bodyText2;
     return Scaffold(
         appBar: AppBar(
-          title: Text('About'),
+          title: Text('About', style: Theme.of(context).textTheme.headline6),
         ),
         body: Padding(
           padding: EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -36,16 +36,20 @@ class AboutScreen extends StatelessWidget {
             RichText(
                 text: TextSpan(style: defaultStyle, children: [
               TextSpan(
-                  text: 'About and Copyright\n\n',
+                  text: '99 © 2020 SIM.',
                   style: Theme.of(context).textTheme.headline6),
-              TextSpan(text: '99 (c) 2020 SIM.'),
             ])),
-            Divider(),
+            Divider(
+              thickness: 3,
+            ),
             RichText(
                 text: TextSpan(style: defaultStyle, children: [
               TextSpan(
+                  text: 'Kàddug Yàlla gi',
+                  style: TextStyle(fontStyle: FontStyle.italic)),
+              TextSpan(
                   text:
-                      'Kàddug Yàlla gi © 2010, 2020 Les Assemblées Evangéliques du Senegal et La Mission Baptiste du Sénégal.\n\n'),
+                      ' © 2010, 2020 Les Assemblées Evangéliques du Senegal et La Mission Baptiste du Sénégal.\n\n'),
               urlGo(
                   'CC-BY-NC-ND license\n\n',
                   'https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode',
@@ -54,7 +58,9 @@ class AboutScreen extends StatelessWidget {
                   linkTheme),
               urlGo('Wolof Bible online', 'http://biblewolof.com', linkTheme),
             ])),
-            Divider(),
+            Divider(
+              thickness: 3,
+            ),
             RichText(
               text: TextSpan(
                 style: defaultStyle,
@@ -82,13 +88,15 @@ class AboutScreen extends StatelessWidget {
                       'https://unsplash.com/@augustinewong', linkTheme),
                   urlGo('Annie Spratt\n\n', 'https://unsplash.com/@anniespratt',
                       linkTheme),
+                  urlGo('Chiranjeeb Mitra\n\n',
+                      'https://unsplash.com/@chiro_007', linkTheme),
                   TextSpan(
                       text: 'Licenses:\n\n',
                       style: Theme.of(context).textTheme.subtitle2),
                   TextSpan(text: 'MIT Licensed software included:\n\n'),
-                  urlGo('audioplayers, Copyright (c) 2017 Luan Nico,\n\n',
+                  urlGo('audioplayers, Copyright © 2017 Luan Nico,\n\n',
                       'https://github.com/luanpotter/audioplayers', linkTheme),
-                  urlGo('provider, Copyright (c) 2019 Remi Rousselet\n\n',
+                  urlGo('provider, Copyright © 2019 Remi Rousselet\n\n',
                       'https://github.com/rrousselGit/provider', linkTheme),
                   TextSpan(
                       text:
@@ -116,7 +124,7 @@ class AboutScreen extends StatelessWidget {
                   TextSpan(
                       text: 'License:\n\n',
                       style: Theme.of(context).textTheme.headline6),
-                  TextSpan(text: '99 (c) 2020 SIM.\n\n'),
+                  TextSpan(text: '99 © 2020 SIM.\n\n'),
                   TextSpan(
                       text:
                           'Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n'),

@@ -22,6 +22,9 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     appBarTheme: AppBarTheme(
       color: Color(0xff1f655d),
       iconTheme: IconThemeData(color: Colors.black54),
+    ),
+    buttonTheme: ButtonThemeData(
+      minWidth: 80,
     ));
 
 ThemeData lightTheme = ThemeData.light().copyWith(
@@ -36,7 +39,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
       headline6: TextStyle(color: Colors.black54, fontFamily: 'Lato'),
       subtitle2: TextStyle(color: Colors.black54),
       subtitle1: TextStyle(color: Colors.black54),
-      bodyText2: TextStyle(color: Colors.black54),
+      bodyText2: TextStyle(color: Colors.black87),
     ),
     appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(color: Colors.black54),
@@ -46,7 +49,8 @@ ThemeData lightTheme = ThemeData.light().copyWith(
         //     subtitle2: TextStyle(color: Colors.white),
         //     subtitle1: TextStyle(color: Colors.white)),
         color: Colors.teal,
-        actionsIconTheme: IconThemeData(color: Colors.black54)));
+        actionsIconTheme: IconThemeData(color: Colors.black54)),
+    buttonTheme: ButtonThemeData(minWidth: 80));
 
 ThemeData blueTheme = ThemeData.light().copyWith(
     primaryColor: Colors.blueGrey,
@@ -63,7 +67,8 @@ ThemeData blueTheme = ThemeData.light().copyWith(
         bodyText2: TextStyle(color: Colors.white)),
     appBarTheme: AppBarTheme(
         color: Colors.blueAccent,
-        actionsIconTheme: IconThemeData(color: Colors.white)));
+        actionsIconTheme: IconThemeData(color: Colors.white)),
+    buttonTheme: ButtonThemeData(minWidth: 80));
 
 ThemeData tealTheme = ThemeData.light().copyWith(
     primaryColor: Colors.tealAccent,
@@ -76,11 +81,14 @@ ThemeData tealTheme = ThemeData.light().copyWith(
       headline6: TextStyle(color: Colors.black54, fontFamily: 'Lato'),
       subtitle2: TextStyle(color: Colors.black54),
       subtitle1: TextStyle(color: Colors.black54),
-      bodyText2: TextStyle(color: Colors.black54),
+      bodyText2: TextStyle(color: Colors.black87),
     ),
     appBarTheme: AppBarTheme(
         color: Color(0xff1f655d),
-        actionsIconTheme: IconThemeData(color: Colors.white)));
+        actionsIconTheme: IconThemeData(color: Colors.white)),
+    buttonTheme: ButtonThemeData(
+      minWidth: 80,
+    ));
 
 enum ThemeType { Light, Blue, Teal, Dark }
 

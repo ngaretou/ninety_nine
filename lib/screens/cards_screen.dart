@@ -10,20 +10,26 @@ class CardsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     print('card_screen build');
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed(SettingsScreen.routeName);
+      floatingActionButton: Builder(
+        builder: (context) {
+          return FloatingActionButton(
+              onPressed: () {
+                // Scaffold.of(context).openEndDrawer();
+                Navigator.of(context).pushNamed(SettingsScreen.routeName);
+              },
+              child: Icon(Icons.menu),
+              mini: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ));
         },
-        child: Icon(Icons.menu),
-        mini: true,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
-        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
       body: NameCards(),
+      endDrawer: SettingsScreen(),
+      // drawer: SettingsScreen(),
     );
   }
 }

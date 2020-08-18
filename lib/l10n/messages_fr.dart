@@ -21,10 +21,28 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "cancel" : MessageLookupByLibrary.simpleMessage("Annuler"),
+    "clickHereToReadMore" : MessageLookupByLibrary.simpleMessage("Cliquez ici pour en lire plus"),
+    "introPage1" : MessageLookupByLibrary.simpleMessage("introPage1"),
+    "introPage2" : MessageLookupByLibrary.simpleMessage("introPage2"),
+    "introPage3" : MessageLookupByLibrary.simpleMessage("introPage3"),
     "settingsAbout" : MessageLookupByLibrary.simpleMessage("A propos & Copyright"),
     "settingsCardBackground" : MessageLookupByLibrary.simpleMessage("Fond de carte"),
+    "settingsCardDirection" : MessageLookupByLibrary.simpleMessage("Sens des cartes"),
+    "settingsContactUs" : MessageLookupByLibrary.simpleMessage("Contactez-nous"),
+    "settingsFavorites" : MessageLookupByLibrary.simpleMessage("Afficher le favoris"),
+    "settingsLTR" : MessageLookupByLibrary.simpleMessage("GD"),
     "settingsLanguage" : MessageLookupByLibrary.simpleMessage("Langue"),
+    "settingsRTL" : MessageLookupByLibrary.simpleMessage("DG"),
+    "settingsShowFavs" : MessageLookupByLibrary.simpleMessage("Affichage des favoris"),
+    "settingsTextAll" : MessageLookupByLibrary.simpleMessage("Afficher tout"),
     "settingsTheme" : MessageLookupByLibrary.simpleMessage("Thème"),
-    "settingsTitle" : MessageLookupByLibrary.simpleMessage("Paramètres")
+    "settingsTitle" : MessageLookupByLibrary.simpleMessage("Paramètres"),
+    "settingsVerseDisplay" : MessageLookupByLibrary.simpleMessage("Affichage des versets"),
+    "settingsVerseinWolof" : MessageLookupByLibrary.simpleMessage("Versets en wolof"),
+    "settingsVerseinWolofal" : MessageLookupByLibrary.simpleMessage("Versets en wolofal"),
+    "settingsViewIntro" : MessageLookupByLibrary.simpleMessage("Regarder l\'introduction"),
+    "sharingMsg" : MessageLookupByLibrary.simpleMessage("Choisissez le script dans lequel que vous souhaitez partager"),
+    "sharingTitle" : MessageLookupByLibrary.simpleMessage("Partage")
   };
 }
