@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
     "clickHereToReadMore" : MessageLookupByLibrary.simpleMessage("Click here to read more"),
+    "favsNoneYet" : MessageLookupByLibrary.simpleMessage("No favorites yet"),
+    "favsNoneYetInstructions" : MessageLookupByLibrary.simpleMessage("Click the heart icon on your favorite names to add some."),
     "introPage1" : MessageLookupByLibrary.simpleMessage("introPage1"),
     "introPage2" : MessageLookupByLibrary.simpleMessage("introPage2"),
     "introPage3" : MessageLookupByLibrary.simpleMessage("introPage3"),

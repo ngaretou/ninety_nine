@@ -120,19 +120,19 @@
     "type": "text",
     "placeholders": {}
   },
-  "introPage1": "introPage1",
+  "introPage1": "introPage1 FR",
   "@introPage1": {
     "description": "introPage1",
     "type": "text",
     "placeholders": {}
   },
-  "introPage2": "introPage2",
+  "introPage2": "introPage2 FR",
   "@introPage2": {
     "description": "introPage2",
     "type": "text",
     "placeholders": {}
   },
-  "introPage3": "introPage3",
+  "introPage3": "introPage3 FR",
   "@introPage3": {
     "description": "introPage3",
     "type": "text",

@@ -225,6 +225,8 @@ class AppLocalization {
       desc: 'OK',
     );
   }
+  //to add:
+  //skip and start on intro page
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {

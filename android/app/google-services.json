@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "368474548405",
+    "firebase_url": "https://wolof-99.firebaseio.com",
+    "project_id": "wolof-99",
+    "storage_bucket": "wolof-99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368474548405:android:6ceb13b362262682f176fc",
+        "android_client_info": {
+          "package_name": "org.mbs.w99.wol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368474548405-04dp42889f5h2vc15vj73hqlb66hiq9u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRqQ-OXXGqTfO9jBi5wzJSvXWJxNJ7rZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368474548405-04dp42889f5h2vc15vj73hqlb66hiq9u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

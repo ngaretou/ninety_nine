@@ -1,8 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './cards_screen.dart';
+import '../locale/app_localization.dart';
+import '../providers/theme.dart';
+import '../providers/card_prefs.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const routeName = '/onboarding-screen';
@@ -13,32 +17,12 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final int _totalPages = 3;
-  final PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController =
+      PageController(initialPage: 0, viewportFraction: 1);
   int _currentPage = 0;
-
-  Widget languageChooser() {
-    return SimpleDialog(title: Text("Lakk/Langue/Language"), children: [
-      FlatButton(
-          child: Text("Wolof"),
-          onPressed: () {
-            Navigator.of(context).pop();
-          }),
-      FlatButton(
-          child: Text("French"),
-          onPressed: () {
-            Navigator.of(context).pop();
-          }),
-      FlatButton(
-          child: Text("English"),
-          onPressed: () {
-            Navigator.of(context).pop();
-          }),
-    ]);
-  }
 
   @override
   Widget build(BuildContext context) {
-    languageChooser();
     return Scaffold(
       body: Container(
         child: Stack(
@@ -54,19 +38,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     isShowImageOnTop: false,
                     bgimage: 'assets/images/1.jpg',
                     // image: null,
-                    body:
-                        'Browse the menu and order directly from the application.',
+                    body: AppLocalization.of(context).introPage1,
                     color: Color(0xFFFF7252)),
                 _buildPageContent(
                     isShowImageOnTop: true,
                     bgimage: 'assets/images/2.jpg',
-                    body:
-                        'Your order will be immediately collected and sent by our courier ',
+                    body: AppLocalization.of(context).introPage2,
                     color: Color(0xFFFFA131)),
                 _buildPageContent(
                     isShowImageOnTop: false,
                     bgimage: 'assets/images/3.jpg',
-                    body: 'Pick up delivery at your door and enjoy groceries',
+                    body: AppLocalization.of(context).introPage3,
                     color: Color(0xFF3C60FF))
               ],
             ),
@@ -89,6 +71,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   : _buildPageIndicator(false)
                           ]),
                         ),
+                        Spacer(),
+                        languageChooser(),
                         Spacer(),
                         if (_currentPage != 2)
                           InkWell(
@@ -140,6 +124,94 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  Widget languageChooser() {
+    int _value;
+    bool firstRun =
+        Provider.of<CardPrefs>(context, listen: false).showOnboarding;
+    String chosenLang =
+        Provider.of<ThemeModel>(context, listen: false).userLang;
+    if (firstRun == true) {
+      _value = 1;
+    } else {
+      switch (chosenLang) {
+        case "wo":
+          {
+            _value = 1;
+            break;
+          }
+        case "fr":
+          {
+            _value = 2;
+            break;
+          }
+        case "en":
+          {
+            _value = 3;
+            break;
+          }
+      }
+    }
+
+    TextStyle chooserStyle = TextStyle(color: Colors.black87);
+    return Container(
+      padding: EdgeInsets.only(left: 10),
+      width: 105,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: Colors.white38,
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+            value: _value,
+            items: [
+              DropdownMenuItem(
+                child: Text("Wolof", style: chooserStyle),
+                value: 1,
+              ),
+              DropdownMenuItem(
+                child: Text("Français", style: chooserStyle),
+                value: 2,
+              ),
+              DropdownMenuItem(
+                child: Text("English", style: chooserStyle),
+                value: 3,
+              ),
+            ],
+            onChanged: (value) {
+              switch (value) {
+                case 1:
+                  {
+                    setState(() {
+                      Provider.of<ThemeModel>(context, listen: false)
+                          .setLang('wo');
+                      _value = value;
+                    });
+                    break;
+                  }
+                case 2:
+                  {
+                    setState(() {
+                      Provider.of<ThemeModel>(context, listen: false)
+                          .setLang('fr');
+                      _value = value;
+                    });
+                    break;
+                  }
+                case 3:
+                  {
+                    setState(() {
+                      Provider.of<ThemeModel>(context, listen: false)
+                          .setLang('en');
+                      _value = value;
+                    });
+                    break;
+                  }
+              }
+            }),
+      ),
+    );
+  }
+
   Widget _buildPageContent(
       {String bgimage,
       // String image,
@@ -178,14 +250,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         // child: Image.asset(image),
                         ),
                     SizedBox(height: 50),
-                    Text(
-                      body,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 24,
-                          height: 1.6,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white),
+                    Container(
+                      child: Text(
+                        body,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 24,
+                            height: 1.6,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.white),
+                      ),
                     ),
                   ],
                 ),
