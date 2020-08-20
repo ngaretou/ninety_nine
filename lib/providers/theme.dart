@@ -68,7 +68,11 @@ ThemeData blueTheme = ThemeData.light().copyWith(
     appBarTheme: AppBarTheme(
         color: Colors.blueAccent,
         actionsIconTheme: IconThemeData(color: Colors.white)),
-    buttonTheme: ButtonThemeData(minWidth: 80));
+    buttonTheme: ButtonThemeData(minWidth: 80),
+    dialogTheme: DialogTheme(
+        contentTextStyle: TextStyle(color: Colors.black54),
+        titleTextStyle: TextStyle(
+            color: Colors.black54, fontFamily: 'Lato', fontSize: 20)));
 
 ThemeData tealTheme = ThemeData.light().copyWith(
     primaryColor: Colors.tealAccent,

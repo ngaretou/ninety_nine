@@ -12,6 +12,7 @@
 #Corey edit
 test
 pubspec.lock
+**/android/key.properties
 
 # IntelliJ related
 *.iml

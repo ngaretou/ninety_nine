@@ -157,7 +157,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       padding: EdgeInsets.only(left: 10),
       width: 105,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(5.0),
         color: Colors.white38,
       ),
       child: DropdownButtonHideUnderline(

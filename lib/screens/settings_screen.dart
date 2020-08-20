@@ -383,7 +383,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selected: cardPrefs.cardPrefs.showFavs ? false : true,
                 avatar: Icon(Icons.all_inclusive),
                 label: Text(
-                  "All",
+                  AppLocalization.of(context).settingsTextAll,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 backgroundColor: Theme.of(context).primaryColor,

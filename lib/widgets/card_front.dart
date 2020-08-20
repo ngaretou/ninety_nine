@@ -49,6 +49,7 @@ class CardFront extends StatelessWidget {
         names.arabicName,
         textAlign: TextAlign.center,
         style: TextStyle(
+            height: 1,
             color: Colors.white,
             fontFamily: "Harmattan",
             fontSize: adaptiveFontSize),
@@ -60,6 +61,7 @@ class CardFront extends StatelessWidget {
         names.wolofalName,
         textAlign: TextAlign.center,
         style: TextStyle(
+            height: 1,
             color: Colors.white,
             fontFamily: "Harmattan",
             fontSize: adaptiveFontSize),
@@ -71,6 +73,7 @@ class CardFront extends StatelessWidget {
         names.wolofName,
         textAlign: TextAlign.center,
         style: TextStyle(
+          height: 1,
           fontFamily: "Harmattan",
           color: Colors.white,
           fontSize: adaptiveFontSize,
@@ -105,6 +108,7 @@ class CardFront extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(20.0),
           child: isLandscape
+              // Landscape version
               ? Column(
                   children: [
                     Expanded(
@@ -122,7 +126,7 @@ class CardFront extends StatelessWidget {
                               color: Theme.of(context).primaryColor,
                               thickness: 3,
                               width: 100),
-                          arabicNameFront(mediaQuery, name),
+                          Expanded(child: arabicNameFront(mediaQuery, name)),
                           VerticalDivider(
                               color: Theme.of(context).primaryColor,
                               thickness: 3,
@@ -137,18 +141,31 @@ class CardFront extends StatelessWidget {
                     Expanded(flex: 1, child: CardIconBar(name, context)),
                   ],
                 )
+              //Portrait version
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(child: SizedBox(width: 20)),
-                    arabicNameFront(mediaQuery, name),
+                    Expanded(
+                        flex: 2,
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: arabicNameFront(mediaQuery, name))),
                     Divider(
                         color: Theme.of(context).primaryColor, thickness: 3),
-                    wolofalNameFront(mediaQuery, name),
+                    Expanded(
+                        flex: 2,
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: wolofalNameFront(mediaQuery, name))),
                     Divider(
                         color: Theme.of(context).primaryColor, thickness: 3),
-                    wolofNameFront(mediaQuery, name),
+                    Expanded(
+                        flex: 2,
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: wolofNameFront(mediaQuery, name))),
                     Expanded(
                       child: CardIconBar(name, context),
                     ),

@@ -72,13 +72,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "settingsFavorites": "Afficher le favoris",
+  "settingsFavorites": "Les favoris",
   "@settingsFavorites": {
     "description": "settingsFavorites",
     "type": "text",
     "placeholders": {}
   },
-  "settingsTextAll": "Afficher tout",
+  "settingsTextAll": "Tout",
   "@settingsTextAll": {
     "description": "settingsTextAll",
     "type": "text",

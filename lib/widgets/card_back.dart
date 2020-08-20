@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
 
+import '../locale/app_localization.dart';
+
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
 import '../providers/theme.dart';
@@ -145,7 +147,9 @@ class CardBack extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Click here to read more ',
+                                Text(
+                                    AppLocalization.of(context)
+                                        .clickHereToReadMore,
                                     style: TextStyle(color: _fontColor)),
                                 Icon(Icons.arrow_forward, color: _fontColor),
                               ],
