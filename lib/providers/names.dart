@@ -80,10 +80,11 @@ class DivineNames with ChangeNotifier {
   String get randomNumber {
     Random rnd = new Random();
     int min = 1;
-    int max = 10;
+    int max = 14;
     // rnd =
     var result = min + rnd.nextInt(max - min);
     var r = result.toString();
+
     return r;
   }
 

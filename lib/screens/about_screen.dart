@@ -90,6 +90,10 @@ class AboutScreen extends StatelessWidget {
                       linkTheme),
                   urlGo('Chiranjeeb Mitra\n\n',
                       'https://unsplash.com/@chiro_007', linkTheme),
+                  urlGo('Jeff Attaway\n\n',
+                      'https://www.flickr.com/photos/attawayjl/', linkTheme),
+                  urlGo('Frank McKenna\n\n',
+                      'https://unsplash.com/@frankiefoto', linkTheme),
                   TextSpan(
                       text: 'Licenses:\n\n',
                       style: Theme.of(context).textTheme.subtitle2),

@@ -214,7 +214,8 @@ class ThemeModel extends ChangeNotifier {
   Future<void> setupLang() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userLang')) {
-      setLang('wo');
+      // setLang('fr');
+      setLang('en');
     } else {
       final savedUserLang = json.decode(prefs.getString('userLang')) as String;
       setLang(savedUserLang);

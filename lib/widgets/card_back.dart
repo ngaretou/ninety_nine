@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
+import 'dart:ui' as ui;
 
 import '../locale/app_localization.dart';
 
@@ -26,7 +27,8 @@ class CardBack extends StatelessWidget {
     final bool _isDark =
         Provider.of<ThemeModel>(context, listen: false).userThemeName ==
             'darkTheme';
-
+    ui.TextDirection rtlText = ui.TextDirection.rtl;
+    ui.TextDirection ltrText = ui.TextDirection.ltr;
     Color _fontColor = _isDark ? Colors.white : Colors.black;
 
     Widget textRS(input, double fontReduction) {
@@ -51,6 +53,7 @@ class CardBack extends StatelessWidget {
           fontFamily: "Harmattan",
           fontSize: 40 - fontReduction,
         ),
+        textDirection: rtlText,
       );
     }
 
@@ -106,12 +109,16 @@ class CardBack extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(child: textRS(name.wolofName, 0)),
+                              //change
+                              // Expanded(child: textRS('The All-Hearing', 0)),
                               VerticalDivider(
                                 color: Theme.of(context).primaryColor,
                                 thickness: 3,
                               ),
                               Expanded(
                                 child: textAS(name.wolofalName, 0),
+                                //change
+                                // child: textAS('دࣹ اَلّ هِيرِنْ', 0),
                               ),
                             ],
                           ),
@@ -125,6 +132,11 @@ class CardBack extends StatelessWidget {
                                     ),
                                     textAS(name.wolofalVerse, 0.0),
                                     textAS(name.wolofalVerseRef, 10.0)
+                                    //change
+                                    // textAS(
+                                    //     'وࣹنْ دࣹ رَيْتࣴسْ ڪرَيْ فࣷرْ هࣹلݒّ دࣹ لࣷردْ هِيرسّ اَندْ دࣹلِفࣴرسْ دࣹمْ اࣷوتّ اࣴفْ اَلّ دࣹرْ تࣴرࣴبَلسّ؞',
+                                    //     0.0),
+                                    // textAS('سَامّ 34 آيَ 17', 10.0)
                                   ],
                                 )
                               : SizedBox(width: 20),
@@ -137,8 +149,14 @@ class CardBack extends StatelessWidget {
                                       thickness: 3,
                                     ),
                                     textRS(name.wolofVerse, 0.0),
+                                    //change
+                                    // textRS(
+                                    //     'When the righteous cry for help, the LORD hears and delivers them out of all their troubles.',
+                                    //     0.0),
                                     SizedBox(height: 20),
                                     textRS(name.wolofVerseRef, 10.0),
+                                    //change
+                                    // textRS('Psalm 34 verse 17', 10.0),
                                   ],
                                 )
                               : SizedBox(width: 20),

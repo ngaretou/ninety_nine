@@ -23,6 +23,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   //Main Settings screen construction:
   @override
   Widget build(BuildContext context) {
+    final bool _isPhone = (MediaQuery.of(context).size.width +
+            MediaQuery.of(context).size.height) <=
+        1350;
     final userThemeName =
         Provider.of<ThemeModel>(context, listen: false).userThemeName;
     final themeProvider = Provider.of<ThemeModel>(context, listen: false);
@@ -273,7 +276,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ]))),
           Expanded(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment:
+                  _isPhone ? MainAxisAlignment.end : MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
@@ -307,7 +311,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ]))),
           Expanded(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment:
+                  _isPhone ? MainAxisAlignment.end : MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
@@ -462,6 +467,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
+    print(MediaQuery.of(context).size.width);
 ///////////////////////////////
     return Scaffold(
       appBar: AppBar(
@@ -472,7 +478,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       //If the width of the screen is greater or equal to 500
       //show the wide view
-      body: MediaQuery.of(context).size.width >= 500
+      body: MediaQuery.of(context).size.width >= 730
           ? Padding(
               padding: EdgeInsets.symmetric(horizontal: 50),
               child: ListView(
@@ -511,11 +517,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       }
                     },
                   ),
-                  Divider(),
-                  settingTitle(AppLocalization.of(context).settingsViewIntro,
-                      Icons.replay, () {
-                    Navigator.of(context).pushNamed(OnboardingScreen.routeName);
-                  }),
+                  // Divider(),
+                  // settingTitle(AppLocalization.of(context).settingsViewIntro,
+                  //     Icons.replay, () {
+                  //   Navigator.of(context).pushNamed(OnboardingScreen.routeName);
+                  // }),
                 ],
               ),
             )
@@ -550,12 +556,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     }
                   },
                 ),
-                Divider(),
-                settingTitle(
-                    AppLocalization.of(context).settingsViewIntro, Icons.replay,
-                    () {
-                  Navigator.of(context).pushNamed(OnboardingScreen.routeName);
-                }),
+                // Divider(),
+                // settingTitle(
+                //     AppLocalization.of(context).settingsViewIntro, Icons.replay,
+                //     () {
+                //   Navigator.of(context).pushNamed(OnboardingScreen.routeName);
+                // }),
               ],
             ),
       // ),

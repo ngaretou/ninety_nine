@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
-
+import 'dart:ui' as ui;
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
 
@@ -24,6 +24,8 @@ class CardFront extends StatelessWidget {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     double adaptiveFontSize;
+    ui.TextDirection rtlText = ui.TextDirection.rtl;
+    ui.TextDirection ltrText = ui.TextDirection.ltr;
 
     // final bool _isPhone = (MediaQuery.of(context).size.width +
     //         MediaQuery.of(context).size.width) <=
@@ -37,48 +39,54 @@ class CardFront extends StatelessWidget {
     //if it's portrait mode
     if (mediaQuery.orientation != Orientation.landscape) {
       adaptiveFontSize =
-          min(_portraitFontSize * (mediaQuery.size.width / 320), 75);
+          min(_portraitFontSize * (mediaQuery.size.width / 320), 70);
     } else if (mediaQuery.orientation == Orientation.landscape) {
       // adaptiveFontSize = min(_portraitFontSize * (mediaQuery.size.width / 320), 75);
       adaptiveFontSize =
-          min(_landscapeFontSize * (mediaQuery.size.width / 568), 75);
+          min(_landscapeFontSize * (mediaQuery.size.width / 568), 70);
     }
-    print(mediaQuery.size.width);
+
+//Note that the + " " in the arabicName and wolofalName is a hack -
+//otherwise as of Sep 24 2020 teh end of hte line gets cut off
+//Tried Padding widget around but the problem is the Text widget itslef not seeing how much space is needed
     Widget arabicNameFront(mediaQuery, names) {
-      return Text(
-        names.arabicName,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            height: 1,
-            color: Colors.white,
-            fontFamily: "Harmattan",
-            fontSize: adaptiveFontSize),
-      );
+      return Text(" " + names.arabicName + " ",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              // height: 1.3,
+              color: Colors.white,
+              fontFamily: "Harmattan",
+              fontSize: adaptiveFontSize),
+          textDirection: rtlText);
     }
 
     Widget wolofalNameFront(mediaQuery, names) {
       return Text(
-        names.wolofalName,
+        " " + names.wolofalName + " ",
+        //change
+        // 'دࣹ اَلّ هِيرِنْ',
         textAlign: TextAlign.center,
         style: TextStyle(
-            height: 1,
+            // height: 1,
             color: Colors.white,
             fontFamily: "Harmattan",
             fontSize: adaptiveFontSize),
+        textDirection: rtlText,
       );
     }
 
     Widget wolofNameFront(mediaQuery, names) {
-      return Text(
-        names.wolofName,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          height: 1,
-          fontFamily: "Harmattan",
-          color: Colors.white,
-          fontSize: adaptiveFontSize,
-        ),
-      );
+      return Text(names.wolofName,
+          //change
+          // 'The All-Hearing',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            height: 1,
+            fontFamily: "Harmattan",
+            color: Colors.white,
+            fontSize: adaptiveFontSize,
+          ),
+          textDirection: ltrText);
     }
 
     return Container(
@@ -90,6 +98,8 @@ class CardFront extends StatelessWidget {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage("assets/images/${name.img}.jpg"),
+                //change
+                // image: AssetImage("assets/images/4.jpg"),
               ),
             )
           : null,
@@ -149,6 +159,7 @@ class CardFront extends StatelessWidget {
                     Expanded(child: SizedBox(width: 20)),
                     Expanded(
                         flex: 2,
+                        //This Align widget aligns vertically here
                         child: Align(
                             alignment: Alignment.center,
                             child: arabicNameFront(mediaQuery, name))),
@@ -157,8 +168,11 @@ class CardFront extends StatelessWidget {
                     Expanded(
                         flex: 2,
                         child: Align(
-                            alignment: Alignment.center,
-                            child: wolofalNameFront(mediaQuery, name))),
+                          alignment: Alignment.center,
+                          child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: wolofalNameFront(mediaQuery, name)),
+                        )),
                     Divider(
                         color: Theme.of(context).primaryColor, thickness: 3),
                     Expanded(
