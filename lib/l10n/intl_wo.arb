@@ -6,7 +6,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "settingsTheme": "Theme (WO)",
+  "settingsTheme": "Melow wërale bi",
   "@settingsTheme": {
     "description": "settings: Theme section",
     "type": "text",
@@ -30,25 +30,25 @@
     "type": "text",
     "placeholders": {}
   },
-  "settingsCardDirection": "Kàrt man nañu dem: ",
+  "settingsCardDirection": "Kàrt yi man nañu jëm: ",
   "@settingsCardDirection": {
     "description": "settingsCardDirection",
     "type": "text",
     "placeholders": {}
   },
-  "settingsLTR": "CN",
+  "settingsLTR": "Ndeyjoor",
   "@settingsLTR": {
     "description": "settingsLTR",
     "type": "text",
     "placeholders": {}
   },
-  "settingsRTL": "NC",
+  "settingsRTL": "Càmmoñ",
   "@settingsRTL": {
     "description": "settingsRTL",
     "type": "text",
     "placeholders": {}
   },
-  "settingsVerseDisplay": "Yan aaya lañu wone",
+  "settingsVerseDisplay": "Aaya yi nga bëgga gis: ",
   "@settingsVerseDisplay": {
     "description": "settingsVerseDisplay",
     "type": "text",
@@ -66,7 +66,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "settingsShowFavs": "Woneel tuur: ",
+  "settingsShowFavs": "Woneel tur: ",
   "@settingsShowFavs": {
     "description": "settingsShowFavs",
     "type": "text",
@@ -78,7 +78,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "settingsTextAll": "Yepp",
+  "settingsTextAll": "Yépp",
   "@settingsTextAll": {
     "description": "settingsTextAll",
     "type": "text",
@@ -90,7 +90,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "settingsViewIntro": "Xòolat ubbite gi",
+  "settingsViewIntro": "Xoolat ubbite gi",
   "@settingsViewIntro": {
     "description": "settingsViewIntro",
     "type": "text",
@@ -102,7 +102,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "sharingMsg": "Ban mbindin nga bëgg séddo?",
+  "sharingMsg": "Ci ban mbindin nga bëgga séddoo?",
   "@sharingMsg": {
     "description": "sharingMsg",
     "type": "text",
@@ -114,7 +114,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "clickHereToReadMore": "Boo bëgg doole ci njàng mi: ",
+  "clickHereToReadMore": "Bësal fii ngir yokk sa njàng: ",
   "@clickHereToReadMore": {
     "description": "clickHereToReadMore",
     "type": "text",
@@ -138,13 +138,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "favsNoneYet": "Tànnuguloo ay tuur",
+  "favsNoneYet": "Tànnaguloo benn tur",
   "@favsNoneYet": {
     "description": "favsNoneYet",
     "type": "text",
     "placeholders": {}
   },
-  "favsNoneYetInstructions": "Bëssal ci xol ba ci tuur yi nga gën bëgg.",
+  "favsNoneYetInstructions": "Bësal ci xol bi ci tur yi nga gëna bëgg.",
   "@favsNoneYetInstructions": {
     "description": "favsNoneYetInstructions",
     "type": "text",
