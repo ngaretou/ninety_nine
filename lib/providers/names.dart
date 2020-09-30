@@ -30,36 +30,11 @@ class DivineName with ChangeNotifier {
     this.img,
     this.isFav = false,
   });
-
-//   Future<void> toggleFavoriteStatus() async {
-//     List<dynamic> _favList;
-//     //Get the favorites list from disk
-//     final prefs = await SharedPreferences.getInstance();
-//     //check if this is the first time a user has set prefs - if so empty list
-//     if (!prefs.containsKey('favList')) {
-//       _favList = [];
-//     } else {
-//       //or if not get that list in memory so we can use it
-//       _favList = json.decode(prefs.getString('favList')) as List<dynamic>;
-//     }
-
-//     //set the model in memory to true or false and also add the id of the current name to the list or remove it
-//     if (isFav) {
-//       isFav = false;
-//       _favList.remove(id);
-//     } else if (!isFav) {
-//       isFav = true;
-//       _favList.add(id);
-//     }
-//     notifyListeners();
-// //Now store the list back to disk
-//     final favList = json.encode(_favList);
-//     prefs.setString('favList', favList);
-//   }
 }
 
 class DivineNames with ChangeNotifier {
   int _lastPageViewed;
+  List<int> _pictureIds = [];
 
   List<DivineName> _names = [];
 
@@ -77,13 +52,25 @@ class DivineNames with ChangeNotifier {
   }
 
   // get a random number for the image
+  //This is to select random numbers until the pictures are gone, then loop again, but not in same order.
   String get randomNumber {
+    //set max to the last int of the number of pics that we ship with the app
+    int numberOfPicsAvailable = 14;
+    String r;
     Random rnd = new Random();
-    int min = 1;
-    int max = 14;
-    // rnd =
-    var result = min + rnd.nextInt(max - min);
-    var r = result.toString();
+
+    //If this is first run, no pics yet, put all possible pics in
+    if (_pictureIds.length == 0) {
+      _pictureIds = List<int>.generate(numberOfPicsAvailable, (i) => i + 1);
+    }
+
+    //get a random number between 1 and the number of pics we have left in this round
+    var indexToGrab = rnd.nextInt(_pictureIds.length) + 1;
+
+    //This line does two things -
+    //grabs the element at the random index we just generated and gets rid of it in the list
+    //so we don't grab that picture again until all pics have been used
+    r = _pictureIds.removeAt(indexToGrab).toString();
 
     return r;
   }
