@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>368474548405-ap5cqdtjce3pkl96ub058fqiqtij6e5r.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.368474548405-ap5cqdtjce3pkl96ub058fqiqtij6e5r</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBxvNzNnjVqOTJjsGiiPQOUltGIhO5cevc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>368474548405</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.mbs.w99.wol</string>
+	<key>PROJECT_ID</key>
+	<string>wolof-99</string>
+	<key>STORAGE_BUCKET</key>
+	<string>wolof-99.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:368474548405:ios:c267b96b934c9c31f176fc</string>
+	<key>DATABASE_URL</key>
+	<string>https://wolof-99.firebaseio.com</string>
+</dict>
+</plist>
