@@ -87,7 +87,7 @@ class _NameCardsState extends State<NameCards>
     final bool _isPhone = (MediaQuery.of(context).size.width +
             MediaQuery.of(context).size.height) <=
         1350;
-    print(_isPhone);
+    // print(_isPhone);
 
     final Matrix4 phoneTransform = Matrix4.identity()
       ..setEntry(3, 2, 0.002)
@@ -141,7 +141,7 @@ class _NameCardsState extends State<NameCards>
                         }
                       }
 
-                      print('in onTap');
+                      // print('in onTap');
                     },
                     child: _animation.value <= 0.5
                         ? CardFront(namesToShow[i], context)

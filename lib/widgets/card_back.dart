@@ -60,7 +60,7 @@ class CardBack extends StatelessWidget {
     bool _isPhone = (MediaQuery.of(context).size.width +
             MediaQuery.of(context).size.height) <=
         1350;
-    print(MediaQuery.of(context).size.width);
+    // print(MediaQuery.of(context).size.width);
 
     //Card back does not have alternate layouts for portrait and landscape
     return Transform(

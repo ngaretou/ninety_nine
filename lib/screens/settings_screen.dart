@@ -467,7 +467,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
-    print(MediaQuery.of(context).size.width);
+    // print(MediaQuery.of(context).size.width);
 ///////////////////////////////
     return Scaffold(
       appBar: AppBar(

@@ -23,8 +23,6 @@ class _PlayerState extends State<Player> {
     } else {
       player = await cache.play('audio/${widget.file}.m4a');
       player.onPlayerCompletion.listen((_) {
-        print('oncompletion');
-
         player.stop();
         setState(() {
           if (isPaused) {
