@@ -164,7 +164,7 @@ class AppLocalization {
 
   String get cancel {
     return Intl.message(
-      "Cancel",
+      'Cancel',
       name: 'cancel',
       desc: 'cancel',
     );
@@ -172,7 +172,7 @@ class AppLocalization {
 
   String get clickHereToReadMore {
     return Intl.message(
-      "Click here to read more",
+      'Click here to read more',
       name: 'clickHereToReadMore',
       desc: 'clickHereToReadMore',
     );
@@ -180,31 +180,71 @@ class AppLocalization {
 
   String get introPage1 {
     return Intl.message(
-      "introPage1",
+      "This app contains 99 names of God in Arabic, Wolofal, and Wolof.\n\nRead and reflect on the verses found on the back of the cards to know God better and understand how he wants us to live.",
       name: 'introPage1',
-      desc: 'introPage1',
+      desc: 'General introductory words',
     );
   }
 
   String get introPage2 {
     return Intl.message(
-      "introPage2",
+      "When you read a verse, ask yourself four questions:\n\n 1.\tWhat do these verses teach about God?\n\n 2.\tWhat do these verses teach about people?\n\n 3.\tHow can I live out these verses?\n\n 4.\tWho in my life needs to hear these verses?",
       name: 'introPage2',
-      desc: 'introPage2',
+      desc: 'DBS questions',
     );
   }
 
-  String get introPage3 {
+  String get introPage3a {
     return Intl.message(
-      "introPage3",
-      name: 'introPage3',
-      desc: 'introPage3',
+      "As you meditate on God’s Word, you will see your love for him grow.\n\nGod says in Proverbs 8:17:",
+      name: 'introPage3a',
+      desc: 'Motivation for DBS',
+    );
+  }
+
+  String get introPage3b {
+    return Intl.message(
+      'I love those who love me, and those who seek me diligently find me.',
+      name: 'introPage3b',
+      desc: 'Motivation for DBS: bible verse',
+    );
+  }
+
+  String get introPage4a {
+    return Intl.message(
+      'On each card you can:',
+      name: 'introPage4a',
+      desc: 'On each card you can',
+    );
+  }
+
+  String get introPage4b {
+    return Intl.message(
+      'hear the verse read,',
+      name: 'introPage4b',
+      desc: 'hear the verse read,',
+    );
+  }
+
+  String get introPage4c {
+    return Intl.message(
+      'share the verse with your friends,',
+      name: 'introPage4c',
+      desc: 'share the verse with your friends,',
+    );
+  }
+
+  String get introPage4d {
+    return Intl.message(
+      'and choose your favorites.',
+      name: 'introPage4d',
+      desc: 'and choose your favorites.',
     );
   }
 
   String get favsNoneYet {
     return Intl.message(
-      "No favorites yet",
+      'No favorites yet',
       name: 'favsNoneYet',
       desc: 'favsNoneYet',
     );
@@ -212,7 +252,7 @@ class AppLocalization {
 
   String get favsNoneYetInstructions {
     return Intl.message(
-      "Click the heart icon on your favorite names to add some.",
+      'Click the heart icon on your favorite names to add some.',
       name: 'favsNoneYetInstructions',
       desc: 'favsNoneYetInstructions',
     );
@@ -220,9 +260,25 @@ class AppLocalization {
 
   String get ok {
     return Intl.message(
-      "OK",
-      name: 'OK',
+      'OK',
+      name: 'ok',
       desc: 'OK',
+    );
+  }
+
+  String get skip {
+    return Intl.message(
+      'Skip',
+      name: 'skip',
+      desc: 'Skip on onboarding screen',
+    );
+  }
+
+  String get start {
+    return Intl.message(
+      'Start',
+      name: 'start',
+      desc: 'Start on onboarding screen',
     );
   }
   //to add:

@@ -70,7 +70,9 @@ class DivineNames with ChangeNotifier {
     //This line does two things -
     //grabs the element at the random index we just generated and gets rid of it in the list
     //so we don't grab that picture again until all pics have been used
+    print('r');
     r = _pictureIds.removeAt(indexToGrab).toString();
+    print(r);
 
     return r;
   }

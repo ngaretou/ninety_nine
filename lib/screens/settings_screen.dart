@@ -517,11 +517,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       }
                     },
                   ),
-                  // Divider(),
-                  // settingTitle(AppLocalization.of(context).settingsViewIntro,
-                  //     Icons.replay, () {
-                  //   Navigator.of(context).pushNamed(OnboardingScreen.routeName);
-                  // }),
+                  Divider(),
+                  settingTitle(AppLocalization.of(context).settingsViewIntro,
+                      Icons.replay, () {
+                    Navigator.of(context).pushNamed(OnboardingScreen.routeName);
+                  }),
                 ],
               ),
             )
@@ -556,12 +556,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     }
                   },
                 ),
-                // Divider(),
-                // settingTitle(
-                //     AppLocalization.of(context).settingsViewIntro, Icons.replay,
-                //     () {
-                //   Navigator.of(context).pushNamed(OnboardingScreen.routeName);
-                // }),
+                Divider(),
+                settingTitle(
+                    AppLocalization.of(context).settingsViewIntro, Icons.replay,
+                    () {
+                  Navigator.of(context).pushNamed(OnboardingScreen.routeName);
+                }),
               ],
             ),
       // ),

@@ -25,9 +25,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "clickHereToReadMore" : MessageLookupByLibrary.simpleMessage("Cliquez ici pour en lire plus"),
     "favsNoneYet" : MessageLookupByLibrary.simpleMessage("Vous n\'avez pas encore choisi des favoris"),
     "favsNoneYetInstructions" : MessageLookupByLibrary.simpleMessage("Cliquez sur l\'icône du cœur pour ajouter quelques favoris"),
-    "introPage1" : MessageLookupByLibrary.simpleMessage("introPage1 FR"),
-    "introPage2" : MessageLookupByLibrary.simpleMessage("introPage2 FR"),
-    "introPage3" : MessageLookupByLibrary.simpleMessage("introPage3 FR"),
+    "introPage1" : MessageLookupByLibrary.simpleMessage("Cette application contient les 99 noms de Dieu en arab, en wolofal, et en wolof.\n\nLisez et réfléchissez aux versets qui se trouvent au dos des cartes pour mieux connaître Dieu et comprendre comment il veut que nous vivions."),
+    "introPage2" : MessageLookupByLibrary.simpleMessage("Lorsque vous lisez un verset, posez-vous quatre questions :\n\n1.\tQu\'est-ce que ces versets enseignent sur Dieu ?\n\n2.\tQu\'est-ce que ces versets enseignent sur les humains ?\n\n3.\tComment puis-je vivre ces versets ?\n\n4.\tQui dans ma vie a besoin d\'entendre ces versets ?"),
+    "introPage3a" : MessageLookupByLibrary.simpleMessage("En méditant sur la Parole de Dieu, vous verrez grandir votre amour pour lui.\n\nDieu dit en Proverbes 8:17 :"),
+    "introPage3b" : MessageLookupByLibrary.simpleMessage("J’aime ceux qui m’aiment, Et ceux qui me cherchent me trouvent."),
+    "introPage4a" : MessageLookupByLibrary.simpleMessage("Sur chaque carte, vous pouvez :"),
+    "introPage4b" : MessageLookupByLibrary.simpleMessage("entendre la lecture du verset,"),
+    "introPage4c" : MessageLookupByLibrary.simpleMessage("partager le verset avec vos amis,"),
+    "introPage4d" : MessageLookupByLibrary.simpleMessage("et choisir vos favoris."),
+    "ok" : MessageLookupByLibrary.simpleMessage("OK"),
     "settingsAbout" : MessageLookupByLibrary.simpleMessage("A propos & Copyright"),
     "settingsCardBackground" : MessageLookupByLibrary.simpleMessage("Fond de carte"),
     "settingsCardDirection" : MessageLookupByLibrary.simpleMessage("Sens des cartes"),
@@ -45,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsVerseinWolofal" : MessageLookupByLibrary.simpleMessage("Versets en wolofal"),
     "settingsViewIntro" : MessageLookupByLibrary.simpleMessage("Regarder l\'introduction"),
     "sharingMsg" : MessageLookupByLibrary.simpleMessage("Choisissez le script dans lequel que vous souhaitez partager"),
-    "sharingTitle" : MessageLookupByLibrary.simpleMessage("Partage")
+    "sharingTitle" : MessageLookupByLibrary.simpleMessage("Partage"),
+    "skip" : MessageLookupByLibrary.simpleMessage("Sauter"),
+    "start" : MessageLookupByLibrary.simpleMessage("Démarrer")
   };
 }

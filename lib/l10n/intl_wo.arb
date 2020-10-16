@@ -120,21 +120,51 @@
     "type": "text",
     "placeholders": {}
   },
-  "introPage1": "introPage1 WO",
+  "introPage1": "Appli bii daa ëmb 99 turu Yàlla yi ci araab, wolofal, ak alfa.\n\nJàngal te xalaat ci aaya yi ngay gis ci ganaawu kart yi ngir gën xam Yàlla ak nu mu bëgg nu dunde.",
   "@introPage1": {
-    "description": "introPage1",
+    "description": "General introductory words",
     "type": "text",
     "placeholders": {}
   },
-  "introPage2": "introPage2 WO",
+  "introPage2": "Boo jangee ab aaya, laajal sa bopp ñeenti laaj yi:\n\n1.\tLan la nu aaya yii di xamal ci Yàlla?\n\n2.\tLan la nu aaya yii di xamal ci doomu Aadama?\n\n3.\tNaka lañu wara soppi sunu dundin?\n\n4.\tAk kan nga bëgg seddoo aaya yi?",
   "@introPage2": {
-    "description": "introPage2",
+    "description": "DBS questions",
     "type": "text",
     "placeholders": {}
   },
-  "introPage3": "introPage3 WO",
-  "@introPage3": {
-    "description": "introPage3",
+  "introPage3a": "Booy jàngat kàddug Yàlla gi ci appli bi, dinga koo gën bëgg.\n\nCi Kaddu yu Xelu, saar 8 aaya 17 Yàlla daa ne:",
+  "@introPage3a": {
+    "description": "Motivation for DBS",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage3b": "Maa sopp ku ma sopp, ku ma seet tigi, gis ma.",
+  "@introPage3b": {
+    "description": "Motivation for DBS: bible verse",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4a": "Ci kart bu nekk man nga:",
+  "@introPage4a": {
+    "description": "On each card you can",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4b": "deglu nu jàngal la aaya bi,",
+  "@introPage4b": {
+    "description": "hear the verse read,",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4c": "seddoo aaya bi ak sa wóllëre yi,",
+  "@introPage4c": {
+    "description": "share the verse with your friends,",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4d": "te tann tur yi nga gën bëgg.",
+  "@introPage4d": {
+    "description": "and choose your favorites.",
     "type": "text",
     "placeholders": {}
   },
@@ -147,6 +177,24 @@
   "favsNoneYetInstructions": "Bësal ci xol bi ci tur yi nga gëna bëgg.",
   "@favsNoneYetInstructions": {
     "description": "favsNoneYetInstructions",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ok": "WK",
+  "@ok": {
+    "description": "OK",
+    "type": "text",
+    "placeholders": {}
+  },
+  "skip": "Tëbbal",
+  "@skip": {
+    "description": "Skip on onboarding screen",
+    "type": "text",
+    "placeholders": {}
+  },
+  "start": "Aywa",
+  "@start": {
+    "description": "Start on onboarding screen",
     "type": "text",
     "placeholders": {}
   }

@@ -62,8 +62,8 @@ class _MyAppState extends State<MyApp> {
                 : Provider.of<CardPrefs>(context, listen: false)
                         .cardPrefs
                         .showOnboarding
-                    // ? OnboardingScreen()
-                    ? CardsScreen()
+                    ? OnboardingScreen()
+                    // ? CardsScreen()
                     : CardsScreen(),
       ),
       theme: Provider.of<ThemeModel>(context).currentTheme != null

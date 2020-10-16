@@ -28,7 +28,7 @@ class CardBack extends StatelessWidget {
         Provider.of<ThemeModel>(context, listen: false).userThemeName ==
             'darkTheme';
     ui.TextDirection rtlText = ui.TextDirection.rtl;
-    ui.TextDirection ltrText = ui.TextDirection.ltr;
+    // ui.TextDirection ltrText = ui.TextDirection.ltr;
     Color _fontColor = _isDark ? Colors.white : Colors.black;
 
     Widget textRS(input, double fontReduction) {

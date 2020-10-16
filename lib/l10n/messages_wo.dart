@@ -25,9 +25,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "clickHereToReadMore" : MessageLookupByLibrary.simpleMessage("Bësal fii ngir yokk sa njàng: "),
     "favsNoneYet" : MessageLookupByLibrary.simpleMessage("Tànnaguloo benn tur"),
     "favsNoneYetInstructions" : MessageLookupByLibrary.simpleMessage("Bësal ci xol bi ci tur yi nga gëna bëgg."),
-    "introPage1" : MessageLookupByLibrary.simpleMessage("introPage1 WO"),
-    "introPage2" : MessageLookupByLibrary.simpleMessage("introPage2 WO"),
-    "introPage3" : MessageLookupByLibrary.simpleMessage("introPage3 WO"),
+    "introPage1" : MessageLookupByLibrary.simpleMessage("Appli bii daa ëmb 99 turu Yàlla yi ci araab, wolofal, ak alfa.\n\nJàngal te xalaat ci aaya yi ngay gis ci ganaawu kart yi ngir gën xam Yàlla ak nu mu bëgg nu dunde."),
+    "introPage2" : MessageLookupByLibrary.simpleMessage("Boo jangee ab aaya, laajal sa bopp ñeenti laaj yi:\n\n1.\tLan la nu aaya yii di xamal ci Yàlla?\n\n2.\tLan la nu aaya yii di xamal ci doomu Aadama?\n\n3.\tNaka lañu wara soppi sunu dundin?\n\n4.\tAk kan nga bëgg seddoo aaya yi?"),
+    "introPage3a" : MessageLookupByLibrary.simpleMessage("Booy jàngat kàddug Yàlla gi ci appli bi, dinga koo gën bëgg.\n\nCi Kaddu yu Xelu, saar 8 aaya 17 Yàlla daa ne:"),
+    "introPage3b" : MessageLookupByLibrary.simpleMessage("Maa sopp ku ma sopp, ku ma seet tigi, gis ma."),
+    "introPage4a" : MessageLookupByLibrary.simpleMessage("Ci kart bu nekk man nga:"),
+    "introPage4b" : MessageLookupByLibrary.simpleMessage("deglu nu jàngal la aaya bi,"),
+    "introPage4c" : MessageLookupByLibrary.simpleMessage("seddoo aaya bi ak sa wóllëre yi,"),
+    "introPage4d" : MessageLookupByLibrary.simpleMessage("te tann tur yi nga gën bëgg."),
+    "ok" : MessageLookupByLibrary.simpleMessage("WK"),
     "settingsAbout" : MessageLookupByLibrary.simpleMessage("Ci mbirum appli bi"),
     "settingsCardBackground" : MessageLookupByLibrary.simpleMessage("Melow kàrt yi"),
     "settingsCardDirection" : MessageLookupByLibrary.simpleMessage("Kàrt yi man nañu jëm: "),
@@ -45,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsVerseinWolofal" : MessageLookupByLibrary.simpleMessage("Aaya yi ci Wolofal"),
     "settingsViewIntro" : MessageLookupByLibrary.simpleMessage("Xoolat ubbite gi"),
     "sharingMsg" : MessageLookupByLibrary.simpleMessage("Ci ban mbindin nga bëgga séddoo?"),
-    "sharingTitle" : MessageLookupByLibrary.simpleMessage("Séddoo ab aaya")
+    "sharingTitle" : MessageLookupByLibrary.simpleMessage("Séddoo ab aaya"),
+    "skip" : MessageLookupByLibrary.simpleMessage("Tëbbal"),
+    "start" : MessageLookupByLibrary.simpleMessage("Aywa")
   };
 }

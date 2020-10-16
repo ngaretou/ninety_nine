@@ -120,21 +120,51 @@
     "type": "text",
     "placeholders": {}
   },
-  "introPage1": "introPage1 FR",
+  "introPage1": "Cette application contient les 99 noms de Dieu en arab, en wolofal, et en wolof.\n\nLisez et réfléchissez aux versets qui se trouvent au dos des cartes pour mieux connaître Dieu et comprendre comment il veut que nous vivions.",
   "@introPage1": {
-    "description": "introPage1",
+    "description": "General introductory words",
     "type": "text",
     "placeholders": {}
   },
-  "introPage2": "introPage2 FR",
+  "introPage2": "Lorsque vous lisez un verset, posez-vous quatre questions :\n\n1.\tQu'est-ce que ces versets enseignent sur Dieu ?\n\n2.\tQu'est-ce que ces versets enseignent sur les humains ?\n\n3.\tComment puis-je vivre ces versets ?\n\n4.\tQui dans ma vie a besoin d'entendre ces versets ?",
   "@introPage2": {
-    "description": "introPage2",
+    "description": "DBS questions",
     "type": "text",
     "placeholders": {}
   },
-  "introPage3": "introPage3 FR",
-  "@introPage3": {
-    "description": "introPage3",
+  "introPage3a": "En méditant sur la Parole de Dieu, vous verrez grandir votre amour pour lui.\n\nDieu dit en Proverbes 8:17 :",
+  "@introPage3a": {
+    "description": "Motivation for DBS",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage3b": "J’aime ceux qui m’aiment, Et ceux qui me cherchent me trouvent.",
+  "@introPage3b": {
+    "description": "Motivation for DBS: bible verse",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4a": "Sur chaque carte, vous pouvez :",
+  "@introPage4a": {
+    "description": "On each card you can",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4b": "entendre la lecture du verset,",
+  "@introPage4b": {
+    "description": "hear the verse read,",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4c": "partager le verset avec vos amis,",
+  "@introPage4c": {
+    "description": "share the verse with your friends,",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4d": "et choisir vos favoris.",
+  "@introPage4d": {
+    "description": "and choose your favorites.",
     "type": "text",
     "placeholders": {}
   },
@@ -147,6 +177,24 @@
   "favsNoneYetInstructions": "Cliquez sur l'icône du cœur pour ajouter quelques favoris",
   "@favsNoneYetInstructions": {
     "description": "favsNoneYetInstructions",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK",
+    "type": "text",
+    "placeholders": {}
+  },
+  "skip": "Sauter",
+  "@skip": {
+    "description": "Skip on onboarding screen",
+    "type": "text",
+    "placeholders": {}
+  },
+  "start": "Démarrer",
+  "@start": {
+    "description": "Start on onboarding screen",
     "type": "text",
     "placeholders": {}
   }

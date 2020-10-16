@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-08-18T16:43:33.481802",
+  "@@last_modified": "2020-10-13T10:35:31.265620",
   "settingsTitle": "Settings",
   "@settingsTitle": {
     "description": "Settings screen title",
@@ -120,21 +120,51 @@
     "type": "text",
     "placeholders": {}
   },
-  "introPage1": "introPage1",
+  "introPage1": "This app contains 99 names of God in Arabic, Wolofal, and Wolof.\n\nRead and reflect on the verses found on the back of the cards to know God better and understand how he wants us to live.",
   "@introPage1": {
-    "description": "introPage1",
+    "description": "General introductory words",
     "type": "text",
     "placeholders": {}
   },
-  "introPage2": "introPage2",
+  "introPage2": "When you read a verse, ask yourself four questions:\n\n 1\tWhat do these verses teach about God?\n\n 2.\tWhat do these verses teach about people?\n\n 3.\tHow can I live out these verses?\n\n 4.\tWho in my life needs to hear these verses?",
   "@introPage2": {
-    "description": "introPage2",
+    "description": "DBS questions",
     "type": "text",
     "placeholders": {}
   },
-  "introPage3": "introPage3",
-  "@introPage3": {
-    "description": "introPage3",
+  "introPage3a": "As you meditate on God’s Word, you will see your love for him grow.\n\nGod says in Proverbs 8:17:",
+  "@introPage3a": {
+    "description": "Motivation for DBS",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage3b": "I love those who love me, and those who seek me diligently find me.",
+  "@introPage3b": {
+    "description": "Motivation for DBS: bible verse",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4a": "On each card you can:",
+  "@introPage4a": {
+    "description": "On each card you can",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4b": "hear the verse read,",
+  "@introPage4b": {
+    "description": "hear the verse read,",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4c": "share the verse with your friends,",
+  "@introPage4c": {
+    "description": "share the verse with your friends,",
+    "type": "text",
+    "placeholders": {}
+  },
+  "introPage4d": "and choose your favorites.",
+  "@introPage4d": {
+    "description": "and choose your favorites.",
     "type": "text",
     "placeholders": {}
   },
@@ -147,6 +177,24 @@
   "favsNoneYetInstructions": "Click the heart icon on your favorite names to add some.",
   "@favsNoneYetInstructions": {
     "description": "favsNoneYetInstructions",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK",
+    "type": "text",
+    "placeholders": {}
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "Skip on onboarding screen",
+    "type": "text",
+    "placeholders": {}
+  },
+  "start": "Start",
+  "@start": {
+    "description": "Start on onboarding screen",
     "type": "text",
     "placeholders": {}
   }
