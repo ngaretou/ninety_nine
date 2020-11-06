@@ -80,14 +80,18 @@ class _NameCardsState extends State<NameCards>
       keepPage: true,
     );
     //Smallest iPhone is UIKit 320 x 480 = 800.
-    //Biggest is 414 x 896 = 1310.
+    //Biggest is 428 x 926 = 1354.
     //Android biggest phone I can find is is 480 x 853 = 1333
     //For tablets the smallest I can find is 768 x 1024
 
     final bool _isPhone = (MediaQuery.of(context).size.width +
             MediaQuery.of(context).size.height) <=
-        1350;
+        1400;
     // print(_isPhone);
+    print(
+        MediaQuery.of(context).size.width + MediaQuery.of(context).size.height);
+    print(MediaQuery.of(context).size.width);
+    print(MediaQuery.of(context).size.height);
 
     final Matrix4 phoneTransform = Matrix4.identity()
       ..setEntry(3, 2, 0.002)

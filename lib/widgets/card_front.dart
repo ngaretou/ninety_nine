@@ -27,10 +27,6 @@ class CardFront extends StatelessWidget {
     ui.TextDirection rtlText = ui.TextDirection.rtl;
     ui.TextDirection ltrText = ui.TextDirection.ltr;
 
-    // final bool _isPhone = (MediaQuery.of(context).size.width +
-    //         MediaQuery.of(context).size.width) <=
-    //     1350;
-
     //Smallest iPhone is UIKit 320 x 480 = 800.
     //Biggest is 414 x 896 = 1310.
     //Android biggest phone I can find is is 480 x 853 = 1333
@@ -98,8 +94,6 @@ class CardFront extends StatelessWidget {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage("assets/images/${name.img}.jpg"),
-                //change
-                // image: AssetImage("assets/images/4.jpg"),
               ),
             )
           : null,
