@@ -1,4 +1,9 @@
 Publishing: 
+
+icons: 
+make icons command is: 
+flutter pub run flutter_launcher_icons:main
+
 Android: 
 https://flutter.dev/docs/deployment/android
 To precache animation: (https://flutter.dev/docs/perf/rendering/shader)
@@ -16,6 +21,7 @@ So normally:
 >>flutter build apk --split-per-abi --bundle-sksl-path flutter_01.sksl.json
 
 iOS: 
+https://flutter.dev/docs/deployment/ios
 >>flutter build ios                                                        
 
 

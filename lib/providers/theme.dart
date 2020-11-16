@@ -114,10 +114,18 @@ class ThemeModel extends ChangeNotifier {
   // }
 
   Future<void> initialSetupAsync(context) async {
-    await Provider.of<DivineNames>(context, listen: false).getDivineNames();
-    await Provider.of<CardPrefs>(context, listen: false).setupCardPrefs();
-    await setupTheme();
-    await setupLang();
+    // await Provider.of<DivineNames>(context, listen: false).getDivineNames();
+    // await Provider.of<CardPrefs>(context, listen: false).setupCardPrefs();
+    // await setupTheme();
+    // await setupLang();
+
+    List<Future> setupTasks = [
+      Provider.of<DivineNames>(context, listen: false).getDivineNames(),
+      Provider.of<CardPrefs>(context, listen: false).setupCardPrefs(),
+      setupTheme(),
+      setupLang()
+    ];
+    Future.wait(setupTasks);
     return;
   }
 

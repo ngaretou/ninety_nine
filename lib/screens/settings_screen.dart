@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ninety_nine/screens/names_list_screen.dart';
 import 'package:ninety_nine/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -467,6 +468,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
+    Widget viewListOfNames() {
+      return settingTitle(
+        'List View',
+        Icons.list,
+        () {
+          //Part of the names list navigation - this opens the NamesLIst, then gets and then passes on the value from the popped screen
+          Navigator.of(context).pushNamed(NamesList.routeName).then((value) {
+            Navigator.of(context).pop(value);
+          });
+        },
+      );
+    }
+
     // print(MediaQuery.of(context).size.width);
 ///////////////////////////////
     return Scaffold(
@@ -483,6 +497,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               padding: EdgeInsets.symmetric(horizontal: 50),
               child: ListView(
                 children: [
+                  viewListOfNames(),
                   settingRow(themeTitle(), themeSettings()),
                   Divider(),
                   settingRow(backgroundTitle(), backgroundSettings()),
@@ -527,6 +542,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             )
           : ListView(
               children: [
+                viewListOfNames(),
                 settingColumn(themeTitle(), themeSettings()),
                 settingColumn(backgroundTitle(), backgroundSettings()),
                 settingColumn(directionTitle(), directionSettings()),

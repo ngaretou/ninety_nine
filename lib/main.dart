@@ -12,6 +12,7 @@ import './screens/settings_screen.dart';
 import './screens/about_screen.dart';
 import './screens/cards_screen.dart';
 import './screens/onboarding_screen.dart';
+import './screens/names_list_screen.dart';
 
 void main() {
   runApp(
@@ -70,10 +71,12 @@ class _MyAppState extends State<MyApp> {
           ? Provider.of<ThemeModel>(context).currentTheme
           : ThemeData.dark(),
       routes: {
+        // '/': (BuildContext context) => CardsScreen(),
         CardsScreen.routeName: (ctx) => CardsScreen(),
         SettingsScreen.routeName: (ctx) => SettingsScreen(),
         AboutScreen.routeName: (ctx) => AboutScreen(),
         OnboardingScreen.routeName: (ctx) => OnboardingScreen(),
+        NamesList.routeName: (ctx) => NamesList(),
       },
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,

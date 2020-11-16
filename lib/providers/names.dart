@@ -61,28 +61,30 @@ class DivineNames with ChangeNotifier {
 
     //If this is first run, no pics yet, put all possible pics in
     if (_pictureIds.length == 0) {
-      _pictureIds = List<int>.generate(numberOfPicsAvailable, (i) => i + 1);
+      _pictureIds = List<int>.generate(numberOfPicsAvailable, (i) => i);
     }
 
     //get a random number between 1 and the number of pics we have left in this round
-    var indexToGrab = rnd.nextInt(_pictureIds.length) + 1;
+    //The indexes here are 0 through _pictureIds.length, in other words these are the indexes, not the values
+    //the 'max' is in the parentheses here, and 0 is inclusive and max is exclusive, so you have to do the number of pics you have -1
+    int indexToGrab = rnd.nextInt(_pictureIds.length - 1);
 
     //This line does two things -
     //grabs the element at the random index we just generated and gets rid of it in the list
     //so we don't grab that picture again until all pics have been used
-
     r = _pictureIds.removeAt(indexToGrab).toString();
 
     return r;
   }
 
-  Future getDivineNames() async {
-    var temp = await getLastNameViewed();
-    temp == null ? temp = 0 : _lastPageViewed = temp;
-    //check if the current session still contains the names - if so no need to rebuild
+  Future<void> getDivineNames() async {
+    print(_names.length);
     if (_names.length != 0) {
       return;
     }
+    var temp = await getLastNameViewed();
+    temp == null ? temp = 0 : _lastPageViewed = temp;
+    //check if the current session still contains the names - if so no need to rebuild
 
     //Get the divine names from names.json file
     String jsonString = await rootBundle.loadString("assets/names.json");
@@ -121,6 +123,7 @@ class DivineNames with ChangeNotifier {
   }
 
   Future<void> saveLastNameViewed(lastPageViewed) async {
+    print(lastPageViewed);
     final prefs = await SharedPreferences.getInstance();
     final jsonData = json.encode(lastPageViewed.toString());
     prefs.setString('lastNameViewed', jsonData);

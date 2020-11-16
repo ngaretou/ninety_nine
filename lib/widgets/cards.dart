@@ -10,9 +10,10 @@ import '../widgets/card_front.dart';
 import '../widgets/card_back.dart';
 
 class NameCards extends StatefulWidget {
-  NameCards({
-    Key key,
-  }) : super(key: key);
+  //This goToPage is only in case of a name chosen in list view. It is passed up from list view page and then back down here.
+  final int goToPage;
+
+  NameCards({Key key, @required this.goToPage}) : super(key: key);
 
   @override
   _NameCardsState createState() => _NameCardsState();
@@ -20,13 +21,17 @@ class NameCards extends StatefulWidget {
 
 class _NameCardsState extends State<NameCards>
     with SingleTickerProviderStateMixin {
+  bool initialized;
+
   AnimationController _animationController;
   Animation<double> _animation;
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
-
+  PageController _pageController;
   @override
   void initState() {
+    print('NameCards initState');
     super.initState();
+    initialized = false;
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 800),
@@ -43,11 +48,21 @@ class _NameCardsState extends State<NameCards>
       ..addStatusListener((status) {
         _animationStatus = status;
       });
+    //page controller is initialized here and initialPage given
+    _pageController = PageController(
+      initialPage:
+          Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
+              ? 0
+              : Provider.of<DivineNames>(context, listen: false).lastPageViewed,
+      viewportFraction: 1,
+      keepPage: false,
+    );
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -73,12 +88,7 @@ class _NameCardsState extends State<NameCards>
     //The initial page should be the last viewed page, which gets stored on each
     // page turn. But, if it's favs, start at the first one (index 0). Then when you go back to
     // viewing all, go back to last viewed page.
-    final PageController _pageController = PageController(
-      initialPage:
-          cardPrefs.cardPrefs.showFavs ? 0 : divineNames.lastPageViewed,
-      viewportFraction: 1,
-      keepPage: true,
-    );
+
     //Smallest iPhone is UIKit 320 x 480 = 800.
     //Biggest is 428 x 926 = 1354.
     //Android biggest phone I can find is is 480 x 853 = 1333
@@ -88,10 +98,10 @@ class _NameCardsState extends State<NameCards>
             MediaQuery.of(context).size.height) <=
         1400;
     // print(_isPhone);
-    print(
-        MediaQuery.of(context).size.width + MediaQuery.of(context).size.height);
-    print(MediaQuery.of(context).size.width);
-    print(MediaQuery.of(context).size.height);
+    // print(
+    //     MediaQuery.of(context).size.width + MediaQuery.of(context).size.height);
+    // print(MediaQuery.of(context).size.width);
+    // print(MediaQuery.of(context).size.height);
 
     final Matrix4 phoneTransform = Matrix4.identity()
       ..setEntry(3, 2, 0.002)
@@ -107,7 +117,16 @@ class _NameCardsState extends State<NameCards>
       // So start at 1 - .1
       ..scale(.75 + (.1 * _animation.value), .75 + (.1 * _animation.value));
 
-    // print(_pageController.page);
+//This is for when the user chooses a name from List View. The index is passed back up to cards scren then back down here.
+//This only happens after the page is initialized.
+
+    if (initialized) {
+      // _pageController.jumpToPage(widget.goToPage);
+      _pageController.animateToPage(widget.goToPage,
+          duration: Duration(milliseconds: 700), curve: Curves.ease);
+    }
+    initialized = true;
+
     return Center(
         child: Stack(children: [
       Container(

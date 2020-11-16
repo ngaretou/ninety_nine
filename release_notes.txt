@@ -1,3 +1,6 @@
+1.0.2
+Updated sharing plugin that was not working on iPads
+
 1.0.1
 Added Google Analytics
 
