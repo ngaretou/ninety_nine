@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
-import '../locale/app_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../providers/names.dart';
 
@@ -68,9 +68,10 @@ class _CardIconBarState extends State<CardIconBar> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text(
-                            AppLocalization.of(context).sharingTitle,
+                            AppLocalizations.of(context).sharingTitle,
                           ),
-                          content: Text(AppLocalization.of(context).sharingMsg),
+                          content:
+                              Text(AppLocalizations.of(context).sharingMsg),
                           actions: [
                             FlatButton(
                                 child: Text("Wolof"),
@@ -98,7 +99,7 @@ class _CardIconBarState extends State<CardIconBar> {
                                 }),
                             FlatButton(
                                 child: Text(
-                                  AppLocalization.of(context).cancel,
+                                  AppLocalizations.of(context).cancel,
                                 ),
                                 onPressed: () {
                                   Navigator.of(context).pop();

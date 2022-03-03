@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
 import 'dart:ui' as ui;
 
-import '../locale/app_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
@@ -23,10 +23,10 @@ class CardBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cardPrefs = Provider.of<CardPrefs>(context, listen: false).cardPrefs;
+    final cardPrefs = Provider.of<CardPrefs>(context, listen: false).cardPrefs!;
     final bool _isDark =
-        Provider.of<ThemeModel>(context, listen: false).userThemeName ==
-            'darkTheme';
+        Provider.of<ThemeModel>(context, listen: false).userTheme!.brightness ==
+            Brightness.dark;
     ui.TextDirection rtlText = ui.TextDirection.rtl;
     // ui.TextDirection ltrText = ui.TextDirection.ltr;
     Color _fontColor = _isDark ? Colors.white : Colors.black;
@@ -123,7 +123,7 @@ class CardBack extends StatelessWidget {
                             ],
                           ),
                           //Wolofal verse section
-                          cardPrefs.wolofalVerseEnabled
+                          cardPrefs.wolofalVerseEnabled!
                               ? Column(
                                   children: [
                                     Divider(
@@ -141,7 +141,7 @@ class CardBack extends StatelessWidget {
                                 )
                               : SizedBox(width: 20),
                           //Wolof verse section
-                          cardPrefs.wolofVerseEnabled
+                          cardPrefs.wolofVerseEnabled!
                               ? Column(
                                   children: [
                                     Divider(
@@ -166,7 +166,7 @@ class CardBack extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                    AppLocalization.of(context)
+                                    AppLocalizations.of(context)
                                         .clickHereToReadMore,
                                     style: TextStyle(color: _fontColor)),
                                 Icon(Icons.arrow_forward, color: _fontColor),

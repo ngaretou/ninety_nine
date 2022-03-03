@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './cards_screen.dart';
-import '../locale/app_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const routeName = '/onboarding-screen';
-  OnboardingScreen({Key key}) : super(key: key);
+  OnboardingScreen({Key? key}) : super(key: key);
 
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }
@@ -37,12 +37,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+//  final themeProvider = Provider.of<ThemeModel>(context, listen: false);
+
     return Scaffold(
       body: Container(
         child: Stack(
           children: [
             NotificationListener(
-                onNotification: ((notification) {
+                onNotification: ((dynamic notification) {
                   // print(notification.toString());
                   if (notification is OverscrollNotification) {
                     // print('in OverscrollNotification true');
@@ -67,12 +69,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         isShowImageOnTop: false,
                         bgimage: 'assets/images/1.jpg',
                         // image: null,
-                        body: AppLocalization.of(context).introPage1,
+                        body: AppLocalizations.of(context).introPage1,
                         color: Color(0xFFFF7252)),
                     _buildPageContent(
                         isShowImageOnTop: true,
                         bgimage: 'assets/images/2.jpg',
-                        body: AppLocalization.of(context).introPage2,
+                        body: AppLocalizations.of(context).introPage2,
                         color: Color(0xFFFFA131)),
                     _buildFormattedPageContent(
                         bgimage: 'assets/images/13.jpg',
@@ -118,7 +120,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               height: Platform.isIOS ? 70 : 60,
                               alignment: Alignment.center,
                               child: Text(
-                                AppLocalization.of(context).skip,
+                                AppLocalizations.of(context).skip,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
@@ -136,7 +138,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               height: Platform.isIOS ? 70 : 60,
                               alignment: Alignment.center,
                               child: Text(
-                                AppLocalization.of(context).start,
+                                AppLocalizations.of(context).start,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
@@ -157,11 +159,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget languageChooser() {
-    int _value;
-    bool firstRun =
+    final themeProvider = Provider.of<ThemeModel>(context, listen: false);
+    int? _value;
+    bool? firstRun =
         Provider.of<CardPrefs>(context, listen: false).showOnboarding;
-    String chosenLang =
-        Provider.of<ThemeModel>(context, listen: false).userLang;
+    String? chosenLang =
+        Provider.of<ThemeModel>(context, listen: false).userLocale.toString();
     if (firstRun == true) {
       _value = 1;
     } else {
@@ -209,31 +212,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 value: 3,
               ),
             ],
-            onChanged: (value) {
+            onChanged: (dynamic value) {
               switch (value) {
                 case 1:
                   {
                     setState(() {
-                      Provider.of<ThemeModel>(context, listen: false)
-                          .setLang('wo');
+                      themeProvider.setLocale('fr_CH');
                       _value = value;
                     });
                     break;
                   }
                 case 2:
                   {
+                    themeProvider.setLocale('fr');
                     setState(() {
-                      Provider.of<ThemeModel>(context, listen: false)
-                          .setLang('fr');
                       _value = value;
                     });
                     break;
                   }
                 case 3:
                   {
+                    themeProvider.setLocale('en');
                     setState(() {
-                      Provider.of<ThemeModel>(context, listen: false)
-                          .setLang('en');
                       _value = value;
                     });
                     break;
@@ -245,11 +245,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildPageContent(
-      {String bgimage,
+      {required String bgimage,
       // String image,
-      String body,
-      Color color,
-      isShowImageOnTop}) {
+      String? body,
+      Color? color,
+      required isShowImageOnTop}) {
     return Container(
         decoration: BoxDecoration(
           color: Colors.black54,
@@ -284,7 +284,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     SizedBox(height: 50),
                     Container(
                       child: Text(
-                        body,
+                        body!,
                         textAlign: TextAlign.center,
                         style: introStyle,
                       ),
@@ -294,7 +294,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               if (isShowImageOnTop)
                 Column(
                   children: [
-                    Text(body, textAlign: TextAlign.center, style: introStyle),
+                    Text(body!, textAlign: TextAlign.center, style: introStyle),
                     SizedBox(height: 50),
                     Center(
                         // child: Image.asset(image),
@@ -307,10 +307,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildFormattedPageContent(
-      {String bgimage,
+      {required String bgimage,
       // String image,
-      Widget body,
-      Color color}) {
+      required Widget body,
+      Color? color}) {
     return Container(
         decoration: BoxDecoration(
           color: Colors.black54,
@@ -345,15 +345,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       text: TextSpan(
         children: [
           TextSpan(
-            text: '${AppLocalization.of(context).introPage3a} \n\n',
+            text: '${AppLocalizations.of(context).introPage3a} \n\n',
             style: introStyle,
           ),
           TextSpan(
-              text: AppLocalization.of(context).introPage3b,
+              text: AppLocalizations.of(context).introPage3b,
               style: introStyle.copyWith(
                 fontWeight: FontWeight.w900,
                 fontStyle: FontStyle.italic,
-                fontSize: introStyle.fontSize + 4,
+                fontSize: introStyle.fontSize! + 4,
               )),
         ],
       ),
@@ -385,16 +385,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppLocalization.of(context).introPage4a,
+        Text(AppLocalizations.of(context).introPage4a,
             style: introStyle, textAlign: TextAlign.left),
         SizedBox(height: 20),
         instructionRow(
-            Icons.play_arrow, AppLocalization.of(context).introPage4b),
+            Icons.play_arrow, AppLocalizations.of(context).introPage4b),
         SizedBox(height: 10),
-        instructionRow(Icons.share, AppLocalization.of(context).introPage4c),
+        instructionRow(Icons.share, AppLocalizations.of(context).introPage4c),
         SizedBox(height: 10),
         instructionRow(
-            Icons.favorite_border, AppLocalization.of(context).introPage4d)
+            Icons.favorite_border, AppLocalizations.of(context).introPage4d)
       ],
     );
   }

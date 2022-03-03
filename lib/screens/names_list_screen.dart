@@ -6,7 +6,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'dart:ui' as ui;
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
-import '../locale/app_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NamesList extends StatelessWidget {
   static const routeName = 'names-list-screen';
@@ -17,13 +17,13 @@ class NamesList extends StatelessWidget {
     //Make sure you're showing all, not favorites
     TextStyle _asStyle = TextStyle(
         // height: 1.3,
-        color: Theme.of(context).textTheme.headline6.color,
+        color: Theme.of(context).textTheme.headline6!.color,
         fontFamily: "Harmattan",
         fontSize: 32);
 
     TextStyle _rsStyle = TextStyle(
         // height: 1.3,
-        color: Theme.of(context).textTheme.headline6.color,
+        color: Theme.of(context).textTheme.headline6!.color,
         fontFamily: "Lato",
         fontSize: 22);
     ui.TextDirection _rtlText = ui.TextDirection.rtl;
@@ -31,7 +31,7 @@ class NamesList extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'List View',
+            AppLocalizations.of(context).listView,
             style: Theme.of(context).textTheme.headline6,
           ),
         ),

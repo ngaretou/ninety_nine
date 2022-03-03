@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:core';
-import 'dart:async';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CardPrefs with ChangeNotifier {
-  bool textDirection;
-  bool imageEnabled;
-  bool wolofVerseEnabled;
-  bool wolofalVerseEnabled;
-  bool showFavs;
-  bool showOnboarding;
+  bool? textDirection;
+  bool? imageEnabled;
+  bool? wolofVerseEnabled;
+  bool? wolofalVerseEnabled;
+  bool? showFavs = false;
+  bool? showOnboarding;
 
   CardPrefs({
     this.textDirection,
@@ -22,9 +21,9 @@ class CardPrefs with ChangeNotifier {
     this.showOnboarding,
   });
 
-  CardPrefs _cardPrefs;
+  CardPrefs? _cardPrefs;
 
-  CardPrefs get cardPrefs {
+  CardPrefs? get cardPrefs {
     return _cardPrefs;
   }
 
@@ -58,14 +57,15 @@ class CardPrefs with ChangeNotifier {
       prefs.setString('cardPrefs', _defaultCardPrefs);
     } else {
       final jsonResponse =
-          json.decode(prefs.getString('cardPrefs')) as Map<String, Object>;
+          json.decode(prefs.getString('cardPrefs')!) as Map<String, dynamic>;
+
       _cardPrefs = CardPrefs(
-        textDirection: jsonResponse['textDirection'],
-        imageEnabled: jsonResponse['imageEnabled'],
-        wolofVerseEnabled: jsonResponse['wolofVerseEnabled'],
-        wolofalVerseEnabled: jsonResponse['wolofalVerseEnabled'],
-        showFavs: jsonResponse['showFavs'],
-        showOnboarding: jsonResponse['showOnboarding'],
+        textDirection: jsonResponse['textDirection'] as bool,
+        imageEnabled: jsonResponse['imageEnabled'] as bool,
+        wolofVerseEnabled: jsonResponse['wolofVerseEnabled'] as bool,
+        wolofalVerseEnabled: jsonResponse['wolofalVerseEnabled'] as bool,
+        showFavs: jsonResponse['showFavs'] as bool,
+        showOnboarding: jsonResponse['showOnboarding'] as bool,
       );
 
       // notifyListeners();
@@ -76,14 +76,14 @@ class CardPrefs with ChangeNotifier {
     //get the prefs
     final prefs = await SharedPreferences.getInstance();
     final jsonResponse =
-        json.decode(prefs.getString('cardPrefs')) as Map<String, Object>;
+        json.decode(prefs.getString('cardPrefs')!) as Map<String, dynamic>;
     var _tempCardPrefs = CardPrefs(
-      textDirection: jsonResponse['textDirection'],
-      imageEnabled: jsonResponse['imageEnabled'],
-      wolofVerseEnabled: jsonResponse['wolofVerseEnabled'],
-      wolofalVerseEnabled: jsonResponse['wolofalVerseEnabled'],
-      showFavs: jsonResponse['showFavs'],
-      showOnboarding: jsonResponse['showOnboarding'],
+      textDirection: jsonResponse['textDirection'] as bool,
+      imageEnabled: jsonResponse['imageEnabled'] as bool,
+      wolofVerseEnabled: jsonResponse['wolofVerseEnabled'] as bool,
+      wolofalVerseEnabled: jsonResponse['wolofalVerseEnabled'] as bool,
+      showFavs: jsonResponse['showFavs'] as bool,
+      showOnboarding: jsonResponse['showOnboarding'] as bool,
     );
 
     //set the incoming setting

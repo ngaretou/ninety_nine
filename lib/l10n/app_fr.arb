@@ -1,180 +1,180 @@
 {
-  "@@last_modified": "2020-10-13T10:35:31.265620",
-  "settingsTitle": "Settings",
+  "@@last_modified": "2020-08-07T19:54:38.584472",
+  "settingsTitle": "Paramètres",
   "@settingsTitle": {
     "description": "Settings screen title",
     "type": "text",
     "placeholders": {}
   },
-  "settingsTheme": "Theme",
+  "settingsTheme": "Thème",
   "@settingsTheme": {
     "description": "settings: Theme section",
     "type": "text",
     "placeholders": {}
   },
-  "settingsCardBackground": "Card Background",
+  "settingsCardBackground": "Fond de carte",
   "@settingsCardBackground": {
     "description": "settings: CardBackground section",
     "type": "text",
     "placeholders": {}
   },
-  "settingsLanguage": "Language",
+  "settingsLanguage": "Langue",
   "@settingsLanguage": {
     "description": "settingsLanguage",
     "type": "text",
     "placeholders": {}
   },
-  "settingsAbout": "About & Copyright",
+  "settingsAbout": "A propos & Copyright",
   "@settingsAbout": {
     "description": "settingsAbout",
     "type": "text",
     "placeholders": {}
   },
-  "settingsCardDirection": "Card Direction",
+  "settingsCardDirection": "Sens des cartes",
   "@settingsCardDirection": {
     "description": "settingsCardDirection",
     "type": "text",
     "placeholders": {}
   },
-  "settingsLTR": "LTR",
+  "settingsLTR": "GD",
   "@settingsLTR": {
     "description": "settingsLTR",
     "type": "text",
     "placeholders": {}
   },
-  "settingsRTL": "RTL",
+  "settingsRTL": "DG",
   "@settingsRTL": {
     "description": "settingsRTL",
     "type": "text",
     "placeholders": {}
   },
-  "settingsVerseDisplay": "Verse Display",
+  "settingsVerseDisplay": "Affichage des versets",
   "@settingsVerseDisplay": {
-    "description": "settingsVerseDisplay title: Show verses in Wolof and/or Wolofal",
+    "description": "settingsVerseDisplay",
     "type": "text",
     "placeholders": {}
   },
-  "settingsVerseinWolofal": "Verse in Wolofal",
+  "settingsVerseinWolofal": "Versets en wolofal",
   "@settingsVerseinWolofal": {
     "description": "settingsVerseinWolofal",
     "type": "text",
     "placeholders": {}
   },
-  "settingsVerseinWolof": "Verse in Wolof",
+  "settingsVerseinWolof": "Versets en wolof",
   "@settingsVerseinWolof": {
     "description": "settingsVerseinWolof",
     "type": "text",
     "placeholders": {}
   },
-  "settingsShowFavs": "Show Favorites",
+  "settingsShowFavs": "Affichage des favoris",
   "@settingsShowFavs": {
     "description": "settingsShowFavs",
     "type": "text",
     "placeholders": {}
   },
-  "settingsFavorites": "Favorites",
+  "settingsFavorites": "Les favoris",
   "@settingsFavorites": {
     "description": "settingsFavorites",
     "type": "text",
     "placeholders": {}
   },
-  "settingsTextAll": "All",
+  "settingsTextAll": "Tout",
   "@settingsTextAll": {
     "description": "settingsTextAll",
     "type": "text",
     "placeholders": {}
   },
-  "settingsContactUs": "Contact Us",
+  "settingsContactUs": "Contactez-nous",
   "@settingsContactUs": {
     "description": "settingsContactUs",
     "type": "text",
     "placeholders": {}
   },
-  "settingsViewIntro": "View intro again",
+  "settingsViewIntro": "Regarder l'introduction",
   "@settingsViewIntro": {
     "description": "settingsViewIntro",
     "type": "text",
     "placeholders": {}
   },
-  "sharingTitle": "Share a verse",
+  "sharingTitle": "Partage",
   "@sharingTitle": {
     "description": "sharingTitle",
     "type": "text",
     "placeholders": {}
   },
-  "sharingMsg": "Choose which script you'd like to share",
+  "sharingMsg": "Choisissez le script dans lequel que vous souhaitez partager",
   "@sharingMsg": {
     "description": "sharingMsg",
     "type": "text",
     "placeholders": {}
   },
-  "cancel": "Cancel",
+  "cancel": "Annuler",
   "@cancel": {
     "description": "cancel",
     "type": "text",
     "placeholders": {}
   },
-  "clickHereToReadMore": "Click here to read more",
+  "clickHereToReadMore": "Cliquez ici pour en lire plus",
   "@clickHereToReadMore": {
     "description": "clickHereToReadMore",
     "type": "text",
     "placeholders": {}
   },
-  "introPage1": "This app contains 99 names of God in Arabic, Wolofal, and Wolof.\n\nRead and reflect on the verses found on the back of the cards to know God better and understand how he wants us to live.",
+  "introPage1": "Cette application contient les 99 noms de Dieu en arab, en wolofal, et en wolof.\n\nLisez et réfléchissez aux versets qui se trouvent au dos des cartes pour mieux connaître Dieu et comprendre comment il veut que nous vivions.",
   "@introPage1": {
     "description": "General introductory words",
     "type": "text",
     "placeholders": {}
   },
-  "introPage2": "When you read a verse, ask yourself four questions:\n\n 1\tWhat do these verses teach about God?\n\n 2.\tWhat do these verses teach about people?\n\n 3.\tHow can I live out these verses?\n\n 4.\tWho in my life needs to hear these verses?",
+  "introPage2": "Lorsque vous lisez un verset, posez-vous quatre questions :\n\n1.\tQu'est-ce que ces versets enseignent sur Dieu ?\n\n2.\tQu'est-ce que ces versets enseignent sur les humains ?\n\n3.\tComment puis-je vivre ces versets ?\n\n4.\tQui dans ma vie a besoin d'entendre ces versets ?",
   "@introPage2": {
     "description": "DBS questions",
     "type": "text",
     "placeholders": {}
   },
-  "introPage3a": "As you meditate on God’s Word, you will see your love for him grow.\n\nGod says in Proverbs 8:17:",
+  "introPage3a": "En méditant sur la Parole de Dieu, vous verrez grandir votre amour pour lui.\n\nDieu dit en Proverbes 8:17 :",
   "@introPage3a": {
     "description": "Motivation for DBS",
     "type": "text",
     "placeholders": {}
   },
-  "introPage3b": "I love those who love me, and those who seek me diligently find me.",
+  "introPage3b": "J’aime ceux qui m’aiment, Et ceux qui me cherchent me trouvent.",
   "@introPage3b": {
     "description": "Motivation for DBS: bible verse",
     "type": "text",
     "placeholders": {}
   },
-  "introPage4a": "On each card you can:",
+  "introPage4a": "Sur chaque carte, vous pouvez :",
   "@introPage4a": {
     "description": "On each card you can",
     "type": "text",
     "placeholders": {}
   },
-  "introPage4b": "hear the verse read,",
+  "introPage4b": "entendre la lecture du verset,",
   "@introPage4b": {
     "description": "hear the verse read,",
     "type": "text",
     "placeholders": {}
   },
-  "introPage4c": "share the verse with your friends,",
+  "introPage4c": "partager le verset avec vos amis,",
   "@introPage4c": {
     "description": "share the verse with your friends,",
     "type": "text",
     "placeholders": {}
   },
-  "introPage4d": "and choose your favorites.",
+  "introPage4d": "et choisir vos favoris.",
   "@introPage4d": {
     "description": "and choose your favorites.",
     "type": "text",
     "placeholders": {}
   },
-  "favsNoneYet": "No favorites yet",
+  "favsNoneYet": "Vous n'avez pas encore choisi des favoris",
   "@favsNoneYet": {
     "description": "favsNoneYet",
     "type": "text",
     "placeholders": {}
   },
-  "favsNoneYetInstructions": "Click the heart icon on your favorite names to add some.",
+  "favsNoneYetInstructions": "Cliquez sur l'icône du cœur pour ajouter quelques favoris",
   "@favsNoneYetInstructions": {
     "description": "favsNoneYetInstructions",
     "type": "text",
@@ -186,15 +186,21 @@
     "type": "text",
     "placeholders": {}
   },
-  "skip": "Skip",
+  "skip": "Sauter",
   "@skip": {
     "description": "Skip on onboarding screen",
     "type": "text",
     "placeholders": {}
   },
-  "start": "Start",
+  "start": "Démarrer",
   "@start": {
     "description": "Start on onboarding screen",
+    "type": "text",
+    "placeholders": {}
+  },
+  "listView": "Vue en liste",
+  "@listView": {
+    "description": "List View",
     "type": "text",
     "placeholders": {}
   }

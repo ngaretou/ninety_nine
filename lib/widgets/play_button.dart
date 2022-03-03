@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:audioplayers/audio_cache.dart';
 
 class Player extends StatefulWidget {
   final String file;
@@ -12,7 +11,7 @@ class Player extends StatefulWidget {
 
 class _PlayerState extends State<Player> {
   static AudioCache cache = AudioCache();
-  AudioPlayer player;
+  late AudioPlayer player;
 
   bool isPlaying = false;
   bool isPaused = false;

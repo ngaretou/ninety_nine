@@ -4,7 +4,7 @@ import 'package:ninety_nine/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../locale/app_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/names.dart';
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
@@ -27,21 +27,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final bool _isPhone = (MediaQuery.of(context).size.width +
             MediaQuery.of(context).size.height) <=
         1400;
-    final userThemeName =
-        Provider.of<ThemeModel>(context, listen: false).userThemeName;
+
     final themeProvider = Provider.of<ThemeModel>(context, listen: false);
-    final userLang = Provider.of<ThemeModel>(context, listen: false).userLang;
+    final ThemeComponents? _userTheme = themeProvider.userTheme;
+    final Locale userLocale = themeProvider.userLocale!;
+
     final cardPrefs = Provider.of<CardPrefs>(context, listen: false);
-    final _wolof = cardPrefs.cardPrefs.wolofVerseEnabled;
-    final _wolofal = cardPrefs.cardPrefs.wolofalVerseEnabled;
-    // final screenWidth = MediaQuery.of(context).size.width;
-    print('in settings');
+    final _wolof = cardPrefs.cardPrefs!.wolofVerseEnabled;
+    bool? _wolofal = cardPrefs.cardPrefs!.wolofalVerseEnabled;
 
     //Widgets
     //Main template for all setting titles
-    Widget settingTitle(String title, IconData icon, Function tapHandler) {
+    Widget settingTitle(String title, IconData icon, Function? tapHandler) {
       return InkWell(
-        onTap: tapHandler,
+        onTap: tapHandler as void Function()?,
         child: Container(
             width: 300,
             child: Padding(
@@ -90,78 +89,177 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     //Now individual implementations of it
     Widget themeTitle() {
-      return settingTitle(AppLocalization.of(context).settingsTheme,
+      return settingTitle(AppLocalizations.of(context).settingsTheme,
           Icons.settings_brightness, null);
     }
 
+    Widget themeSettings() {
+      List<Color> themeColors = [
+        // Colors.red,
+        // Colors.deepOrange,
+        // Colors.amber,
+        // Colors.lightGreen,
+        Colors.green,
+        Colors.teal,
+        Colors.cyan,
+        Colors.blue,
+        // Colors.indigo,
+        // Colors.deepPurple,
+        // Colors.blueGrey,
+        // Colors.brown,
+        // Colors.grey
+      ];
+
+      List<DropdownMenuItem<String>> menuItems = [];
+
+      for (var color in themeColors) {
+        menuItems.add(DropdownMenuItem(
+            child: Material(
+              shape: CircleBorder(side: BorderSide.none),
+              elevation: 2,
+              child: Container(
+                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+                margin: EdgeInsets.all(0),
+                width: 36,
+              ),
+            ),
+            value: color.value.toString()));
+      }
+
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          DropdownButton(
+              itemHeight: 48,
+              underline: SizedBox(),
+              value: _userTheme!.color.value.toString(),
+              items: menuItems,
+              onChanged: (response) {
+                int _colorValue = int.parse(response.toString());
+
+                Color color = Color(_colorValue).withOpacity(1);
+
+                ThemeComponents _themeToSet = ThemeComponents(
+                    brightness: _userTheme.brightness, color: color);
+
+                themeProvider.setTheme(_themeToSet);
+              }),
+          Container(
+              height: 45,
+              width: 1,
+              color: Theme.of(context).colorScheme.outline),
+          ElevatedButton(
+            child: _userTheme.brightness == Brightness.light
+                ? Icon(
+                    Icons.check,
+                    color: Colors.black,
+                  )
+                : null,
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+              padding: EdgeInsets.all(0),
+              shape: CircleBorder(),
+            ),
+            onPressed: () {
+              ThemeComponents _themeToSet = ThemeComponents(
+                  brightness: Brightness.light, color: _userTheme.color);
+
+              themeProvider.setTheme(_themeToSet);
+            },
+          ),
+          ElevatedButton(
+            child: _userTheme.brightness == Brightness.dark
+                ? Icon(
+                    Icons.check,
+                    color: Colors.white,
+                  )
+                : null,
+            style: ElevatedButton.styleFrom(
+              primary: Colors.black,
+              padding: EdgeInsets.all(0),
+              shape: CircleBorder(),
+            ),
+            onPressed: () {
+              ThemeComponents _themeToSet = ThemeComponents(
+                  brightness: Brightness.dark, color: _userTheme.color);
+
+              themeProvider.setTheme(_themeToSet);
+            },
+          ),
+        ],
+      );
+    }
+
+    Widget languageSetting() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Wrap(
+            direction: Axis.horizontal,
+            spacing: 15,
+            children: [
+              ChoiceChip(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                selected: userLocale.toString() == 'fr_CH' ? true : false,
+                label: Text(
+                  "Wolof",
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+                onSelected: (bool selected) {
+                  themeProvider.setLocale('fr_CH');
+                },
+              ),
+              ChoiceChip(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                selected: userLocale.toString() == 'fr' ? true : false,
+                label: Text(
+                  "Français",
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+                onSelected: (bool selected) {
+                  themeProvider.setLocale('fr');
+                },
+              ),
+              ChoiceChip(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                selected: userLocale.toString() == 'en' ? true : false,
+                label: Text(
+                  "English",
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+                onSelected: (bool selected) {
+                  themeProvider.setLocale('en');
+                },
+              ),
+            ],
+          ),
+        ],
+      );
+    }
+
     Widget backgroundTitle() {
-      return settingTitle(AppLocalization.of(context).settingsCardBackground,
+      return settingTitle(AppLocalizations.of(context).settingsCardBackground,
           Icons.image, null);
     }
 
     Widget directionTitle() {
-      return settingTitle(AppLocalization.of(context).settingsCardDirection,
+      return settingTitle(AppLocalizations.of(context).settingsCardDirection,
           Icons.compare_arrows, null);
     }
 
     Widget scriptPickerTitle() {
-      return settingTitle(AppLocalization.of(context).settingsVerseDisplay,
+      return settingTitle(AppLocalizations.of(context).settingsVerseDisplay,
           Icons.format_quote, null);
     }
 
     Widget showFavsTitle() {
       return settingTitle(
-          AppLocalization.of(context).settingsShowFavs, Icons.favorite, null);
+          AppLocalizations.of(context).settingsShowFavs, Icons.favorite, null);
     }
 
     Widget languageTitle() {
       return settingTitle(
-          AppLocalization.of(context).settingsLanguage, Icons.translate, null);
-    }
-
-    Widget themeSettings() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          RaisedButton(
-            padding: EdgeInsets.all(0),
-            child: userThemeName == 'lightTheme' ? Icon(Icons.check) : null,
-            shape: CircleBorder(),
-            color: Colors.white,
-            onPressed: () {
-              themeProvider.setLightTheme();
-            },
-          ),
-          RaisedButton(
-            padding: EdgeInsets.all(0),
-            child: userThemeName == 'blueTheme' ? Icon(Icons.check) : null,
-            shape: CircleBorder(),
-            color: Colors.blue,
-            onPressed: () {
-              themeProvider.setBlueTheme();
-            },
-          ),
-          RaisedButton(
-              padding: EdgeInsets.all(0),
-              child: userThemeName == 'tealTheme' ? Icon(Icons.check) : null,
-              shape: CircleBorder(),
-              color: Colors.teal,
-              onPressed: () {
-                themeProvider.setTealTheme();
-              }),
-          RaisedButton(
-            padding: EdgeInsets.all(0),
-            child: userThemeName == 'darkTheme' ? Icon(Icons.check) : null,
-            shape: CircleBorder(),
-            color: Colors.black,
-            onPressed: () {
-              setState(() {
-                themeProvider.setDarkTheme();
-              });
-            },
-          ),
-        ],
-      );
+          AppLocalizations.of(context).settingsLanguage, Icons.translate, null);
     }
 
     Widget backgroundSettings() {
@@ -171,7 +269,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           RaisedButton(
-            child: cardPrefs.cardPrefs.imageEnabled
+            child: cardPrefs.cardPrefs!.imageEnabled!
                 ? null
                 : Icon(
                     Icons.check,
@@ -196,7 +294,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 });
               },
               child: Container(
-                child: cardPrefs.cardPrefs.imageEnabled
+                child: cardPrefs.cardPrefs!.imageEnabled!
                     ? Icon(Icons.check, color: Colors.white)
                     : null,
                 height: 40.0,
@@ -225,14 +323,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             children: [
               ChoiceChip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: cardPrefs.cardPrefs.textDirection ? false : true,
+                selected: cardPrefs.cardPrefs!.textDirection! ? false : true,
                 avatar: Icon(Icons.arrow_forward),
                 label: Text(
                   "LTR",
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
-                backgroundColor: Theme.of(context).primaryColor,
-                selectedColor: Theme.of(context).accentColor,
                 onSelected: (bool selected) {
                   setState(() {
                     cardPrefs.savePref('textDirection', false);
@@ -241,14 +337,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               ChoiceChip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: cardPrefs.cardPrefs.textDirection ? true : false,
+                selected: cardPrefs.cardPrefs!.textDirection! ? true : false,
                 avatar: Icon(Icons.arrow_back),
                 label: Text(
                   "RTL",
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
-                backgroundColor: Theme.of(context).primaryColor,
-                selectedColor: Theme.of(context).accentColor,
                 onSelected: (bool selected) {
                   setState(() {
                     cardPrefs.savePref('textDirection', true);
@@ -272,7 +366,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   padding: EdgeInsets.only(left: 80),
                   child: Row(children: [
                     // Expanded(child:
-                    Text(AppLocalization.of(context).settingsVerseinWolofal,
+                    Text(AppLocalizations.of(context).settingsVerseinWolofal,
                         style: Theme.of(context).textTheme.subtitle1),
                   ]))),
           Expanded(
@@ -282,7 +376,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
-                  value: _wolofal,
+                  value: _wolofal!,
                   onChanged: (_) {
                     setState(() {
                       cardPrefs.savePref('wolofalVerseEnabled', !_wolofal);
@@ -307,7 +401,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   padding: EdgeInsets.only(left: 80),
                   child: Row(children: [
                     // Expanded(child:
-                    Text(AppLocalization.of(context).settingsVerseinWolof,
+                    Text(AppLocalizations.of(context).settingsVerseinWolof,
                         style: Theme.of(context).textTheme.subtitle1),
                   ]))),
           Expanded(
@@ -317,7 +411,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
-                  value: _wolof,
+                  value: _wolof!,
                   onChanged: (_) {
                     setState(() {
                       cardPrefs.savePref('wolofVerseEnabled', !_wolof);
@@ -341,14 +435,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             children: [
               ChoiceChip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: cardPrefs.cardPrefs.showFavs ? true : false,
+                selected: cardPrefs.cardPrefs!.showFavs! ? true : false,
                 avatar: Icon(Icons.favorite),
                 label: Text(
-                  AppLocalization.of(context).settingsFavorites,
+                  AppLocalizations.of(context).settingsFavorites,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
-                backgroundColor: Theme.of(context).primaryColor,
-                selectedColor: Theme.of(context).accentColor,
                 onSelected: (bool selected) async {
                   print('in fav selector');
                   if (Provider.of<DivineNames>(context, listen: false)
@@ -360,15 +452,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text(
-                            AppLocalization.of(context).favsNoneYet,
+                            AppLocalizations.of(context).favsNoneYet,
                           ),
                           content: Text(
-                            AppLocalization.of(context).favsNoneYetInstructions,
+                            AppLocalizations.of(context)
+                                .favsNoneYetInstructions,
                           ),
                           actions: [
                             FlatButton(
                                 child: Text(
-                                  AppLocalization.of(context).ok,
+                                  AppLocalizations.of(context).ok,
                                 ),
                                 onPressed: () {
                                   Navigator.of(context).pop();
@@ -386,14 +479,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               ChoiceChip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: cardPrefs.cardPrefs.showFavs ? false : true,
+                selected: cardPrefs.cardPrefs!.showFavs! ? false : true,
                 avatar: Icon(Icons.all_inclusive),
                 label: Text(
-                  AppLocalization.of(context).settingsTextAll,
+                  AppLocalizations.of(context).settingsTextAll,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
-                backgroundColor: Theme.of(context).primaryColor,
-                selectedColor: Theme.of(context).accentColor,
                 onSelected: (bool selected) {
                   setState(() {
                     cardPrefs.savePref('showFavs', false);
@@ -406,71 +497,72 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
-    Widget languageSetting() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Wrap(
-            direction: Axis.horizontal,
-            spacing: 15,
-            children: [
-              ChoiceChip(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: userLang == 'wo' ? true : false,
-                label: Text(
-                  "Wolof",
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                backgroundColor: Theme.of(context).primaryColor,
-                selectedColor: Theme.of(context).accentColor,
-                onSelected: (bool selected) {
-                  setState(() {
-                    Provider.of<ThemeModel>(context, listen: false)
-                        .setLang('wo');
-                  });
-                },
-              ),
-              ChoiceChip(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: userLang == 'fr' ? true : false,
-                label: Text(
-                  "Français",
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                backgroundColor: Theme.of(context).primaryColor,
-                selectedColor: Theme.of(context).accentColor,
-                onSelected: (bool selected) {
-                  setState(() {
-                    Provider.of<ThemeModel>(context, listen: false)
-                        .setLang('fr');
-                  });
-                },
-              ),
-              ChoiceChip(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: userLang == 'en' ? true : false,
-                label: Text(
-                  "English",
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                backgroundColor: Theme.of(context).primaryColor,
-                selectedColor: Theme.of(context).accentColor,
-                onSelected: (bool selected) {
-                  setState(() {
-                    Provider.of<ThemeModel>(context, listen: false)
-                        .setLang('en');
-                  });
-                },
-              ),
-            ],
-          ),
-        ],
-      );
-    }
+//old; delete if wokrking
+    // Widget languageSetting() {
+    //   return Row(
+    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //     children: [
+    //       Wrap(
+    //         direction: Axis.horizontal,
+    //         spacing: 15,
+    //         children: [
+    //           ChoiceChip(
+    //             padding: EdgeInsets.symmetric(horizontal: 10),
+    //             selected: userLang == 'wo' ? true : false,
+    //             label: Text(
+    //               "Wolof",
+    //               style: Theme.of(context).textTheme.subtitle1,
+    //             ),
+    //             backgroundColor: Theme.of(context).primaryColor,
+    //             selectedColor: Theme.of(context).accentColor,
+    //             onSelected: (bool selected) {
+    //               setState(() {
+    //                 Provider.of<ThemeModel>(context, listen: false)
+    //                     .setLang('wo');
+    //               });
+    //             },
+    //           ),
+    //           ChoiceChip(
+    //             padding: EdgeInsets.symmetric(horizontal: 10),
+    //             selected: userLang == 'fr' ? true : false,
+    //             label: Text(
+    //               "Français",
+    //               style: Theme.of(context).textTheme.subtitle1,
+    //             ),
+    //             backgroundColor: Theme.of(context).primaryColor,
+    //             selectedColor: Theme.of(context).accentColor,
+    //             onSelected: (bool selected) {
+    //               setState(() {
+    //                 Provider.of<ThemeModel>(context, listen: false)
+    //                     .setLang('fr');
+    //               });
+    //             },
+    //           ),
+    //           ChoiceChip(
+    //             padding: EdgeInsets.symmetric(horizontal: 10),
+    //             selected: userLang == 'en' ? true : false,
+    //             label: Text(
+    //               "English",
+    //               style: Theme.of(context).textTheme.subtitle1,
+    //             ),
+    //             backgroundColor: Theme.of(context).primaryColor,
+    //             selectedColor: Theme.of(context).accentColor,
+    //             onSelected: (bool selected) {
+    //               setState(() {
+    //                 Provider.of<ThemeModel>(context, listen: false)
+    //                     .setLang('en');
+    //               });
+    //             },
+    //           ),
+    //         ],
+    //       ),
+    //     ],
+    //   );
+    // }
 
     Widget viewListOfNames() {
       return settingTitle(
-        'List View',
+        AppLocalizations.of(context).listView,
         Icons.list,
         () {
           //Part of the names list navigation - this opens the NamesLIst, then gets and then passes on the value from the popped screen
@@ -486,7 +578,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppLocalization.of(context).settingsTitle,
+          AppLocalizations.of(context).settingsTitle,
           style: Theme.of(context).textTheme.headline6,
         ),
       ),
@@ -513,7 +605,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   settingRow(languageTitle(), languageSetting()),
                   Divider(),
                   settingTitle(
-                    AppLocalization.of(context).settingsAbout,
+                    AppLocalizations.of(context).settingsAbout,
                     Icons.question_answer,
                     () {
                       Navigator.of(context).pushNamed(AboutScreen.routeName);
@@ -521,7 +613,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   Divider(),
                   settingTitle(
-                    AppLocalization.of(context).settingsContactUs,
+                    AppLocalizations.of(context).settingsContactUs,
                     Icons.email,
                     () async {
                       const url = 'mailto:equipedevmbs@gmail.com';
@@ -533,7 +625,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     },
                   ),
                   Divider(),
-                  settingTitle(AppLocalization.of(context).settingsViewIntro,
+                  settingTitle(AppLocalizations.of(context).settingsViewIntro,
                       Icons.replay, () {
                     Navigator.of(context).pushNamed(OnboardingScreen.routeName);
                   }),
@@ -553,7 +645,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 settingColumn(showFavsTitle(), showFavsSetting()),
                 settingColumn(languageTitle(), languageSetting()),
                 settingTitle(
-                  AppLocalization.of(context).settingsAbout,
+                  AppLocalizations.of(context).settingsAbout,
                   Icons.question_answer,
                   () {
                     Navigator.of(context).pushNamed(AboutScreen.routeName);
@@ -561,7 +653,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 Divider(),
                 settingTitle(
-                  AppLocalization.of(context).settingsContactUs,
+                  AppLocalizations.of(context).settingsContactUs,
                   Icons.email,
                   () async {
                     const url = 'mailto:equipedevmbs@gmail.com';
@@ -573,9 +665,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   },
                 ),
                 Divider(),
-                settingTitle(
-                    AppLocalization.of(context).settingsViewIntro, Icons.replay,
-                    () {
+                settingTitle(AppLocalizations.of(context).settingsViewIntro,
+                    Icons.replay, () {
                   Navigator.of(context).pushNamed(OnboardingScreen.routeName);
                 }),
               ],

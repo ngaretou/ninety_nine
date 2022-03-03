@@ -11,9 +11,9 @@ import '../widgets/card_back.dart';
 
 class NameCards extends StatefulWidget {
   //This goToPage is only in case of a name chosen in list view. It is passed up from list view page and then back down here.
-  final int goToPage;
+  final int? goToPage;
 
-  NameCards({Key key, @required this.goToPage}) : super(key: key);
+  NameCards({Key? key, required this.goToPage}) : super(key: key);
 
   @override
   _NameCardsState createState() => _NameCardsState();
@@ -21,12 +21,12 @@ class NameCards extends StatefulWidget {
 
 class _NameCardsState extends State<NameCards>
     with SingleTickerProviderStateMixin {
-  bool initialized;
+  late bool initialized;
 
-  AnimationController _animationController;
-  Animation<double> _animation;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
-  PageController _pageController;
+  PageController? _pageController;
   @override
   void initState() {
     print('NameCards initState');
@@ -50,10 +50,11 @@ class _NameCardsState extends State<NameCards>
       });
     //page controller is initialized here and initialPage given
     _pageController = PageController(
-      initialPage:
-          Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
-              ? 0
-              : Provider.of<DivineNames>(context, listen: false).lastPageViewed,
+      initialPage: Provider.of<CardPrefs>(context, listen: false)
+              .cardPrefs!
+              .showFavs!
+          ? 0
+          : Provider.of<DivineNames>(context, listen: false).lastPageViewed!,
       viewportFraction: 1,
       keepPage: false,
     );
@@ -62,7 +63,7 @@ class _NameCardsState extends State<NameCards>
   @override
   void dispose() {
     _animationController.dispose();
-    _pageController.dispose();
+    _pageController!.dispose();
     super.dispose();
   }
 
@@ -78,7 +79,7 @@ class _NameCardsState extends State<NameCards>
     //If you get this far, you've seen the onboarding, so don't show again
     cardPrefs.savePref('showOnboarding', false);
     //If you are just looking at favs or if you are looking at all names
-    final namesToShow = cardPrefs.cardPrefs.showFavs
+    final namesToShow = cardPrefs.cardPrefs!.showFavs!
         ? divineNames.favoriteNames
         : divineNames.names ?? divineNames.names;
 
@@ -122,7 +123,7 @@ class _NameCardsState extends State<NameCards>
 
     if (initialized) {
       // _pageController.jumpToPage(widget.goToPage);
-      _pageController.animateToPage(widget.goToPage,
+      _pageController!.animateToPage(widget.goToPage!,
           duration: Duration(milliseconds: 700), curve: Curves.ease);
     }
     initialized = true;
@@ -133,14 +134,14 @@ class _NameCardsState extends State<NameCards>
         height: (mediaQuery.size.height),
         child: PageView.builder(
             //Controls from card preferences the card flow direction
-            reverse: cardPrefs.cardPrefs.textDirection,
+            reverse: cardPrefs.cardPrefs!.textDirection!,
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             controller: _pageController,
             onPageChanged: (index) {
               //Here we want the user to be able to come back to the name they were on even if they
               //switch temporarily to favorites - so save lastpage viewed only when not viewing favs
-              if (!cardPrefs.cardPrefs.showFavs) {
+              if (!cardPrefs.cardPrefs!.showFavs!) {
                 divineNames.saveLastNameViewed(index);
               }
               if (_animationStatus != AnimationStatus.dismissed) {
@@ -156,7 +157,7 @@ class _NameCardsState extends State<NameCards>
                   transform: (_isPhone) ? phoneTransform : tabletTransform,
                   child: GestureDetector(
                     onTap: () {
-                      if (_pageController.page == i) {
+                      if (_pageController!.page == i) {
                         if (_animationStatus == AnimationStatus.dismissed) {
                           _animationController.forward();
                         } else {

@@ -13,7 +13,7 @@ class CardsScreen extends StatefulWidget {
 }
 
 class _CardsScreenState extends State<CardsScreen> {
-  int goToPage;
+  int? goToPage;
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _CardsScreenState extends State<CardsScreen> {
                     .then((value) {
                   if (value != null) {
                     setState(() {
-                      goToPage = value;
+                      goToPage = value as int?;
                     });
                   }
                 });

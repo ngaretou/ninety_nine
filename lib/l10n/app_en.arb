@@ -1,5 +1,4 @@
 {
-  "@@last_modified": "2020-08-07T19:54:38.584472",
   "settingsTitle": "Settings",
   "@settingsTitle": {
     "description": "Settings screen title",
@@ -195,6 +194,12 @@
   "start": "Start",
   "@start": {
     "description": "Start on onboarding screen",
+    "type": "text",
+    "placeholders": {}
+  },
+  "listView": "List View",
+  "@listView": {
+    "description": "List View",
     "type": "text",
     "placeholders": {}
   }

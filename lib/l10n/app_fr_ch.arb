@@ -197,5 +197,11 @@
     "description": "Start on onboarding screen",
     "type": "text",
     "placeholders": {}
+  },
+  "listView": "Limeefu tur yi",
+  "@listView": {
+    "description": "List View",
+    "type": "text",
+    "placeholders": {}
   }
 }

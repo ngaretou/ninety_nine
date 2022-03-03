@@ -23,9 +23,9 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle linkTheme = Theme.of(context)
         .textTheme
-        .bodyText2
+        .bodyText2!
         .copyWith(decoration: TextDecoration.underline);
-    TextStyle defaultStyle = Theme.of(context).textTheme.bodyText2;
+    TextStyle? defaultStyle = Theme.of(context).textTheme.bodyText2;
     return Scaffold(
         appBar: AppBar(
           title: Text('About', style: Theme.of(context).textTheme.headline6),

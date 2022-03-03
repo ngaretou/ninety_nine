@@ -15,25 +15,25 @@ class DivineName with ChangeNotifier {
   final String wolofVerseRef;
   final String wolofalVerse;
   final String wolofalVerseRef;
-  String img;
+  String? img;
   bool isFav;
 
   DivineName({
-    @required this.id,
-    @required this.arabicName,
-    @required this.wolofName,
-    @required this.wolofalName,
-    @required this.wolofVerse,
-    @required this.wolofVerseRef,
-    @required this.wolofalVerse,
-    @required this.wolofalVerseRef,
+    required this.id,
+    required this.arabicName,
+    required this.wolofName,
+    required this.wolofalName,
+    required this.wolofVerse,
+    required this.wolofVerseRef,
+    required this.wolofalVerse,
+    required this.wolofalVerseRef,
     this.img,
     this.isFav = false,
   });
 }
 
 class DivineNames with ChangeNotifier {
-  int _lastPageViewed;
+  int? _lastPageViewed = 0;
   List<int> _pictureIds = [];
 
   List<DivineName> _names = [];
@@ -47,7 +47,7 @@ class DivineNames with ChangeNotifier {
     return _names.where((name) => name.isFav).toList();
   }
 
-  int get lastPageViewed {
+  int? get lastPageViewed {
     return _lastPageViewed;
   }
 
@@ -109,15 +109,15 @@ class DivineNames with ChangeNotifier {
     //so we populate the copy of names that lives in session memory with the user's info here
 
     //Get the user's favorite list from sharedprefs
-    List _favList;
+    List? _favList;
     final prefs = await SharedPreferences.getInstance();
     !prefs.containsKey('favList')
         ? _favList = []
-        : _favList = json.decode(prefs.getString('favList')) as List;
+        : _favList = json.decode(prefs.getString('favList')!) as List?;
 
     //Loop over the names list and fill in the values
     _names.forEach((name) {
-      _favList.contains(name.id) ? name.isFav = true : name.isFav = false;
+      _favList!.contains(name.id) ? name.isFav = true : name.isFav = false;
     });
     notifyListeners();
   }
@@ -134,14 +134,14 @@ class DivineNames with ChangeNotifier {
     if (!prefs.containsKey('lastNameViewed')) {
       return 0;
     } else {
-      final storedValue = json.decode(prefs.getString('lastNameViewed'));
+      final storedValue = json.decode(prefs.getString('lastNameViewed')!);
       int _lastNameViewed = int.parse(storedValue);
       return _lastNameViewed;
     }
   }
 
   Future<void> toggleFavoriteStatus(id) async {
-    List<dynamic> _favList;
+    List<dynamic>? _favList;
     //Get the favorites list from disk
     final prefs = await SharedPreferences.getInstance();
     //check if this is the first time a user has set prefs - if so empty list
@@ -149,16 +149,16 @@ class DivineNames with ChangeNotifier {
       _favList = [];
     } else {
       //or if not get that list in memory so we can use it
-      _favList = json.decode(prefs.getString('favList')) as List<dynamic>;
+      _favList = json.decode(prefs.getString('favList')!) as List<dynamic>?;
     }
     var currentName = _names.firstWhere((name) => name.id == id);
     //set the model in memory to true or false and also add the id of the current name to the list or remove it
     if (currentName.isFav) {
       currentName.isFav = false;
-      _favList.remove(id);
+      _favList!.remove(id);
     } else if (!currentName.isFav) {
       currentName.isFav = true;
-      _favList.add(id);
+      _favList!.add(id);
     }
     notifyListeners();
 //Now store the list back to disk
