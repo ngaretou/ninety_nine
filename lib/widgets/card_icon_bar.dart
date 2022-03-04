@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../providers/names.dart';
@@ -51,6 +51,7 @@ class _CardIconBarState extends State<CardIconBar> {
                   onPressed: () {
                     Provider.of<DivineNames>(context, listen: false)
                         .toggleFavoriteStatus(widget.name.id);
+                    setState(() {});
                   },
                 ),
                 //Media Player
@@ -73,7 +74,7 @@ class _CardIconBarState extends State<CardIconBar> {
                           content:
                               Text(AppLocalizations.of(context).sharingMsg),
                           actions: [
-                            FlatButton(
+                            TextButton(
                                 child: Text("Wolof"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
@@ -84,7 +85,7 @@ class _CardIconBarState extends State<CardIconBar> {
                                       " -- " +
                                       widget.name.wolofVerseRef);
                                 }),
-                            FlatButton(
+                            TextButton(
                                 child: Text("وࣷلࣷفَلْ",
                                     style: TextStyle(
                                         fontFamily: "Harmattan", fontSize: 22)),
@@ -97,7 +98,7 @@ class _CardIconBarState extends State<CardIconBar> {
                                       " -- " +
                                       widget.name.wolofalVerseRef);
                                 }),
-                            FlatButton(
+                            TextButton(
                                 child: Text(
                                   AppLocalizations.of(context).cancel,
                                 ),

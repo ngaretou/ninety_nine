@@ -123,7 +123,6 @@ class _MyAppState extends State<MyApp> {
                     : CardsScreen(),
       ),
       routes: {
-        // '/': (BuildContext context) => CardsScreen(),
         CardsScreen.routeName: (ctx) => CardsScreen(),
         SettingsScreen.routeName: (ctx) => SettingsScreen(),
         AboutScreen.routeName: (ctx) => AboutScreen(),

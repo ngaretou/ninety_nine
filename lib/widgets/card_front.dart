@@ -58,11 +58,8 @@ class CardFront extends StatelessWidget {
     Widget wolofalNameFront(mediaQuery, names) {
       return Text(
         " " + names.wolofalName + " ",
-        //change
-        // 'دࣹ اَلّ هِيرِنْ',
         textAlign: TextAlign.center,
         style: TextStyle(
-            // height: 1,
             color: Colors.white,
             fontFamily: "Harmattan",
             fontSize: adaptiveFontSize),
@@ -72,8 +69,6 @@ class CardFront extends StatelessWidget {
 
     Widget wolofNameFront(mediaQuery, names) {
       return Text(names.wolofName,
-          //change
-          // 'The All-Hearing',
           textAlign: TextAlign.center,
           style: TextStyle(
             height: 1,
@@ -87,7 +82,7 @@ class CardFront extends StatelessWidget {
     return Container(
       //with background image or not?
       decoration:
-          Provider.of<CardPrefs>(context, listen: true).cardPrefs.imageEnabled
+          Provider.of<CardPrefs>(context, listen: false).cardPrefs.imageEnabled
               ? BoxDecoration(
                   color: Colors.black54,
                   borderRadius: BorderRadius.circular(20.0),

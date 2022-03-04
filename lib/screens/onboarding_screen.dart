@@ -28,17 +28,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   TextStyle introStyle = TextStyle(
-      // fontFamily: 'Charis',
       fontFamily: 'Lato',
       fontSize: 24,
-      // height: 2.6,
       fontWeight: FontWeight.w600,
       color: Colors.white);
 
   @override
   Widget build(BuildContext context) {
-//  final themeProvider = Provider.of<ThemeModel>(context, listen: false);
-
     return Scaffold(
       body: Container(
         child: Stack(
@@ -169,7 +165,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       _value = 1;
     } else {
       switch (chosenLang) {
-        case "wo":
+        case "fr_CH":
           {
             _value = 1;
             break;
@@ -188,19 +184,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
 
     TextStyle chooserStyle = TextStyle(color: Colors.black87);
+
     return Container(
       padding: EdgeInsets.only(left: 10),
       width: 105,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
-        color: Colors.white38,
+        color: Colors.white,
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
+            dropdownColor: Colors.white,
             value: _value,
             items: [
               DropdownMenuItem(
-                child: Text("Wolof", style: chooserStyle),
+                child: Container(
+                  child: Text("Wolof", style: chooserStyle),
+                  color: Colors.white,
+                ),
                 value: 1,
               ),
               DropdownMenuItem(

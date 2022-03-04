@@ -28,13 +28,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             MediaQuery.of(context).size.height) <=
         1400;
 
-    final themeProvider = Provider.of<ThemeModel>(context, listen: false);
-    final ThemeComponents? _userTheme = themeProvider.userTheme;
-    final Locale userLocale = themeProvider.userLocale!;
+    ThemeModel themeProvider = Provider.of<ThemeModel>(context, listen: false);
+    ThemeComponents? _userTheme = themeProvider.userTheme;
+    Locale userLocale = themeProvider.userLocale!;
 
-    final cardPrefs = Provider.of<CardPrefs>(context, listen: false);
-    final _wolof = cardPrefs.cardPrefs.wolofVerseEnabled;
-    bool? _wolofal = cardPrefs.cardPrefs.wolofalVerseEnabled;
+    CardPrefs cardPrefs = Provider.of<CardPrefs>(context, listen: false);
+    bool _wolof = cardPrefs.cardPrefs.wolofVerseEnabled;
+    bool _wolofal = cardPrefs.cardPrefs.wolofalVerseEnabled;
 
     //Widgets
     //Main template for all setting titles
@@ -268,15 +268,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          RaisedButton(
+          ElevatedButton(
             child: cardPrefs.cardPrefs.imageEnabled
                 ? null
                 : Icon(
                     Icons.check,
                     color: Colors.black,
                   ),
-            shape: CircleBorder(),
-            color: Colors.white70,
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white70,
+              padding: EdgeInsets.all(0),
+              shape: CircleBorder(),
+            ),
             onPressed: () {
               cardPrefs.savePref('imageEnabled', false);
               setState(() {});
@@ -324,13 +327,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selected: cardPrefs.cardPrefs.textDirection ? false : true,
                 avatar: Icon(Icons.arrow_forward),
                 label: Text(
-                  "LTR",
+                  "(abc)",
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 onSelected: (bool selected) {
-                  setState(() {
-                    cardPrefs.savePref('textDirection', false);
-                  });
+                  cardPrefs.savePref('textDirection', false);
+                  setState(() {});
                 },
               ),
               ChoiceChip(
@@ -338,13 +340,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selected: cardPrefs.cardPrefs.textDirection ? true : false,
                 avatar: Icon(Icons.arrow_back),
                 label: Text(
-                  "RTL",
+                  "(بݖد)",
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 onSelected: (bool selected) {
-                  setState(() {
-                    cardPrefs.savePref('textDirection', true);
-                  });
+                  cardPrefs.savePref('textDirection', true);
+                  setState(() {});
                 },
               ),
             ],
@@ -376,9 +377,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Switch(
                   value: _wolofal,
                   onChanged: (_) {
-                    setState(() {
-                      cardPrefs.savePref('wolofalVerseEnabled', !_wolofal);
-                    });
+                    cardPrefs.savePref('wolofalVerseEnabled', !_wolofal);
+                    setState(() {});
                   },
                 ),
               ],
@@ -411,9 +411,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Switch(
                   value: _wolof,
                   onChanged: (_) {
-                    setState(() {
-                      cardPrefs.savePref('wolofVerseEnabled', !_wolof);
-                    });
+                    cardPrefs.savePref('wolofVerseEnabled', !_wolof);
+                    setState(() {});
                   },
                 ),
               ],
@@ -457,7 +456,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 .favsNoneYetInstructions,
                           ),
                           actions: [
-                            FlatButton(
+                            TextButton(
                                 child: Text(
                                   AppLocalizations.of(context).ok,
                                 ),
@@ -469,9 +468,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       },
                     );
                   } else {
-                    setState(() {
-                      cardPrefs.savePref('showFavs', true);
-                    });
+                    cardPrefs.savePref('showFavs', true);
+                    setState(() {});
                   }
                 },
               ),
@@ -484,9 +482,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 onSelected: (bool selected) {
-                  setState(() {
-                    cardPrefs.savePref('showFavs', false);
-                  });
+                  cardPrefs.savePref('showFavs', false);
+                  setState(() {});
                 },
               ),
             ],
@@ -494,69 +491,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       );
     }
-
-//old; delete if wokrking
-    // Widget languageSetting() {
-    //   return Row(
-    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //     children: [
-    //       Wrap(
-    //         direction: Axis.horizontal,
-    //         spacing: 15,
-    //         children: [
-    //           ChoiceChip(
-    //             padding: EdgeInsets.symmetric(horizontal: 10),
-    //             selected: userLang == 'wo' ? true : false,
-    //             label: Text(
-    //               "Wolof",
-    //               style: Theme.of(context).textTheme.subtitle1,
-    //             ),
-    //             backgroundColor: Theme.of(context).primaryColor,
-    //             selectedColor: Theme.of(context).accentColor,
-    //             onSelected: (bool selected) {
-    //               setState(() {
-    //                 Provider.of<ThemeModel>(context, listen: false)
-    //                     .setLang('wo');
-    //               });
-    //             },
-    //           ),
-    //           ChoiceChip(
-    //             padding: EdgeInsets.symmetric(horizontal: 10),
-    //             selected: userLang == 'fr' ? true : false,
-    //             label: Text(
-    //               "Français",
-    //               style: Theme.of(context).textTheme.subtitle1,
-    //             ),
-    //             backgroundColor: Theme.of(context).primaryColor,
-    //             selectedColor: Theme.of(context).accentColor,
-    //             onSelected: (bool selected) {
-    //               setState(() {
-    //                 Provider.of<ThemeModel>(context, listen: false)
-    //                     .setLang('fr');
-    //               });
-    //             },
-    //           ),
-    //           ChoiceChip(
-    //             padding: EdgeInsets.symmetric(horizontal: 10),
-    //             selected: userLang == 'en' ? true : false,
-    //             label: Text(
-    //               "English",
-    //               style: Theme.of(context).textTheme.subtitle1,
-    //             ),
-    //             backgroundColor: Theme.of(context).primaryColor,
-    //             selectedColor: Theme.of(context).accentColor,
-    //             onSelected: (bool selected) {
-    //               setState(() {
-    //                 Provider.of<ThemeModel>(context, listen: false)
-    //                     .setLang('en');
-    //               });
-    //             },
-    //           ),
-    //         ],
-    //       ),
-    //     ],
-    //   );
-    // }
 
     Widget viewListOfNames() {
       return settingTitle(
@@ -571,7 +505,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
-    // print(MediaQuery.of(context).size.width);
 ///////////////////////////////
     return Scaffold(
       appBar: AppBar(

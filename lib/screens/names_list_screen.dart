@@ -8,11 +8,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NamesList extends StatelessWidget {
   static const routeName = 'names-list-screen';
+
   @override
   Widget build(BuildContext context) {
     final names = Provider.of<DivineNames>(context, listen: false);
     final mediaQuery = MediaQuery.of(context);
-    //Make sure you're showing all, not favorites
 
     TextStyle _asStyle = TextStyle(
         // height: 1.3,
@@ -77,6 +77,8 @@ class NamesList extends StatelessWidget {
                 //Resets to show all cards rather than favs
                 Provider.of<CardPrefs>(context, listen: false)
                     .savePref('showFavs', false);
+                //This is a hacky marker that shows the app we should navigate -
+                //This is trickier than it sounds as the build gets triggered with all the animation
                 Provider.of<DivineNames>(context, listen: false).moveToName =
                     true;
                 //Closes this screen and sends index of the chosen name up the tree

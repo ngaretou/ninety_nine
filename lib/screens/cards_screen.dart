@@ -40,6 +40,8 @@ class _CardsScreenState extends State<CardsScreen> {
                     setState(() {
                       goToPage = value as int;
                     });
+                  } else {
+                    setState(() {});
                   }
                 });
               },
@@ -53,7 +55,8 @@ class _CardsScreenState extends State<CardsScreen> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
-      //goToPage only comes into play when a name is chosen from List View
+
+      //Open to the requested name
       body: NameCards(goToPage: goToPage),
     );
   }

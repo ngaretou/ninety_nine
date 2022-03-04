@@ -23,12 +23,12 @@ class CardBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cardPrefs = Provider.of<CardPrefs>(context, listen: false).cardPrefs;
+    CardPrefList cardPrefs =
+        Provider.of<CardPrefs>(context, listen: false).cardPrefs;
     final bool _isDark =
         Provider.of<ThemeModel>(context, listen: false).userTheme!.brightness ==
             Brightness.dark;
     ui.TextDirection rtlText = ui.TextDirection.rtl;
-    // ui.TextDirection ltrText = ui.TextDirection.ltr;
     Color _fontColor = _isDark ? Colors.white : Colors.black;
 
     Widget textRS(input, double fontReduction) {
@@ -39,7 +39,6 @@ class CardBack extends StatelessWidget {
           color: _fontColor,
           fontFamily: "Charis",
           fontSize: 30 - fontReduction,
-          // fontWeight: FontWeight.bold,
         ),
       );
     }
@@ -60,7 +59,6 @@ class CardBack extends StatelessWidget {
     bool _isPhone = (MediaQuery.of(context).size.width +
             MediaQuery.of(context).size.height) <=
         1400;
-    // print(MediaQuery.of(context).size.width);
 
     //Card back does not have alternate layouts for portrait and landscape
     return Transform(
@@ -95,7 +93,6 @@ class CardBack extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.all(20.0),
-                // isLandscape ? EdgeInsets.all(50.0) : EdgeInsets.all(20.0),
                 child: ListView(
                   children: [
                     Padding(
@@ -109,16 +106,12 @@ class CardBack extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(child: textRS(name.wolofName, 0)),
-                              //change
-                              // Expanded(child: textRS('The All-Hearing', 0)),
                               VerticalDivider(
                                 color: Theme.of(context).primaryColor,
                                 thickness: 3,
                               ),
                               Expanded(
                                 child: textAS(name.wolofalName, 0),
-                                //change
-                                // child: textAS('دࣹ اَلّ هِيرِنْ', 0),
                               ),
                             ],
                           ),
@@ -132,11 +125,6 @@ class CardBack extends StatelessWidget {
                                     ),
                                     textAS(name.wolofalVerse, 0.0),
                                     textAS(name.wolofalVerseRef, 10.0)
-                                    //change
-                                    // textAS(
-                                    //     'وࣹنْ دࣹ رَيْتࣴسْ ڪرَيْ فࣷرْ هࣹلݒّ دࣹ لࣷردْ هِيرسّ اَندْ دࣹلِفࣴرسْ دࣹمْ اࣷوتّ اࣴفْ اَلّ دࣹرْ تࣴرࣴبَلسّ؞',
-                                    //     0.0),
-                                    // textAS('سَامّ 34 آيَ 17', 10.0)
                                   ],
                                 )
                               : SizedBox(width: 20),
@@ -149,19 +137,13 @@ class CardBack extends StatelessWidget {
                                       thickness: 3,
                                     ),
                                     textRS(name.wolofVerse, 0.0),
-                                    //change
-                                    // textRS(
-                                    //     'When the righteous cry for help, the LORD hears and delivers them out of all their troubles.',
-                                    //     0.0),
                                     SizedBox(height: 20),
                                     textRS(name.wolofVerseRef, 10.0),
-                                    //change
-                                    // textRS('Psalm 34 verse 17', 10.0),
                                   ],
                                 )
                               : SizedBox(width: 20),
                           SizedBox(height: 60),
-                          FlatButton(
+                          TextButton(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -193,8 +175,9 @@ class CardBack extends StatelessWidget {
             ),
           ),
           Padding(
-              padding: EdgeInsets.only(bottom: 20),
-              child: CardIconBar(name, context)),
+            padding: EdgeInsets.only(bottom: 20),
+            child: CardIconBar(name, context),
+          ),
         ],
       ),
     );

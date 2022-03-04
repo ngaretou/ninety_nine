@@ -32,12 +32,12 @@ class CardPrefs with ChangeNotifier {
   Future<void> setupCardPrefs() async {
     //get the prefs
     final prefs = await SharedPreferences.getInstance();
-    //if there's no userTheme, it's the first time they've run the app, so give them lightTheme
-    //We're also grabbing other setup info here: language:
 
+    //if there's no userTheme, it's the first time they've run the app, so give them lightTheme
+    //We're also grabbing other setup info here:
     if (!prefs.containsKey('cardPrefs')) {
       CardPrefList defaultCardPrefs = CardPrefList(
-        //Starting off LTR as in English - the relevant setting is PageView(reverse: false) = LTR
+        //Starting off LTR as in English - the relevant setting is in cards.dart PageView(reverse: false) = LTR
         textDirection: false,
         imageEnabled: true,
         wolofVerseEnabled: true,
@@ -49,15 +49,16 @@ class CardPrefs with ChangeNotifier {
       _cardPrefs = defaultCardPrefs;
       //Save prefs to disk
       final _defaultCardPrefs = json.encode({
-        'textDirection': false,
-        'imageEnabled': true,
-        'wolofVerseEnabled': true,
-        'wolofalVerseEnabled': true,
-        'showFavs': false,
-        'showOnboarding': true,
+        'textDirection': defaultCardPrefs.textDirection,
+        'imageEnabled': defaultCardPrefs.imageEnabled,
+        'wolofVerseEnabled': defaultCardPrefs.wolofVerseEnabled,
+        'wolofalVerseEnabled': defaultCardPrefs.wolofalVerseEnabled,
+        'showFavs': defaultCardPrefs.showFavs,
+        'showOnboarding': defaultCardPrefs.showOnboarding,
       });
       prefs.setString('cardPrefs', _defaultCardPrefs);
     } else {
+      //The user has prefs from a previous session - load them
       final jsonResponse =
           json.decode(prefs.getString('cardPrefs')!) as Map<String, dynamic>;
 
@@ -89,18 +90,37 @@ class CardPrefs with ChangeNotifier {
     );
 
     //set the incoming setting
-    if (setting == 'textDirection') {
-      _tempCardPrefs.textDirection = userPref;
-    } else if (setting == 'imageEnabled') {
-      _tempCardPrefs.imageEnabled = userPref;
-    } else if (setting == 'wolofVerseEnabled') {
-      _tempCardPrefs.wolofVerseEnabled = userPref;
-    } else if (setting == 'wolofalVerseEnabled') {
-      _tempCardPrefs.wolofalVerseEnabled = userPref;
-    } else if (setting == 'showFavs') {
-      _tempCardPrefs.showFavs = userPref;
-    } else if (setting == 'showOnboarding') {
-      _tempCardPrefs.showOnboarding = userPref;
+    switch (setting) {
+      case 'textDirection':
+        {
+          _tempCardPrefs.textDirection = userPref;
+        }
+        break;
+      case 'imageEnabled':
+        {
+          _tempCardPrefs.imageEnabled = userPref;
+        }
+        break;
+      case 'wolofVerseEnabled':
+        {
+          _tempCardPrefs.wolofVerseEnabled = userPref;
+        }
+        break;
+      case 'wolofalVerseEnabled':
+        {
+          _tempCardPrefs.wolofalVerseEnabled = userPref;
+        }
+        break;
+      case 'showFavs':
+        {
+          _tempCardPrefs.showFavs = userPref;
+        }
+        break;
+      case 'showOnboarding':
+        {
+          _tempCardPrefs.showOnboarding = userPref;
+        }
+        break;
     }
 
     //now set it in memory

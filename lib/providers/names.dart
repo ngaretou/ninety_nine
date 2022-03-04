@@ -38,6 +38,7 @@ class DivineNames with ChangeNotifier {
   List<DivineName> _names = [];
   bool _moveToName = false;
 
+  // ignore: unnecessary_getters_setters
   bool get moveToName {
     return _moveToName;
   }
@@ -68,6 +69,7 @@ class DivineNames with ChangeNotifier {
     Random rnd = new Random();
 
     //If this is first run, no pics yet, put all possible pics in
+    //It can also be after all pictures are assigned
     if (_pictureIds.length == 0) {
       //i is index, so + 1 on each as it will start with 0
       _pictureIds = List<int>.generate(numberOfPicsAvailable, (i) => i + 1);
@@ -88,11 +90,9 @@ class DivineNames with ChangeNotifier {
 
   Future<void> getDivineNames() async {
     print('getDivineNames');
-    print(_names.length);
 
     //On launch initialize the last name viewed
-    int myint = await getLastNameViewed();
-    print("lastNameViewed " + myint.toString());
+    getLastNameViewed();
 
     //Get the divine names from names.json file
     String jsonString = await rootBundle.loadString("assets/names.json");
@@ -117,7 +117,7 @@ class DivineNames with ChangeNotifier {
     //so we populate the copy of names that lives in session memory with the user's info here
 
     //Get the user's favorite list from sharedprefs
-    List? _favList;
+    late List _favList;
     final prefs = await SharedPreferences.getInstance();
     //If there is no list of favs, set the list to empty, or if there are favs, load them into the list
     !prefs.containsKey('favList')
@@ -126,22 +126,20 @@ class DivineNames with ChangeNotifier {
 
     //Loop over the names list and fill in the values
     _names.forEach((name) {
-      _favList!.contains(name.id) ? name.isFav = true : name.isFav = false;
+      _favList.contains(name.id) ? name.isFav = true : name.isFav = false;
     });
-    // notifyListeners();
+
     print('end getDivineNames');
   }
 
   Future<void> saveLastNameViewed(lastNameViewed) async {
     _lastNameViewed = lastNameViewed;
-    print('lastNameViewed ' + lastNameViewed.toString());
     final prefs = await SharedPreferences.getInstance();
     final jsonData = json.encode(lastNameViewed.toString());
     prefs.setString('lastNameViewed', jsonData);
   }
 
   Future<int> getLastNameViewed() async {
-    print('getting _lastNameViewed');
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('lastNameViewed')) {
       _lastNameViewed = 0;
@@ -161,7 +159,7 @@ class DivineNames with ChangeNotifier {
     if (!prefs.containsKey('favList')) {
       _favList = [];
     } else {
-      //or if not get that list in memory so we can use it
+      //or if the user does have favs get that list in memory so we can use it
       _favList = json.decode(prefs.getString('favList')!) as List<dynamic>?;
     }
     var currentName = _names.firstWhere((name) => name.id == id);
@@ -173,7 +171,7 @@ class DivineNames with ChangeNotifier {
       currentName.isFav = true;
       _favList!.add(id);
     }
-    notifyListeners();
+    // notifyListeners();
     //Now store the list back to disk
     final favList = json.encode(_favList);
     prefs.setString('favList', favList);

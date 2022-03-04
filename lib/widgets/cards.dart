@@ -25,10 +25,12 @@ class _NameCardsState extends State<NameCards>
   late Animation<double> _animation;
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
   PageController _pageController = PageController();
+  bool? rightToLeft;
 
   @override
   void initState() {
     print('NameCards initState');
+
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 800),
@@ -70,15 +72,18 @@ class _NameCardsState extends State<NameCards>
   Widget build(BuildContext context) {
     print('NameCards build method');
 
-    final divineNames = Provider.of<DivineNames>(context);
+    final divineNames = Provider.of<DivineNames>(context, listen: false);
 
     final cardPrefs = Provider.of<CardPrefs>(context, listen: false);
+
     //If you get this far, you've seen the onboarding, so don't show again
     cardPrefs.savePref('showOnboarding', false);
+
     //If you are just looking at favs or if you are looking at all names
-    final namesToShow = cardPrefs.cardPrefs.showFavs
-        ? divineNames.favoriteNames
-        : divineNames.names;
+    List<DivineName> namesToShow =
+        Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
+            ? divineNames.favoriteNames
+            : divineNames.names;
 
     final mediaQuery = MediaQuery.of(context);
 
@@ -112,11 +117,11 @@ class _NameCardsState extends State<NameCards>
 //This is for when the user chooses a name from List View. The index is passed back up to cards scren then back down here.
 //This only happens after the page is initialized.
 
-    if (Provider.of<DivineNames>(context, listen: false).moveToName == true) {
+    if (divineNames.moveToName == true) {
       _pageController.animateToPage(widget.goToPage!,
           duration: Duration(milliseconds: 700), curve: Curves.ease);
       //reset the session so this only triggers once
-      Provider.of<DivineNames>(context, listen: false).moveToName = false;
+      divineNames.moveToName = false;
     }
 
     return Center(
@@ -125,14 +130,15 @@ class _NameCardsState extends State<NameCards>
           height: (mediaQuery.size.height),
           child: PageView.builder(
             //Controls from card preferences the card flow direction
-            reverse: cardPrefs.cardPrefs.textDirection,
+            reverse: Provider.of<CardPrefs>(context, listen: false)
+                .cardPrefs
+                .textDirection,
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             controller: _pageController,
             onPageChanged: (index) {
               //Here we want the user to be able to come back to the name they were on even if they
               //switch temporarily to favorites - so save lastpage viewed only when not viewing favs
-
               divineNames.saveLastNameViewed(index);
 
               if (_animationStatus != AnimationStatus.dismissed) {
