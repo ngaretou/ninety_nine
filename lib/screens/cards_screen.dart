@@ -17,23 +17,13 @@ class _CardsScreenState extends State<CardsScreen> {
 
   @override
   void initState() {
-    print('initState');
-    goToPage = Provider.of<DivineNames>(context, listen: false).lastPageViewed;
+    goToPage = Provider.of<DivineNames>(context, listen: false).lastNameViewed;
     super.initState();
   }
-
-  // @override
-  // void didChangeDependencies() {
-  //   print('didChangeDependencies');
-  //   initialPage =
-  //       Provider.of<DivineNames>(context, listen: false).lastPageViewed;
-  //   super.didChangeDependencies();
-  // }
 
   @override
   Widget build(BuildContext context) {
     print('card_screen build');
-    print(goToPage);
     return Scaffold(
       floatingActionButton: Builder(
         builder: (context) {
@@ -48,7 +38,7 @@ class _CardsScreenState extends State<CardsScreen> {
                     .then((value) {
                   if (value != null) {
                     setState(() {
-                      goToPage = value as int?;
+                      goToPage = value as int;
                     });
                   }
                 });

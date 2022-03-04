@@ -33,8 +33,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final Locale userLocale = themeProvider.userLocale!;
 
     final cardPrefs = Provider.of<CardPrefs>(context, listen: false);
-    final _wolof = cardPrefs.cardPrefs!.wolofVerseEnabled;
-    bool? _wolofal = cardPrefs.cardPrefs!.wolofalVerseEnabled;
+    final _wolof = cardPrefs.cardPrefs.wolofVerseEnabled;
+    bool? _wolofal = cardPrefs.cardPrefs.wolofalVerseEnabled;
 
     //Widgets
     //Main template for all setting titles
@@ -269,7 +269,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           RaisedButton(
-            child: cardPrefs.cardPrefs!.imageEnabled!
+            child: cardPrefs.cardPrefs.imageEnabled
                 ? null
                 : Icon(
                     Icons.check,
@@ -278,9 +278,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             shape: CircleBorder(),
             color: Colors.white70,
             onPressed: () {
-              setState(() {
-                cardPrefs.savePref('imageEnabled', false);
-              });
+              cardPrefs.savePref('imageEnabled', false);
+              setState(() {});
             },
           ),
           Material(
@@ -289,12 +288,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               borderRadius: BorderRadius.circular(20),
               splashColor: Colors.black,
               onTap: () {
-                setState(() {
-                  cardPrefs.savePref('imageEnabled', true);
-                });
+                cardPrefs.savePref('imageEnabled', true);
+                setState(() {});
               },
               child: Container(
-                child: cardPrefs.cardPrefs!.imageEnabled!
+                child: cardPrefs.cardPrefs.imageEnabled
                     ? Icon(Icons.check, color: Colors.white)
                     : null,
                 height: 40.0,
@@ -323,7 +321,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             children: [
               ChoiceChip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: cardPrefs.cardPrefs!.textDirection! ? false : true,
+                selected: cardPrefs.cardPrefs.textDirection ? false : true,
                 avatar: Icon(Icons.arrow_forward),
                 label: Text(
                   "LTR",
@@ -337,7 +335,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               ChoiceChip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: cardPrefs.cardPrefs!.textDirection! ? true : false,
+                selected: cardPrefs.cardPrefs.textDirection ? true : false,
                 avatar: Icon(Icons.arrow_back),
                 label: Text(
                   "RTL",
@@ -376,7 +374,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
-                  value: _wolofal!,
+                  value: _wolofal,
                   onChanged: (_) {
                     setState(() {
                       cardPrefs.savePref('wolofalVerseEnabled', !_wolofal);
@@ -411,7 +409,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
-                  value: _wolof!,
+                  value: _wolof,
                   onChanged: (_) {
                     setState(() {
                       cardPrefs.savePref('wolofVerseEnabled', !_wolof);
@@ -435,7 +433,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             children: [
               ChoiceChip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: cardPrefs.cardPrefs!.showFavs! ? true : false,
+                selected: cardPrefs.cardPrefs.showFavs ? true : false,
                 avatar: Icon(Icons.favorite),
                 label: Text(
                   AppLocalizations.of(context).settingsFavorites,
@@ -479,7 +477,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               ChoiceChip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: cardPrefs.cardPrefs!.showFavs! ? false : true,
+                selected: cardPrefs.cardPrefs.showFavs ? false : true,
                 avatar: Icon(Icons.all_inclusive),
                 label: Text(
                   AppLocalizations.of(context).settingsTextAll,
@@ -579,7 +577,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: Text(
           AppLocalizations.of(context).settingsTitle,
-          style: Theme.of(context).textTheme.headline6,
         ),
       ),
       //If the width of the screen is greater or equal to 500

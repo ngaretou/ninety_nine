@@ -23,7 +23,7 @@ class CardBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cardPrefs = Provider.of<CardPrefs>(context, listen: false).cardPrefs!;
+    final cardPrefs = Provider.of<CardPrefs>(context, listen: false).cardPrefs;
     final bool _isDark =
         Provider.of<ThemeModel>(context, listen: false).userTheme!.brightness ==
             Brightness.dark;
@@ -123,7 +123,7 @@ class CardBack extends StatelessWidget {
                             ],
                           ),
                           //Wolofal verse section
-                          cardPrefs.wolofalVerseEnabled!
+                          cardPrefs.wolofalVerseEnabled
                               ? Column(
                                   children: [
                                     Divider(
@@ -141,7 +141,7 @@ class CardBack extends StatelessWidget {
                                 )
                               : SizedBox(width: 20),
                           //Wolof verse section
-                          cardPrefs.wolofVerseEnabled!
+                          cardPrefs.wolofVerseEnabled
                               ? Column(
                                   children: [
                                     Divider(

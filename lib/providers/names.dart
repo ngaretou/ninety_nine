@@ -33,10 +33,18 @@ class DivineName with ChangeNotifier {
 }
 
 class DivineNames with ChangeNotifier {
-  int? _lastPageViewed = 0;
+  late int _lastNameViewed;
   List<int> _pictureIds = [];
-
   List<DivineName> _names = [];
+  bool _moveToName = false;
+
+  bool get moveToName {
+    return _moveToName;
+  }
+
+  set moveToName(bool incoming) {
+    _moveToName = incoming;
+  }
 
   //Work with a copy of the map, not the map itself
   List<DivineName> get names {
@@ -47,8 +55,8 @@ class DivineNames with ChangeNotifier {
     return _names.where((name) => name.isFav).toList();
   }
 
-  int? get lastPageViewed {
-    return _lastPageViewed;
+  int get lastNameViewed {
+    return _lastNameViewed;
   }
 
   // get a random number for the image
@@ -61,7 +69,8 @@ class DivineNames with ChangeNotifier {
 
     //If this is first run, no pics yet, put all possible pics in
     if (_pictureIds.length == 0) {
-      _pictureIds = List<int>.generate(numberOfPicsAvailable, (i) => i);
+      //i is index, so + 1 on each as it will start with 0
+      _pictureIds = List<int>.generate(numberOfPicsAvailable, (i) => i + 1);
     }
 
     //get a random number between 1 and the number of pics we have left in this round
@@ -73,18 +82,17 @@ class DivineNames with ChangeNotifier {
     //grabs the element at the random index we just generated and gets rid of it in the list
     //so we don't grab that picture again until all pics have been used
     r = _pictureIds.removeAt(indexToGrab).toString();
-
+    print(r);
     return r;
   }
 
   Future<void> getDivineNames() async {
+    print('getDivineNames');
     print(_names.length);
-    if (_names.length != 0) {
-      return;
-    }
-    var temp = await getLastNameViewed();
-    temp == null ? temp = 0 : _lastPageViewed = temp;
-    //check if the current session still contains the names - if so no need to rebuild
+
+    //On launch initialize the last name viewed
+    int myint = await getLastNameViewed();
+    print("lastNameViewed " + myint.toString());
 
     //Get the divine names from names.json file
     String jsonString = await rootBundle.loadString("assets/names.json");
@@ -111,31 +119,36 @@ class DivineNames with ChangeNotifier {
     //Get the user's favorite list from sharedprefs
     List? _favList;
     final prefs = await SharedPreferences.getInstance();
+    //If there is no list of favs, set the list to empty, or if there are favs, load them into the list
     !prefs.containsKey('favList')
         ? _favList = []
-        : _favList = json.decode(prefs.getString('favList')!) as List?;
+        : _favList = json.decode(prefs.getString('favList')!) as List;
 
     //Loop over the names list and fill in the values
     _names.forEach((name) {
       _favList!.contains(name.id) ? name.isFav = true : name.isFav = false;
     });
-    notifyListeners();
+    // notifyListeners();
+    print('end getDivineNames');
   }
 
-  Future<void> saveLastNameViewed(lastPageViewed) async {
-    print(lastPageViewed);
+  Future<void> saveLastNameViewed(lastNameViewed) async {
+    _lastNameViewed = lastNameViewed;
+    print('lastNameViewed ' + lastNameViewed.toString());
     final prefs = await SharedPreferences.getInstance();
-    final jsonData = json.encode(lastPageViewed.toString());
+    final jsonData = json.encode(lastNameViewed.toString());
     prefs.setString('lastNameViewed', jsonData);
   }
 
   Future<int> getLastNameViewed() async {
+    print('getting _lastNameViewed');
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('lastNameViewed')) {
-      return 0;
+      _lastNameViewed = 0;
+      return _lastNameViewed;
     } else {
-      final storedValue = json.decode(prefs.getString('lastNameViewed')!);
-      int _lastNameViewed = int.parse(storedValue);
+      String storedValue = json.decode(prefs.getString('lastNameViewed')!);
+      _lastNameViewed = int.parse(storedValue);
       return _lastNameViewed;
     }
   }
@@ -161,7 +174,7 @@ class DivineNames with ChangeNotifier {
       _favList!.add(id);
     }
     notifyListeners();
-//Now store the list back to disk
+    //Now store the list back to disk
     final favList = json.encode(_favList);
     prefs.setString('favList', favList);
   }

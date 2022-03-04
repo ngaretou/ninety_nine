@@ -4,26 +4,28 @@ import 'dart:core';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CardPrefs with ChangeNotifier {
-  bool? textDirection;
-  bool? imageEnabled;
-  bool? wolofVerseEnabled;
-  bool? wolofalVerseEnabled;
-  bool? showFavs = false;
-  bool? showOnboarding;
+class CardPrefList {
+  bool textDirection;
+  bool imageEnabled;
+  bool wolofVerseEnabled;
+  bool wolofalVerseEnabled;
+  bool showFavs = false;
+  bool showOnboarding;
 
-  CardPrefs({
-    this.textDirection,
-    this.imageEnabled,
-    this.wolofVerseEnabled,
-    this.wolofalVerseEnabled,
-    this.showFavs,
-    this.showOnboarding,
+  CardPrefList({
+    required this.textDirection,
+    required this.imageEnabled,
+    required this.wolofVerseEnabled,
+    required this.wolofalVerseEnabled,
+    required this.showFavs,
+    required this.showOnboarding,
   });
+}
 
-  CardPrefs? _cardPrefs;
+class CardPrefs with ChangeNotifier {
+  late CardPrefList _cardPrefs;
 
-  CardPrefs? get cardPrefs {
+  CardPrefList get cardPrefs {
     return _cardPrefs;
   }
 
@@ -34,7 +36,7 @@ class CardPrefs with ChangeNotifier {
     //We're also grabbing other setup info here: language:
 
     if (!prefs.containsKey('cardPrefs')) {
-      CardPrefs defaultCardPrefs = CardPrefs(
+      CardPrefList defaultCardPrefs = CardPrefList(
         //Starting off LTR as in English - the relevant setting is PageView(reverse: false) = LTR
         textDirection: false,
         imageEnabled: true,
@@ -59,7 +61,7 @@ class CardPrefs with ChangeNotifier {
       final jsonResponse =
           json.decode(prefs.getString('cardPrefs')!) as Map<String, dynamic>;
 
-      _cardPrefs = CardPrefs(
+      _cardPrefs = CardPrefList(
         textDirection: jsonResponse['textDirection'] as bool,
         imageEnabled: jsonResponse['imageEnabled'] as bool,
         wolofVerseEnabled: jsonResponse['wolofVerseEnabled'] as bool,
@@ -77,7 +79,7 @@ class CardPrefs with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     final jsonResponse =
         json.decode(prefs.getString('cardPrefs')!) as Map<String, dynamic>;
-    var _tempCardPrefs = CardPrefs(
+    var _tempCardPrefs = CardPrefList(
       textDirection: jsonResponse['textDirection'] as bool,
       imageEnabled: jsonResponse['imageEnabled'] as bool,
       wolofVerseEnabled: jsonResponse['wolofVerseEnabled'] as bool,
@@ -114,5 +116,6 @@ class CardPrefs with ChangeNotifier {
       'showOnboarding': _tempCardPrefs.showOnboarding,
     });
     prefs.setString('cardPrefs', _userPrefs);
+    notifyListeners();
   }
 }

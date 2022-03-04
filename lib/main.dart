@@ -86,25 +86,30 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> callInititalization() async {
+    await Provider.of<DivineNames>(context, listen: false).getDivineNames();
     await Provider.of<ThemeModel>(context, listen: false).setupTheme();
     await Provider.of<CardPrefs>(context, listen: false).setupCardPrefs();
     await setupLang();
     //This gives the flutter UI a second to complete these above initialization processes
     //These should wait and this be unnecessary but the build happens before all these inits finish,
     //so this is a hack that helps
-    await Future.delayed(Duration(milliseconds: 1000));
+    // await Future.delayed(Duration(milliseconds: 3000));
     return;
   }
 
   @override
   Widget build(BuildContext context) {
+    print('main.dart build');
+
     //Don't show top status bar
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
 
-    print('main.dart build');
+    ThemeData? _currentTheme = Provider.of<ThemeModel>(context).currentTheme;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: _currentTheme == null ? ThemeData.light() : _currentTheme,
       title: '99',
       home: FutureBuilder(
         future: _initialization,
@@ -112,12 +117,11 @@ class _MyAppState extends State<MyApp> {
             snapshot.connectionState == ConnectionState.waiting
                 ? Center(child: CircularProgressIndicator())
                 : Provider.of<CardPrefs>(context, listen: false)
-                        .cardPrefs!
-                        .showOnboarding!
+                        .cardPrefs
+                        .showOnboarding
                     ? OnboardingScreen()
                     : CardsScreen(),
       ),
-      theme: Provider.of<ThemeModel>(context).currentTheme,
       routes: {
         // '/': (BuildContext context) => CardsScreen(),
         CardsScreen.routeName: (ctx) => CardsScreen(),

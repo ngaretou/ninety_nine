@@ -162,7 +162,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final themeProvider = Provider.of<ThemeModel>(context, listen: false);
     int? _value;
     bool? firstRun =
-        Provider.of<CardPrefs>(context, listen: false).showOnboarding;
+        Provider.of<CardPrefs>(context, listen: false).cardPrefs.showOnboarding;
     String? chosenLang =
         Provider.of<ThemeModel>(context, listen: false).userLocale.toString();
     if (firstRun == true) {

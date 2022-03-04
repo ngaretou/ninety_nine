@@ -20,7 +20,6 @@ class CardFront extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cardPrefs = Provider.of<CardPrefs>(context, listen: false).cardPrefs!;
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     double? adaptiveFontSize;
@@ -87,16 +86,17 @@ class CardFront extends StatelessWidget {
 
     return Container(
       //with background image or not?
-      decoration: cardPrefs.imageEnabled!
-          ? BoxDecoration(
-              color: Colors.black54,
-              borderRadius: BorderRadius.circular(20.0),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage("assets/images/${name.img}.jpg"),
-              ),
-            )
-          : null,
+      decoration:
+          Provider.of<CardPrefs>(context, listen: true).cardPrefs.imageEnabled
+              ? BoxDecoration(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.circular(20.0),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage("assets/images/${name.img}.jpg"),
+                  ),
+                )
+              : null,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
