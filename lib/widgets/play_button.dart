@@ -80,8 +80,8 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
       print('an error occurred loading audio: ' + e.toString());
     }
 
-    // Listen to errors during playback.
     _player.playbackEventStream.listen((event) {},
+        // Listen to errors during playback.
         onError: (Object e, StackTrace stackTrace) {
       print('A stream error occurred: $e');
     });
@@ -137,7 +137,8 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
             icon: Icon(Icons.play_arrow, color: Colors.white),
             onPressed: () {
               print('in the else');
-              _player.seek(Duration.zero);
+              //on done, go back to the beginning of the playlist
+              _player.seek(Duration(seconds: 0), index: 0);
             },
           );
         }
@@ -145,74 +146,3 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-// import 'package:audioplayers/audioplayers.dart';
-
-// class Player extends StatefulWidget {
-//   final String file;
-
-//   Player(this.file);
-//   @override
-//   _PlayerState createState() => _PlayerState();
-// }
-
-// class _PlayerState extends State<Player> {
-//   static AudioCache cache = AudioCache();
-//   late AudioPlayer player;
-
-//   bool isPlaying = false;
-//   bool isPaused = false;
-
-//   void playHandler() async {
-//     if (isPlaying) {
-//       player.stop();
-//     } else {
-//       player = await cache.play('audio/${widget.file}.m4a');
-//       player.onPlayerCompletion.listen((_) {
-//         player.stop();
-//         setState(() {
-//           if (isPaused) {
-//             isPlaying = false;
-//             isPaused = false;
-//           } else {
-//             isPlaying = !isPlaying;
-//           }
-//         });
-//       });
-//     }
-
-//     setState(() {
-//       if (isPaused) {
-//         isPlaying = false;
-//         isPaused = false;
-//       } else {
-//         isPlaying = !isPlaying;
-//       }
-//     });
-//   }
-
-//   void pauseHandler() {
-//     if (isPaused && isPlaying) {
-//       player.resume();
-//     } else {
-//       player.pause();
-//     }
-//     setState(() {
-//       isPaused = !isPaused;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return IconButton(
-//       icon: Icon(
-//         isPlaying ? Icons.pause : Icons.play_arrow,
-//         color: Colors.white,
-//       ),
-//       onPressed: () {
-//         playHandler();
-//       },
-//     );
-//   }
-// }

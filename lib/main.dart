@@ -101,10 +101,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     print('main.dart build');
 
-    //Don't show top status bar
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-    //     overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    //Here set the status bar to be shown, but the app to go under it, regardless of display cutout
+    //SystemUiOverlayStyle set in cards_screen
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
     ThemeData? _currentTheme = Provider.of<ThemeModel>(context).currentTheme;
 

@@ -70,7 +70,8 @@ flutter:
     - assets/html/
     - assets/audio/
     - assets/audio/verses/
-    - assets/audio/names/
+    - assets/audio/arnames/
+    - assets/audio/wonames/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
