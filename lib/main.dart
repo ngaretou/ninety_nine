@@ -102,8 +102,9 @@ class _MyAppState extends State<MyApp> {
     print('main.dart build');
 
     //Don't show top status bar
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+    //     overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
     ThemeData? _currentTheme = Provider.of<ThemeModel>(context).currentTheme;
 

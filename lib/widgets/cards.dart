@@ -141,9 +141,10 @@ class _NameCardsState extends State<NameCards>
               //switch temporarily to favorites - so save lastpage viewed only when not viewing favs
               divineNames.saveLastNameViewed(index);
 
-              if (_animationStatus != AnimationStatus.dismissed) {
-                _animationController.reverse();
-              }
+              // This flips the cards on swipe back to the picture side
+              // if (_animationStatus != AnimationStatus.dismissed) {
+              //   _animationController.reverse();
+              // }
             },
             itemCount: namesToShow.length,
             itemBuilder: (ctx, i) => ChangeNotifierProvider.value(

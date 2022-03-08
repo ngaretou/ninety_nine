@@ -56,7 +56,7 @@ class _CardIconBarState extends State<CardIconBar> {
                 ),
                 //Media Player
 
-                Player(widget.name.id),
+                PlayButton(id: widget.name.id),
 
                 IconButton(
                   icon: Icon(

@@ -77,8 +77,8 @@ class DivineNames with ChangeNotifier {
 
     //get a random number between 1 and the number of pics we have left in this round
     //The indexes here are 0 through _pictureIds.length, in other words these are the indexes, not the values
-    //the 'max' is in the parentheses here, and 0 is inclusive and max is exclusive, so you have to do the number of pics you have -1
-    int indexToGrab = rnd.nextInt(_pictureIds.length - 1);
+    //the 'max' is in the parentheses here
+    int indexToGrab = rnd.nextInt(_pictureIds.length);
 
     //This line does two things -
     //grabs the element at the random index we just generated and gets rid of it in the list

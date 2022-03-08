@@ -153,7 +153,9 @@ class CardFront extends StatelessWidget {
                             alignment: Alignment.center,
                             child: arabicNameFront(mediaQuery, name))),
                     Divider(
-                        color: Theme.of(context).primaryColor, thickness: 3),
+                      // color: Theme.of(context).primaryColor,
+                      thickness: 3,
+                    ),
                     Expanded(
                         flex: 2,
                         child: Align(
@@ -163,7 +165,9 @@ class CardFront extends StatelessWidget {
                               child: wolofalNameFront(mediaQuery, name)),
                         )),
                     Divider(
-                        color: Theme.of(context).primaryColor, thickness: 3),
+                      // color: Theme.of(context).primaryColor,
+                      thickness: 3,
+                    ),
                     Expanded(
                         flex: 2,
                         child: Align(

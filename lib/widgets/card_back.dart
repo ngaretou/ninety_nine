@@ -69,7 +69,7 @@ class CardBack extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: Colors.yellow[50],
-              borderRadius: BorderRadius.circular(20.0),
+              // borderRadius: BorderRadius.circular(20.0),
               gradient: LinearGradient(begin: Alignment.bottomRight, colors: [
                 Colors.black.withOpacity(.3),
                 Colors.black.withOpacity(.0)
@@ -82,7 +82,7 @@ class CardBack extends StatelessWidget {
             ),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
+                // borderRadius: BorderRadius.circular(20.0),
                 gradient: LinearGradient(
                   begin: Alignment.bottomRight,
                   colors: [

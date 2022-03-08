@@ -1,46 +1,1002 @@
 [
   {
     "id": 1,
-    "arabicName": "الله",
+    "arabicName": "ﷲ",
     "wolofName": "Yàlla",
-    "wolofalName": "يࣵلَّ",
+    "wolofalName": "يࣵلَّ",
     "wolofVerse": "Ana kuy Yàlla ku moy Aji Sax ji? Ku jara sës ku dul sunu Yàlla? ﻿Yàllaa may dooleel, di ma xàllal, yoon mat.",
     "wolofVerseRef": "Sabóor, saar 18, aaya 32-33",
-    "wolofalVerse": "اَنَ ڪُيْ يࣵلَّ ڪُ مࣷيْ اَجِ سَخْ جِ؟ ڪُ جَرَ سࣴسْ ڪُ دُلْ سُنُ يࣵلَّ؟ يࣵلاَّ مَيْ دࣷولࣹيلْ، دِ مَ خࣵلَّلْ، يࣷونْ مَتْ؞",
-    "wolofalVerseRef": "سَبٗورْ، سَارْ 18، آيَ 32‏-33",
-    "isFav": ""
+    "wolofalVerse": "اَنَ ڪُيْ يࣵلَّ ڪُ مࣷيْ اَجِ سَخْ جِ؟ ڪُ جَرَ سࣴسْ ڪُ دُلْ سُنُ يࣵلَّ؟ ﻿يࣵلاَّ مَيْ دࣷولࣹيلْ، دِ مَ خࣵلَّلْ، يࣷونْ مَتْ؞",
+    "wolofalVerseRef": "Sabóor, saar 18, aaya 32-33"
   },
   {
     "id": 2,
-    "arabicName": "القدوس",
-    "wolofName": "Aji Sell ji",
-    "wolofalName": "اَجِ سࣹلّ جِ",
-    "wolofVerse": "Ku màgg, ku kawe ki, ki màkkaanam sax dàkk te turam sell, daa wax ne: «Fu kawe te sell laa màkkaanoo, maa dëkk ak boroom xol bu mokk, te toroxlu, ngir leqli ku toroxlu, leqli boroom xol bu mokk.",
-    "wolofVerseRef": "Esayi, saar 57, aaya 15",
-    "wolofalVerse": "ڪُ مࣵگّ، ڪُ ڪَوࣹ ڪِ، ڪِ مࣵڪَّانَمْ سَخْ دࣵڪّ تࣹ تُرَمْ سࣹلّ، دَا وَخْ نࣹ:‏ «فُ ڪَوࣹ تࣹ سࣹلّ لاَ مࣵڪَّانࣷو، مَا دࣴڪّ اَڪْ بࣷرࣷومْ خࣷلْ بُ مࣷڪّ، تࣹ تࣷرࣷخْلُ، نگِرْ لࣹقْلِ ڪُ تࣷرࣷخْلُ لࣹقْلِ بࣷرࣷومْ خࣷلْ بُ مࣷڪّ؞",
-    "wolofalVerseRef": "اࣹسَيِ، سَارْ 57، آيَ 15",
-    "isFav": ""
+    "arabicName": "ٱلْرَّحْمَـانُ",
+    "wolofName": "Aji Yërëm ci àddina",
+    "wolofalName": "اَجِ يࣴرࣴمْ ݖِ اࣵدِّنَ",
+    "wolofVerse": "Yiw ak yërmande, Aji Sax ji; kee muñ mer te bare ngor! Aji Sax jee baaxe ñépp, di yërëm lu mu sàkk.",
+    "wolofVerseRef": "Sabóor, saar 145, aaya 8-9",
+    "wolofalVerse": "يِوْ اَڪْ يࣴرْمَنْدࣹ، اَجِ سَخْ جِ؛ ڪࣹي مُݧْ مࣹرْ تࣹ بَرࣹ نگࣷرْ!‏‏‏ اَجِ سَخْ جࣹي بَاخࣹ ݧࣺݒّ، دِ يࣴرࣴمْ لُ مُ سࣵڪّ؞",
+    "wolofalVerseRef": "Sabóor, saar 145, aaya 8-9"
   },
   {
     "id": 3,
-    "arabicName": "السميع",
-    "wolofName": "Kiy Dégg",
-    "wolofalName": "ڪِيْ دࣺگّ",
-    "wolofVerse": "Ku jub yuuxu, Aji Sax ji dégg, fu mu jàqe, mu musal ko.",
-    "wolofVerseRef": "Sabóor, saar 34, aaya 17",
-    "wolofalVerse": "ڪُ جُبْ يُوخُ، اَجِ سَخْ جِ دࣺگّ، فُ مُ جࣵقࣹ، مُ مُسَلْ ڪࣷ؞",
-    "wolofalVerseRef": "سَبٗورْ، سَارْ 34، آيَ 17",
-    "isFav": ""
+    "arabicName": "ٱلْرَّحِيْمُ",
+    "wolofName": "Aji Yërëm ci laaxira",
+    "wolofalName": "اَجِ يࣴرࣴمْ ݖِ لاَخِرَ",
+    "wolofVerse": "Aji Sax ji, bàyyil xel sa yërmandeek sa ngor. Naka jekk sa jikkoo!",
+    "wolofVerseRef": "Sabóor, saar 25, aaya 6",
+    "wolofalVerse": "اَجِ سَخْ جِ، بࣵيِّلْ خࣹلْ سَ يࣴرْمَنْدࣹيڪْ سَ نگࣷرْ؞ نَڪَ جࣹڪّ سَ جِڪّࣷو!‏‏‏",
+    "wolofalVerseRef": "Sabóor, saar 25, aaya 6"
   },
   {
     "id": 4,
-    "arabicName": "البصير",
-    "wolofName": "Kiy Gis",
-    "wolofalName": "ڪِيْ گِسْ",
+    "arabicName": "ٱلْمَلِكُ",
+    "wolofName": "Buur bi",
+    "wolofalName": "بُورْ بِ",
+    "wolofVerse": "Buur Boroom ndam booboo di kan? Xanaa Aji Sax ju gàngoor yi. Kookooy Buur Boroom ndam.",
+    "wolofVerseRef": "Sabóor, saar 24, aaya 10",
+    "wolofalVerse": "بُورْ بࣷرࣷومْ ندَمْ بࣷوبࣷو دِ ڪَنْ؟ خَنَا اَجِ سَخْ جُ گࣵنگࣷورْ يِ؞ ڪࣷوڪࣷويْ بُورْ بࣷرࣷومْ ندَمْ؞",
+    "wolofalVerseRef": "Sabóor, saar 24, aaya 10"
+  },
+  {
+    "id": 5,
+    "arabicName": "ٱلْقُدُّوسُ",
+    "wolofName": "Aji Sell ji",
+    "wolofalName": "اَجِ سࣹلّ جِ",
+    "wolofVerse": "Ku màgg, ku kawe ki, ki màkkaanam sax dàkk te turam sell, daa wax ne: Fu kawe te sell laa màkkaanoo, maa dëkk ak boroom xol bu mokk, te toroxlu, ngir leqli ku toroxlu, leqli boroom xol bu mokk.",
+    "wolofVerseRef": "Esayi, saar 57, aaya 15",
+    "wolofalVerse": "ڪُ مࣵگّ، ڪُ ڪَوࣹ ڪِ، ڪِ مࣵڪَّانَمْ سَخْ دࣵڪّ تࣹ تُرَمْ سࣹلّ، دَا وَخْ نࣹ:‏‏‏ فُ ڪَوࣹ تࣹ سࣹلّ لاَ مࣵڪَّانࣷو، مَا دࣴڪّ اَڪْ بࣷرࣷومْ خࣷلْ بُ مࣷڪّ، تࣹ تࣷرࣷخْلُ، نگِرْ لࣹقْلِ ڪُ تࣷرࣷخْلُ، لࣹقْلِ بࣷرࣷومْ خࣷلْ بُ مࣷڪّ؞",
+    "wolofalVerseRef": "Esayi, saar 57, aaya 15"
+  },
+  {
+    "id": 6,
+    "arabicName": "ٱلْسَّلَامُ",
+    "wolofName": "Jàmm ji",
+    "wolofalName": "جࣵمّ جِ",
+    "wolofVerse": "1Th. 5:23   Yàlla ci boppam, moom miy Boroom jàmm, yal na leen sellal, ba ngeen mat sëkk, te seen léppi xel, ak seen léppi xol, ak seen léppi yaram sàmmu, ba mucc sikk, ba kera bés bu sunu Sang Yeesu Almasi feeñee.",
+    "wolofVerseRef": "1 Tesalonig, saar 5, aaya 23",
+    "wolofalVerse": "1تهّ؞ 5‏؞23   يࣵلَّ ݖِ بࣷݒَّمْ، مࣷومْ مِيْ بࣷرࣷومْ جࣵمّ، يَلْ نَ لࣹينْ سࣹلَّلْ، بَ نگࣹينْ مَتْ سࣴڪّ، تࣹ سࣹينْ لࣺݒِّ خࣹلْ، اَڪْ سࣹينْ لࣺݒِّ خࣷلْ، اَڪْ سࣹينْ لࣺݒِّ يَرَمْ سࣵمُّ، بَ مُݖّ سِڪّ، بَ ڪࣹرَ بࣺسْ بُ سُنُ سَنگّ عِيسَىٰ اَلْمَسِ فࣹيݧࣹي؞",
+    "wolofalVerseRef": "1 Tesalonig, saar 5, aaya 23"
+  },
+  {
+    "id": 7,
+    "arabicName": "ٱلْمُؤْمِنُ",
+    "wolofName": "Ku nu wóolu",
+    "wolofalName": "ڪُ نُ وٗولُ",
+    "wolofVerse": "Aji Sax ji, yaw, ku la xam, wóolu la. Aji Sax ji, yaw, ku lay sàkku, doo ko wacc.",
+    "wolofVerseRef": "Sabóor, saar 9, aaya 11",
+    "wolofalVerse": "اَجِ سَخْ جِ، يَوْ، ڪُ لَ خَمْ، وٗولُ لَ؞ اَجِ سَخْ جِ، يَوْ، ڪُ لَيْ سࣵڪُّ، دࣷو ڪࣷ وَݖّ؞",
+    "wolofalVerseRef": "Sabóor, saar 9, aaya 11"
+  },
+  {
+    "id": 8,
+    "arabicName": "ٱلْمُهَيْمِنُ",
+    "wolofName": "Aji Ràññe ji",
+    "wolofalName": "اَجِ رࣵݧّࣹ جِ",
+    "wolofVerse": "Aji Sax ji, yaa ma natt, xam ma; yaa xam sama toogaay ak sama taxawaay,di ràññee fu sore samay xalaat, di càmbar samab dox ak sama tëraay, yittewoo lépp lu may def.",
+    "wolofVerseRef": "Sabóor, saar 139, aaya 1-3",
+    "wolofalVerse": "اَجِ سَخْ جِ، يَا مَ نَتّ، خَمْ مَ؛ يَا خَمْ سَمَ تࣷوگَايْ اَڪْ سَمَ تَخَوَايْ،دِ رࣵݧّࣹي فُ سࣷرࣹ سَمَيْ خَلاَتْ، دِ ݖࣵمْبَرْ سَمَبْ دࣷخْ اَڪْ سَمَ تࣴرَايْ، يِتّࣹوࣷو لࣺݒّ لُ مَيْ دࣹفْ؞",
+    "wolofalVerseRef": "Sabóor, saar 139, aaya 1-3"
+  },
+  {
+    "id": 9,
+    "arabicName": "ٱلْعَزِيزُ",
+    "wolofName": "Aji Tedd",
+    "wolofalName": "اَجِ تࣹدّ",
+    "wolofVerse": "Sa leeru teddnga ji ne ràññ, ak sa jëf ju yéeme laay jàngat!",
+    "wolofVerseRef": "Sabóor, saar 145, aaya 5",
+    "wolofalVerse": "سَ لࣹيرُ تࣹدّنگَ جِ نࣹ رࣵݧّ، اَڪْ سَ جࣴفْ جُ يࣺيمࣹ لاَيْ جࣵنگَتْ!‏‏‏",
+    "wolofalVerseRef": "Sabóor, saar 145, aaya 5"
+  },
+  {
+    "id": 10,
+    "arabicName": "ٱلْجَبَّارُ",
+    "wolofName": "Jàmbaar Ji",
+    "wolofalName": "جࣵمْبَارْ جِ",
+    "wolofVerse": "Aji Sax ji sa Yàllaa ngi fi sa biir, di jàmbaar juy walloo. Moo lay bége ci biir bànneex, leqlee la cofeelam, bége la bay sarxolle.",
+    "wolofVerseRef": "Cefaña, saar 3, aaya 17",
+    "wolofalVerse": "اَجِ سَخْ جِ سَ يࣵلاَّ نگِ فِ سَ بِيرْ، دِ جࣵمْبَارْ جُيْ وَلّࣷو؞ مࣷو لَيْ بࣺگࣹ ݖِ بِيرْ بࣵنّࣹيخْ، لࣹقْلࣹي لَ ݖࣷفࣹيلَمْ، بࣺگࣹ لَ بَيْ سَرْخࣷلّࣹ؞",
+    "wolofalVerseRef": "Cefaña, saar 3, aaya 17"
+  },
+  {
+    "id": 11,
+    "arabicName": "ٱلْمُتَكَبِّرُ",
+    "wolofName": "Aji Réy Ji",
+    "wolofalName": "اَجِ رࣺيْ جِ",
+    "wolofVerse": "Céy Yàlla, sa njekk àkki na fa kawa kaw. Def nga lu réy. Yaw Yàlla, ana ku mel ni yaw?",
+    "wolofVerseRef": "Sabóor, saar 71, aaya 19",
+    "wolofalVerse": "ݖࣺيْ يࣵلَّ، سَ نجࣹڪّ اࣵڪِّ نَ فَ ڪَوَ ڪَوْ؞ دࣹفْ نگَ لُ رࣺيْ؞ يَوْ يࣵلَّ، اَنَ ڪُ مࣹلْ نِ يَوْ؟",
+    "wolofalVerseRef": "Sabóor, saar 71, aaya 19"
+  },
+  {
+    "id": 12,
+    "arabicName": "ٱلْخَالِقُ",
+    "wolofName": "Aji Bind ji",
+    "wolofalName": "اَجِ بِندّ جِ",
+    "wolofVerse": "Yeen bindeef yépp, nangeen sante Aji Sax ji fépp fu mu tiim. Naa sant Aji Sax ji ci saa xol bii!",
+    "wolofVerseRef": "Sabóor, saar 103, aaya 22",
+    "wolofalVerse": "يࣹينْ بِنْدࣹيفْ يࣺݒّ، نَنگࣹينْ سَنْتࣹ اَجِ سَخْ جِ فࣺݒّ فُ مُ تِيمْ؞ نَا سَنتّ اَجِ سَخْ جِ ݖِ سَا خࣷلْ بِي!‏‏‏",
+    "wolofalVerseRef": "Sabóor, saar 103, aaya 22"
+  },
+  {
+    "id": 13,
+    "arabicName": "ٱلْبَارِئُ",
+    "wolofName": "Aji Sàkk ji",
+    "wolofalName": "اَجِ سࣵڪّ جِ",
+    "wolofVerse": "Ci biir loolu Yàlla bind rabi géej yu mag yi ak mboolem mbindeef muy féey tey ramm-rammi ci ndox mi, mu ci nekk ak wirgoom, teg ca lépp luy boroomi laaf, lu ci nekk ak wirgoom. Yàlla gis ne baax na.",
+    "wolofVerseRef": "Njàlbéen ga, saar 1, aaya 21",
+    "wolofalVerse": "ݖِ بِيرْ لࣷولُ يࣵلَّ بِندّ رَبِ گࣺيجْ يُ مَگْ يِ اَڪْ مبࣷولࣹمْ مبِنْدࣹيفْ مُيْ فࣺييْ تࣹيْ رَمّ-رَمِّ ݖِ ندࣷخْ مِ، مُ ݖِ نࣹڪّ اَڪْ وِرْگࣷومْ، تࣹگْ ݖَ لࣺݒّ لُيْ بࣷرࣷومِ لاَفْ، لُ ݖِ نࣹڪّ اَڪْ وِرْگࣷومْ؞ يࣵلَّ گِسْ نࣹ بَاخْ نَ؞",
+    "wolofalVerseRef": "Njàlbéen ga, saar 1, aaya 21"
+  },
+  {
+    "id": 14,
+    "arabicName": "ٱلْمُصَوِّرُ",
+    "wolofName": "Aji Melal ji",
+    "wolofalName": "اَجِ مࣹلَلْ جِ",
+    "wolofVerse": "Say loxoo ma sàkk, tabax ma, may ma ag dégg, ma mokkal say santaane, ñi la ragal gis ma, bég; nde sa kàddu laa yaakaar.",
+    "wolofVerseRef": "Sabóor, saar 119, aaya 73-74",
+    "wolofalVerse": "سَيْ لࣷخࣷو مَ سࣵڪّ، تَبَخْ مَ، مَيْ مَ اَگْ دࣺگّ، مَ مࣷڪَّلْ سَيْ سَنْتَانࣹ، ݧِ لَ رَگَلْ گِسْ مَ، بࣺگْ؛ ندࣹ سَ ڪࣵدُّ لاَ يَاڪَارْ؞",
+    "wolofalVerseRef": "Sabóor, saar 119, aaya 73-74"
+  },
+  {
+    "id": 15,
+    "arabicName": "ٱلْغَفَّارُ",
+    "wolofName": "Aji Jéggale",
+    "wolofalName": "اَجِ جࣺگَّلࣹ",
+    "wolofVerse": "Kenn dootu soxlaa jàngal kenn, muy moroomam mbaa mbokkam, naan ko: “Ràññeel Aji Sax ji,” ndax ñoom ñépp a may ràññee, ki gëna tuut ba ki gëna mag,» kàddug Aji Sax jee, «ndax maa leen di jéggal seeni ñaawtéef, te seeni bàkkaar, duma ci bàyyeeti xel.»",
+    "wolofVerseRef": "Yeremi, saar 31, aaya 34",
+    "wolofalVerse": "ڪࣹنّ دࣷوتُ سࣷخْلاَ جࣵنگَلْ ڪࣹنّ، مُيْ مࣷرࣷومَمْ مبَا مبࣷڪَّمْ، نَانْ ڪࣷ:‏‏‏ ‹رࣵݧّࣹيلْ اَجِ سَخْ جِ،› ندَخْ ݧࣷومْ ݧࣺݒَّ مَيْ رࣵݧّࣹي، ڪِ گࣴنَ تُوتْ بَ ڪِ گࣴنَ مَگْ،» ڪࣵدُّگْ اَجِ سَخْ جࣹي، «ندَخْ مَا لࣹينْ دِ جࣺگَّلْ سࣹينِ ݧَاوْتࣺيفْ، تࣹ سࣹينِ بࣵڪَّارْ، دُمَ ݖِ بࣵيّࣹيتِ خࣹلْ؞»",
+    "wolofalVerseRef": "Yeremi, saar 31, aaya 34"
+  },
+  {
+    "id": 16,
+    "arabicName": "ٱلْقَهَّارُ",
+    "wolofName": "Aji Not ji",
+    "wolofalName": "اَجِ نࣷتْ جِ",
+    "wolofVerse": "Aji Sax ji sib seen njiit yi leen not, wërloo leen àll bu amul yoon. Waaye mooy teggil néew-ji-doole coonoom, ful njabootam nig jur, aji jub ñi gis ko, bég; mboolem ku bon wedam.",
+    "wolofVerseRef": "Sabóor, saar 107, aaya 40",
+    "wolofalVerse": "اَجِ سَخْ جِ سِبْ سࣹينْ نجِيتْ يِ لࣹينْ نࣷتْ، وࣴرْلࣷو لࣹينْ اࣵلّ بُ اَمُلْ يࣷونْ؞ وَايࣹ مࣷويْ تࣹگِّلْ نࣺيوْ-جِ-دࣷولࣹ ݖࣷونࣷومْ، فُلْ نجَبࣷوتَمْ نِگْ جُرْ، اَجِ جُبْ ݧِ گِسْ ڪࣷ، بࣺگْ؛ مبࣷولࣹمْ ڪُ بࣷنْ وࣹدَمْ؞",
+    "wolofalVerseRef": "Sabóor, saar 107, aaya 40"
+  },
+  {
+    "id": 17,
+    "arabicName": "ٱلْوَهَّابُ",
+    "wolofName": "Aji Maye",
+    "wolofalName": "اَجِ مَيࣹ",
+    "wolofVerse": "…gépp may gu baax, ak bépp jagle bu mat, fa kaw la bawoo, di lu wàcce fa Baay biy boroom leer yi, ki soppikuwul ci lenn, te genn ker gu toogadi nekkul ci moom.",
+    "wolofVerseRef": "Yanqóoba, saar 1, aaya 17",
+    "wolofalVerse": "…گࣺݒّ مَيْ گُ بَاخْ، اَڪْ بࣺݒّ جَگْلࣹ بُ مَتْ، فَ ڪَوْ لَ بَوࣷو، دِ لُ وࣵݖّࣹ فَ بَايْ بِيْ بࣷرࣷومْ لࣹيرْ يِ، ڪِ سࣷݒِّڪُوُلْ ݖِ لࣹنّ، تࣹ گࣹنّ ڪࣹرْ گُ تࣷوگَدِ نࣹڪُّلْ ݖِ مࣷومْ؞",
+    "wolofalVerseRef": "Yanqóoba, saar 1, aaya 17"
+  },
+  {
+    "id": 18,
+    "arabicName": "ٱلْرَّزَّاقُ",
+    "wolofName": "Aji Wërsëgal",
+    "wolofalName": "اَجِ وࣴرْسࣴگَلْ",
+    "wolofVerse": "Aji Sax ji, yaay wàll wi ma séddoo, di sama ndabal xéewal. Yaa yor sama wërsëg.",
+    "wolofVerseRef": "Sabóor, saar 16, aaya 5",
+    "wolofalVerse": "اَجِ سَخْ جِ، يَايْ وࣵلّ وِ مَ سࣺدّࣷو، دِ سَمَ ندَبَلْ خࣺيوَلْ؞ يَا يࣷرْ سَمَ وࣴرْسࣴگْ؞",
+    "wolofalVerseRef": "Sabóor, saar 16, aaya 5"
+  },
+  {
+    "id": 19,
+    "arabicName": "ٱلْفَتَّاحُ",
+    "wolofName": "Aji Ubbi",
+    "wolofalName": "اَجِ اُبِّ",
+    "wolofVerse": "Ubbil-leen ma bunti njekk, ma dugg santi Ki Sax.",
+    "wolofVerseRef": "Sabóor, saar 118, aaya 19",
+    "wolofalVerse": "اُبِّلْ-لࣹينْ مَ بُنْتِ نجࣹڪّ، مَ دُگّ سَنْتِ ڪِ سَخْ؞",
+    "wolofalVerseRef": "Sabóor, saar 118, aaya 19"
+  },
+  {
+    "id": 20,
+    "arabicName": "ٱلْعَلِيمُ",
+    "wolofName": "Aji Xam",
+    "wolofalName": "اَجِ خَمْ",
+    "wolofVerse": "Aji Sax ji, yaa ma natt, xam ma; yaa xam sama toogaay ak sama taxawaay, di ràññee fu sore samay xalaat, di càmbar samab dox ak sama tëraay, yittewoo lépp lu may def. Aji Sax ji, bala maa wax baat, ndeke yaw, xam nga lépp. Kanam ak gannaaw nga ma dare, teg ma sa loxo. Ni nga ma xame daa yéeme, xóot lool, ba wees ma.",
+    "wolofVerseRef": "Sabóor, saar 139, aaya 1-6",
+    "wolofalVerse": "اَجِ سَخْ جِ، يَا مَ نَتّ، خَمْ مَ؛ يَا خَمْ سَمَ تࣷوگَايْ اَڪْ سَمَ تَخَوَايْ، دِ رࣵݧّࣹي فُ سࣷرࣹ سَمَيْ خَلاَتْ، دِ ݖࣵمْبَرْ سَمَبْ دࣷخْ اَڪْ سَمَ تࣴرَايْ، يِتّࣹوࣷو لࣺݒّ لُ مَيْ دࣹفْ؞ اَجِ سَخْ جِ، بَلَ مَا وَخْ بَاتْ، ندࣹڪࣹ يَوْ، خَمْ نگَ لࣺݒّ؞ ڪَنَمْ اَڪْ گَنَّاوْ نگَ مَ دَرࣹ، تࣹگْ مَ سَ لࣷخࣷ؞ نِ نگَ مَ خَمࣹ دَا يࣺيمࣹ، خٗوتْ لࣷولْ، بَ وࣹيسْ مَ؞",
+    "wolofalVerseRef": "Sabóor, saar 139, aaya 1-6"
+  },
+  {
+    "id": 21,
+    "arabicName": "ٱلْقَابِضُ",
+    "wolofName": "Aji Jàpp",
+    "wolofalName": "اَجِ جࣵݒّ",
+    "wolofVerse": "Kon gisleen ne man la, man doŋŋ, kenn du Yàlla ku dul man! Man maay rey, di dundal; di gaañe, di wéral; maay jàpp, te kenn du xettli.",
+    "wolofVerseRef": "Baamtug Yoon wi, saar 32, aaya 39",
+    "wolofalVerse": "ڪࣷنْ گِسْلࣹينْ نࣹ مَنْ لَ، مَنْ دࣷݝّ، ڪࣹنّ دُ يࣵلَّ ڪُ دُلْ مَنْ!‏‏‏ مَنْ مَايْ رࣹيْ، دِ دُنْدَلْ؛ دِ گَاݧࣹ، دِ وࣺرَلْ؛ مَايْ جࣵݒّ، تࣹ ڪࣹنّ دُ خࣹتّلِ؞",
+    "wolofalVerseRef": "Baamtug Yoon wi, saar 32, aaya 39"
+  },
+  {
+    "id": 22,
+    "arabicName": "ٱلْبَاسِطُ",
+    "wolofName": "Aji Tàllal",
+    "wolofalName": "اَجِ تࣵلَّلْ",
+    "wolofVerse": "Ñépp a la wékk bët, di yaakaar, te bu jotee, yaa leen di leel, tàllal sa loxo, reggal luy dund, ba xolam sedd.",
+    "wolofVerseRef": "Sabóor, saar 145, aaya 15-16",
+    "wolofalVerse": "ݧࣺݒَّ لَ وࣺڪّ بࣴتْ، دِ يَاڪَارْ، تࣹ بُ جࣷتࣹي، يَا لࣹينْ دِ لࣹيلْ، تࣵلَّلْ سَ لࣷخࣷ، رࣹگَّلْ لُيْ دُندّ، بَ خࣷلَمْ سࣹدّ؞",
+    "wolofalVerseRef": "Sabóor, saar 145, aaya 15-16"
+  },
+  {
+    "id": 23,
+    "arabicName": "ٱلْخَافِضُ",
+    "wolofName": "Aji Suufeel",
+    "wolofalName": "اَجِ سُوفࣹيلْ",
+    "wolofVerse": "Léegi nag...maa ngi sant Boroom asamaan, di ko sargal, di ko màggal. Lu mu def dëgg la, fu mu jaare njub la, te kuy réy-réylu man na laa suufeel.",
+    "wolofVerseRef": "Dañeel, saar 4, aaya 37",
+    "wolofalVerse": "لࣺيگِ نَگْ...مَا نگِ سَنتّ بࣷرࣷومْ اَسَمَانْ، دِ ڪࣷ سَرْگَلْ، دِ ڪࣷ مࣵگَّلْ؞ لُ مُ دࣹفْ دࣴگّ لَ، فُ مُ جَارࣹ نجُبْ لَ، تࣹ ڪُيْ رࣺيْ-رࣺيْلُ مَنْ نَ لاَ سُوفࣹيلْ؞",
+    "wolofalVerseRef": "Dañeel, saar 4, aaya 37"
+  },
+  {
+    "id": 24,
+    "arabicName": "ٱلْرَّافِعُ",
+    "wolofName": "Aji Yékkati",
+    "wolofalName": "اَجِ يࣺڪَّتِ",
+    "wolofVerse": "Toroxluleen fi kanam Boroom bi, mu yékkati leen.",
+    "wolofVerseRef": "Yanqóoba, saar 4, aaya 10",
+    "wolofalVerse": "تࣷرࣷخْلُلࣹينْ فِ ڪَنَمْ بࣷرࣷومْ بِ، مُ يࣺڪَّتِ لࣹينْ؞",
+    "wolofalVerseRef": "Yanqóoba, saar 4, aaya 10"
+  },
+  {
+    "id": 25,
+    "arabicName": "ٱلْمُعِزُّ",
+    "wolofName": "Aji Teddal",
+    "wolofalName": "اَجِ تࣹدَّلْ",
+    "wolofVerse": "Aji Sax ji Yàllaa mat jant, mat kiiraay; yiw ak daraja, Aji Sax ji joxe; te du ngëneel lu muy bañal ku mat. Éy Aji Sax ji Boroom gàngoor yi, dokklee ku la wóolu.",
+    "wolofVerseRef": "Sabóor, saar 84, aaya 11-12",
+    "wolofalVerse": "اَجِ سَخْ جِ يࣵلاَّ مَتْ جَنتّ، مَتْ ڪِيرَايْ؛ يِوْ اَڪْ دَرَجَ، اَجِ سَخْ جِ جࣷخࣹ؛ تࣹ دُ نگࣴنࣹيلْ لُ مُيْ بَݧَلْ ڪُ مَتْ؞ اࣺيْ اَجِ سَخْ جِ بࣷرࣷومْ گࣵنگࣷورْ يِ، دࣷڪّلࣹي ڪُ لَ وٗولُ؞",
+    "wolofalVerseRef": "Sabóor, saar 84, aaya 11-12"
+  },
+  {
+    "id": 26,
+    "arabicName": "ٱلْمُذِلُّ",
+    "wolofName": "Aji Toroxal",
+    "wolofalName": "اَجِ تࣷرࣷخَلْ",
+    "wolofVerse": "Yaw Aji Sax ji yaakaaru Israyil, ku la wacc, torox; ku la dëddu daa repp. Moo wacc Aji Sax ji, bëtu ndox miy dund.",
+    "wolofVerseRef": "Yeremi, saar 17, aaya 13",
+    "wolofalVerse": "يَوْ اَجِ سَخْ جِ يَاڪَارُ إِسْرَاءِيلْ، ڪُ لَ وَݖّ، تࣷرࣷخْ؛ ڪُ لَ دࣴدُّ دَا رࣹݒّ؞ مࣷو وَݖّ اَجِ سَخْ جِ، بࣴتُ ندࣷخْ مِيْ دُندّ؞",
+    "wolofalVerseRef": "Yeremi, saar 17, aaya 13"
+  },
+  {
+    "id": 27,
+    "arabicName": "ٱلْسَّمِيعُ",
+    "wolofName": "Aji Dégg",
+    "wolofalName": "اَجِ دࣺگّ",
+    "wolofVerse": "Ku jub yuuxu, Aji Sax ji dégg, fu mu jàqe, mu musal ko.",
+    "wolofVerseRef": "Sabóor, saar 34, aaya 17",
+    "wolofalVerse": "ڪُ جُبْ يُوخُ، اَجِ سَخْ جِ دࣺگّ، فُ مُ جࣵقࣹ، مُ مُسَلْ ڪࣷ؞",
+    "wolofalVerseRef": "Sabóor, saar 34, aaya 17"
+  },
+  {
+    "id": 28,
+    "arabicName": "ٱلْبَصِيرُ",
+    "wolofName": "Aji Gis",
+    "wolofalName": "اَجِ گِسْ",
     "wolofVerse": "Asamaan la Aji Sax jiy jéere, di gis doom aadama yépp. Aji Sax jee naa jàkk ku ko ragal tey wéeroo ngoram.",
     "wolofVerseRef": "Sabóor, saar 33, aaya 13, 18",
     "wolofalVerse": "اَسَمَانْ لَ اَجِ سَخْ جِيْ جࣺيرࣹ، دِ گِسْ دࣷومْ آدَمَ يࣺݒّ؞ اَجِ سَخْ جࣹي نَا جࣵڪّ ڪُ ڪࣷ رَگَلْ تࣹيْ وࣺيرࣷو نگࣷرَمْ؞",
-    "wolofalVerseRef": "سَبٗورْ، سَارْ 33، آيَ 13، 18",
-    "isFav": ""
+    "wolofalVerseRef": "Sabóor, saar 33, aaya 13, 18"
+  },
+  {
+    "id": 29,
+    "arabicName": "ٱلْحَكَمُ",
+    "wolofName": "Aji Àtte",
+    "wolofalName": "اَجِ اࣵتّࣹ",
+    "wolofVerse": "Ku jub jot sab yool moos! Te Yàllaa ngi fi moos, di àtte àddina!",
+    "wolofVerseRef": "Sabóor, saar 58, aaya 12",
+    "wolofalVerse": "ڪُ جُبْ جࣷتْ سَبْ يࣷولْ مࣷوسْ!‏‏‏ تࣹ يࣵلاَّ نگِ فِ مࣷوسْ، دِ اࣵتّࣹ اࣵدِّنَ!‏‏‏",
+    "wolofalVerseRef": "Sabóor, saar 58, aaya 12"
+  },
+  {
+    "id": 30,
+    "arabicName": "ٱلْعَدْلُ",
+    "wolofName": "Aji Maandu",
+    "wolofalName": "اَجِ مَانْدُ",
+    "wolofVerse": "Man Aji Sax ji, damaa sopp yoon, bañ càcc ak ñaawtéef. Maay dàmp sama ñoñ ni mu ware, fas ak ñoom kóllëre gu sax.",
+    "wolofVerseRef": "Esayi, saar 61, aaya 8",
+    "wolofalVerse": "مَنْ اَجِ سَخْ جِ، دَمَا سࣷݒّ يࣷونْ، بَݧْ ݖࣵݖّ اَڪْ ݧَاوْتࣺيفْ؞ مَايْ دࣵمݒّ سَمَ ݧࣷݧْ نِ مُ وَرࣹ، فَسْ اَڪْ ݧࣷومْ ڪٗلّࣴرࣹ گُ سَخْ؞",
+    "wolofalVerseRef": "Esayi, saar 61, aaya 8"
+  },
+  {
+    "id": 31,
+    "arabicName": "ٱلْلَّطِيفُ",
+    "wolofName": "Aji Ñeewantel",
+    "wolofalName": "اَجِ ݧࣹيوَنْتࣹلْ",
+    "wolofVerse": "Waaye yaw Boroom bi Yàlla, yaa ñeewante, yërëm, yaa muñ mer, bare ngor ak worma.",
+    "wolofVerseRef": "Sabóor, saar 86, aaya 15",
+    "wolofalVerse": "وَايࣹ يَوْ بࣷرࣷومْ بِ يࣵلَّ، يَا ݧࣹيوَنْتࣹ، يࣴرࣴمْ، يَا مُݧْ مࣹرْ، بَرࣹ نگࣷرْ اَڪْ وࣷرْمَ؞",
+    "wolofalVerseRef": "Sabóor, saar 86, aaya 15"
+  },
+  {
+    "id": 32,
+    "arabicName": "ٱلْخَبِيرُ",
+    "wolofName": "Aji Deñ Kumpa",
+    "wolofalName": "اَجِ دࣹݧْ ڪُمْݒَ",
+    "wolofVerse": "Cant gu amul ndoorte amul kemu ñeel na Yàlla, xam-xam ak kàttan mooy boroom.… Mooy feeñal mbóot mu làqu, xam li ci biir lëndëm, te leer màkkaanoo ko.",
+    "wolofVerseRef": "Dañeel, saar 2, aaya 20-22",
+    "wolofalVerse": "ݖَنتّ گُ اَمُلْ ندࣷورْتࣹ اَمُلْ ڪࣹمُ ݧࣹيلْ نَ يࣵلَّ، خَمْ-خَمْ اَڪْ ڪࣵتَّنْ مࣷويْ بࣷرࣷومْ؞… مࣷويْ فࣹيݧَلْ مبٗوتْ مُ لࣵقُ، خَمْ لِ ݖِ بِيرْ لࣴنْدࣴمْ، تࣹ لࣹيرْ مࣵڪَّانࣷو ڪࣷ؞",
+    "wolofalVerseRef": "Dañeel, saar 2, aaya 20-22"
+  },
+  {
+    "id": 33,
+    "arabicName": "ٱلْحَلِيمُ",
+    "wolofName": "Aji Lewet ji",
+    "wolofalName": "اَجِ لࣹوࣹتْ جِ",
+    "wolofVerse": "Yeenay ñi Yàlla taamu, sellal leen, sopp leen. Kon nag solooleen xolu yërmande, akug mbaax, ak woyoflu, ak jikko ju lewet, ak xolu muñ.",
+    "wolofVerseRef": "Kolos, saar 3, aaya 12",
+    "wolofalVerse": "يࣹينَيْ ݧِ يࣵلَّ تَامُ، سࣹلَّلْ لࣹينْ، سࣷݒّ لࣹينْ؞ ڪࣷنْ نَگْ سࣷلࣷولࣹينْ خࣷلُ يࣴرْمَنْدࣹ، اَڪُگْ مبَاخْ، اَڪْ وࣷيࣷفْلُ، اَڪْ جِڪّࣷ جُ لࣹوࣹتْ، اَڪْ خࣷلُ مُݧْ؞",
+    "wolofalVerseRef": "Kolos, saar 3, aaya 12"
+  },
+  {
+    "id": 34,
+    "arabicName": "ٱلْعَظِيمُ",
+    "wolofName": "Aji Màgg ji",
+    "wolofalName": "اَجِ مࣵگّ جِ",
+    "wolofVerse": "Aji Sax jeey Yàlla ju màgg ji, buur bu mag bi tiim yàllay xeet yépp.",
+    "wolofVerseRef": "Sabóor, saar 95, aaya 3",
+    "wolofalVerse": "اَجِ سَخْ جࣹييْ يࣵلَّ جُ مࣵگّ جِ، بُورْ بُ مَگْ بِ تِيمْ يࣵلَّيْ خࣹيتْ يࣺݒّ؞",
+    "wolofalVerseRef": "Sabóor, saar 95, aaya 3"
+  },
+  {
+    "id": 35,
+    "arabicName": "ٱلْغَفُورُ",
+    "wolofName": "Aji Jéggale",
+    "wolofalName": "اَجِ جࣺگَّلࣹ",
+    "wolofVerse": "Ki Sax, yaw, soo doon lim bàkkaar, Boroom bi, ana kuy taxaw? Waaye yaay jéggale, ñu ragal la.",
+    "wolofVerseRef": "Sabóor, saar 130, aaya 3-4",
+    "wolofalVerse": "ڪِ سَخْ، يَوْ، سࣷو دࣷونْ لِمْ بࣵڪَّارْ، بࣷرࣷومْ بِ، اَنَ ڪُيْ تَخَوْ؟ وَايࣹ يَايْ جࣺگَّلࣹ، ݧُ رَگَلْ لَ؞",
+    "wolofalVerseRef": "Sabóor, saar 130, aaya 3-4"
+  },
+  {
+    "id": 36,
+    "arabicName": "ٱلْشَّكُورُ",
+    "wolofName": "Aji Sant",
+    "wolofalName": "اَجِ سَنتّ",
+    "wolofVerse": "Kan moo nekk surga bu takku te teey, bu njaatigeem teg ci waa kër gi, ngir mu leen di dundal ca jamono ja? Bu njaatigeem ñëwee te gis muy def noonu, surga boobu dina am ngërëm.",
+    "wolofVerseRef": "Macë, saar 24, aaya 45-46",
+    "wolofalVerse": "ڪَنْ مࣷو نࣹڪّ سُرْگَ بُ تَڪُّ تࣹ تࣹييْ، بُ نجَاتِگࣹيمْ تࣹگْ ݖِ وَا ڪࣴرْ گِ، نگِرْ مُ لࣹينْ دِ دُنْدَلْ ݖَ جَمࣷنࣷ جَ؟ بُ نجَاتِگࣹيمْ ݧࣴوࣹي تࣹ گِسْ مُيْ دࣹفْ نࣷونُ، سُرْگَ بࣷوبُ دِنَ اَمْ نگࣴرࣴمْ؞",
+    "wolofalVerseRef": "Macë, saar 24, aaya 45-46"
+  },
+  {
+    "id": 37,
+    "arabicName": "ٱلْعَلِيُّ",
+    "wolofName": "Aji Kawe ji",
+    "wolofalName": "اَجِ ڪَوࣹ جِ",
+    "wolofVerse": "Ku dëkke kiiraayu Aji Kawe ji yaa këroo keppaaru Aji Man ji. Dama naa Aji Sax ji: «Yaw laay làqoo, di la fegoo; ngay sama Yàlla ji ma doyloo.»",
+    "wolofVerseRef": "Sabóor, saar 91, aaya 1-2",
+    "wolofalVerse": "ڪُ دࣴڪّࣹ ڪِيرَايُ اَجِ ڪَوࣹ جِ يَا ڪࣴرࣷو ڪࣹݒَّارُ اَجِ مَنْ جِ؞ دَمَ نَا اَجِ سَخْ جِ:‏‏‏ «يَوْ لاَيْ لࣵقࣷو، دِ لَ فࣹگࣷو؛ نگَيْ سَمَ يࣵلَّ جِ مَ دࣷيْلࣷو؞»",
+    "wolofalVerseRef": "Sabóor, saar 91, aaya 1-2"
+  },
+  {
+    "id": 38,
+    "arabicName": "ٱلْكَبِيرُ",
+    "wolofName": "Aji Magg ji",
+    "wolofalName": "اَجِ مَگّ جِ",
+    "wolofVerse": "Aji Sax jee màgg te jara màggala màggal, kii màggam amul kemu!",
+    "wolofVerseRef": "Sabóor, saar 145, aaya 3",
+    "wolofalVerse": "اَجِ سَخْ جࣹي مࣵگّ تࣹ جَرَ مࣵگَّلَ مࣵگَّلْ، ڪِي مࣵگَّمْ اَمُلْ ڪࣹمُ!‏‏‏",
+    "wolofalVerseRef": "Sabóor, saar 145, aaya 3"
+  },
+  {
+    "id": 39,
+    "arabicName": "ٱلْحَفِيظُ",
+    "wolofName": "Aji Wattu",
+    "wolofalName": "اَجِ وَتُّ",
+    "wolofVerse": "Kër, su ko Aji Sax ji tabaxul, ku ko tabax, neen nga doñ-doñi. Ab dëkk, su ko Aji Sax ji wattuwul, ku ko wattu, neen nga teewlu.",
+    "wolofVerseRef": "Sabóor, saar 127, aaya 1",
+    "wolofalVerse": "ڪࣴرْ، سُ ڪࣷ اَجِ سَخْ جِ تَبَخُلْ، ڪُ ڪࣷ تَبَخْ، نࣹينْ نگَ دࣷݧْ-دࣷݧِ؞ اَبْ دࣴڪّ، سُ ڪࣷ اَجِ سَخْ جِ وَتُّوُلْ، ڪُ ڪࣷ وَتُّ، نࣹينْ نگَ تࣹيوْلُ؞",
+    "wolofalVerseRef": "Sabóor, saar 127, aaya 1"
+  },
+  {
+    "id": 40,
+    "arabicName": "ٱلْمُقِيتُ",
+    "wolofName": "Aji Saxal",
+    "wolofalName": "اَجِ سَخَلْ",
+    "wolofVerse": "Yaa saxalal jur gi ñax ak gàncax gu doom aadama di bey, ba génnee ab dund fi suuf,",
+    "wolofVerseRef": "Sabóor, saar 104, aaya 14",
+    "wolofalVerse": "يَا سَخَلَلْ جُرْ گِ ݧَخْ اَڪْ گࣵنݖَخْ گُ دࣷومْ آدَمَ دِ بࣹيْ، بَ گࣺنّࣹي اَبْ دُندّ فِ سُوفْ،",
+    "wolofalVerseRef": "Sabóor, saar 104, aaya 14"
+  },
+  {
+    "id": 41,
+    "arabicName": "ٱلْحَسِيبُ",
+    "wolofName": "Aji Doy ji",
+    "wolofalName": "اَجِ دࣷيْ جِ",
+    "wolofVerse": "Yàlla man na leena baawaanal wépp yiw, ba ngeen saxoo am lu leen doy ci lépp, ak koom gu bare, ngir jépp jëf ju baax.",
+    "wolofVerseRef": "2 Korent, saar 9, aaya 8",
+    "wolofalVerse": "يࣵلَّ مَنْ نَ لࣹينَ بَاوَانَلْ وࣺݒّ يِوْ، بَ نگࣹينْ سَخࣷو اَمْ لُ لࣹينْ دࣷيْ ݖِ لࣺݒّ، اَڪْ ڪࣷومْ گُ بَرࣹ، نگِرْ جࣺݒّ جࣴفْ جُ بَاخْ؞",
+    "wolofalVerseRef": "2 Korent, saar 9, aaya 8"
+  },
+  {
+    "id": 42,
+    "arabicName": "ٱلْجَلِيلُ",
+    "wolofName": "Aji Magg ji",
+    "wolofalName": "اَجِ مَگّ جِ",
+    "wolofVerse": "Yàlla, kay daa màgg ba wees xam-xam, te ay atam, deesul xayma lim ba.",
+    "wolofVerseRef": "Ayóoba, saar 36, aaya 26",
+    "wolofalVerse": "يࣵلَّ، ڪَيْ دَا مࣵگّ بَ وࣹيسْ خَمْ-خَمْ، تࣹ اَيْ اَتَمْ، دࣹيسُلْ خَيْمَ لِمْ بَ؞",
+    "wolofalVerseRef": "Ayóoba, saar 36, aaya 26"
+  },
+  {
+    "id": 43,
+    "arabicName": "ٱلْكَرِيمُ",
+    "wolofName": "Boroom Teraanga",
+    "wolofalName": "بࣷرࣷومْ تࣹرَانگَ",
+    "wolofVerse": "Mooy yékkatee ku ndóol ci suuf, jële ku ñàkk ci mbuubit, boole leen dëj ca garmi ya, sédde leen jataayu teraanga.",
+    "wolofVerseRef": "1 Samiyel, saar 2, aaya 8",
+    "wolofalVerse": "مࣷويْ يࣺڪَّتࣹي ڪُ ندٗولْ ݖِ سُوفْ، جࣴلࣹ ڪُ ݧࣵڪّ ݖِ مبُوبِتْ، بࣷولࣹ لࣹينْ دࣴجْ ݖَ گَرْمِ يَ، سࣺدّࣹ لࣹينْ جَتَايُ تࣹرَانگَ؞",
+    "wolofalVerseRef": "1 Samiyel, saar 2, aaya 8"
+  },
+  {
+    "id": 44,
+    "arabicName": "ٱلْرَّقِيبُ",
+    "wolofName": "Aji Seetaanteel ji",
+    "wolofalName": "اَجِ سࣹيتَانْتࣹيلْ جِ",
+    "wolofVerse": "Aji Sax ji moo gis lépp, di xool ku baax ak ku bon.",
+    "wolofVerseRef": "Kàddu yu Xelu, saar 15, aaya 3",
+    "wolofalVerse": "اَجِ سَخْ جِ مࣷو گِسْ لࣺݒّ، دِ خࣷولْ ڪُ بَاخْ اَڪْ ڪُ بࣷنْ؞",
+    "wolofalVerseRef": "Kàddu yu Xelu, saar 15, aaya 3"
+  },
+  {
+    "id": 45,
+    "arabicName": "ٱلْمُجِيبُ",
+    "wolofName": "Aji Wuyu",
+    "wolofalName": "اَجِ وُيُ",
+    "wolofVerse": "Yàlla da naa: «Kii de man la safoo, ma di ko xettli. Man la xam, te maa koy teg fu wóor. Mu woo ma, ma wuyu ko; mook man ci biir njàqare, ma xettli ko, darajaal ko, reggal koy fan, baaxe ko samag wall.»",
+    "wolofVerseRef": "Sabóor, saar 91, aaya 14-16",
+    "wolofalVerse": "يࣵلَّ دَ نَا:‏‏‏ «ڪِي دࣹ مَنْ لَ سَفࣷو، مَ دِ ڪࣷ خࣹتّلِ؞ مَنْ لَ خَمْ، تࣹ مَا ڪࣷيْ تࣹگْ فُ وٗورْ؞ مُ وࣷو مَ، مَ وُيُ ڪࣷ؛ مࣷوڪْ مَنْ ݖِ بِيرْ نجࣵقَرࣹ، مَ خࣹتّلِ ڪࣷ، دَرَجَالْ ڪࣷ، رࣹگَّلْ ڪࣷيْ فَنْ، بَاخࣹ ڪࣷ سَمَگْ وَلّ؞»",
+    "wolofalVerseRef": "Sabóor, saar 91, aaya 14-16"
+  },
+  {
+    "id": 46,
+    "arabicName": "ٱلْوَاسِعُ",
+    "wolofName": "Aji Yaatu",
+    "wolofalName": "اَجِ يَاتُ",
+    "wolofVerse": "Màggaayu Yàllaa sut suuf, gëna yaatu géej!",
+    "wolofVerseRef": "Ayóoba, saar 11, aaya 9",
+    "wolofalVerse": "مࣵگَّايُ يࣵلاَّ سُتْ سُوفْ، گࣴنَ يَاتُ گࣺيجْ!‏‏‏",
+    "wolofalVerseRef": "Ayóoba, saar 11, aaya 9"
+  },
+  {
+    "id": 47,
+    "arabicName": "ٱلْحَكِيمُ",
+    "wolofName": "Aji Xareñ",
+    "wolofalName": "اَجِ خَرࣹݧْ",
+    "wolofVerse": "Moona moom it xareñ na, mane na safaan, te du fommi digeem. Kuy def lu bon, mu dal ci waa këram; kuy def lu ñaaw, mu song ay wallam.",
+    "wolofVerseRef": "Esayi, saar 31, aaya 2",
+    "wolofalVerse": "مࣷونَ مࣷومْ اِتْ خَرࣹݧْ نَ، مَنࣹ نَ سَفَانْ، تࣹ دُ فࣷمِّ دِگࣹيمْ؞ ڪُيْ دࣹفْ لُ بࣷنْ، مُ دَلْ ݖِ وَا ڪࣴرَمْ؛ ڪُيْ دࣹفْ لُ ݧَاوْ، مُ سࣷنگّ اَيْ وَلَّمْ؞",
+    "wolofalVerseRef": "Esayi, saar 31, aaya 2"
+  },
+  {
+    "id": 48,
+    "arabicName": "ٱلْوَدُودُ",
+    "wolofName": "Boroom Cofeel",
+    "wolofalName": "بࣷرࣷومْ ݖࣷفࣹيلْ",
+    "wolofVerse": "Ndeke sama tiisu xol wii, sama jàmm rekk a tax. Sa cofeel a tax nga sorele maak paxum sànkute. Yaa sànni sa gannaaw sama bépp bàkkaar.",
+    "wolofVerseRef": "Esayi, saar 38, aaya 17",
+    "wolofalVerse": "ندࣹڪࣹ سَمَ تِيسُ خࣷلْ وِي، سَمَ جࣵمّ رࣹڪَّ تَخْ؞ سَ ݖࣷفࣹيلَ تَخْ نگَ سࣷرࣹلࣹ مَاڪْ ݒَخُمْ سࣵنڪُتࣹ؞ يَا سࣵنِّ سَ گَنَّاوْ سَمَ بࣺݒّ بࣵڪَّارْ؞",
+    "wolofalVerseRef": "Esayi, saar 38, aaya 17"
+  },
+  {
+    "id": 49,
+    "arabicName": "ٱلْمَجِيدُ",
+    "wolofName": "Aji Tedd",
+    "wolofalName": "اَجِ تࣹدّ",
+    "wolofVerse": "Jëfam teddnga laak daraja, njekkam di sax ba fàww.",
+    "wolofVerseRef": "Sabóor, saar 111, aaya 3",
+    "wolofalVerse": "جࣴفَمْ تࣹدّنگَ لاَڪْ دَرَجَ، نجࣹڪَّمْ دِ سَخْ بَ فࣵوّ؞",
+    "wolofalVerseRef": "Sabóor, saar 111, aaya 3"
+  },
+  {
+    "id": 50,
+    "arabicName": "ٱلْبَاعِثُ",
+    "wolofName": "Aji Dekkal",
+    "wolofalName": "اَجِ دࣹڪَّلْ",
+    "wolofVerse": "Waaye yaw askan wi, ñi nga deele ñooy dellu dundaat, seeni néew ay dekki, ku doon nelaw sa biir bàmmeel, yewwu, sarxolle. Aji Sax jeey yebal lay bu ànd aki leer, suuf délloosi ña dëddu.",
+    "wolofVerseRef": "Esayi, saar 26, aaya 19",
+    "wolofalVerse": "وَايࣹ يَوْ اَسْڪَنْ وِ، ݧِ نگَ دࣹيلࣹ ݧࣷويْ دࣹلُّ دُنْدَاتْ، سࣹينِ نࣺيوْ اَيْ دࣹڪِّ، ڪُ دࣷونْ نࣹلَوْ سَ بِيرْ بࣵمّࣹيلْ، يࣹوُّ، سَرْخࣷلّࣹ؞ اَجِ سَخْ جࣹييْ يࣹبَلْ لَيْ بُ اࣵندّ اَڪِ لࣹيرْ، سُوفْ دࣺلّࣷوسِ ݧَ دࣴدُّ؞",
+    "wolofalVerseRef": "Esayi, saar 26, aaya 19"
+  },
+  {
+    "id": 51,
+    "arabicName": "ٱلْشَّهِيدُ",
+    "wolofName": "Aji Seede",
+    "wolofalName": "اَجِ سࣹيدࣹ",
+    "wolofVerse": "...amul mbindeef mu làqu fi kanam Yàlla. Lépp a ne duŋŋ, ne fàŋŋ, muy gis, te moom lanuy waxal bés-pénc.",
+    "wolofVerseRef": "Yawut Ya, saar 4, aaya 13",
+    "wolofalVerse": "...اَمُلْ مبِنْدࣹيفْ مُ لࣵقُ فِ ڪَنَمْ يࣵلَّ؞ لࣺݒَّ نࣹ دُݝّ، نࣹ فࣵݝّ، مُيْ گِسْ، تࣹ مࣷومْ لَنُيْ وَخَلْ بࣺسْ-ݒࣺنݖّ؞",
+    "wolofalVerseRef": "Yawut Ya, saar 4, aaya 13"
+  },
+  {
+    "id": 52,
+    "arabicName": "ٱلْحَقُّ",
+    "wolofName": "Aji Dëgg",
+    "wolofalName": "اَجِ دࣴگّ",
+    "wolofVerse": "Fàww Yàlla wéye di ku dëggu, te ñépp di ay fen-kat, te noonu la Mbind mi indee ne: «Soo waxee, am dëgg, te soo àttee, yey.»",
+    "wolofVerseRef": "Room, saar 3, aaya 4",
+    "wolofalVerse": "فࣵوّ يࣵلَّ وࣺيࣹ دِ ڪُ دࣴگُّ، تࣹ ݧࣺݒّ دِ اَيْ فࣹنْ-ڪَتْ، تࣹ نࣷونُ لَ مبِندّ مِ اِنْدࣹي نࣹ:‏‏‏ «سࣷو وَخࣹي، اَمْ دࣴگّ، تࣹ سࣷو اࣵتّࣹي، يࣹيْ؞»",
+    "wolofalVerseRef": "Room, saar 3, aaya 4"
+  },
+  {
+    "id": 53,
+    "arabicName": "ٱلْوَكِيلُ",
+    "wolofName": "Wéeruwaay bi",
+    "wolofalName": "وࣺيرُوَايْ بِ",
+    "wolofVerse": "Ana ku ragal Aji Sax ji ci yeen, di déglu kàddug jaamam? Képp kuy doxe lëndëm te amul leeraange, na wóolu Aji Sax ji, te wéeroo Yàllaam jii.",
+    "wolofVerseRef": "Esayi, saar 50, aaya 10",
+    "wolofalVerse": "اَنَ ڪُ رَگَلْ اَجِ سَخْ جِ ݖِ يࣹينْ، دِ دࣺگْلُ ڪࣵدُّگْ جَامَمْ؟ ڪࣺݒّ ڪُيْ دࣷخࣹ لࣴنْدࣴمْ تࣹ اَمُلْ لࣹيرَانگࣹ، نَ وٗولُ اَجِ سَخْ جِ، تࣹ وࣺيرࣷو يࣵلاَّمْ جِي؞",
+    "wolofalVerseRef": "Esayi, saar 50, aaya 10"
+  },
+  {
+    "id": 54,
+    "arabicName": "ٱلْقَوِيُّ",
+    "wolofName": "Aji Kàttan",
+    "wolofalName": "اَجِ ڪࣵتَّنْ",
+    "wolofVerse": "Yàlla sunu Boroom, yaa yeyoo daraja ak teraanga ak kàttan, ndaxte yaa sàkk lépp, lépp lu am, yaw la soob, nga sàkk ko.",
+    "wolofVerseRef": "Peeñu, saar 4, aaya 11",
+    "wolofalVerse": "يࣵلَّ سُنُ بࣷرࣷومْ، يَا يࣹيࣷو دَرَجَ اَڪْ تࣹرَانگَ اَڪْ ڪࣵتَّنْ، ندَخْتࣹ يَا سࣵڪّ لࣺݒّ، لࣺݒّ لُ اَمْ، يَوْ لَ سࣷوبْ، نگَ سࣵڪّ ڪࣷ؞",
+    "wolofalVerseRef": "Peeñu, saar 4, aaya 11"
+  },
+  {
+    "id": 55,
+    "arabicName": "ٱلْمَتِينُ",
+    "wolofName": "Aji Dëgër",
+    "wolofalName": "اَجِ دࣴگࣴرْ",
+    "wolofVerse": "Aji Sax ji nas, mu àntu ba fàww, mu mébét, mu sottil maasoo maas.",
+    "wolofVerseRef": "Sabóor, saar 33, aaya 11",
+    "wolofalVerse": "اَجِ سَخْ جِ نَسْ، مُ اࣵنْتُ بَ فࣵوّ، مُ مࣺبࣺتْ، مُ سࣷتِّلْ مَاسࣷو مَاسْ؞",
+    "wolofalVerseRef": "Sabóor, saar 33, aaya 11"
+  },
+  {
+    "id": 56,
+    "arabicName": "ٱلْوَلِيُّ",
+    "wolofName": "Dimbalikat bi",
+    "wolofalName": "دِمْبَلِڪَتْ بِ",
+    "wolofVerse": "Yàllaa ngii, moo may dimbali; Boroom bee yor sama bakkan.",
+    "wolofVerseRef": "Sabóor, saar 54, aaya 6",
+    "wolofalVerse": "يࣵلاَّ نگِي، مࣷو مَيْ دِمْبَلِ؛ بࣷرࣷومْ بࣹي يࣷرْ سَمَ بَڪَّنْ؞",
+    "wolofalVerseRef": "Sabóor, saar 54, aaya 6"
+  },
+  {
+    "id": 57,
+    "arabicName": "ٱلْحَمِيدُ",
+    "wolofName": "Aji Yelloo Cant",
+    "wolofalName": "اَجِ يࣹلّࣷو ݖَنتّ",
+    "wolofVerse": "Yàlla, nu sant la, santati la; nu ngi lay woo, di siiwal say jaloore.",
+    "wolofVerseRef": "Sabóor, saar 75, aaya 2",
+    "wolofalVerse": "يࣵلَّ، نُ سَنتّ لَ، سَنْتَتِ لَ؛ نُ نگِ لَيْ وࣷو، دِ سِيوَلْ سَيْ جَلࣷورࣹ؞",
+    "wolofalVerseRef": "Sabóor, saar 75, aaya 2"
+  },
+  {
+    "id": 58,
+    "arabicName": "ٱلْمُحْصِيُ",
+    "wolofName": "Aji Takk",
+    "wolofalName": "اَجِ تَڪّ",
+    "wolofVerse": "Yàlla nee: Maay takk ab àpp, àtte ca njub. Bu suuf di yëngu mook ñi ko dëkke ñépp, maay kiy téye ay kenoom.",
+    "wolofVerseRef": "Sabóor, saar 75, aaya 2-3",
+    "wolofalVerse": "يࣵلَّ نࣹي:‏‏‏ مَايْ تَڪّ اَبْ اࣵݒّ، اࣵتّࣹ ݖَ نجُبْ؞ بُ سُوفْ دِ يࣴنگُ مࣷوڪْ ݧِ ڪࣷ دࣴڪّࣹ ݧࣺݒّ، مَايْ ڪِيْ تࣺيࣹ اَيْ ڪࣹنࣷومْ؞",
+    "wolofalVerseRef": "Sabóor, saar 75, aaya 2-3"
+  },
+  {
+    "id": 59,
+    "arabicName": "ٱلْمُبْدِئُ",
+    "wolofName": "Aji Tàmbali",
+    "wolofalName": "اَجِ تࣵمْبَلِ",
+    "wolofVerse": "Seedeleen ne Aji Sax jeey Yàlla. Moo nu sàkk, nuy ñoñam, di gàttam yi muy foral.",
+    "wolofVerseRef": "Sabóor, saar 100, aaya 3",
+    "wolofalVerse": "سࣹيدࣹلࣹينْ نࣹ اَجِ سَخْ جࣹييْ يࣵلَّ؞ مࣷو نُ سࣵڪّ، نُيْ ݧࣷݧَمْ، دِ گࣵتَّمْ يِ مُيْ فࣷرَلْ؞",
+    "wolofalVerseRef": "Sabóor, saar 100, aaya 3"
+  },
+  {
+    "id": 60,
+    "arabicName": "ٱلْمُعِيدُ",
+    "wolofName": "Aji Delloo",
+    "wolofalName": "اَجِ دࣹلّࣷو",
+    "wolofVerse": "Waaye bu ma déjjatee yooyu xeet ba noppi, dinaa leen dellu yërëm, ku nekk, ma delloo ko céram, ku nekk ak suufam.",
+    "wolofVerseRef": "Yeremi, saar 12, aaya 15",
+    "wolofalVerse": "وَايࣹ بُ مَ دࣺجَّتࣹي يࣷويُ خࣹيتْ بَ نࣷݒِّ، دِنَا لࣹينْ دࣹلُّ يࣴرࣴمْ، ڪُ نࣹڪّ، مَ دࣹلّࣷو ڪࣷ ݖࣺرَمْ، ڪُ نࣹڪّ اَڪْ سُوفَمْ؞",
+    "wolofalVerseRef": "Yeremi, saar 12, aaya 15"
+  },
+  {
+    "id": 61,
+    "arabicName": "ٱلْمُحْيِى",
+    "wolofName": "Aji Dundal",
+    "wolofalName": "اَجِ دُنْدَلْ",
+    "wolofVerse": "Ci yaw la dund di balle, te sag leer lanuy leerloo.",
+    "wolofVerseRef": "Sabóor, saar 36, aaya 10",
+    "wolofalVerse": "ݖِ يَوْ لَ دُندّ دِ بَلّࣹ، تࣹ سَگْ لࣹيرْ لَنُيْ لࣹيرْلࣷو؞",
+    "wolofalVerseRef": "Sabóor, saar 36, aaya 10"
+  },
+  {
+    "id": 62,
+    "arabicName": "ٱلْمُمِيتُ",
+    "wolofName": "Aji Rey ji",
+    "wolofalName": "اَجِ رࣹيْ جِ",
+    "wolofVerse": "Aji Sax jeey rey, di dundal, mooy wàcce jaam njaniiw, génnee ko ca.",
+    "wolofVerseRef": "1 Samiyel, saar 2, aaya 6",
+    "wolofalVerse": "اَجِ سَخْ جࣹييْ رࣹيْ، دِ دُنْدَلْ، مࣷويْ وࣵݖّࣹ جَامْ نجَنِيوْ، گࣺنّࣹي ڪࣷ ݖَ؞",
+    "wolofalVerseRef": "1 Samiyel, saar 2, aaya 6"
+  },
+  {
+    "id": 63,
+    "arabicName": "ٱلْحَىُّ",
+    "wolofName": "Aji Dund",
+    "wolofalName": "اَجِ دُندّ",
+    "wolofVerse": "Ma sant Aji Kawe ji, sargal Kiy dund ba fàww, màggal ko: kilifteefam sax fàww, nguuram ñeel maasoo maas.",
+    "wolofVerseRef": "Dañeel, saar 4, aaya 34",
+    "wolofalVerse": "مَ سَنتّ اَجِ ڪَوࣹ جِ، سَرْگَلْ ڪِيْ دُندّ بَ فࣵوّ، مࣵگَّلْ ڪࣷ:‏‏‏ ڪِلِفْتࣹيفَمْ سَخْ فࣵوّ، نگُورَمْ ݧࣹيلْ مَاسࣷو مَاسْ؞",
+    "wolofalVerseRef": "Dañeel, saar 4, aaya 34"
+  },
+  {
+    "id": 64,
+    "arabicName": "ٱلْقَيُّومُ",
+    "wolofName": "Aji Taxawal",
+    "wolofalName": "اَجِ تَخَوَلْ",
+    "wolofVerse": "Yaa moom asamaan, yaa moom suuf. Àddinaak li ci biiram, yaa ko taxawal. Bëj-gànnaar ak bëj-saalum, yaa ko sàkk. Tabor ak Ermon, tund ya, di sarxollee sa tur.",
+    "wolofVerseRef": "Sabóor, saar 89, aaya 12-13",
+    "wolofalVerse": "يَا مࣷومْ اَسَمَانْ، يَا مࣷومْ سُوفْ؞ اࣵدِّنَاڪْ لِ ݖِ بِيرَمْ، يَا ڪࣷ تَخَوَلْ؞ بࣴجْ-گࣵنَّارْ اَڪْ بࣴجْ-سَالُمْ، يَا ڪࣷ سࣵڪّ؞ تَبࣷرْ اَڪْ اࣹرْمࣷنْ، تُندّ يَ، دِ سَرْخࣷلّࣹي سَ تُرْ؞",
+    "wolofalVerseRef": "Sabóor, saar 89, aaya 12-13"
+  },
+  {
+    "id": 65,
+    "arabicName": "ٱلْوَاجِدُ",
+    "wolofName": "Aji Fekk",
+    "wolofalName": "اَجِ فࣹڪّ",
+    "wolofVerse": "Yàlla nag gis li mu def lépp, fekk lépp baax lool.",
+    "wolofVerseRef": "Njàlbéen ga, saar 1, aaya 31",
+    "wolofalVerse": "يࣵلَّ نَگْ گِسْ لِ مُ دࣹفْ لࣺݒّ، فࣹڪّ لࣺݒّ بَاخْ لࣷولْ؞",
+    "wolofalVerseRef": "Njàlbéen ga, saar 1, aaya 31"
+  },
+  {
+    "id": 66,
+    "arabicName": "ٱلْمَاجِدُ",
+    "wolofName": "Boroom Teddnga",
+    "wolofalName": "بࣷرࣷومْ تࣹدّنگَ",
+    "wolofVerse": "Woyleen Aji Sax ji, màggal turam, di yéene bés ak bés ne mooy musle. Siiwal-leen teddngaam fi biir xeet yi, xamal waasoo waaso ay jalooreem.",
+    "wolofVerseRef": "Sabóor, saar 96, aaya 2-3",
+    "wolofalVerse": "وࣷيْلࣹينْ اَجِ سَخْ جِ، مࣵگَّلْ تُرَمْ، دِ يࣺينࣹ بࣺسْ اَڪْ بࣺسْ نࣹ مࣷويْ مُسْلࣹ؞ سِيوَلْ-لࣹينْ تࣹدّنگَامْ فِ بِيرْ خࣹيتْ يِ، خَمَلْ وَاسࣷو وَاسࣷ اَيْ جَلࣷورࣹيمْ؞",
+    "wolofalVerseRef": "Sabóor, saar 96, aaya 2-3"
+  },
+  {
+    "id": 67,
+    "arabicName": "ٱلْوَاحِدُ",
+    "wolofName": "Aji Wéet ji",
+    "wolofalName": "اَجِ وࣺيتْ جِ",
+    "wolofVerse": "Céy Yàlla, yaa wéet ngor, doom aadama yiiroo sa ker, yiiru.",
+    "wolofVerseRef": "Sabóor, saar 36, aaya 8",
+    "wolofalVerse": "ݖࣺيْ يࣵلَّ، يَا وࣺيتْ نگࣷرْ، دࣷومْ آدَمَ يِيرࣷو سَ ڪࣹرْ، يِيرُ؞",
+    "wolofalVerseRef": "Sabóor, saar 36, aaya 8"
+  },
+  {
+    "id": 68,
+    "arabicName": "ٱلْأَحَد",
+    "wolofName": "Kenn ki",
+    "wolofalName": "ڪࣹنّ ڪِ",
+    "wolofVerse": "Dégluleen, bànni Israyil, Aji Sax ji sunu Yàlla, Aji Sax ji kenn la. Seen Yàlla Aji Sax ji, soppeleen ko seen léppi xol, ak seen léppi bakkan, ak seen léppi doole.",
+    "wolofVerseRef": "Baamtug Yoon wi, saar 6, aaya 4-5",
+    "wolofalVerse": "دࣺگْلُلࣹينْ، بࣵنِّ إِسْرَاءِيلْ، اَجِ سَخْ جِ سُنُ يࣵلَّ، اَجِ سَخْ جِ ڪࣹنّ لَ؞ سࣹينْ يࣵلَّ اَجِ سَخْ جِ، سࣷݒّࣹلࣹينْ ڪࣷ سࣹينْ لࣺݒِّ خࣷلْ، اَڪْ سࣹينْ لࣺݒِّ بَڪَّنْ، اَڪْ سࣹينْ لࣺݒِّ دࣷولࣹ؞",
+    "wolofalVerseRef": "Baamtug Yoon wi, saar 6, aaya 4-5"
+  },
+  {
+    "id": 69,
+    "arabicName": "ٱلْصَّمَدُ",
+    "wolofName": "Ku nu jublu",
+    "wolofalName": "ڪُ نُ جُبْلُ",
+    "wolofVerse": "...jublu ci Yàlla te di ko jaamu, moom miy Yàlla Aji Dund ju dëggu ji….",
+    "wolofVerseRef": "1 Tesalonig, saar 1, aaya 9",
+    "wolofalVerse": "...جُبْلُ ݖِ يࣵلَّ تࣹ دِ ڪࣷ جَامُ، مࣷومْ مِيْ يࣵلَّ اَجِ دُندّ جُ دࣴگُّ جِ…؞",
+    "wolofalVerseRef": "1 Tesalonig, saar 1, aaya 9"
+  },
+  {
+    "id": 70,
+    "arabicName": "ٱلْقَادِرُ",
+    "wolofName": "Aji Káttan",
+    "wolofalName": "اَجِ ڪáتَّنْ",
+    "wolofVerse": "Man maa sàkk suuf, sàkk doom aadama ak mala fi kaw suuf ci sama doole ju bare ak sama kàttan gu matale, te loolu lépp, maa ko jox ku ma neex.",
+    "wolofVerseRef": "Yeremi, saar 27, aaya 5",
+    "wolofalVerse": "مَنْ مَا سࣵڪّ سُوفْ، سࣵڪّ دࣷومْ آدَمَ اَڪْ مَلَ فِ ڪَوْ سُوفْ ݖِ سَمَ دࣷولࣹ جُ بَرࣹ اَڪْ سَمَ ڪࣵتَّنْ گُ مَتَلࣹ، تࣹ لࣷولُ لࣺݒّ، مَا ڪࣷ جࣷخْ ڪُ مَ نࣹيخْ؞",
+    "wolofalVerseRef": "Yeremi, saar 27, aaya 5"
+  },
+  {
+    "id": 71,
+    "arabicName": "ٱلْمُقْتَدِرُ",
+    "wolofName": "Aji Dogal",
+    "wolofalName": "اَجِ دࣷگَلْ",
+    "wolofVerse": "Aji Sax ji, yaay sama Yàlla, dama lay teral, di la sant. Yaa defi jaloore, muy dogal yu yàgg, wér te wóor.",
+    "wolofVerseRef": "Esayi, saar 25, aaya 1",
+    "wolofalVerse": "اَجِ سَخْ جِ، يَايْ سَمَ يࣵلَّ، دَمَ لَيْ تࣹرَلْ، دِ لَ سَنتّ؞ يَا دࣹفِ جَلࣷورࣹ، مُيْ دࣷگَلْ يُ يࣵگّ، وࣺرْ تࣹ وٗورْ؞",
+    "wolofalVerseRef": "Esayi, saar 25, aaya 1"
+  },
+  {
+    "id": 72,
+    "arabicName": "ٱلْمُقَدِّمُ",
+    "wolofName": "Aji Jiitu ji",
+    "wolofalName": "اَجِ جِيتُ جِ",
+    "wolofVerse": "Bésub Aji Sax bu mag bee dëgmal, moo dëgmal te tànk yu gaaw lool lay jegesee. Kàddug bésub Aji Sax ji dégtu na, te ca la jàmbaar di yuuxoo yuux yu metti.",
+    "wolofVerseRef": "Cefaña, saar 1, aaya 14",
+    "wolofalVerse": "بࣺسُبْ اَجِ سَخْ بُ مَگْ بࣹي دࣴگْمَلْ، مࣷو دࣴگْمَلْ تࣹ تࣵنڪّ يُ گَاوْ لࣷولْ لَيْ جࣹگࣹسࣹي؞ ڪࣵدُّگْ بࣺسُبْ اَجِ سَخْ جِ دࣺگْتُ نَ، تࣹ ݖَ لَ جࣵمْبَارْ دِ يُوخࣷو يُوخْ يُ مࣹتِّ؞",
+    "wolofalVerseRef": "Cefaña, saar 1, aaya 14"
+  },
+  {
+    "id": 73,
+    "arabicName": "ٱلْمُؤَخِّرُ",
+    "wolofName": "Aji Yeexal",
+    "wolofalName": "اَجِ يࣹيخَلْ",
+    "wolofVerse": "Soppe yi, lenn a ngii, buleen ko umple: benn bés ni junniy at la mel ci Boroom bi; junniy at mel ni benn bés ci moom. Du caageenu yeexe gu Boroom bi yeexe dige ba, noonu ko ñenn ñi fooge ag yeex. Yeen la muñal kay, ndax buggul kenn sànku, xanaa ñépp dem ba tuub.",
+    "wolofVerseRef": "2 Piyeer, saar 3, aaya 8-9",
+    "wolofalVerse": "سࣷݒّࣹ يِ، لࣹنَّ نگِي، بُلࣹينْ ڪࣷ اُمݒّلࣹ:‏‏‏ بࣹنّ بࣺسْ نِ جُنِّيْ اَتْ لَ مࣹلْ ݖِ بࣷرࣷومْ بِ؛ جُنِّيْ اَتْ مࣹلْ نِ بࣹنّ بࣺسْ ݖِ مࣷومْ؞ دُ ݖَاگࣹينُ يࣹيخࣹ گُ بࣷرࣷومْ بِ يࣹيخࣹ دِگࣹ بَ، نࣷونُ ڪࣷ ݧࣹنّ ݧِ فࣷوگࣹ اَگْ يࣹيخْ؞ يࣹينْ لَ مُݧَلْ ڪَيْ، ندَخْ بُگُّلْ ڪࣹنّ سࣵنڪُ، خَنَا ݧࣺݒّ دࣹمْ بَ تُوبْ؞",
+    "wolofalVerseRef": "2 Piyeer, saar 3, aaya 8-9"
+  },
+  {
+    "id": 74,
+    "arabicName": "ٱلأَوَّلُ",
+    "wolofName": "Aji Jëkk",
+    "wolofalName": "اَجِ جࣴڪّ",
+    "wolofVerse": "Maay kenn, maa jëkk te maa mujj; te sama loxo bee dëj suuf, sama ndijoor bi firi asamaan. Maa leen di woo, ñu bokk taxaw.",
+    "wolofVerseRef": "Esayi, saar 48, aaya 12-13",
+    "wolofalVerse": "مَايْ ڪࣹنّ، مَا جࣴڪّ تࣹ مَا مُجّ؛ تࣹ سَمَ لࣷخࣷ بࣹي دࣴجْ سُوفْ، سَمَ ندِجࣷورْ بِ فِرِ اَسَمَانْ؞ مَا لࣹينْ دِ وࣷو، ݧُ بࣷڪّ تَخَوْ؞",
+    "wolofalVerseRef": "Esayi, saar 48, aaya 12-13"
+  },
+  {
+    "id": 75,
+    "arabicName": "ٱلْآخِرُ",
+    "wolofName": "Aji Mujj",
+    "wolofalName": "اَجِ مُجّ",
+    "wolofVerse": "Aji Sax ji dafa wax, moom buurub Israyil, jotkatam, Aji Sax ji Boroom gàngoor yi, mu ne: Maa jëkk, maa mujj, te yàlla amul ndare man.",
+    "wolofVerseRef": "Esayi, saar 44, aaya 6",
+    "wolofalVerse": "اَجِ سَخْ جِ دَفَ وَخْ، مࣷومْ بُورُبْ إِسْرَاءِيلْ، جࣷتْڪَتَمْ، اَجِ سَخْ جِ بࣷرࣷومْ گࣵنگࣷورْ يِ، مُ نࣹ:‏‏‏ مَا جࣴڪّ، مَا مُجّ، تࣹ يࣵلَّ اَمُلْ ندَرࣹ مَنْ؞",
+    "wolofalVerseRef": "Esayi, saar 44, aaya 6"
+  },
+  {
+    "id": 76,
+    "arabicName": "ٱلْظَّاهِرُ",
+    "wolofName": "Aji Feeñ ji",
+    "wolofalName": "اَجِ فࣹيݧْ جِ",
+    "wolofVerse": "Na sa ngor feeñ, yaw miy walloo sa doole ku la làqooy noonam.",
+    "wolofVerseRef": "Sabóor, saar 17, aaya 7",
+    "wolofalVerse": "نَ سَ نگࣷرْ فࣹيݧْ، يَوْ مِيْ وَلّࣷو سَ دࣷولࣹ ڪُ لَ لࣵقࣷويْ نࣷونَمْ؞",
+    "wolofalVerseRef": "Sabóor, saar 17, aaya 7"
+  },
+  {
+    "id": 77,
+    "arabicName": "ٱلْبَاطِنُ",
+    "wolofName": "Aji Nëbbu",
+    "wolofalName": "اَجِ نࣴبُّ",
+    "wolofVerse": "Yaw déy, yaa di Yàlla ju làqu, yaw Yàllay Israyil ji koy wallu.",
+    "wolofVerseRef": "Esayi, saar 45, aaya 15",
+    "wolofalVerse": "يَوْ دࣺيْ، يَا دِ يࣵلَّ جُ لࣵقُ، يَوْ يࣵلَّيْ إِسْرَاءِيلْ جِ ڪࣷيْ وَلُّ؞",
+    "wolofalVerseRef": "Esayi, saar 45, aaya 15"
+  },
+  {
+    "id": 78,
+    "arabicName": "ٱلْوَالِي",
+    "wolofName": "Aji Méngoo",
+    "wolofalName": "اَجِ مࣺنگࣷو",
+    "wolofVerse": "Saam xel ne ma, ku jub ak ku bon la Yàlla di boole àtte, ngir mbir mu ne ak jëf ju ne ak bésam.",
+    "wolofVerseRef": "Kàdduy Waare, saar 3, aaya 17",
+    "wolofalVerse": "سَامْ خࣹلْ نࣹ مَ، ڪُ جُبْ اَڪْ ڪُ بࣷنْ لَ يࣵلَّ دِ بࣷولࣹ اࣵتّࣹ، نگِرْ مبِرْ مُ نࣹ اَڪْ جࣴفْ جُ نࣹ اَڪْ بࣺسَمْ؞",
+    "wolofalVerseRef": "Kàdduy Waare, saar 3, aaya 17"
+  },
+  {
+    "id": 79,
+    "arabicName": "ٱلْمُتَعَالِي",
+    "wolofName": "Aji Kawe ji",
+    "wolofalName": "اَجِ ڪَوࣹ جِ",
+    "wolofVerse": "Aji Sax ji, Aji Kawe jee jara ragal, mooy buur bu mag bi tiim àddina sépp.",
+    "wolofVerseRef": "Sabóor, saar 47, aaya 3",
+    "wolofalVerse": "اَجِ سَخْ جِ، اَجِ ڪَوࣹ جࣹي جَرَ رَگَلْ، مࣷويْ بُورْ بُ مَگْ بِ تِيمْ اࣵدِّنَ سࣺݒّ؞",
+    "wolofalVerseRef": "Sabóor, saar 47, aaya 3"
+  },
+  {
+    "id": 80,
+    "arabicName": "ٱلْبَرُّ",
+    "wolofName": "Aji Baax",
+    "wolofalName": "اَجِ بَاخْ",
+    "wolofVerse": "Boroom bi, yaa baax, di bale, di nàddil sa ngor képp ku lay sàkku.",
+    "wolofVerseRef": "Sabóor, saar 86, aaya 5",
+    "wolofalVerse": "بࣷرࣷومْ بِ، يَا بَاخْ، دِ بَلࣹ، دِ نࣵدِّلْ سَ نگࣷرْ ڪࣺݒّ ڪُ لَيْ سࣵڪُّ؞",
+    "wolofalVerseRef": "Sabóor, saar 86, aaya 5"
+  },
+  {
+    "id": 81,
+    "arabicName": "ٱلْتَّوَّابُ",
+    "wolofName": "Aji Nangu Tuub",
+    "wolofalName": "اَجِ نَنگُ تُوبْ",
+    "wolofVerse": "Saraxi Yàlla, xol bu tuub la, yaw Yàlla, xol bu tuub ba mokk, doo gàntal boroom.",
+    "wolofVerseRef": "Esayi, saar 1, aaya 18-20",
+    "wolofalVerse": "سَرَخِ يࣵلَّ، خࣷلْ بُ تُوبْ لَ، يَوْ يࣵلَّ، خࣷلْ بُ تُوبْ بَ مࣷڪّ، دࣷو گࣵنْتَلْ بࣷرࣷومْ؞",
+    "wolofalVerseRef": "Esayi, saar 1, aaya 18-20"
+  },
+  {
+    "id": 82,
+    "arabicName": "ٱلْمُنْتَقِمُ",
+    "wolofName": "Aji Fey",
+    "wolofalName": "اَجِ فࣹيْ",
+    "wolofVerse": "Samay soppe, buleen di feyul seen bopp, xajal-leen am sànj, am sànj fajal boppam, ndax bindees na ne: «Man maay feye, maay añale.» Boroom bee ko wax. Li mu wax kay mooy: «Bu sab noon xiifee, jox ko mu lekk, bu maree, may ko mu naan. Soo defee noonu, day rus, ba mel ni koo yen ay xal.» Bu leen lu bon man, waaye defleen lu baax, ba man lu bon.",
+    "wolofVerseRef": "Room, saar 12, aaya 19-21",
+    "wolofalVerse": "سَمَيْ سࣷݒّࣹ، بُلࣹينْ دِ فࣹيُلْ سࣹينْ بࣷݒّ، خَجَلْ-لࣹينْ اَمْ سࣵنجّ، اَمْ سࣵنجّ فَجَلْ بࣷݒَّمْ، ندَخْ بِنْدࣹيسْ نَ نࣹ:‏‏‏ «مَنْ مَايْ فࣹيࣹ، مَايْ اَݧَلࣹ؞» بࣷرࣷومْ بࣹي ڪࣷ وَخْ؞ لِ مُ وَخْ ڪَيْ مࣷويْ:‏‏‏ «بُ سَبْ نࣷونْ خِيفࣹي، جࣷخْ ڪࣷ مُ لࣹڪّ، بُ مَرࣹي، مَيْ ڪࣷ مُ نَانْ؞ سࣷو دࣹفࣹي نࣷونُ، دَيْ رُسْ، بَ مࣹلْ نِ ڪࣷو يࣹنْ اَيْ خَلْ؞» بُ لࣹينْ لُ بࣷنْ مَنْ، وَايࣹ دࣹفْلࣹينْ لُ بَاخْ، بَ مَنْ لُ بࣷنْ؞",
+    "wolofalVerseRef": "Room, saar 12, aaya 19-21"
+  },
+  {
+    "id": 83,
+    "arabicName": "ٱلْعَفُوُّ",
+    "wolofName": "Aji Jéggale",
+    "wolofalName": "اَجِ جࣺگَّلࣹ",
+    "wolofVerse": "Na ku bon ba jëfinam, kuy def lu ñaaw fomm mébétam, te walbatiku ci Aji Sax ji sunu Yàlla, mu yërëm ko, yaatal njéggalam.",
+    "wolofVerseRef": "Esayi, saar 55, aaya 7",
+    "wolofalVerse": "نَ ڪُ بࣷنْ بَ جࣴفِنَمْ، ڪُيْ دࣹفْ لُ ݧَاوْ فࣷمّ مࣺبࣺتَمْ، تࣹ وَلْبَتِڪُ ݖِ اَجِ سَخْ جِ سُنُ يࣵلَّ، مُ يࣴرࣴمْ ڪࣷ، يَاتَلْ نجࣺگَّلَمْ؞",
+    "wolofalVerseRef": "Esayi, saar 55, aaya 7"
+  },
+  {
+    "id": 84,
+    "arabicName": "ٱلْرَّؤُفُ",
+    "wolofName": "Aji Ñeewantel",
+    "wolofalName": "اَجِ ݧࣹيوَنْتࣹلْ",
+    "wolofVerse": "Asamaanoo sarxolleel, suufoo bégal, te tund yi xaacoondoo! Aji Sax jee dëfal ñoñam, moo ñeewante néew-ji-dooleem ñii.",
+    "wolofVerseRef": "Esayi, saar 49, aaya 13",
+    "wolofalVerse": "اَسَمَانࣷو سَرْخࣷلّࣹيلْ، سُوفࣷو بࣺگَلْ، تࣹ تُندّ يِ خَاݖࣷونْدࣷو!‏‏‏ اَجِ سَخْ جࣹي دࣴفَلْ ݧࣷݧَمْ، مࣷو ݧࣹيوَنْتࣹ نࣺيوْ-جِ-دࣷولࣹيمْ ݧِي؞",
+    "wolofalVerseRef": "Esayi, saar 49, aaya 13"
+  },
+  {
+    "id": 85,
+    "arabicName": "مَالِكُ ٱلْمُلْكُ",
+    "wolofName": "Boroom Nguur",
+    "wolofalName": "بࣷرࣷومْ نگُورْ",
+    "wolofVerse": "Aji Sax jeey boroom nguur, moo yilif xeet yi.",
+    "wolofVerseRef": "Sabóor, saar 22, aaya 29",
+    "wolofalVerse": "اَجِ سَخْ جࣹييْ بࣷرࣷومْ نگُورْ، مࣷو يِلِفْ خࣹيتْ يِ؞",
+    "wolofalVerseRef": "Sabóor, saar 22, aaya 29"
+  },
+  {
+    "id": 86,
+    "arabicName": "ذُو ٱلْجَلَالِ وَٱلْإِكْرَامُ",
+    "wolofName": "Boroom Magg ji, Boroom Teddnga ji",
+    "wolofalName": "بࣷرࣷومْ مَگّ جِ، بࣷرࣷومْ تࣹدّنگَ جِ",
+    "wolofVerse": "Moom doŋŋ moo dul dee, moo màkkaanoo leer gu kenn jotewul, te mooy ki nit masula gis te tële koo gis. Teddnga ak kàttan ñeel na ko ba fàww. Amiin.",
+    "wolofVerseRef": "1 Timote, saar 6, aaya 16",
+    "wolofalVerse": "مࣷومْ دࣷݝّ مࣷو دُلْ دࣹي، مࣷو مࣵڪَّانࣷو لࣹيرْ گُ ڪࣹنّ جࣷتࣹوُلْ، تࣹ مࣷويْ ڪِ نِتْ مَسُلَ گِسْ تࣹ تࣴلࣹ ڪࣷو گِسْ؞ تࣹدّنگَ اَڪْ ڪࣵتَّنْ ݧࣹيلْ نَ ڪࣷ بَ فࣵوّ؞ اَمِينْ؞",
+    "wolofalVerseRef": "1 Timote, saar 6, aaya 16"
+  },
+  {
+    "id": 87,
+    "arabicName": "ٱلْمُقْسِطُ",
+    "wolofName": "Aji Maandu",
+    "wolofalName": "اَجِ مَانْدُ",
+    "wolofVerse": "Naa teewlu yoonu maandute. Ana kañ nga may dikkal? Naa doxe maandute fi sama biir waa kër.",
+    "wolofVerseRef": "Sabóor, saar 101, aaya 2",
+    "wolofalVerse": "نَا تࣹيوْلُ يࣷونُ مَانْدُتࣹ؞ اَنَ ڪَݧْ نگَ مَيْ دِڪَّلْ؟ نَا دࣷخࣹ مَانْدُتࣹ فِ سَمَ بِيرْ وَا ڪࣴرْ؞",
+    "wolofalVerseRef": "Sabóor, saar 101, aaya 2"
+  },
+  {
+    "id": 88,
+    "arabicName": "ٱلْجَامِعُ",
+    "wolofName": "Aji Dajale",
+    "wolofalName": "اَجِ دَجَلࣹ",
+    "wolofVerse": "Man maa xam seeni jëf ak seeni xalaat. Bés bii taxaw lees di dajale xeetoo xeet aki làkk, ñu dikk ba niir samag leer.",
+    "wolofVerseRef": "Esayi, saar 66, aaya 18",
+    "wolofalVerse": "مَنْ مَا خَمْ سࣹينِ جࣴفْ اَڪْ سࣹينِ خَلاَتْ؞ بࣺسْ بِي تَخَوْ لࣹيسْ دِ دَجَلࣹ خࣹيتࣷو خࣹيتْ اَڪِ لࣵڪّ، ݧُ دِڪّ بَ نِيرْ سَمَگْ لࣹيرْ؞",
+    "wolofalVerseRef": "Esayi, saar 66, aaya 18"
+  },
+  {
+    "id": 89,
+    "arabicName": "ٱلْغَنيُّ",
+    "wolofName": "Boroom Alal ji",
+    "wolofalName": "بࣷرࣷومْ اَلَلْ جِ",
+    "wolofVerse": "Aji Sax jee moom suuf ak li ko fees, ak àddina ak li ci biiram.",
+    "wolofVerseRef": "Sabóor, saar 24, aaya 1",
+    "wolofalVerse": "اَجِ سَخْ جࣹي مࣷومْ سُوفْ اَڪْ لِ ڪࣷ فࣹيسْ، اَڪْ اࣵدِّنَ اَڪْ لِ ݖِ بِيرَمْ؞",
+    "wolofalVerseRef": "Sabóor, saar 24, aaya 1"
+  },
+  {
+    "id": 90,
+    "arabicName": "ٱلْمُغْنِيُّ",
+    "wolofName": "Ku Woomal",
+    "wolofalName": "ڪُ وࣷومَلْ",
+    "wolofVerse": "Ku bëgge day sooke ay, te ku wóolu Aji Sax ji, woomle.",
+    "wolofVerseRef": "Kàddu yu Xelu, saar 28, aaya 25",
+    "wolofalVerse": "ڪُ بࣴگّࣹ دَيْ سࣷوڪࣹ اَيْ، تࣹ ڪُ وٗولُ اَجِ سَخْ جِ، وࣷومْلࣹ؞",
+    "wolofalVerseRef": "Kàddu yu Xelu, saar 28, aaya 25"
+  },
+  {
+    "id": 91,
+    "arabicName": "ٱلْمَانِعُ",
+    "wolofName": "Aji Tere",
+    "wolofalName": "اَجِ تࣹرࣹ",
+    "wolofVerse": "Aji Sax jeey neenal li xeet yiy fexe, di gàntal li mbooloo yiy mébét.",
+    "wolofVerseRef": "Sabóor, saar 33, aaya 10",
+    "wolofalVerse": "اَجِ سَخْ جࣹييْ نࣹينَلْ لِ خࣹيتْ يِيْ فࣹخࣹ، دِ گࣵنْتَلْ لِ مبࣷولࣷو يِيْ مࣺبࣺتْ؞",
+    "wolofalVerseRef": "Sabóor, saar 33, aaya 10"
+  },
+  {
+    "id": 92,
+    "arabicName": "ٱلْضَّارُ",
+    "wolofName": "Aji Lor",
+    "wolofalName": "اَجِ لࣷرْ",
+    "wolofVerse": "Kàddug Aji Sax jee. “Maa ngii di leen dikke mbugal ci bii bérab, ba ngeen xam ne samay kàddooy sotti ba mat sëkk, di seen loraange.”»",
+    "wolofVerseRef": "Yeremi, saar 44, aaya 29",
+    "wolofalVerse": "ڪࣵدُّگْ اَجِ سَخْ جࣹي؞ ‹مَا نگِي دِ لࣹينْ دِڪّࣹ مبُگَلْ ݖِ بِي بࣺرَبْ، بَ نگࣹينْ خَمْ نࣹ سَمَيْ ڪࣵدّࣷويْ سࣷتِّ بَ مَتْ سࣴڪّ، دِ سࣹينْ لࣷرَانگࣹ؞›»",
+    "wolofalVerseRef": "Yeremi, saar 44, aaya 29"
+  },
+  {
+    "id": 93,
+    "arabicName": "ٱلْنَّافِعُ",
+    "wolofName": "Aji Jariñ",
+    "wolofalName": "اَجِ جَرِݧْ",
+    "wolofVerse": "Ndax nit ki, su jagoo àddina sépp sax, te nara ñàkk bakkanam mbaa mu sànku, ana lu mu koy jariñ?",
+    "wolofVerseRef": "Luug, saar 9, aaya 25",
+    "wolofalVerse": "ندَخْ نِتْ ڪِ، سُ جَگࣷو اࣵدِّنَ سࣺݒّ سَخْ، تࣹ نَرَ ݧࣵڪّ بَڪَّنَمْ مبَا مُ سࣵنڪُ، اَنَ لُ مُ ڪࣷيْ جَرِݧْ؟",
+    "wolofalVerseRef": "Luug, saar 9, aaya 25"
+  },
+  {
+    "id": 94,
+    "arabicName": "ٱلْنُّورُ",
+    "wolofName": "Leer gi",
+    "wolofalName": "لࣹيرْ گِ",
+    "wolofVerse": "Yàlla ag Leer la, te gennug lëndëm nekkul ci moom.",
+    "wolofVerseRef": "1 Yowaana, saar 1, aaya 5",
+    "wolofalVerse": "يࣵلَّ اَگْ لࣹيرْ لَ، تࣹ گࣹنُّگْ لࣴنْدࣴمْ نࣹڪُّلْ ݖِ مࣷومْ؞",
+    "wolofalVerseRef": "1 Yowaana, saar 1, aaya 5"
+  },
+  {
+    "id": 95,
+    "arabicName": "ٱلْهَادِي",
+    "wolofName": "Kiy Gindi",
+    "wolofalName": "ڪِيْ گِنْدِ",
+    "wolofVerse": "Aji Sax jee baax, rafeti dogal, di gindi moykat ci yoon wi, di jiite ku woyof mbubb ci njubte, di ko xamal aw yoonam. Aji Sax ji ngor ak dëgg rekk lay jiitee kuy sàmm kóllëreem ak seedey yoonam.",
+    "wolofVerseRef": "Sabóor, saar 25, aaya 8-10",
+    "wolofalVerse": "اَجِ سَخْ جࣹي بَاخْ، رَفࣹتِ دࣷگَلْ، دِ گِنْدِ مࣷيْڪَتْ ݖِ يࣷونْ وِ، دِ جِيتࣹ ڪُ وࣷيࣷفْ مبُبّ ݖِ نجُبْتࣹ، دِ ڪࣷ خَمَلْ اَوْ يࣷونَمْ؞ اَجِ سَخْ جِ نگࣷرْ اَڪْ دࣴگّ رࣹڪّ لَيْ جِيتࣹي ڪُيْ سࣵمّ ڪٗلّࣴرࣹيمْ اَڪْ سࣹيدࣹيْ يࣷونَمْ؞",
+    "wolofalVerseRef": "Sabóor, saar 25, aaya 8-10"
+  },
+  {
+    "id": 96,
+    "arabicName": "ٱلْبَدِيعُ",
+    "wolofName": "Aji Fent ji",
+    "wolofalName": "اَجِ فࣹنتّ جِ",
+    "wolofVerse": "Ci moom la lépp sosoo, ci moom la lépp sottee, te moom la lépp ñeel. Moom la daraja ñeel ba fàww! Amiin.",
+    "wolofVerseRef": "Room, saar 11, aaya 36",
+    "wolofalVerse": "ݖِ مࣷومْ لَ لࣺݒّ سࣷسࣷو، ݖِ مࣷومْ لَ لࣺݒّ سࣷتّࣹي، تࣹ مࣷومْ لَ لࣺݒّ ݧࣹيلْ؞ مࣷومْ لَ دَرَجَ ݧࣹيلْ بَ فࣵوّ!‏‏‏ اَمِينْ؞",
+    "wolofalVerseRef": "Room, saar 11, aaya 36"
+  },
+  {
+    "id": 97,
+    "arabicName": "ٱلْبَاقِي",
+    "wolofName": "Aji Des ji",
+    "wolofalName": "اَجِ دࣹسْ جِ",
+    "wolofVerse": "Waaye yaw Aji Sax ji, yaay des ba fàww, saw tur saxal maasoo maas.",
+    "wolofVerseRef": "Sabóor, saar 102, aaya 13",
+    "wolofalVerse": "وَايࣹ يَوْ اَجِ سَخْ جِ، يَايْ دࣹسْ بَ فࣵوّ، سَوْ تُرْ سَخَلْ مَاسࣷو مَاسْ؞",
+    "wolofalVerseRef": "Sabóor, saar 102, aaya 13"
+  },
+  {
+    "id": 98,
+    "arabicName": "ٱلْوَارِثُ",
+    "wolofName": "Aji Dono",
+    "wolofalName": "اَجِ دࣷنࣷ",
+    "wolofVerse": "Léegi nag su ngeen ma déggalee bu baax, di sàmm sama kóllëre ak yeen, yeenay doon sama moomeelu bopp ci mboolem askan yi. Dëgg la, àddina wërngal këpp maay Boroom, waaye yeenay doon nguuru sarxalkati Yàlla, te di xeet wu sell.",
+    "wolofVerseRef": "Mucc ga, saar 19, aaya 5",
+    "wolofalVerse": "لࣺيگِ نَگْ سُ نگࣹينْ مَ دࣺگَّلࣹي بُ بَاخْ، دِ سࣵمّ سَمَ ڪٗلّࣴرࣹ اَڪْ يࣹينْ، يࣹينَيْ دࣷونْ سَمَ مࣷومࣹيلُ بࣷݒّ ݖِ مبࣷولࣹمْ اَسْڪَنْ يِ؞ دࣴگّ لَ، اࣵدِّنَ وࣴرْنگَلْ ڪࣴݒّ مَايْ بࣷرࣷومْ، وَايࣹ يࣹينَيْ دࣷونْ نگُورُ سَرْخَلْڪَتِ يࣵلَّ، تࣹ دِ خࣹيتْ وُ سࣹلّ؞",
+    "wolofalVerseRef": "Mucc ga, saar 19, aaya 5"
+  },
+  {
+    "id": 99,
+    "arabicName": "ٱلْرَّشِيدُ",
+    "wolofName": "Aji Jubal",
+    "wolofalName": "اَجِ جُبَلْ",
+    "wolofVerse": "Yaa may xamal yoonu ndund. Fu bànneex mate, yaa teew, xéewal sa ndijoor la saxe.",
+    "wolofVerseRef": "Sabóor, saar 16, aaya 11",
+    "wolofalVerse": "يَا مَيْ خَمَلْ يࣷونُ ندُندّ؞ فُ بࣵنّࣹيخْ مَتࣹ، يَا تࣹيوْ، خࣺيوَلْ سَ ندِجࣷورْ لَ سَخࣹ؞",
+    "wolofalVerseRef": "Sabóor, saar 16, aaya 11"
+  },
+  {
+    "id": 100,
+    "arabicName": "ٱلْصَّبُورُ",
+    "wolofName": "Aji Muñ",
+    "wolofalName": "اَجِ مُݧْ",
+    "wolofVerse": "Aji Sax ji! Kiy muñ mer, te bare ngor, di bale tooñ aki moy te du ñàkka topp mukk doom, tooñu waajuram, ba ca sët yaak sëtaat ya.",
+    "wolofVerseRef": "Màndiŋ ma, saar 14, aaya 18",
+    "wolofalVerse": "اَجِ سَخْ جِ!‏‏‏ ڪِيْ مُݧْ مࣹرْ، تࣹ بَرࣹ نگࣷرْ، دِ بَلࣹ تࣷوݧْ اَڪِ مࣷيْ تࣹ دُ ݧࣵڪَّ تࣷݒّ مُڪّ دࣷومْ، تࣷوݧُ وَاجُرَمْ، بَ ݖَ سࣴتْ يَاڪْ سࣴتَاتْ يَ؞",
+    "wolofalVerseRef": "Màndiŋ ma, saar 14, aaya 18"
   }
 ]

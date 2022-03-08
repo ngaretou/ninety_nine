@@ -30,7 +30,8 @@ dependencies:
   shared_preferences: ^2.0.13
   url_launcher: ^6.0.20
   share_plus: ^3.0.4
-  audioplayers: ^0.20.1
+  just_audio: ^0.9.18
+  audio_session: ^0.1.6+1
   firebase_core: ^1.13.1
   firebase_analytics: ^9.1.2
   scrollable_positioned_list: ^0.2.3
@@ -67,8 +68,9 @@ flutter:
     - assets/names.json
     - assets/images/
     - assets/html/
-
     - assets/audio/
+    - assets/audio/verses/
+    - assets/audio/names/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
