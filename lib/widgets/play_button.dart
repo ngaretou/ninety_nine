@@ -56,7 +56,7 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
     }
 
     await checkAndAddAudioSource("names/${widget.id}.mp3");
-    await checkAndAddAudioSource("verses/${widget.id}.m4a");
+    await checkAndAddAudioSource("verses/${widget.id}.mp3");
 
     //Load audio
     try {
