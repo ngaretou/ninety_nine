@@ -1,8 +1,8 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+// import 'package:flutter/foundation.dart' show kIsWeb;
 import './cards_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/theme.dart';
@@ -113,7 +113,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               setState(() {});
                             },
                             child: Container(
-                              height: Platform.isIOS ? 70 : 60,
+                              height: 60,
+                              // height: Platform.isIOS ? 70 : 60,
                               alignment: Alignment.center,
                               child: Text(
                                 AppLocalizations.of(context).skip,
@@ -131,7 +132,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   .popAndPushNamed(CardsScreen.routeName);
                             },
                             child: Container(
-                              height: Platform.isIOS ? 70 : 60,
+                              height: 60,
+                              // height: Platform.isIOS ? 70 : 60,
                               alignment: Alignment.center,
                               child: Text(
                                 AppLocalizations.of(context).start,

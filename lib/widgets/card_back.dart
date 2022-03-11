@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:math';
 import 'dart:ui' as ui;
 
@@ -23,6 +24,7 @@ class CardBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('card back build ' + name.id.toString());
     CardPrefList cardPrefs =
         Provider.of<CardPrefs>(context, listen: false).cardPrefs;
     final bool _isDark =
@@ -60,6 +62,40 @@ class CardBack extends StatelessWidget {
             MediaQuery.of(context).size.height) <=
         1400;
 
+    BoxDecoration adaptiveBackground() {
+      late BoxDecoration _boxDecoration;
+      if (Provider.of<CardPrefs>(context, listen: false)
+          .cardPrefs
+          .imageEnabled) {
+        _boxDecoration = BoxDecoration(
+          color: Colors.yellow[50],
+          borderRadius:
+              kIsWeb ? BorderRadius.circular(20.0) : BorderRadius.circular(0.0),
+          gradient: LinearGradient(begin: Alignment.bottomRight, colors: [
+            Colors.black.withOpacity(.3),
+            Colors.black.withOpacity(.0)
+          ]),
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: _isDark
+                ? AssetImage("assets/images/black-bg-1.jpg")
+                : AssetImage("assets/images/white-bg-2.jpg"),
+          ),
+        );
+      } else {
+        _boxDecoration = BoxDecoration(
+          color: Colors.yellow[50],
+          borderRadius:
+              kIsWeb ? BorderRadius.circular(20.0) : BorderRadius.circular(0.0),
+          gradient: LinearGradient(begin: Alignment.bottomRight, colors: [
+            Colors.black.withOpacity(.3),
+            Colors.black.withOpacity(.0)
+          ]),
+        );
+      }
+      return _boxDecoration;
+    }
+
     //Card back does not have alternate layouts for portrait and landscape
     return Transform(
       alignment: Alignment.center,
@@ -67,22 +103,12 @@ class CardBack extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-              color: Colors.yellow[50],
-              // borderRadius: BorderRadius.circular(20.0),
-              gradient: LinearGradient(begin: Alignment.bottomRight, colors: [
-                Colors.black.withOpacity(.3),
-                Colors.black.withOpacity(.0)
-              ]),
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: _isDark
-                      ? AssetImage("assets/images/black-bg-1.jpg")
-                      : AssetImage("assets/images/white-bg-2.jpg")),
-            ),
+            decoration: adaptiveBackground(),
             child: Container(
               decoration: BoxDecoration(
-                // borderRadius: BorderRadius.circular(20.0),
+                borderRadius: kIsWeb
+                    ? BorderRadius.circular(20.0)
+                    : BorderRadius.circular(0.0),
                 gradient: LinearGradient(
                   begin: Alignment.bottomRight,
                   colors: [
@@ -174,10 +200,10 @@ class CardBack extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 20),
-            child: CardIconBar(name, context),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.only(bottom: 20),
+          //   child: CardIconBar(name, context),
+          // ),
         ],
       ),
     );

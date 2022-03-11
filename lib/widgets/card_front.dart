@@ -20,6 +20,7 @@ class CardFront extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('card front build ' + name.id.toString());
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     double? adaptiveFontSize;
@@ -41,9 +42,9 @@ class CardFront extends StatelessWidget {
           min(_landscapeFontSize * (mediaQuery.size.width / 568), 70);
     }
 
-//Note that the + " " in the arabicName and wolofalName is a hack -
-//otherwise as of Sep 24 2020 teh end of hte line gets cut off
-//Tried Padding widget around but the problem is the Text widget itslef not seeing how much space is needed
+    //Note that the + " " in the arabicName and wolofalName is a hack -
+    //otherwise as of Sep 24 2020 teh end of the line gets cut off
+    //Tried Padding widget around but the problem is the Text widget itslef not seeing how much space is needed
     Widget arabicNameFront(mediaQuery, names) {
       return Text(" " + names.arabicName + " ",
           textAlign: TextAlign.center,
@@ -103,11 +104,12 @@ class CardFront extends StatelessWidget {
             ],
           ),
         ),
+
         //Card text
         child: Padding(
           padding: EdgeInsets.all(20.0),
           child: isLandscape
-              // Landscape version
+              // Landscape/tablet version
               ? Column(
                   children: [
                     Expanded(
@@ -136,11 +138,13 @@ class CardFront extends StatelessWidget {
                         ],
                       ),
                     ),
+
                     //Favorite Button - in landscape
                     Expanded(flex: 1, child: CardIconBar(name, context)),
                   ],
                 )
-              //Portrait version
+
+              //Portrait/phone version
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -173,9 +177,9 @@ class CardFront extends StatelessWidget {
                         child: Align(
                             alignment: Alignment.center,
                             child: wolofNameFront(mediaQuery, name))),
-                    Expanded(
-                      child: CardIconBar(name, context),
-                    ),
+                    // Expanded(
+                    //   child: CardIconBar(name, context),
+                    // ),
                   ],
                 ),
         ),
