@@ -9,19 +9,16 @@ import '../widgets/card_icon_bar.dart';
 
 class CardFront extends StatelessWidget {
   final DivineName name;
-  final BuildContext context;
+  final MediaQueryData mediaQuery;
 
-  CardFront(
-    this.name,
-    this.context,
-  );
+  const CardFront(this.name, this.mediaQuery, {Key? key}) : super(key: key);
   static const _portraitFontSize = 70.0;
   static const _landscapeFontSize = 50.0;
 
   @override
   Widget build(BuildContext context) {
     print('card front build ' + name.id.toString());
-    final mediaQuery = MediaQuery.of(context);
+
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     double? adaptiveFontSize;
     ui.TextDirection rtlText = ui.TextDirection.rtl;
@@ -45,7 +42,7 @@ class CardFront extends StatelessWidget {
     //Note that the + " " in the arabicName and wolofalName is a hack -
     //otherwise as of Sep 24 2020 teh end of the line gets cut off
     //Tried Padding widget around but the problem is the Text widget itslef not seeing how much space is needed
-    Widget arabicNameFront(mediaQuery, names) {
+    Widget arabicNameFront(names) {
       return Text(" " + names.arabicName + " ",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -56,7 +53,7 @@ class CardFront extends StatelessWidget {
           textDirection: rtlText);
     }
 
-    Widget wolofalNameFront(mediaQuery, names) {
+    Widget wolofalNameFront(names) {
       return Text(
         " " + names.wolofalName + " ",
         textAlign: TextAlign.center,
@@ -68,7 +65,7 @@ class CardFront extends StatelessWidget {
       );
     }
 
-    Widget wolofNameFront(mediaQuery, names) {
+    Widget wolofNameFront(names) {
       return Text(names.wolofName,
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -122,18 +119,18 @@ class CardFront extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Expanded(child: wolofNameFront(mediaQuery, name)),
+                          Expanded(child: wolofNameFront(name)),
                           VerticalDivider(
                               color: Theme.of(context).primaryColor,
                               thickness: 3,
                               width: 100),
-                          Expanded(child: arabicNameFront(mediaQuery, name)),
+                          Expanded(child: arabicNameFront(name)),
                           VerticalDivider(
                               color: Theme.of(context).primaryColor,
                               thickness: 3,
                               width: 100),
                           Expanded(
-                            child: wolofalNameFront(mediaQuery, name),
+                            child: wolofalNameFront(name),
                           ),
                         ],
                       ),
@@ -155,7 +152,7 @@ class CardFront extends StatelessWidget {
                         //This Align widget aligns vertically here
                         child: Align(
                             alignment: Alignment.center,
-                            child: arabicNameFront(mediaQuery, name))),
+                            child: arabicNameFront(name))),
                     Divider(
                       // color: Theme.of(context).primaryColor,
                       thickness: 3,
@@ -166,20 +163,19 @@ class CardFront extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 20),
-                              child: wolofalNameFront(mediaQuery, name)),
+                              child: wolofalNameFront(name)),
                         )),
                     Divider(
-                      // color: Theme.of(context).primaryColor,
                       thickness: 3,
                     ),
                     Expanded(
                         flex: 2,
                         child: Align(
                             alignment: Alignment.center,
-                            child: wolofNameFront(mediaQuery, name))),
-                    // Expanded(
-                    //   child: CardIconBar(name, context),
-                    // ),
+                            child: wolofNameFront(name))),
+                    Expanded(
+                      child: CardIconBar(name, context),
+                    ),
                   ],
                 ),
         ),

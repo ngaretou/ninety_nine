@@ -13,25 +13,28 @@ import '../providers/theme.dart';
 
 import '../widgets/card_icon_bar.dart';
 
+const darkBackground = AssetImage("assets/images/black-bg-1.jpg");
+const lightBackground = AssetImage("assets/images/white-bg-2.jpg");
+
 class CardBack extends StatelessWidget {
   final DivineName name;
-  final BuildContext context;
+  final bool isPhone;
 
-  CardBack(
+  const CardBack(
     this.name,
-    this.context,
+    this.isPhone,
   );
 
   @override
   Widget build(BuildContext context) {
-    print('card back build ' + name.id.toString());
+    // print('card back build ' + name.id.toString());
     CardPrefList cardPrefs =
         Provider.of<CardPrefs>(context, listen: false).cardPrefs;
     final bool _isDark =
         Provider.of<ThemeModel>(context, listen: false).userTheme!.brightness ==
             Brightness.dark;
-    ui.TextDirection rtlText = ui.TextDirection.rtl;
-    Color _fontColor = _isDark ? Colors.white : Colors.black;
+    final ui.TextDirection rtlText = ui.TextDirection.rtl;
+    final Color _fontColor = _isDark ? Colors.white : Colors.black;
 
     Widget textRS(input, double fontReduction) {
       return Text(
@@ -58,12 +61,9 @@ class CardBack extends StatelessWidget {
       );
     }
 
-    bool _isPhone = (MediaQuery.of(context).size.width +
-            MediaQuery.of(context).size.height) <=
-        1400;
-
     BoxDecoration adaptiveBackground() {
       late BoxDecoration _boxDecoration;
+
       if (Provider.of<CardPrefs>(context, listen: false)
           .cardPrefs
           .imageEnabled) {
@@ -77,9 +77,7 @@ class CardBack extends StatelessWidget {
           ]),
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: _isDark
-                ? AssetImage("assets/images/black-bg-1.jpg")
-                : AssetImage("assets/images/white-bg-2.jpg"),
+            image: _isDark ? darkBackground : lightBackground,
           ),
         );
       } else {
@@ -97,6 +95,8 @@ class CardBack extends StatelessWidget {
     }
 
     //Card back does not have alternate layouts for portrait and landscape
+    //This transform is important because we're looking at the back of the
+    //widget when we look at it normally, so it has to be flipped over like this to be legible
     return Transform(
       alignment: Alignment.center,
       transform: Matrix4.rotationY(pi),
@@ -118,92 +118,83 @@ class CardBack extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.all(20.0),
-                child: ListView(
-                  children: [
-                    Padding(
-                      padding:
-                          _isPhone ? EdgeInsets.all(10) : EdgeInsets.all(100),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                  padding: EdgeInsets.all(20.0),
+                  child: ListView(
+                    children: [
+                      // children: [
+                      //Name Header
+                      Row(
                         children: [
-                          //Name Header
-                          Row(
-                            children: [
-                              Expanded(child: textRS(name.wolofName, 0)),
-                              VerticalDivider(
-                                color: Theme.of(context).primaryColor,
-                                thickness: 3,
-                              ),
-                              Expanded(
-                                child: textAS(name.wolofalName, 0),
-                              ),
-                            ],
+                          Expanded(child: textRS(name.wolofName, 0)),
+                          VerticalDivider(
+                            color: Theme.of(context).primaryColor,
+                            thickness: 3,
                           ),
-                          //Wolofal verse section
-                          cardPrefs.wolofalVerseEnabled
-                              ? Column(
-                                  children: [
-                                    Divider(
-                                      color: Theme.of(context).primaryColor,
-                                      thickness: 3,
-                                    ),
-                                    textAS(name.wolofalVerse, 0.0),
-                                    textAS(name.wolofalVerseRef, 10.0)
-                                  ],
-                                )
-                              : SizedBox(width: 20),
-                          //Wolof verse section
-                          cardPrefs.wolofVerseEnabled
-                              ? Column(
-                                  children: [
-                                    Divider(
-                                      color: Theme.of(context).primaryColor,
-                                      thickness: 3,
-                                    ),
-                                    textRS(name.wolofVerse, 0.0),
-                                    SizedBox(height: 20),
-                                    textRS(name.wolofVerseRef, 10.0),
-                                  ],
-                                )
-                              : SizedBox(width: 20),
-                          SizedBox(height: 60),
-                          TextButton(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                    AppLocalizations.of(context)
-                                        .clickHereToReadMore,
-                                    style: TextStyle(color: _fontColor)),
-                                Icon(Icons.arrow_forward, color: _fontColor),
-                              ],
-                            ),
-                            onPressed: () async {
-                              const url = 'https://sng.al/chrono';
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw 'Could not launch $url';
-                              }
-                            },
-                          ),
-                          SizedBox(
-                            height: 70,
+                          Expanded(
+                            child: textAS(name.wolofalName, 0),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                      // Wolofal verse section
+                      cardPrefs.wolofalVerseEnabled
+                          ? Column(
+                              children: [
+                                Divider(
+                                  color: Theme.of(context).primaryColor,
+                                  thickness: 3,
+                                ),
+                                textAS(name.wolofalVerse, 0.0),
+                                textAS(name.wolofalVerseRef, 10.0)
+                              ],
+                            )
+                          : SizedBox(width: 20),
+                      //Wolof verse section
+                      cardPrefs.wolofVerseEnabled
+                          ? Column(
+                              children: [
+                                Divider(
+                                  color: Theme.of(context).primaryColor,
+                                  thickness: 3,
+                                ),
+                                textRS(name.wolofVerse, 0.0),
+                                SizedBox(height: 20),
+                                textRS(name.wolofVerseRef, 10.0),
+                              ],
+                            )
+                          : SizedBox(width: 20),
+                      SizedBox(height: 60),
+                      TextButton(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                                AppLocalizations.of(context)
+                                    .clickHereToReadMore,
+                                style: TextStyle(color: _fontColor)),
+                            Icon(Icons.arrow_forward, color: _fontColor),
+                          ],
+                        ),
+                        onPressed: () async {
+                          const String url = 'https://sng.al/chrono';
+                          if (await canLaunch(url)) {
+                            await launch(url);
+                          } else {
+                            throw 'Could not launch $url';
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 70,
+                      ),
+                      // ],
+                    ],
+                  )),
             ),
           ),
-          // Padding(
-          //   padding: EdgeInsets.only(bottom: 20),
-          //   child: CardIconBar(name, context),
-          // ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 20),
+            child: CardIconBar(name, context),
+          ),
         ],
       ),
     );

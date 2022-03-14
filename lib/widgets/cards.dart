@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
+import '../providers/fps.dart';
 
 import '../widgets/card_front.dart';
 import '../widgets/card_back.dart';
@@ -38,6 +39,8 @@ class _NameCardsState extends State<NameCards>
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
   PageController _pageController = PageController();
   bool? rightToLeft;
+  int fpsDangerZone = 0;
+  int fpsWorking = 0;
 
   @override
   void initState() {
@@ -59,6 +62,7 @@ class _NameCardsState extends State<NameCards>
       ..addStatusListener((status) {
         _animationStatus = status;
       });
+
     //page controller is initialized here and initialPage given
     _pageController = PageController(
       initialPage:
@@ -68,13 +72,39 @@ class _NameCardsState extends State<NameCards>
       viewportFraction: 1,
       keepPage: false,
     );
+
+    Fps.instance!.start();
+    Fps.instance!.addFpsCallback((fpsInfo) {
+      // print(widget.goToPage.toString() + " " + fpsInfo.toString());
+      // FpsInfo fpsInfo = FpsInfo(fps, totalCount, droppedCount, drawFramesCount);
+      ((fpsInfo.drawFramesCount * 2) < fpsInfo.droppedFramesCount)
+          ? fpsDangerZone++
+          : fpsWorking++;
+
+      if (fpsDangerZone > 5) enableLightAnimation();
+      if (fpsWorking > 15) disableFpsMonitoring();
+    });
+
     super.initState();
+  }
+
+  Future<void> enableLightAnimation() async {
+    Fps.instance!.removeFpsCallback((fpsInfo) {});
+    print('FPS consistently low: ask to enableLightAnimation');
+
+    // showDialog(context: context, builder: builder);
+  }
+
+  Future<void> disableFpsMonitoring() async {
+    Fps.instance!.removeFpsCallback((fpsInfo) {});
+    print('FPS consistently good: disable monitoring');
   }
 
   @override
   void dispose() {
     _animationController.dispose();
     _pageController.dispose();
+    Fps.instance!.stop();
     super.dispose();
   }
 
@@ -108,9 +138,8 @@ class _NameCardsState extends State<NameCards>
     //Android biggest phone I can find is is 480 x 853 = 1333
     //For tablets the smallest I can find is 768 x 1024
 
-    final bool _isPhone = (MediaQuery.of(context).size.width +
-            MediaQuery.of(context).size.height) <=
-        1400;
+    final bool _isPhone =
+        (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
 
     final Matrix4 phoneTransform = Matrix4.identity()
       ..setEntry(3, 2, 0.002)
@@ -146,49 +175,58 @@ class _NameCardsState extends State<NameCards>
             Container(
               height: (mediaQuery.size.height),
               child: PageView.builder(
-                //Controls from card preferences the card flow direction
-                reverse: Provider.of<CardPrefs>(context, listen: false)
-                    .cardPrefs
-                    .textDirection,
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                controller: _pageController,
-                onPageChanged: (index) {
-                  //Here we want the user to be able to come back to the name they were on even if they
-                  //switch temporarily to favorites - so save lastpage viewed only when not viewing favs
-                  divineNames.saveLastNameViewed(index);
+                  //Controls from card preferences the card flow direction
+                  reverse: Provider.of<CardPrefs>(context, listen: false)
+                      .cardPrefs
+                      .textDirection,
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    //Here we want the user to be able to come back to the name they were on even if they
+                    //switch temporarily to favorites - so save lastpage viewed only when not viewing favs
+                    divineNames.saveLastNameViewed(index);
 
-                  // This flips the cards on swipe back to the picture side
-                  // if (_animationStatus != AnimationStatus.dismissed) {
-                  //   _animationController.reverse();
-                  // }
-                },
-                itemCount: namesToShow.length,
-                itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
-                  // key: _listKey,
-                  value: namesToShow[i],
-                  child: Transform(
-                    alignment: FractionalOffset.center,
-                    transform: (_isPhone) ? phoneTransform : tabletTransform,
-                    child: GestureDetector(
-                      onTap: () {
-                        if (_pageController.page == i) {
-                          if (_animationStatus == AnimationStatus.dismissed) {
-                            _animationController.forward();
-                          } else {
-                            _animationController.reverse();
-                          }
-                        }
+                    // This flips the cards on swipe back to the picture side
+                    // if (_animationStatus != AnimationStatus.dismissed) {
+                    //   _animationController.reverse();
+                    // }
+                  },
+                  itemCount: namesToShow.length,
+                  itemBuilder: (ctx, i) {
+                    return ChangeNotifierProvider.value(
+                      // key: _listKey,
+                      value: namesToShow[i],
+                      child: AnimatedBuilder(
+                          animation: _animationController,
+                          // child: new CardFront(namesToShow[i], mediaQuery),
+                          child: _animation.value <= 0.5
+                              ? CardFront(namesToShow[i], mediaQuery)
+                              : CardBack(namesToShow[i], _isPhone),
+                          builder: (BuildContext context, Widget? child) {
+                            return Transform(
+                              alignment: FractionalOffset.center,
+                              transform:
+                                  (_isPhone) ? phoneTransform : tabletTransform,
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (_pageController.page == i) {
+                                    if (_animationStatus ==
+                                        AnimationStatus.dismissed) {
+                                      _animationController.forward();
+                                    } else {
+                                      _animationController.reverse();
+                                    }
+                                  }
 
-                        // print('in onTap');
-                      },
-                      child: _animation.value <= 0.5
-                          ? CardFront(namesToShow[i], context)
-                          : CardBack(namesToShow[i], context),
-                    ),
-                  ),
-                ),
-              ),
+                                  // print('in onTap');
+                                },
+                                child: child,
+                              ),
+                            );
+                          }),
+                    );
+                  }),
             )
           ]),
         ),
