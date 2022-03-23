@@ -33,7 +33,9 @@ class NameCards extends StatefulWidget {
 }
 
 class _NameCardsState extends State<NameCards>
-    with SingleTickerProviderStateMixin {
+    //This has to do with the animation and teh vsync:this, required under AnimationController(s)
+    with
+        SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
@@ -41,6 +43,13 @@ class _NameCardsState extends State<NameCards>
   bool? rightToLeft;
   int fpsDangerZone = 0;
   int fpsWorking = 0;
+
+  late DivineNames divineNames;
+  late CardPrefs cardPrefs;
+  late List<DivineName> namesToShow;
+
+  late MediaQueryData mediaQuery;
+  late bool _isPhone;
 
   @override
   void initState() {
@@ -63,27 +72,30 @@ class _NameCardsState extends State<NameCards>
         _animationStatus = status;
       });
 
-    //page controller is initialized here and initialPage given
-    _pageController = PageController(
-      initialPage:
-          Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
-              ? 0
-              : Provider.of<DivineNames>(context, listen: false).lastNameViewed,
-      viewportFraction: 1,
-      keepPage: false,
-    );
+    // Fps.instance!.start();
+    // Fps.instance!.addFpsCallback((fpsInfo) {
+    //   // print(widget.goToPage.toString() + " " + fpsInfo.toString());
+    //   // FpsInfo fpsInfo = FpsInfo(fps, totalCount, droppedCount, drawFramesCount);
+    //   ((fpsInfo.drawFramesCount * 2) < fpsInfo.droppedFramesCount)
+    //       ? fpsDangerZone++
+    //       : fpsWorking++;
 
-    Fps.instance!.start();
-    Fps.instance!.addFpsCallback((fpsInfo) {
-      // print(widget.goToPage.toString() + " " + fpsInfo.toString());
-      // FpsInfo fpsInfo = FpsInfo(fps, totalCount, droppedCount, drawFramesCount);
-      ((fpsInfo.drawFramesCount * 2) < fpsInfo.droppedFramesCount)
-          ? fpsDangerZone++
-          : fpsWorking++;
+    //   if (fpsDangerZone > 5) enableLightAnimation();
+    //   if (fpsWorking > 15) disableFpsMonitoring();
+    // });
 
-      if (fpsDangerZone > 5) enableLightAnimation();
-      if (fpsWorking > 15) disableFpsMonitoring();
-    });
+    divineNames = Provider.of<DivineNames>(context, listen: false);
+
+    cardPrefs = Provider.of<CardPrefs>(context, listen: false);
+
+    //If you are just looking at favs or if you are looking at all names.
+    //The initial page should be the last viewed page, which gets stored on each
+    // page turn. But, if it's favs, start at the first one (index 0). Then when you go back to
+    // viewing all, go back to last viewed page.
+    namesToShow =
+        Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
+            ? divineNames.favoriteNames
+            : divineNames.names;
 
     super.initState();
   }
@@ -115,33 +127,7 @@ class _NameCardsState extends State<NameCards>
   Widget build(BuildContext context) {
     print('NameCards build method');
 
-    final divineNames = Provider.of<DivineNames>(context, listen: false);
-
-    final cardPrefs = Provider.of<CardPrefs>(context, listen: false);
-
-    //If you get this far, you've seen the onboarding, so don't show again
-    cardPrefs.savePref('showOnboarding', false);
-
-    //If you are just looking at favs or if you are looking at all names
-    List<DivineName> namesToShow =
-        Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
-            ? divineNames.favoriteNames
-            : divineNames.names;
-
-    final mediaQuery = MediaQuery.of(context);
-
-    //The initial page should be the last viewed page, which gets stored on each
-    // page turn. But, if it's favs, start at the first one (index 0). Then when you go back to
-    // viewing all, go back to last viewed page.
-
-    //Smallest iPhone is UIKit 320 x 480 = 800.
-    //Biggest is 428 x 926 = 1354.
-    //Android biggest phone I can find is is 480 x 853 = 1333
-    //For tablets the smallest I can find is 768 x 1024
-
-    final bool _isPhone =
-        (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
-
+    //These transforms have to be in teh build as they calculate with the animation
     final Matrix4 phoneTransform = Matrix4.identity()
       ..setEntry(3, 2, 0.002)
       ..rotateY(pi * _animation.value)
@@ -156,14 +142,84 @@ class _NameCardsState extends State<NameCards>
       // So start at 1 - .1
       ..scale(.75 + (.1 * _animation.value), .75 + (.1 * _animation.value));
 
-//This is for when the user chooses a name from List View. The index is passed back up to cards scren then back down here.
-//This only happens after the page is initialized.
+    //page controller is initialized here and initialPage given
+    _pageController = PageController(
+      initialPage:
+          Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
+              ? 0
+              : Provider.of<DivineNames>(context, listen: false).lastNameViewed,
+      viewportFraction: 1,
+      keepPage: false,
+    );
 
+    //Smallest iPhone is UIKit 320 x 480 = 800.
+    //Biggest is 428 x 926 = 1354.
+    //Android biggest phone I can find is is 480 x 853 = 1333
+    //For tablets the smallest I can find is 768 x 1024
+    mediaQuery = MediaQuery.of(context);
+    _isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
+
+    //This is for when the user chooses a name from List View. The index is passed back up to cards scren then back down here.
+    //This only happens after the page is initialized.
     if (divineNames.moveToName == true) {
       _pageController.animateToPage(widget.goToPage!,
           duration: Duration(milliseconds: 700), curve: Curves.ease);
       //reset the session so this only triggers once
       divineNames.moveToName = false;
+    }
+
+    // ignore: unused_element
+    Widget animatedBuilderVersion(i) {
+      return AnimatedBuilder(
+          animation: _animationController,
+          // child: new CardFront(namesToShow[i], mediaQuery),
+          child: _animation.value <= 0.5
+              ? CardFront(namesToShow[i], mediaQuery)
+              : CardBack(namesToShow[i], _isPhone),
+          builder: (BuildContext context, Widget? child) {
+            return Transform(
+              alignment: FractionalOffset.center,
+              transform: (_isPhone) ? phoneTransform : tabletTransform,
+              child: GestureDetector(
+                onTap: () {
+                  if (_pageController.page == i) {
+                    if (_animationStatus == AnimationStatus.dismissed) {
+                      _animationController.forward();
+                    } else {
+                      _animationController.reverse();
+                    }
+                  }
+
+                  // print('in onTap');
+                },
+                child: child,
+              ),
+            );
+          });
+    }
+
+    // ignore: unused_element
+    Widget nonAnimatedBuilderVersion(i) {
+      return Transform(
+        alignment: FractionalOffset.center,
+        transform: (_isPhone) ? phoneTransform : tabletTransform,
+        child: GestureDetector(
+          onTap: () {
+            if (_pageController.page == i) {
+              if (_animationStatus == AnimationStatus.dismissed) {
+                _animationController.forward();
+              } else {
+                _animationController.reverse();
+              }
+            }
+
+            // print('in onTap');
+          },
+          child: _animation.value <= 0.5
+              ? CardFront(namesToShow[i], mediaQuery)
+              : CardBack(namesToShow[i], _isPhone),
+        ),
+      );
     }
 
     return ScrollConfiguration(
@@ -176,7 +232,7 @@ class _NameCardsState extends State<NameCards>
             Container(
               height: (mediaQuery.size.height),
               child: PageView.builder(
-                  //Controls from card preferences the card flow direction
+                  //Controls the card flow direction - LTR or RTL - from card preferences; it is a bool, so note true = RTL.
                   reverse: Provider.of<CardPrefs>(context, listen: false)
                       .cardPrefs
                       .textDirection,
@@ -195,37 +251,36 @@ class _NameCardsState extends State<NameCards>
                   },
                   itemCount: namesToShow.length,
                   itemBuilder: (ctx, i) {
+                    final cardFront = CardFront(namesToShow[i], mediaQuery);
+                    final cardBack = CardBack(namesToShow[i], _isPhone);
+
                     return ChangeNotifierProvider.value(
-                      // key: _listKey,
                       value: namesToShow[i],
                       child: AnimatedBuilder(
-                          animation: _animationController,
-                          // child: new CardFront(namesToShow[i], mediaQuery),
-                          child: _animation.value <= 0.5
-                              ? CardFront(namesToShow[i], mediaQuery)
-                              : CardBack(namesToShow[i], _isPhone),
-                          builder: (BuildContext context, Widget? child) {
-                            return Transform(
-                              alignment: FractionalOffset.center,
-                              transform:
-                                  (_isPhone) ? phoneTransform : tabletTransform,
-                              child: GestureDetector(
-                                onTap: () {
-                                  if (_pageController.page == i) {
-                                    if (_animationStatus ==
-                                        AnimationStatus.dismissed) {
-                                      _animationController.forward();
-                                    } else {
-                                      _animationController.reverse();
-                                    }
-                                  }
+                        animation: _animationController,
+                        child: _animation.value <= 0.5 ? cardFront : cardBack,
+                        builder: (BuildContext context, Widget? child) =>
+                            Transform(
+                          alignment: FractionalOffset.center,
+                          transform:
+                              (_isPhone) ? phoneTransform : tabletTransform,
+                          child: GestureDetector(
+                            onTap: () {
+                              if (_pageController.page == i) {
+                                if (_animationStatus ==
+                                    AnimationStatus.dismissed) {
+                                  _animationController.forward();
+                                } else {
+                                  _animationController.reverse();
+                                }
+                              }
 
-                                  // print('in onTap');
-                                },
-                                child: child,
-                              ),
-                            );
-                          }),
+                              // print('in onTap');
+                            },
+                            child: child,
+                          ),
+                        ),
+                      ),
                     );
                   }),
             )

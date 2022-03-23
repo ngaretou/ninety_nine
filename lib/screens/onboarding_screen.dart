@@ -130,6 +130,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             onTap: () {
                               Navigator.of(context)
                                   .popAndPushNamed(CardsScreen.routeName);
+                              //If you get this far, you've seen the onboarding, so don't show again
+                              Provider.of<CardPrefs>(context, listen: false)
+                                  .savePref('showOnboarding', false);
                             },
                             child: Container(
                               height: 60,

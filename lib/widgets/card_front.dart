@@ -137,7 +137,7 @@ class CardFront extends StatelessWidget {
                     ),
 
                     //Favorite Button - in landscape
-                    Expanded(flex: 1, child: CardIconBar(name, context)),
+                    // Expanded(flex: 1, child: CardIconBar(name, context),),
                   ],
                 )
 
@@ -173,9 +173,7 @@ class CardFront extends StatelessWidget {
                         child: Align(
                             alignment: Alignment.center,
                             child: wolofNameFront(name))),
-                    Expanded(
-                      child: CardIconBar(name, context),
-                    ),
+                    // Expanded(child: CardIconBar(name, context)),
                   ],
                 ),
         ),
