@@ -93,6 +93,7 @@ class _NameCardsState extends State<NameCards>
     print('FPS consistently low: ask to enableLightAnimation');
 
     // showDialog(context: context, builder: builder);
+    //Snackbar?
   }
 
   Future<void> disableFpsMonitoring() async {
