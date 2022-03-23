@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
 
+// ignore: unused_import
 import '../widgets/card_icon_bar.dart';
 
 class CardFront extends StatelessWidget {

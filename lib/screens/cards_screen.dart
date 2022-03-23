@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +6,7 @@ import '../providers/names.dart';
 import '../providers/card_prefs.dart';
 
 import './settings_screen.dart';
-// import '../widgets/cards.dart';
+import '../widgets/card_animator.dart';
 
 import '../widgets/card_front.dart';
 import '../widgets/card_back.dart';
@@ -23,6 +22,7 @@ class MyCustomScrollBehavior extends ScrollBehavior {
       };
 }
 
+// CardsScreen framework - Scaffold etc
 class CardsScreen extends StatefulWidget {
   static const routeName = '/cards-screen';
 
@@ -80,6 +80,9 @@ class _CardsScreenState extends State<CardsScreen> {
   }
 }
 
+/*
+Name Cards PageViewBuilder - the 
+ */
 class NameCards extends StatefulWidget {
   final int? goToPage;
   final bool newSession;
@@ -97,7 +100,7 @@ class _NameCardsState extends State<NameCards> {
   late List<DivineName> namesToShow;
 
   late MediaQueryData mediaQuery;
-  late bool _isPhone;
+  late bool isPhone;
 
   @override
   void initState() {
@@ -116,17 +119,29 @@ class _NameCardsState extends State<NameCards> {
             ? divineNames.favoriteNames
             : divineNames.names;
 
+    //page controller is initialized here and initialPage given
+    _pageController = PageController(
+      initialPage:
+          Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
+              ? 0
+              : Provider.of<DivineNames>(context, listen: false).lastNameViewed,
+      viewportFraction: 1,
+      keepPage: false,
+    );
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print('Name Cards PageViewBuilder');
+
     //Smallest iPhone is UIKit 320 x 480 = 800.
     //Biggest is 428 x 926 = 1354.
     //Android biggest phone I can find is is 480 x 853 = 1333
     //For tablets the smallest I can find is 768 x 1024
     mediaQuery = MediaQuery.of(context);
-    _isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
+    isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
 
     //This is for when the user chooses a name from List View. The index is passed back up to cards scren then back down here.
     //This only happens after the page is initialized.
@@ -166,9 +181,14 @@ class _NameCardsState extends State<NameCards> {
                 itemCount: namesToShow.length,
                 itemBuilder: (ctx, i) {
                   final cardFront = CardFront(namesToShow[i], mediaQuery);
-                  final cardBack = CardBack(namesToShow[i], _isPhone);
+                  final cardBack = CardBack(namesToShow[i], isPhone);
 
-                  return cardFront;
+                  return CardAnimator(
+                    cardFront: cardFront,
+                    cardBack: cardBack,
+                    mediaQuery: mediaQuery,
+                    isPhone: isPhone,
+                  );
                 }),
           ),
         ),

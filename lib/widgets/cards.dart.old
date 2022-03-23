@@ -1,3 +1,5 @@
+//Old version
+
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -39,6 +41,7 @@ class _NameCardsState extends State<NameCards>
   late AnimationController _animationController;
   late Animation<double> _animation;
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
+
   PageController _pageController = PageController();
   bool? rightToLeft;
   int fpsDangerZone = 0;
@@ -127,7 +130,7 @@ class _NameCardsState extends State<NameCards>
   Widget build(BuildContext context) {
     print('NameCards build method');
 
-    //These transforms have to be in teh build as they calculate with the animation
+    //These transforms have to be in the build as they calculate with the animation
     final Matrix4 phoneTransform = Matrix4.identity()
       ..setEntry(3, 2, 0.002)
       ..rotateY(pi * _animation.value)
