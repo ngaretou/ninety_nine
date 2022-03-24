@@ -165,6 +165,13 @@ class _NameCardsState extends State<NameCards> {
       divineNames.moveToName = false;
     }
 
+    EdgeInsets cardPadding = isPhone
+        ? EdgeInsets.all(20)
+        : EdgeInsets.symmetric(
+            horizontal: 70,
+            vertical: isLandscape ? 70 : (mediaQuery.size.height - 700) / 2,
+          );
+
     return ScrollConfiguration(
       //The 2.8 Flutter behavior is to not have mice grabbing and dragging - but we do want this in the web version of the app, so the custom scroll behavior here
       behavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
@@ -191,8 +198,10 @@ class _NameCardsState extends State<NameCards> {
                 },
                 itemCount: namesToShow.length,
                 itemBuilder: (ctx, i) {
-                  final cardFront = CardFront(namesToShow[i], mediaQuery);
-                  final cardBack = CardBack(namesToShow[i], mediaQuery);
+                  final cardFront =
+                      CardFront(namesToShow[i], mediaQuery, cardPadding);
+                  final cardBack =
+                      CardBack(namesToShow[i], mediaQuery, cardPadding);
 
                   return CardAnimator(
                     cardFront: cardFront,

@@ -10,8 +10,10 @@ import '../widgets/card_icon_bar.dart';
 class CardFront extends StatelessWidget {
   final DivineName name;
   final MediaQueryData mediaQuery;
+  final EdgeInsets cardPadding;
 
-  const CardFront(this.name, this.mediaQuery, {Key? key}) : super(key: key);
+  const CardFront(this.name, this.mediaQuery, this.cardPadding, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +85,6 @@ The offending Expanded is currently placed inside a FittedBox widget.
     // int minCardWidth = 400;
     // double horizPadding = (mediaQuery.size.width * .5 - minCardWidth) / 2;
 
-    EdgeInsets cardFrontPadding =
-        _isPhone ? EdgeInsets.all(20) : EdgeInsets.all(70);
     // horizontal: 70);
 
     Widget verticalDivider = Padding(
@@ -99,7 +99,7 @@ The offending Expanded is currently placed inside a FittedBox widget.
       height: mediaQuery.size.height,
       // width: _isPhone ? mediaQuery.size.width : mediaQuery.size.height / 3,
       child: Padding(
-        padding: cardFrontPadding,
+        padding: cardPadding,
         child: Container(
           //with background image or not?
           decoration: Provider.of<CardPrefs>(context, listen: false)

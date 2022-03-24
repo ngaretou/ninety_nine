@@ -17,10 +17,12 @@ const lightBackground = AssetImage("assets/images/white-bg-2.jpg");
 class CardBack extends StatelessWidget {
   final DivineName name;
   final MediaQueryData mediaQuery;
+  final EdgeInsets cardPadding;
 
   const CardBack(
     this.name,
     this.mediaQuery,
+    this.cardPadding,
   );
 
   @override
@@ -35,8 +37,6 @@ class CardBack extends StatelessWidget {
     final Color _fontColor = _isDark ? Colors.white : Colors.black;
 
     bool _isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
-    EdgeInsets cardBackPadding =
-        _isPhone ? EdgeInsets.all(0) : EdgeInsets.all(70);
 
     Widget textRS(input, double fontReduction) {
       return Text(
@@ -101,11 +101,11 @@ class CardBack extends StatelessWidget {
       //This Container and height seems superfluous but must be here to help the low animation not go weird
       height: mediaQuery.size.height,
       child: Padding(
-        padding: cardBackPadding,
+        padding: cardPadding,
         child: Stack(
           children: [
             Container(
-              height: mediaQuery.size.height - (cardBackPadding.top * 2),
+              height: mediaQuery.size.height - (cardPadding.top * 2),
               decoration: adaptiveBackground(),
               child: Container(
                 decoration: BoxDecoration(
