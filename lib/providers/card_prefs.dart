@@ -12,7 +12,7 @@ class CardPrefList {
   bool showFavs = false;
   bool showOnboarding;
   bool lowPower;
-  bool userHasChosenPowerSetting;
+  bool shouldTestDevicePerformance;
 
   CardPrefList(
       {required this.textDirection,
@@ -22,7 +22,7 @@ class CardPrefList {
       required this.showFavs,
       required this.showOnboarding,
       required this.lowPower,
-      required this.userHasChosenPowerSetting});
+      required this.shouldTestDevicePerformance});
 }
 
 class CardPrefs with ChangeNotifier {
@@ -48,7 +48,7 @@ class CardPrefs with ChangeNotifier {
           showFavs: false,
           showOnboarding: true,
           lowPower: false,
-          userHasChosenPowerSetting: false);
+          shouldTestDevicePerformance: true);
       //Set in-memory copy of prefs
       _cardPrefs = defaultCardPrefs;
       //Save prefs to disk
@@ -60,7 +60,8 @@ class CardPrefs with ChangeNotifier {
         'showFavs': defaultCardPrefs.showFavs,
         'showOnboarding': defaultCardPrefs.showOnboarding,
         'lowPower': defaultCardPrefs.lowPower,
-        'userHasChosenPowerSetting': defaultCardPrefs.userHasChosenPowerSetting,
+        'shouldTestDevicePerformance':
+            defaultCardPrefs.shouldTestDevicePerformance,
       });
       prefs.setString('cardPrefs', _defaultCardPrefs);
     }
@@ -81,8 +82,8 @@ class CardPrefs with ChangeNotifier {
           showFavs: jsonResponse['showFavs'] as bool,
           showOnboarding: jsonResponse['showOnboarding'] as bool,
           lowPower: jsonResponse['lowPower'] as bool,
-          userHasChosenPowerSetting:
-              jsonResponse['userHasChosenPowerSetting'] as bool,
+          shouldTestDevicePerformance:
+              jsonResponse['shouldTestDevicePerformance'] as bool,
         );
       } catch (e) {
         //If there's a problem - example we've added a new preference that there is a null value for in their saved prefs - reset all
@@ -104,8 +105,8 @@ class CardPrefs with ChangeNotifier {
       showFavs: jsonResponse['showFavs'] as bool,
       showOnboarding: jsonResponse['showOnboarding'] as bool,
       lowPower: jsonResponse['lowPower'] as bool,
-      userHasChosenPowerSetting:
-          jsonResponse['userHasChosenPowerSetting'] as bool,
+      shouldTestDevicePerformance:
+          jsonResponse['shouldTestDevicePerformance'] as bool,
     );
 
     //set the incoming setting
@@ -145,9 +146,9 @@ class CardPrefs with ChangeNotifier {
           _tempCardPrefs.lowPower = userPref;
         }
         break;
-      case 'userHasChosenPowerSetting':
+      case 'shouldTestDevicePerformance':
         {
-          _tempCardPrefs.userHasChosenPowerSetting = userPref;
+          _tempCardPrefs.shouldTestDevicePerformance = userPref;
         }
         break;
     }
@@ -164,7 +165,7 @@ class CardPrefs with ChangeNotifier {
       'showFavs': _tempCardPrefs.showFavs,
       'showOnboarding': _tempCardPrefs.showOnboarding,
       'lowPower': _tempCardPrefs.lowPower,
-      'userHasChosenPowerSetting': _tempCardPrefs.userHasChosenPowerSetting,
+      'shouldTestDevicePerformance': _tempCardPrefs.shouldTestDevicePerformance,
     });
     prefs.setString('cardPrefs', _userPrefs);
     notifyListeners();

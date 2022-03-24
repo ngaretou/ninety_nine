@@ -83,6 +83,13 @@ The offending Expanded is currently placed inside a FittedBox widget.
     EdgeInsets cardFrontPadding =
         _isPhone ? EdgeInsets.all(20) : EdgeInsets.all(70);
 
+    Widget verticalDivider = Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        child: Container(
+            height: 150,
+            width: 2,
+            color: Theme.of(context).colorScheme.outline));
+
     return Padding(
       padding: cardFrontPadding,
       child: Container(
@@ -116,23 +123,24 @@ The offending Expanded is currently placed inside a FittedBox widget.
             padding: EdgeInsets.all(20.0),
             child: isLandscape
                 // Landscape/tablet version
-                ? Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                ? Column(
                     children: [
-                      Expanded(child: wolofNameFront(name)),
-                      VerticalDivider(
-                          color: Theme.of(context).primaryColor,
-                          thickness: 3,
-                          width: 100),
-                      Expanded(child: arabicNameFront(name)),
-                      VerticalDivider(
-                          color: Theme.of(context).primaryColor,
-                          thickness: 3,
-                          width: 100),
-                      Expanded(
-                        child: wolofalNameFront(name),
+                      Expanded(child: SizedBox()),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(child: wolofNameFront(name)),
+                          verticalDivider,
+                          Expanded(child: arabicNameFront(name)),
+                          verticalDivider,
+                          Expanded(
+                            child: wolofalNameFront(name),
+                          ),
+                        ],
                       ),
+                      // Expanded(child: CardIconBar(name, context)),
+                      CardIconBar(name, context)
                     ],
                   )
 
@@ -149,7 +157,6 @@ The offending Expanded is currently placed inside a FittedBox widget.
                               alignment: Alignment.center,
                               child: arabicNameFront(name))),
                       Divider(
-                        // color: Theme.of(context).primaryColor,
                         thickness: 3,
                       ),
                       Expanded(

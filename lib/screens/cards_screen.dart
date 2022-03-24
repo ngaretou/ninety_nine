@@ -31,12 +31,23 @@ class CardsScreen extends StatefulWidget {
 }
 
 class _CardsScreenState extends State<CardsScreen> {
-  int? goToPage;
+  int goToPage = 1;
 
   @override
   void initState() {
-    goToPage = Provider.of<DivineNames>(context, listen: false).lastNameViewed;
+    //initially set here but
+    initializePage();
     super.initState();
+  }
+
+  Future<void> initializePage() async {
+    try {
+      goToPage =
+          Provider.of<DivineNames>(context, listen: false).lastNameViewed;
+    } catch (e) {
+      print('error caught');
+      goToPage = 1;
+    }
   }
 
   @override
@@ -180,7 +191,7 @@ class _NameCardsState extends State<NameCards> {
                 itemCount: namesToShow.length,
                 itemBuilder: (ctx, i) {
                   final cardFront = CardFront(namesToShow[i], mediaQuery);
-                  final cardBack = CardBack(namesToShow[i], isPhone);
+                  final cardBack = CardBack(namesToShow[i], mediaQuery);
 
                   return CardAnimator(
                     cardFront: cardFront,

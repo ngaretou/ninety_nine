@@ -525,7 +525,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     cardPrefs.savePref(
                         'lowPower', !cardPrefs.cardPrefs.lowPower);
                     //This makes it so if the user chooses a setting, we won't ask them again to set to low power, they know where the setting is
-                    cardPrefs.savePref('userHasChosenPowerSetting', true);
+                    cardPrefs.savePref('shouldTestDevicePerformance', false);
                     setState(() {});
                   },
                 ),

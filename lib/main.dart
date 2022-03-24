@@ -44,7 +44,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   //A Future for the future builder
-  late Future<void> _initialization;
+  late Future<void> _initialization = callInititalization();
 
   //Language code: Initialize the locale
   Future<void> setupLang() async {
@@ -72,17 +72,17 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     /* https://blog.devgenius.io/understanding-futurebuilder-in-flutter-491501526373
-    Now you must be wondering why we are doing this right? Can’t we directly assign _getContacts() 
+    "Now you must be wondering why we are doing this right? Can’t we directly assign _getContacts() 
     to the FutureBuilder directly instead of introducing another variable?
     If you go through the Flutter documentation, you will notice that the build method can get called 
     at any time. This would include setState() or on device orientation change. What this means is that 
     any change in device configuration or widget rebuilds would trigger your Future to fire multiple times. 
     In order to prevent that, we make sure that the Future is obtained in the initState() and not in the build() 
     method itself. This is something which you may notice in a lot of tutorials online where they assign the 
-    Future method directly to the FutureBuilder and it’s factually wrong.*/
-    print('before _initialization');
-    _initialization = callInititalization();
-    print('after _initialization');
+    Future method directly to the FutureBuilder and it’s factually wrong."*/
+    // print('before _initialization');
+    // _initialization = callInititalization();
+    // print('after _initialization');
   }
 
   Future<void> callInititalization() async {
@@ -94,6 +94,7 @@ class _MyAppState extends State<MyApp> {
     //These should wait and this be unnecessary but the build happens before all these inits finish,
     //so this is a hack that helps
     // await Future.delayed(Duration(milliseconds: 3000));
+    print('returning future from initialization');
     return;
   }
 

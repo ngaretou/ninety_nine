@@ -63,19 +63,24 @@ class _CardAnimatorState extends State<CardAnimator>
     CardPrefList cardPrefs =
         Provider.of<CardPrefs>(context, listen: false).cardPrefs;
 
-    if (!cardPrefs.lowPower || !cardPrefs.userHasChosenPowerSetting) {
+    if (cardPrefs.shouldTestDevicePerformance) {
+      print('starting fps test');
       Fps.instance!.start();
 
       Fps.instance!.addFpsCallback((fpsInfo) {
-        print(fpsInfo);
+        // print(fpsInfo);
+        // Note below format of fpsInfo object
         // FpsInfo fpsInfo = FpsInfo(fps, totalCount, droppedCount, drawFramesCount);
+
+        //If the reported fps is under 10 fps, not good. Add one observation to danger list, otherwise add one to good list
         (fpsInfo.fps < 10) ? fpsDangerZone++ : fpsWorking++;
 
+        //If we've observed 10 bad fps settings:
         if (fpsDangerZone > 10) enableLightAnimation();
+        //If we've observed 15 reports of good working order:
         if (fpsWorking > 15) disableFpsMonitoring();
       });
     }
-
     super.initState();
   }
 
@@ -83,7 +88,9 @@ class _CardAnimatorState extends State<CardAnimator>
     print('FPS consistently low: ask to enableLightAnimation');
     Fps.instance!.stop();
     //Set the preference
-    Provider.of<CardPrefs>(context, listen: false).cardPrefs.lowPower = true;
+    Provider.of<CardPrefs>(context, listen: false).savePref('lowPower', true);
+    Provider.of<CardPrefs>(context, listen: false)
+        .savePref('shouldTestDevicePerformance', false);
 
     setState(() {});
 
@@ -99,8 +106,8 @@ class _CardAnimatorState extends State<CardAnimator>
           label: AppLocalizations.of(context).cancel,
           onPressed: () {
             //undo the lowPower setting
-            Provider.of<CardPrefs>(context, listen: false).cardPrefs.lowPower =
-                false;
+            Provider.of<CardPrefs>(context, listen: false)
+                .savePref('lowPower', false);
             setState(() {});
           }),
     ));
@@ -108,6 +115,9 @@ class _CardAnimatorState extends State<CardAnimator>
 
   Future<void> disableFpsMonitoring() async {
     print('FPS consistently good: disable monitoring');
+    Provider.of<CardPrefs>(context, listen: false)
+        .savePref('shouldTestDevicePerformance', false);
+
     Fps.instance!.stop();
   }
 
@@ -176,10 +186,11 @@ class _CardAnimatorState extends State<CardAnimator>
           },
           child: AnimatedCrossFade(
             duration: const Duration(milliseconds: 500),
-            firstChild: Container(
-                height: widget.mediaQuery.size.height,
-                width: widget.mediaQuery.size.width,
-                child: widget.cardFront),
+            // firstChild: Container(
+            //     height: widget.mediaQuery.size.height,
+            //     width: widget.mediaQuery.size.width,
+            //     child: widget.cardFront),
+            firstChild: widget.cardFront,
             secondChild: widget.cardBack,
             crossFadeState: _showFirst
                 ? CrossFadeState.showFirst
