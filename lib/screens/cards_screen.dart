@@ -112,11 +112,19 @@ class _NameCardsState extends State<NameCards> {
 
   late MediaQueryData mediaQuery;
   late bool isPhone;
+  late bool isLandscape;
 
   @override
-  void initState() {
-    print('NameCards initState');
-
+  void didChangeDependencies() {
+    print('NameCards didChangeDependencies');
+    //Smallest iPhone is UIKit 320 x 480 = 800.
+    //Biggest is 428 x 926 = 1354.
+    //Android biggest phone I can find is is 480 x 853 = 1333
+    //For tablets the smallest I can find is 768 x 1024
+    mediaQuery = MediaQuery.of(context);
+    isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
+    isLandscape =
+        (mediaQuery.orientation == Orientation.landscape) ? true : false;
     divineNames = Provider.of<DivineNames>(context, listen: false);
 
     //page controller is initialized here and initialPage given
@@ -125,11 +133,11 @@ class _NameCardsState extends State<NameCards> {
           Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
               ? 0
               : Provider.of<DivineNames>(context, listen: false).lastNameViewed,
-      viewportFraction: 1,
+      viewportFraction: isPhone ? 1 : 540 / mediaQuery.size.width,
+      //540 = 400 min card width + 70 on each side padding
       keepPage: false,
     );
-
-    super.initState();
+    super.didChangeDependencies();
   }
 
   @override
@@ -147,13 +155,6 @@ class _NameCardsState extends State<NameCards> {
         Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
             ? divineNames.favoriteNames
             : divineNames.names;
-
-    //Smallest iPhone is UIKit 320 x 480 = 800.
-    //Biggest is 428 x 926 = 1354.
-    //Android biggest phone I can find is is 480 x 853 = 1333
-    //For tablets the smallest I can find is 768 x 1024
-    mediaQuery = MediaQuery.of(context);
-    isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
 
     //This is for when the user chooses a name from List View. The index is passed back up to cards scren then back down here.
     //This only happens after the page is initialized.

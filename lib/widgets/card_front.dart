@@ -80,8 +80,13 @@ The offending Expanded is currently placed inside a FittedBox widget.
       );
     }
 
+    int minCardWidth = 400;
+    double horizPadding = (mediaQuery.size.width * .5 - minCardWidth) / 2;
+    print('horizPadding ' + horizPadding.toString());
+
     EdgeInsets cardFrontPadding =
         _isPhone ? EdgeInsets.all(20) : EdgeInsets.all(70);
+    // horizontal: 70);
 
     Widget verticalDivider = Padding(
         padding: EdgeInsets.symmetric(horizontal: 30),
@@ -93,6 +98,7 @@ The offending Expanded is currently placed inside a FittedBox widget.
     return Container(
       //This is important as it dictates the outer boundaries for what follows
       height: mediaQuery.size.height,
+      // width: _isPhone ? mediaQuery.size.width : mediaQuery.size.height / 3,
       child: Padding(
         padding: cardFrontPadding,
         child: Container(
@@ -124,8 +130,8 @@ The offending Expanded is currently placed inside a FittedBox widget.
             //Card text
             child: Padding(
               padding: EdgeInsets.all(20.0),
-              child: isLandscape
-                  // Landscape/tablet version
+              child: isLandscape && _isPhone
+                  // Landscape on phone version
                   ? Column(
                       children: [
                         Expanded(flex: 6, child: SizedBox(height: 10)),

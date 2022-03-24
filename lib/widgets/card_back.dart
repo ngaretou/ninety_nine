@@ -98,13 +98,14 @@ class CardBack extends StatelessWidget {
 
     //Card back does not have alternate layouts for portrait and landscape
     return Container(
-      //Pass in height here, helps many things
+      //This Container and height seems superfluous but must be here to help the low animation not go weird
       height: mediaQuery.size.height,
-      child: Stack(
-        children: [
-          Padding(
-            padding: cardBackPadding,
-            child: Container(
+      child: Padding(
+        padding: cardBackPadding,
+        child: Stack(
+          children: [
+            Container(
+              height: mediaQuery.size.height - (cardBackPadding.top * 2),
               decoration: adaptiveBackground(),
               child: Container(
                 decoration: BoxDecoration(
@@ -194,12 +195,12 @@ class CardBack extends StatelessWidget {
                     )),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 20),
-            child: CardIconBar(name, context),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: CardIconBar(name, context),
+            ),
+          ],
+        ),
       ),
     );
   }

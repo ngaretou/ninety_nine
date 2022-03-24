@@ -134,7 +134,7 @@ class _CardAnimatorState extends State<CardAnimator>
     print('CardAnimator build');
     //These transforms have to be in the build as they calculate with the animation
     final Matrix4 phoneTransform = Matrix4.identity()
-          ..setEntry(3, 2, 0.002)
+          ..setEntry(3, 2, 0.001)
           ..rotateY(pi * _animation.value)
         // I want it to go from .9 to 1.0
         // So start at 1 - .1
@@ -160,7 +160,8 @@ class _CardAnimatorState extends State<CardAnimator>
                 child: widget.cardBack),
         builder: (BuildContext context, Widget? child) => Transform(
           alignment: FractionalOffset.center,
-          transform: (widget.isPhone) ? phoneTransform : tabletTransform,
+          // transform: (widget.isPhone) ? phoneTransform : tabletTransform,
+          transform: phoneTransform,
           child: GestureDetector(
             onTap: () {
               if (_animationStatus == AnimationStatus.dismissed) {
@@ -186,10 +187,6 @@ class _CardAnimatorState extends State<CardAnimator>
           },
           child: AnimatedCrossFade(
             duration: const Duration(milliseconds: 500),
-            // firstChild: Container(
-            //     height: widget.mediaQuery.size.height,
-            //     width: widget.mediaQuery.size.width,
-            //     child: widget.cardFront),
             firstChild: widget.cardFront,
             secondChild: widget.cardBack,
             crossFadeState: _showFirst
