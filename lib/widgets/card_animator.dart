@@ -38,7 +38,7 @@ class _CardAnimatorState extends State<CardAnimator>
 
   @override
   void initState() {
-    print('CardAnimator initState');
+    // print('CardAnimator initState');
     _showFirst = true;
 
     _animationController = AnimationController(
@@ -131,7 +131,7 @@ class _CardAnimatorState extends State<CardAnimator>
 
   @override
   Widget build(BuildContext context) {
-    print('CardAnimator build');
+    // print('CardAnimator build');
     //These transforms have to be in the build as they calculate with the animation
     final Matrix4 phoneTransform = Matrix4.identity()
           ..setEntry(3, 2, 0.001)
@@ -141,6 +141,7 @@ class _CardAnimatorState extends State<CardAnimator>
         // ..scale(.9 + (.1 * _animation.value), .9 + (.1 * _animation.value))
         ;
 
+    // ignore: unused_local_variable
     final Matrix4 tabletTransform = Matrix4.identity()
           ..setEntry(3, 2, 0.0005)
           ..rotateY(pi * _animation.value)
