@@ -15,7 +15,7 @@ class CardFront extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('card front build ' + name.id.toString());
+    // print('card front build ' + name.id.toString());
 
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     const double adaptiveFontSize = 70;
@@ -80,9 +80,8 @@ The offending Expanded is currently placed inside a FittedBox widget.
       );
     }
 
-    int minCardWidth = 400;
-    double horizPadding = (mediaQuery.size.width * .5 - minCardWidth) / 2;
-    print('horizPadding ' + horizPadding.toString());
+    // int minCardWidth = 400;
+    // double horizPadding = (mediaQuery.size.width * .5 - minCardWidth) / 2;
 
     EdgeInsets cardFrontPadding =
         _isPhone ? EdgeInsets.all(20) : EdgeInsets.all(70);
