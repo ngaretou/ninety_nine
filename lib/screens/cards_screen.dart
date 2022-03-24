@@ -6,8 +6,8 @@ import '../providers/names.dart';
 import '../providers/card_prefs.dart';
 
 import './settings_screen.dart';
-import '../widgets/card_animator.dart';
 
+import '../widgets/card_animator.dart';
 import '../widgets/card_front.dart';
 import '../widgets/card_back.dart';
 
@@ -108,17 +108,6 @@ class _NameCardsState extends State<NameCards> {
 
     divineNames = Provider.of<DivineNames>(context, listen: false);
 
-    cardPrefs = Provider.of<CardPrefs>(context, listen: false);
-
-    //If you are just looking at favs or if you are looking at all names.
-    //The initial page should be the last viewed page, which gets stored on each
-    // page turn. But, if it's favs, start at the first one (index 0). Then when you go back to
-    // viewing all, go back to last viewed page.
-    namesToShow =
-        Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
-            ? divineNames.favoriteNames
-            : divineNames.names;
-
     //page controller is initialized here and initialPage given
     _pageController = PageController(
       initialPage:
@@ -135,6 +124,18 @@ class _NameCardsState extends State<NameCards> {
   @override
   Widget build(BuildContext context) {
     print('Name Cards PageViewBuilder');
+
+    //We need to get this in the build so it updates when rebuilding on setState
+    cardPrefs = Provider.of<CardPrefs>(context, listen: false);
+
+    //If you are just looking at favs or if you are looking at all names.
+    //The initial page should be the last viewed page, which gets stored on each
+    // page turn. But, if it's favs, start at the first one (index 0). Then when you go back to
+    // viewing all, go back to last viewed page.
+    namesToShow =
+        Provider.of<CardPrefs>(context, listen: false).cardPrefs.showFavs
+            ? divineNames.favoriteNames
+            : divineNames.names;
 
     //Smallest iPhone is UIKit 320 x 480 = 800.
     //Biggest is 428 x 926 = 1354.
@@ -162,9 +163,7 @@ class _NameCardsState extends State<NameCards> {
             height: (mediaQuery.size.height),
             child: PageView.builder(
                 //Controls the card flow direction - LTR or RTL - from card preferences; it is a bool, so note true = RTL.
-                reverse: Provider.of<CardPrefs>(context, listen: false)
-                    .cardPrefs
-                    .textDirection,
+                reverse: cardPrefs.cardPrefs.textDirection,
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 controller: _pageController,

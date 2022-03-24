@@ -1,18 +1,23 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/fps.dart';
+import '../providers/card_prefs.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardAnimator extends StatefulWidget {
   final Widget cardFront;
   final Widget cardBack;
   final MediaQueryData mediaQuery;
   final bool isPhone;
-  const CardAnimator(
-      {Key? key,
-      required this.cardFront,
-      required this.cardBack,
-      required this.mediaQuery,
-      required this.isPhone})
-      : super(key: key);
+
+  const CardAnimator({
+    Key? key,
+    required this.cardFront,
+    required this.cardBack,
+    required this.mediaQuery,
+    required this.isPhone,
+  }) : super(key: key);
 
   @override
   State<CardAnimator> createState() => _CardAnimatorState();
@@ -25,10 +30,16 @@ class _CardAnimatorState extends State<CardAnimator>
   late AnimationController _animationController;
   late Animation<double> _animation;
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
+  late Widget widgetToBuild;
+  late bool _showFirst = true;
+
+  int fpsDangerZone = 0;
+  int fpsWorking = 0;
 
   @override
   void initState() {
     print('CardAnimator initState');
+    _showFirst = true;
 
     _animationController = AnimationController(
       vsync: this,
@@ -47,12 +58,64 @@ class _CardAnimatorState extends State<CardAnimator>
         _animationStatus = status;
       });
 
+    //If already on low power setting, don't bother checking;
+    //Also if user has one time chosen a power setting and knows where it is, don't check anymore
+    CardPrefList cardPrefs =
+        Provider.of<CardPrefs>(context, listen: false).cardPrefs;
+
+    if (!cardPrefs.lowPower || !cardPrefs.userHasChosenPowerSetting) {
+      Fps.instance!.start();
+
+      Fps.instance!.addFpsCallback((fpsInfo) {
+        print(fpsInfo);
+        // FpsInfo fpsInfo = FpsInfo(fps, totalCount, droppedCount, drawFramesCount);
+        (fpsInfo.fps < 10) ? fpsDangerZone++ : fpsWorking++;
+
+        if (fpsDangerZone > 10) enableLightAnimation();
+        if (fpsWorking > 15) disableFpsMonitoring();
+      });
+    }
+
     super.initState();
+  }
+
+  Future<void> enableLightAnimation() async {
+    print('FPS consistently low: ask to enableLightAnimation');
+    Fps.instance!.stop();
+    //Set the preference
+    Provider.of<CardPrefs>(context, listen: false).cardPrefs.lowPower = true;
+
+    setState(() {});
+
+    //Give the user a message and a chance to cancel
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      duration: Duration(seconds: 5),
+      content: Text(
+        AppLocalizations.of(context).lowPowerModeMessage,
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+      action: SnackBarAction(
+          label: AppLocalizations.of(context).cancel,
+          onPressed: () {
+            //undo the lowPower setting
+            Provider.of<CardPrefs>(context, listen: false).cardPrefs.lowPower =
+                false;
+            setState(() {});
+          }),
+    ));
+  }
+
+  Future<void> disableFpsMonitoring() async {
+    print('FPS consistently good: disable monitoring');
+    Fps.instance!.stop();
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    Fps.instance!.stop();
+
     super.dispose();
   }
 
@@ -61,38 +124,75 @@ class _CardAnimatorState extends State<CardAnimator>
     print('CardAnimator build');
     //These transforms have to be in the build as they calculate with the animation
     final Matrix4 phoneTransform = Matrix4.identity()
-      ..setEntry(3, 2, 0.002)
-      ..rotateY(pi * _animation.value)
-      // I want it to go from .9 to 1.0
-      // So start at 1 - .1
-      ..scale(.9 + (.1 * _animation.value), .9 + (.1 * _animation.value));
+          ..setEntry(3, 2, 0.002)
+          ..rotateY(pi * _animation.value)
+        // I want it to go from .9 to 1.0
+        // So start at 1 - .1
+        // ..scale(.9 + (.1 * _animation.value), .9 + (.1 * _animation.value))
+        ;
 
     final Matrix4 tabletTransform = Matrix4.identity()
-      ..setEntry(3, 2, 0.0005)
-      ..rotateY(pi * _animation.value)
-      // I want it to go from .9 to 1.0
-      // So start at 1 - .1
-      ..scale(.75 + (.1 * _animation.value), .75 + (.1 * _animation.value));
+          ..setEntry(3, 2, 0.0005)
+          ..rotateY(pi * _animation.value)
+        // I want it to go from .9 to 1.0
+        // So start at 1 - .1
+        // ..scale(.75 + (.1 * _animation.value), .75 + (.1 * _animation.value))
+        ;
 
-    return AnimatedBuilder(
-      animation: _animationController,
-      child: _animation.value <= 0.5 ? widget.cardFront : widget.cardBack,
-      builder: (BuildContext context, Widget? child) => Transform(
-        alignment: FractionalOffset.center,
-        transform: (widget.isPhone) ? phoneTransform : tabletTransform,
+    Widget highPowerAnimation() {
+      return AnimatedBuilder(
+        animation: _animationController,
+        child: _animation.value <= 0.5
+            ? widget.cardFront
+            : Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.rotationY(pi),
+                child: widget.cardBack),
+        builder: (BuildContext context, Widget? child) => Transform(
+          alignment: FractionalOffset.center,
+          transform: (widget.isPhone) ? phoneTransform : tabletTransform,
+          child: GestureDetector(
+            onTap: () {
+              if (_animationStatus == AnimationStatus.dismissed) {
+                _animationController.forward();
+              } else {
+                _animationController.reverse();
+              }
+            },
+            child: child,
+          ),
+        ),
+      );
+    }
+
+    Widget lowPowerAnimation() {
+      return Container(
+        height: widget.mediaQuery.size.height,
         child: GestureDetector(
           onTap: () {
-            if (_animationStatus == AnimationStatus.dismissed) {
-              _animationController.forward();
-            } else {
-              _animationController.reverse();
-            }
-
-            // print('in onTap');
+            setState(() {
+              _showFirst = !_showFirst;
+            });
           },
-          child: child,
+          child: AnimatedCrossFade(
+            duration: const Duration(milliseconds: 500),
+            firstChild: Container(
+                height: widget.mediaQuery.size.height,
+                width: widget.mediaQuery.size.width,
+                child: widget.cardFront),
+            secondChild: widget.cardBack,
+            crossFadeState: _showFirst
+                ? CrossFadeState.showFirst
+                : CrossFadeState.showSecond,
+          ),
         ),
-      ),
-    );
+      );
+    }
+
+    Provider.of<CardPrefs>(context, listen: false).cardPrefs.lowPower
+        ? widgetToBuild = lowPowerAnimation()
+        : widgetToBuild = highPowerAnimation();
+
+    return widgetToBuild;
   }
 }

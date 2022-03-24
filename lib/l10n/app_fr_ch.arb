@@ -203,5 +203,22 @@
     "description": "List View",
     "type": "text",
     "placeholders": {}
+  }, 
+  "powerMode": "Mode performance",
+  "@powerMode": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lowPowerMode": "Activer le mode basse performance",
+  "@lowPowerMode": {
+    "description": "Low power mode on",
+    "type": "text",
+    "placeholders": {}
+    },  "lowPowerModeMessage": "Passage en mode basse performance.",
+  "@lowPowerModeMessage": {
+    "description": "lowPowerModeMessage",
+    "type": "text",
+    "placeholders": {}
   }
 }

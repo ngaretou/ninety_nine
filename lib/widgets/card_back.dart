@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'dart:math';
 import 'dart:ui' as ui;
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,7 +26,7 @@ class CardBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print('card back build ' + name.id.toString());
+    print('card back build ' + name.id.toString());
     CardPrefList cardPrefs =
         Provider.of<CardPrefs>(context, listen: false).cardPrefs;
     final bool _isDark =
@@ -97,106 +96,101 @@ class CardBack extends StatelessWidget {
     //Card back does not have alternate layouts for portrait and landscape
     //This transform is important because we're looking at the back of the
     //widget when we look at it normally, so it has to be flipped over like this to be legible
-    return Transform(
-      alignment: Alignment.center,
-      transform: Matrix4.rotationY(pi),
-      child: Stack(
-        children: [
-          Container(
-            decoration: adaptiveBackground(),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: kIsWeb
-                    ? BorderRadius.circular(20.0)
-                    : BorderRadius.circular(0.0),
-                gradient: LinearGradient(
-                  begin: Alignment.bottomRight,
-                  colors: [
-                    Colors.black.withOpacity(.3),
-                    Colors.black.withOpacity(.0)
-                  ],
-                ),
+    return Stack(
+      children: [
+        Container(
+          decoration: adaptiveBackground(),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: kIsWeb
+                  ? BorderRadius.circular(20.0)
+                  : BorderRadius.circular(0.0),
+              gradient: LinearGradient(
+                begin: Alignment.bottomRight,
+                colors: [
+                  Colors.black.withOpacity(.3),
+                  Colors.black.withOpacity(.0)
+                ],
               ),
-              child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: ListView(
-                    children: [
-                      // children: [
-                      //Name Header
-                      Row(
+            ),
+            child: Padding(
+                padding: EdgeInsets.all(20.0),
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    // children: [
+                    //Name Header
+                    Row(
+                      children: [
+                        Expanded(child: textRS(name.wolofName, 0)),
+                        VerticalDivider(
+                          color: Theme.of(context).primaryColor,
+                          thickness: 3,
+                        ),
+                        Expanded(
+                          child: textAS(name.wolofalName, 0),
+                        ),
+                      ],
+                    ),
+                    // Wolofal verse section
+                    cardPrefs.wolofalVerseEnabled
+                        ? Column(
+                            children: [
+                              Divider(
+                                color: Theme.of(context).primaryColor,
+                                thickness: 3,
+                              ),
+                              textAS(name.wolofalVerse, 0.0),
+                              textAS(name.wolofalVerseRef, 10.0)
+                            ],
+                          )
+                        : SizedBox(width: 20),
+                    //Wolof verse section
+                    cardPrefs.wolofVerseEnabled
+                        ? Column(
+                            children: [
+                              Divider(
+                                color: Theme.of(context).primaryColor,
+                                thickness: 3,
+                              ),
+                              textRS(name.wolofVerse, 0.0),
+                              SizedBox(height: 20),
+                              textRS(name.wolofVerseRef, 10.0),
+                            ],
+                          )
+                        : SizedBox(width: 20),
+                    SizedBox(height: 60),
+                    TextButton(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Expanded(child: textRS(name.wolofName, 0)),
-                          VerticalDivider(
-                            color: Theme.of(context).primaryColor,
-                            thickness: 3,
-                          ),
-                          Expanded(
-                            child: textAS(name.wolofalName, 0),
-                          ),
+                          Text(AppLocalizations.of(context).clickHereToReadMore,
+                              style: TextStyle(color: _fontColor)),
+                          Icon(Icons.arrow_forward, color: _fontColor),
                         ],
                       ),
-                      // Wolofal verse section
-                      cardPrefs.wolofalVerseEnabled
-                          ? Column(
-                              children: [
-                                Divider(
-                                  color: Theme.of(context).primaryColor,
-                                  thickness: 3,
-                                ),
-                                textAS(name.wolofalVerse, 0.0),
-                                textAS(name.wolofalVerseRef, 10.0)
-                              ],
-                            )
-                          : SizedBox(width: 20),
-                      //Wolof verse section
-                      cardPrefs.wolofVerseEnabled
-                          ? Column(
-                              children: [
-                                Divider(
-                                  color: Theme.of(context).primaryColor,
-                                  thickness: 3,
-                                ),
-                                textRS(name.wolofVerse, 0.0),
-                                SizedBox(height: 20),
-                                textRS(name.wolofVerseRef, 10.0),
-                              ],
-                            )
-                          : SizedBox(width: 20),
-                      SizedBox(height: 60),
-                      TextButton(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                                AppLocalizations.of(context)
-                                    .clickHereToReadMore,
-                                style: TextStyle(color: _fontColor)),
-                            Icon(Icons.arrow_forward, color: _fontColor),
-                          ],
-                        ),
-                        onPressed: () async {
-                          const String url = 'https://sng.al/chrono';
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          } else {
-                            throw 'Could not launch $url';
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: 70,
-                      ),
-                      // ],
-                    ],
-                  )),
-            ),
+                      onPressed: () async {
+                        const String url = 'https://sng.al/chrono';
+                        if (await canLaunch(url)) {
+                          await launch(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 70,
+                    ),
+                    // ],
+                  ],
+                )),
           ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 20),
-            child: CardIconBar(name, context),
-          ),
-        ],
-      ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(bottom: 20),
+          child: CardIconBar(name, context),
+        ),
+      ],
     );
   }
 }

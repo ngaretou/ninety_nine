@@ -11,15 +11,18 @@ class CardPrefList {
   bool wolofalVerseEnabled;
   bool showFavs = false;
   bool showOnboarding;
+  bool lowPower;
+  bool userHasChosenPowerSetting;
 
-  CardPrefList({
-    required this.textDirection,
-    required this.imageEnabled,
-    required this.wolofVerseEnabled,
-    required this.wolofalVerseEnabled,
-    required this.showFavs,
-    required this.showOnboarding,
-  });
+  CardPrefList(
+      {required this.textDirection,
+      required this.imageEnabled,
+      required this.wolofVerseEnabled,
+      required this.wolofalVerseEnabled,
+      required this.showFavs,
+      required this.showOnboarding,
+      required this.lowPower,
+      required this.userHasChosenPowerSetting});
 }
 
 class CardPrefs with ChangeNotifier {
@@ -35,16 +38,17 @@ class CardPrefs with ChangeNotifier {
 
     //if there's no userTheme, it's the first time they've run the app, so give them lightTheme
     //We're also grabbing other setup info here:
-    if (!prefs.containsKey('cardPrefs')) {
+    void setDefaultCardPrefs() {
       CardPrefList defaultCardPrefs = CardPrefList(
-        //Starting off LTR as in English - the relevant setting is in cards.dart PageView(reverse: false) = LTR
-        textDirection: false,
-        imageEnabled: true,
-        wolofVerseEnabled: true,
-        wolofalVerseEnabled: true,
-        showFavs: false,
-        showOnboarding: true,
-      );
+          //Starting off LTR as in English - the relevant setting is in cards.dart PageView(reverse: false) = LTR
+          textDirection: false,
+          imageEnabled: true,
+          wolofVerseEnabled: true,
+          wolofalVerseEnabled: true,
+          showFavs: false,
+          showOnboarding: true,
+          lowPower: false,
+          userHasChosenPowerSetting: false);
       //Set in-memory copy of prefs
       _cardPrefs = defaultCardPrefs;
       //Save prefs to disk
@@ -55,23 +59,35 @@ class CardPrefs with ChangeNotifier {
         'wolofalVerseEnabled': defaultCardPrefs.wolofalVerseEnabled,
         'showFavs': defaultCardPrefs.showFavs,
         'showOnboarding': defaultCardPrefs.showOnboarding,
+        'lowPower': defaultCardPrefs.lowPower,
+        'userHasChosenPowerSetting': defaultCardPrefs.userHasChosenPowerSetting,
       });
       prefs.setString('cardPrefs', _defaultCardPrefs);
+    }
+
+    if (!prefs.containsKey('cardPrefs')) {
+      setDefaultCardPrefs();
     } else {
       //The user has prefs from a previous session - load them
       final jsonResponse =
           json.decode(prefs.getString('cardPrefs')!) as Map<String, dynamic>;
 
-      _cardPrefs = CardPrefList(
-        textDirection: jsonResponse['textDirection'] as bool,
-        imageEnabled: jsonResponse['imageEnabled'] as bool,
-        wolofVerseEnabled: jsonResponse['wolofVerseEnabled'] as bool,
-        wolofalVerseEnabled: jsonResponse['wolofalVerseEnabled'] as bool,
-        showFavs: jsonResponse['showFavs'] as bool,
-        showOnboarding: jsonResponse['showOnboarding'] as bool,
-      );
-
-      // notifyListeners();
+      try {
+        _cardPrefs = CardPrefList(
+          textDirection: jsonResponse['textDirection'] as bool,
+          imageEnabled: jsonResponse['imageEnabled'] as bool,
+          wolofVerseEnabled: jsonResponse['wolofVerseEnabled'] as bool,
+          wolofalVerseEnabled: jsonResponse['wolofalVerseEnabled'] as bool,
+          showFavs: jsonResponse['showFavs'] as bool,
+          showOnboarding: jsonResponse['showOnboarding'] as bool,
+          lowPower: jsonResponse['lowPower'] as bool,
+          userHasChosenPowerSetting:
+              jsonResponse['userHasChosenPowerSetting'] as bool,
+        );
+      } catch (e) {
+        //If there's a problem - example we've added a new preference that there is a null value for in their saved prefs - reset all
+        setDefaultCardPrefs();
+      }
     }
   }
 
@@ -87,6 +103,9 @@ class CardPrefs with ChangeNotifier {
       wolofalVerseEnabled: jsonResponse['wolofalVerseEnabled'] as bool,
       showFavs: jsonResponse['showFavs'] as bool,
       showOnboarding: jsonResponse['showOnboarding'] as bool,
+      lowPower: jsonResponse['lowPower'] as bool,
+      userHasChosenPowerSetting:
+          jsonResponse['userHasChosenPowerSetting'] as bool,
     );
 
     //set the incoming setting
@@ -121,6 +140,16 @@ class CardPrefs with ChangeNotifier {
           _tempCardPrefs.showOnboarding = userPref;
         }
         break;
+      case 'lowPower':
+        {
+          _tempCardPrefs.lowPower = userPref;
+        }
+        break;
+      case 'userHasChosenPowerSetting':
+        {
+          _tempCardPrefs.userHasChosenPowerSetting = userPref;
+        }
+        break;
     }
 
     //now set it in memory
@@ -134,6 +163,8 @@ class CardPrefs with ChangeNotifier {
       'wolofalVerseEnabled': _tempCardPrefs.wolofalVerseEnabled,
       'showFavs': _tempCardPrefs.showFavs,
       'showOnboarding': _tempCardPrefs.showOnboarding,
+      'lowPower': _tempCardPrefs.lowPower,
+      'userHasChosenPowerSetting': _tempCardPrefs.userHasChosenPowerSetting,
     });
     prefs.setString('cardPrefs', _userPrefs);
     notifyListeners();

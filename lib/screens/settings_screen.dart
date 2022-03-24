@@ -53,7 +53,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: Theme.of(context).iconTheme.color,
                     ),
                     SizedBox(width: 25),
-                    Text(title, style: Theme.of(context).textTheme.headline6),
+                    Expanded(
+                        child: Text(title,
+                            style: Theme.of(context).textTheme.headline6)),
                   ],
                 ))),
       );
@@ -255,6 +257,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     Widget showFavsTitle() {
       return settingTitle(
           AppLocalizations.of(context).settingsShowFavs, Icons.favorite, null);
+    }
+
+    Widget lowPowerModeTitle() {
+      return settingTitle(
+          AppLocalizations.of(context).powerMode, Icons.bolt, null);
     }
 
     Widget languageTitle() {
@@ -492,6 +499,43 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
+    Widget lowPowerModeChooser() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+              width: 300,
+              child: Padding(
+                  padding: EdgeInsets.only(left: 80),
+                  child: Row(children: [
+                    Expanded(
+                        child: Text(AppLocalizations.of(context).lowPowerMode,
+                            style: Theme.of(context).textTheme.subtitle1)),
+                  ]))),
+          Expanded(
+            child: Row(
+              mainAxisAlignment:
+                  _isPhone ? MainAxisAlignment.end : MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Switch(
+                  value: cardPrefs.cardPrefs.lowPower,
+                  onChanged: (_) {
+                    cardPrefs.savePref(
+                        'lowPower', !cardPrefs.cardPrefs.lowPower);
+                    //This makes it so if the user chooses a setting, we won't ask them again to set to low power, they know where the setting is
+                    cardPrefs.savePref('userHasChosenPowerSetting', true);
+                    setState(() {});
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    }
+
     Widget viewListOfNames() {
       return settingTitle(
         AppLocalizations.of(context).listView,
@@ -531,6 +575,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   rsScriptPicker(),
                   Divider(),
                   settingRow(showFavsTitle(), showFavsSetting()),
+                  Divider(),
+                  settingRow(lowPowerModeTitle(), lowPowerModeChooser()),
                   Divider(),
                   settingRow(languageTitle(), languageSetting()),
                   Divider(),
@@ -573,6 +619,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 rsScriptPicker(),
                 Divider(),
                 settingColumn(showFavsTitle(), showFavsSetting()),
+                settingColumn(lowPowerModeTitle(), lowPowerModeChooser()),
                 settingColumn(languageTitle(), languageSetting()),
                 settingTitle(
                   AppLocalizations.of(context).settingsAbout,

@@ -202,5 +202,23 @@
     "description": "List View",
     "type": "text",
     "placeholders": {}
+  }, 
+  "powerMode": "Power mode",
+  "@powerMode": {
+    "description": "Power mode",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lowPowerMode": "Low power mode on",
+  "@lowPowerMode": {
+    "description": "Low power mode on",
+    "type": "text",
+    "placeholders": {}
+  },
+  "lowPowerModeMessage": "Switching to low power mode.",
+  "@lowPowerModeMessage": {
+    "description": "lowPowerModeMessage",
+    "type": "text",
+    "placeholders": {}
   }
 }

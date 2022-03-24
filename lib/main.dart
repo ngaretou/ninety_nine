@@ -101,9 +101,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     print('main.dart build');
 
-    //Here set the status bar to be shown, but the app to go under it, regardless of display cutout
-    //SystemUiOverlayStyle set in cards_screen
-
     //No good on three-button Android
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
@@ -111,7 +108,6 @@ class _MyAppState extends State<MyApp> {
     //Good on three-button Android - you can swipe down to see nav buttons etc but they go away
     //This not perfect perhaps but probably best compromise
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     ThemeData? _currentTheme = Provider.of<ThemeModel>(context).currentTheme;
 

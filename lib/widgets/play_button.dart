@@ -20,7 +20,6 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addObserver(this);
-    _initializeSession();
   }
 
   Future _initializeSession() async {
@@ -85,6 +84,8 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
         onError: (Object e, StackTrace stackTrace) {
       print('A stream error occurred: $e');
     });
+
+    return _source.length != 0 ? true : false;
   }
 
   Future<void> gracefulStop() async {
@@ -123,8 +124,13 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
         if (playing != true) {
           return IconButton(
               icon: Icon(Icons.play_arrow, color: Colors.white),
-              onPressed: () {
-                _player.play();
+              onPressed: () async {
+                bool shouldPlay = await _initializeSession();
+
+                if (shouldPlay) {
+                  _player.setVolume(1);
+                  _player.play();
+                }
               });
         } else if (processingState != ProcessingState.completed) {
           return IconButton(
