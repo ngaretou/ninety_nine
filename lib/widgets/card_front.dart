@@ -90,94 +90,97 @@ The offending Expanded is currently placed inside a FittedBox widget.
             width: 2,
             color: Theme.of(context).colorScheme.outline));
 
-    return Padding(
-      padding: cardFrontPadding,
-      child: Container(
-        //with background image or not?
-        decoration: Provider.of<CardPrefs>(context, listen: false)
-                .cardPrefs
-                .imageEnabled
-            ? BoxDecoration(
-                color: Colors.black54,
-                borderRadius: BorderRadius.circular(20.0),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/${name.img}.jpg"),
-                ),
-              )
-            : null,
+    return Container(
+      //This is important as it dictates the outer boundaries for what follows
+      height: mediaQuery.size.height,
+      child: Padding(
+        padding: cardFrontPadding,
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            gradient: LinearGradient(
-              begin: Alignment.bottomRight,
-              colors: [
-                Colors.black.withOpacity(.9),
-                Colors.black.withOpacity(.3)
-              ],
-            ),
-          ),
-
-          //Card text
-          child: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: isLandscape
-                // Landscape/tablet version
-                ? Column(
-                    children: [
-                      Expanded(child: SizedBox()),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(child: wolofNameFront(name)),
-                          verticalDivider,
-                          Expanded(child: arabicNameFront(name)),
-                          verticalDivider,
-                          Expanded(
-                            child: wolofalNameFront(name),
-                          ),
-                        ],
-                      ),
-                      // Expanded(child: CardIconBar(name, context)),
-                      CardIconBar(name, context)
-                    ],
-                  )
-
-                //Portrait/phone version
-                : Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(child: SizedBox(width: 20)),
-                      Expanded(
-                          flex: 2,
-                          //This Align widget aligns vertically here
-                          child: Align(
-                              alignment: Alignment.center,
-                              child: arabicNameFront(name))),
-                      Divider(
-                        thickness: 3,
-                      ),
-                      Expanded(
-                          flex: 2,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 20),
-                                child: wolofalNameFront(name)),
-                          )),
-                      Divider(
-                        thickness: 3,
-                      ),
-                      Expanded(
-                          flex: 2,
-                          child: Align(
-                              alignment: Alignment.center,
-                              child: wolofNameFront(name))),
-                      Expanded(child: CardIconBar(name, context)),
-                    ],
+          //with background image or not?
+          decoration: Provider.of<CardPrefs>(context, listen: false)
+                  .cardPrefs
+                  .imageEnabled
+              ? BoxDecoration(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.circular(20.0),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage("assets/images/${name.img}.jpg"),
                   ),
+                )
+              : null,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              gradient: LinearGradient(
+                begin: Alignment.bottomRight,
+                colors: [
+                  Colors.black.withOpacity(.9),
+                  Colors.black.withOpacity(.3)
+                ],
+              ),
+            ),
+
+            //Card text
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: isLandscape
+                  // Landscape/tablet version
+                  ? Column(
+                      children: [
+                        Expanded(flex: 6, child: SizedBox(height: 10)),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(child: wolofNameFront(name)),
+                            verticalDivider,
+                            Expanded(child: arabicNameFront(name)),
+                            verticalDivider,
+                            Expanded(
+                              child: wolofalNameFront(name),
+                            ),
+                          ],
+                        ),
+                        Expanded(flex: 7, child: CardIconBar(name, context)),
+                      ],
+                    )
+
+                  //Portrait/phone version
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(child: SizedBox(width: 20)),
+                        Expanded(
+                            flex: 2,
+                            //This Align widget aligns vertically here
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: arabicNameFront(name))),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        Expanded(
+                            flex: 2,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: wolofalNameFront(name)),
+                            )),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        Expanded(
+                            flex: 2,
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: wolofNameFront(name))),
+                        Expanded(child: CardIconBar(name, context)),
+                      ],
+                    ),
+            ),
           ),
         ),
       ),

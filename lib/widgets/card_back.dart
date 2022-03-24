@@ -97,107 +97,110 @@ class CardBack extends StatelessWidget {
     }
 
     //Card back does not have alternate layouts for portrait and landscape
-    return Stack(
-      children: [
-        Padding(
-          padding: cardBackPadding,
-          child: Container(
-            height: mediaQuery.size.height - (cardBackPadding.top * 2),
-            decoration: adaptiveBackground(),
+    return Container(
+      //Pass in height here, helps many things
+      height: mediaQuery.size.height,
+      child: Stack(
+        children: [
+          Padding(
+            padding: cardBackPadding,
             child: Container(
-              decoration: BoxDecoration(
-                borderRadius: _isPhone
-                    ? BorderRadius.circular(0.0)
-                    : BorderRadius.circular(20.0),
-                gradient: LinearGradient(
-                  begin: Alignment.bottomRight,
-                  colors: [
-                    Colors.black.withOpacity(.3),
-                    Colors.black.withOpacity(.0)
-                  ],
+              decoration: adaptiveBackground(),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: _isPhone
+                      ? BorderRadius.circular(0.0)
+                      : BorderRadius.circular(20.0),
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomRight,
+                    colors: [
+                      Colors.black.withOpacity(.3),
+                      Colors.black.withOpacity(.0)
+                    ],
+                  ),
                 ),
-              ),
-              child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      // children: [
-                      //Name Header
-                      Row(
-                        children: [
-                          Expanded(child: textRS(name.wolofName, 0)),
-                          VerticalDivider(
-                            color: Theme.of(context).primaryColor,
-                            thickness: 3,
-                          ),
-                          Expanded(
-                            child: textAS(name.wolofalName, 0),
-                          ),
-                        ],
-                      ),
-                      // Wolofal verse section
-                      cardPrefs.wolofalVerseEnabled
-                          ? Column(
-                              children: [
-                                Divider(
-                                  color: Theme.of(context).primaryColor,
-                                  thickness: 3,
-                                ),
-                                textAS(name.wolofalVerse, 0.0),
-                                textAS(name.wolofalVerseRef, 10.0)
-                              ],
-                            )
-                          : SizedBox(width: 20),
-                      //Wolof verse section
-                      cardPrefs.wolofVerseEnabled
-                          ? Column(
-                              children: [
-                                Divider(
-                                  color: Theme.of(context).primaryColor,
-                                  thickness: 3,
-                                ),
-                                textRS(name.wolofVerse, 0.0),
-                                SizedBox(height: 20),
-                                textRS(name.wolofVerseRef, 10.0),
-                              ],
-                            )
-                          : SizedBox(width: 20),
-                      SizedBox(height: 60),
-                      TextButton(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        // children: [
+                        //Name Header
+                        Row(
                           children: [
-                            Text(
-                                AppLocalizations.of(context)
-                                    .clickHereToReadMore,
-                                style: TextStyle(color: _fontColor)),
-                            Icon(Icons.arrow_forward, color: _fontColor),
+                            Expanded(child: textRS(name.wolofName, 0)),
+                            VerticalDivider(
+                              color: Theme.of(context).primaryColor,
+                              thickness: 3,
+                            ),
+                            Expanded(
+                              child: textAS(name.wolofalName, 0),
+                            ),
                           ],
                         ),
-                        onPressed: () async {
-                          const String url = 'https://sng.al/chrono';
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          } else {
-                            throw 'Could not launch $url';
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: 70,
-                      ),
-                      // ],
-                    ],
-                  )),
+                        // Wolofal verse section
+                        cardPrefs.wolofalVerseEnabled
+                            ? Column(
+                                children: [
+                                  Divider(
+                                    color: Theme.of(context).primaryColor,
+                                    thickness: 3,
+                                  ),
+                                  textAS(name.wolofalVerse, 0.0),
+                                  textAS(name.wolofalVerseRef, 10.0)
+                                ],
+                              )
+                            : SizedBox(width: 20),
+                        //Wolof verse section
+                        cardPrefs.wolofVerseEnabled
+                            ? Column(
+                                children: [
+                                  Divider(
+                                    color: Theme.of(context).primaryColor,
+                                    thickness: 3,
+                                  ),
+                                  textRS(name.wolofVerse, 0.0),
+                                  SizedBox(height: 20),
+                                  textRS(name.wolofVerseRef, 10.0),
+                                ],
+                              )
+                            : SizedBox(width: 20),
+                        SizedBox(height: 60),
+                        TextButton(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                  AppLocalizations.of(context)
+                                      .clickHereToReadMore,
+                                  style: TextStyle(color: _fontColor)),
+                              Icon(Icons.arrow_forward, color: _fontColor),
+                            ],
+                          ),
+                          onPressed: () async {
+                            const String url = 'https://sng.al/chrono';
+                            if (await canLaunch(url)) {
+                              await launch(url);
+                            } else {
+                              throw 'Could not launch $url';
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          height: 70,
+                        ),
+                        // ],
+                      ],
+                    )),
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 20),
-          child: CardIconBar(name, context),
-        ),
-      ],
+          Padding(
+            padding: EdgeInsets.only(bottom: 20),
+            child: CardIconBar(name, context),
+          ),
+        ],
+      ),
     );
   }
 }
