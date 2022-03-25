@@ -101,11 +101,13 @@ class CardBack extends StatelessWidget {
       //This Container and height seems superfluous but must be here to help the low animation not go weird
       height: mediaQuery.size.height,
       child: Padding(
-        padding: cardPadding,
+        padding: _isPhone ? EdgeInsets.all(0) : cardPadding,
         child: Stack(
           children: [
             Container(
-              height: mediaQuery.size.height - (cardPadding.top * 2),
+              height: _isPhone
+                  ? mediaQuery.size.height
+                  : mediaQuery.size.height - (cardPadding.top * 2),
               decoration: adaptiveBackground(),
               child: Container(
                 decoration: BoxDecoration(
