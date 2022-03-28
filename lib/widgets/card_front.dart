@@ -5,14 +5,15 @@ import 'package:provider/provider.dart';
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
 
-import '../widgets/card_icon_bar.dart';
-
 class CardFront extends StatelessWidget {
   final DivineName name;
+  final Widget cardIconBar;
   final MediaQueryData mediaQuery;
   final EdgeInsets cardPadding;
 
-  const CardFront(this.name, this.mediaQuery, this.cardPadding, {Key? key})
+  const CardFront(
+      this.name, this.cardIconBar, this.mediaQuery, this.cardPadding,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -34,13 +35,6 @@ class CardFront extends StatelessWidget {
     //otherwise as of Sep 24 2020 teh end of the line gets cut off
     //Tried Padding widget around but the problem is the Text widget itslef not seeing how much space is needed
 
-/*
-The ParentDataWidget Expanded(flex: 1) wants to apply ParentData of type FlexParentData to a RenderObject, which has been set up to accept ParentData of incompatible type ParentData.
-
-Usually, this means that the Expanded widget has the wrong ancestor RenderObjectWidget. Typically, Expanded widgets are placed directly inside Flex widgets.
-The offending Expanded is currently placed inside a FittedBox widget.
-
-*/
     Widget arabicNameFront(names) {
       return FittedBox(
         child: Text(" " + names.arabicName + " ",
@@ -147,7 +141,7 @@ The offending Expanded is currently placed inside a FittedBox widget.
                             ),
                           ],
                         ),
-                        Expanded(flex: 7, child: CardIconBar(name, context)),
+                        Expanded(flex: 7, child: cardIconBar),
                       ],
                     )
 
@@ -182,7 +176,7 @@ The offending Expanded is currently placed inside a FittedBox widget.
                             child: Align(
                                 alignment: Alignment.center,
                                 child: wolofNameFront(name))),
-                        Expanded(child: CardIconBar(name, context)),
+                        Expanded(child: cardIconBar),
                       ],
                     ),
             ),

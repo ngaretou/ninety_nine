@@ -9,18 +9,18 @@ import '../providers/card_prefs.dart';
 import '../providers/names.dart';
 import '../providers/theme.dart';
 
-import '../widgets/card_icon_bar.dart';
-
 const darkBackground = AssetImage("assets/images/black-bg-1.jpg");
 const lightBackground = AssetImage("assets/images/white-bg-2.jpg");
 
 class CardBack extends StatelessWidget {
   final DivineName name;
+  final Widget cardIconBar;
   final MediaQueryData mediaQuery;
   final EdgeInsets cardPadding;
 
   const CardBack(
     this.name,
+    this.cardIconBar,
     this.mediaQuery,
     this.cardPadding,
   );
@@ -199,7 +199,7 @@ class CardBack extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 20),
-              child: CardIconBar(name, context),
+              child: cardIconBar,
             ),
           ],
         ),

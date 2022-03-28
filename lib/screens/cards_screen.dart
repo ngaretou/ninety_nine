@@ -10,6 +10,7 @@ import './settings_screen.dart';
 import '../widgets/card_animator.dart';
 import '../widgets/card_front.dart';
 import '../widgets/card_back.dart';
+import '../widgets/card_icon_bar.dart';
 
 //To adapt to new Flutter 2.8 behavior that does not allow mice to drag - which is our desired behavior here
 class MyCustomScrollBehavior extends ScrollBehavior {
@@ -198,11 +199,18 @@ class _NameCardsState extends State<NameCards> {
                 },
                 itemCount: namesToShow.length,
                 itemBuilder: (ctx, i) {
-                  final cardFront =
-                      CardFront(namesToShow[i], mediaQuery, cardPadding);
-                  final cardBack =
-                      CardBack(namesToShow[i], mediaQuery, cardPadding);
+                  final cardFront = CardFront(
+                      namesToShow[i],
+                      CardIconBar(namesToShow[i], context),
+                      mediaQuery,
+                      cardPadding);
+                  final cardBack = CardBack(
+                      namesToShow[i],
+                      CardIconBar(namesToShow[i], context),
+                      mediaQuery,
+                      cardPadding);
 
+                  // The animation in this app is pretty heavy, so to lighten the load we pass in pre-built elements so they are not rebuilt with each tick of the animation - kind of takes away from the flow of logic for the developer
                   return CardAnimator(
                     cardFront: cardFront,
                     cardBack: cardBack,

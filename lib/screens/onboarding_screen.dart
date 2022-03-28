@@ -20,6 +20,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController =
       PageController(initialPage: 0, viewportFraction: 1);
   int _currentPage = 0;
+  EdgeInsets edgePadding = EdgeInsets.all(10);
 
   @override
   void dispose() {
@@ -256,60 +257,64 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       String? body,
       Color? color,
       required isShowImageOnTop}) {
-    return Container(
-        decoration: BoxDecoration(
-          color: Colors.black54,
-          borderRadius: BorderRadius.circular(20.0),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage(bgimage),
-          ),
-        ),
-        child: Container(
+    return Padding(
+      padding: edgePadding,
+      child: Container(
           decoration: BoxDecoration(
+            color: Colors.black54,
             borderRadius: BorderRadius.circular(20.0),
-            gradient: LinearGradient(
-              begin: Alignment.bottomRight,
-              colors: [
-                Colors.black.withOpacity(.9),
-                Colors.black.withOpacity(.4)
-              ],
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(bgimage),
             ),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              if (!isShowImageOnTop)
-                Column(
-                  children: [
-                    Center(
-                        // child: Image.asset(image),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              gradient: LinearGradient(
+                begin: Alignment.bottomRight,
+                colors: [
+                  Colors.black.withOpacity(.9),
+                  Colors.black.withOpacity(.4)
+                ],
+              ),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                if (!isShowImageOnTop)
+                  Column(
+                    children: [
+                      Center(
+                          // child: Image.asset(image),
+                          ),
+                      SizedBox(height: 50),
+                      Container(
+                        child: Text(
+                          body!,
+                          textAlign: TextAlign.center,
+                          style: introStyle,
                         ),
-                    SizedBox(height: 50),
-                    Container(
-                      child: Text(
-                        body!,
-                        textAlign: TextAlign.center,
-                        style: introStyle,
                       ),
-                    ),
-                  ],
-                ),
-              if (isShowImageOnTop)
-                Column(
-                  children: [
-                    Text(body!, textAlign: TextAlign.center, style: introStyle),
-                    SizedBox(height: 50),
-                    Center(
-                        // child: Image.asset(image),
-                        ),
-                  ],
-                )
-            ],
-          ),
-        ));
+                    ],
+                  ),
+                if (isShowImageOnTop)
+                  Column(
+                    children: [
+                      Text(body!,
+                          textAlign: TextAlign.center, style: introStyle),
+                      SizedBox(height: 50),
+                      Center(
+                          // child: Image.asset(image),
+                          ),
+                    ],
+                  )
+              ],
+            ),
+          )),
+    );
   }
 
   Widget _buildFormattedPageContent(
@@ -317,33 +322,36 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       // String image,
       required Widget body,
       Color? color}) {
-    return Container(
-        decoration: BoxDecoration(
-          color: Colors.black54,
-          borderRadius: BorderRadius.circular(20.0),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage(bgimage),
-          ),
-        ),
-        child: Container(
+    return Padding(
+      padding: edgePadding,
+      child: Container(
           decoration: BoxDecoration(
+            color: Colors.black54,
             borderRadius: BorderRadius.circular(20.0),
-            gradient: LinearGradient(
-              begin: Alignment.bottomRight,
-              colors: [
-                Colors.black.withOpacity(.9),
-                Colors.black.withOpacity(.4)
-              ],
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(bgimage),
             ),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[body],
-          ),
-        ));
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              gradient: LinearGradient(
+                begin: Alignment.bottomRight,
+                colors: [
+                  Colors.black.withOpacity(.9),
+                  Colors.black.withOpacity(.4)
+                ],
+              ),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[body],
+            ),
+          )),
+    );
   }
 
   Widget _page3Body() {
