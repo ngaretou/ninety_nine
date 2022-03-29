@@ -4,19 +4,22 @@ import 'package:provider/provider.dart';
 import '../providers/fps.dart';
 import '../providers/card_prefs.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:just_audio/just_audio.dart';
 
 class CardAnimator extends StatefulWidget {
   final Widget cardFront;
   final Widget cardBack;
   final MediaQueryData mediaQuery;
   final bool isPhone;
+  final AudioPlayer player;
 
-  const CardAnimator({
+  CardAnimator({
     Key? key,
     required this.cardFront,
     required this.cardBack,
     required this.mediaQuery,
     required this.isPhone,
+    required this.player,
   }) : super(key: key);
 
   @override
@@ -30,6 +33,7 @@ class _CardAnimatorState extends State<CardAnimator>
   late AnimationController _animationController;
   late Animation<double> _animation;
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
+
   late Widget widgetToBuild;
   late bool _showFirst = true;
 
@@ -39,7 +43,7 @@ class _CardAnimatorState extends State<CardAnimator>
   @override
   void initState() {
     // print('CardAnimator initState');
-    _showFirst = true;
+    // _showFirst = true;
 
     _animationController = AnimationController(
       vsync: this,
@@ -81,6 +85,7 @@ class _CardAnimatorState extends State<CardAnimator>
         if (fpsWorking > 15) disableFpsMonitoring();
       });
     }
+
     super.initState();
   }
 
@@ -123,15 +128,16 @@ class _CardAnimatorState extends State<CardAnimator>
 
   @override
   void dispose() {
+    widget.player.dispose();
     _animationController.dispose();
-    Fps.instance!.stop();
 
+    Fps.instance!.stop();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // print('CardAnimator build');
+    print('CardAnimator build');
     //These transforms have to be in the build as they calculate with the animation
     final Matrix4 phoneTransform = Matrix4.identity()
           ..setEntry(3, 2, 0.001)

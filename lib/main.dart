@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:ninety_nine/providers/player_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './providers/card_prefs.dart';
 import './providers/names.dart';
 import './providers/theme.dart';
+import './providers/player_manager.dart';
 
 import './screens/settings_screen.dart';
 import './screens/about_screen.dart';
@@ -28,6 +30,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (ctx) => DivineNames(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => PlayerManager(),
         ),
       ],
       child: MyApp(),

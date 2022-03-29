@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -6,26 +7,27 @@ import 'dart:typed_data';
 
 class PlayButton extends StatefulWidget {
   final String id;
+  final AudioPlayer player;
 
-  PlayButton({Key? key, required this.id}) : super(key: key);
+  PlayButton({Key? key, required this.id, required this.player})
+      : super(key: key);
 
   @override
   PlayButtonState createState() => PlayButtonState();
 }
 
 class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
-  final _player = AudioPlayer();
+  late bool _initialized;
 
   @override
   void initState() {
-    super.initState();
     WidgetsBinding.instance?.addObserver(this);
+    _initialized = false;
+    super.initState();
   }
 
   Future _initializeSession() async {
-    final session = await AudioSession.instance;
-    await session.configure(AudioSessionConfiguration.speech());
-
+    _initialized = true;
     print('loading local audio ' + widget.id.toString());
     List<AudioSource> _source = [];
 
@@ -60,7 +62,7 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
 
     //Load audio
     try {
-      await _player.setAudioSource(
+      await widget.player.setAudioSource(
         ConcatenatingAudioSource(
           // Start loading next item just before reaching it.
           useLazyPreparation: true, // default
@@ -79,7 +81,7 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
       print('an error occurred loading audio: ' + e.toString());
     }
 
-    _player.playbackEventStream.listen((event) {},
+    widget.player.playbackEventStream.listen((event) {},
         // Listen to errors during playback.
         onError: (Object e, StackTrace stackTrace) {
       print('A stream error occurred: $e');
@@ -91,16 +93,15 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
   Future<void> gracefulStop() async {
     print('gracefulStop');
     for (var i = 10; i >= 0; i--) {
-      _player.setVolume(i / 10);
+      widget.player.setVolume(i / 10);
       await Future.delayed(Duration(milliseconds: 100));
     }
-    _player.pause();
+    widget.player.pause();
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance?.removeObserver(this);
-    _player.dispose();
     super.dispose();
   }
 
@@ -114,8 +115,10 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    print('play button build');
+
     return StreamBuilder<PlayerState>(
-      stream: _player.playerStateStream,
+      stream: widget.player.playerStateStream,
       builder: (context, snapshot) {
         final playerState = snapshot.data;
         final processingState = playerState?.processingState;
@@ -125,28 +128,43 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
           return IconButton(
               icon: Icon(Icons.play_arrow, color: Colors.white),
               onPressed: () async {
-                bool shouldPlay = await _initializeSession();
+                bool shouldPlay = false;
+                if (!_initialized) {
+                  shouldPlay = await _initializeSession();
+                }
 
-                if (shouldPlay) {
-                  _player.setVolume(1);
-                  _player.play();
+                if (shouldPlay || _initialized) {
+                  widget.player.setVolume(1);
+                  widget.player.play();
                 }
               });
         } else if (processingState != ProcessingState.completed) {
           return IconButton(
-              icon: Icon(Icons.pause, color: Colors.white),
-              onPressed: () {
-                _player.pause();
-              });
+            icon: Icon(Icons.pause, color: Colors.white),
+            onPressed: () async {
+              widget.player.pause();
+            },
+          );
         } else {
           return IconButton(
             icon: Icon(Icons.play_arrow, color: Colors.white),
-            onPressed: () {
-              print('in the else');
-              //on done, go back to the beginning of the playlist
-              _player.seek(Duration(seconds: 0), index: 0);
-            },
+            onPressed: () => widget.player.seek(Duration.zero),
           );
+          // else if (processingState != ProcessingState.completed) {
+          //   return IconButton(
+          //       icon: Icon(Icons.pause, color: Colors.white),
+          //       onPressed: () {
+          //         widget.player.pause();
+          //       });
+          // } else  {
+          //   widget.player.seek(Duration(seconds: 0), index: 0);
+          //   return IconButton(
+          //     icon: Icon(Icons.play_arrow, color: Colors.white),
+          //     onPressed: () {
+          //       print('in the else');
+          //       //on done, go back to the beginning of the playlist
+          //     });
+
         }
       },
     );

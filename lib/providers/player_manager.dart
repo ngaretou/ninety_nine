@@ -18,16 +18,16 @@ class PlayerManager with ChangeNotifier {
     // });
   }
 
-  String _showToPlay = "";
+  // String _showToPlay = "";
 
-  String get showToPlay {
-    return _showToPlay;
-  }
+  // String get showToPlay {
+  //   return _showToPlay;
+  // }
 
-  set showToPlay(String value) {
-    this._showToPlay = value;
-    notifyListeners();
-  }
+  // set showToPlay(String value) {
+  //   this._showToPlay = value;
+  //   notifyListeners();
+  // }
 
   //Manage the player
   // Future<void> gracefulStop() async {
@@ -40,12 +40,12 @@ class PlayerManager with ChangeNotifier {
   //   player.stop();
   // }
 
-  Future<void> changePlaylist({AudioSource? source}) async {
+  Future<void> changePlaylist({ConcatenatingAudioSource? source}) async {
     await player.stop();
 
     //If we got here by initializing the play button
     if (source != null) {
-      playlist = ConcatenatingAudioSource(children: [source]);
+      playlist = source;
 
       await player.setAudioSource(playlist, preload: true);
 

@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../providers/names.dart';
-
 import '../widgets/play_button.dart';
 
 class CardIconBar extends StatefulWidget {
   final DivineName name;
-  final BuildContext context;
+  final AudioPlayer player;
 
   CardIconBar(
     this.name,
-    this.context,
+    this.player,
   );
 
   @override
@@ -55,8 +55,7 @@ class _CardIconBarState extends State<CardIconBar> {
                   },
                 ),
                 //Media Player
-
-                PlayButton(id: widget.name.id),
+                PlayButton(id: widget.name.id, player: widget.player),
 
                 IconButton(
                   icon: Icon(

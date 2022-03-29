@@ -4,21 +4,22 @@ import 'package:provider/provider.dart';
 
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
+import 'card_icon_bar.dart';
+import 'package:just_audio/just_audio.dart';
 
 class CardFront extends StatelessWidget {
   final DivineName name;
-  final Widget cardIconBar;
+  final AudioPlayer player;
   final MediaQueryData mediaQuery;
   final EdgeInsets cardPadding;
 
-  const CardFront(
-      this.name, this.cardIconBar, this.mediaQuery, this.cardPadding,
+  const CardFront(this.name, this.player, this.mediaQuery, this.cardPadding,
       {Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // print('card front build ' + name.id.toString());
+    print('card front build ' + name.id.toString());
 
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     const double adaptiveFontSize = 70;
@@ -141,7 +142,10 @@ class CardFront extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Expanded(flex: 7, child: cardIconBar),
+                        Expanded(
+                          flex: 7,
+                          child: CardIconBar(name, player),
+                        ),
                       ],
                     )
 
@@ -176,7 +180,9 @@ class CardFront extends StatelessWidget {
                             child: Align(
                                 alignment: Alignment.center,
                                 child: wolofNameFront(name))),
-                        Expanded(child: cardIconBar),
+                        Expanded(
+                          child: CardIconBar(name, player),
+                        ),
                       ],
                     ),
             ),

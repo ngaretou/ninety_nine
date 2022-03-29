@@ -5,12 +5,14 @@ import 'package:provider/provider.dart';
 import '../providers/names.dart';
 import '../providers/card_prefs.dart';
 
+import 'package:just_audio/just_audio.dart';
+import 'package:audio_session/audio_session.dart';
+
 import './settings_screen.dart';
 
 import '../widgets/card_animator.dart';
 import '../widgets/card_front.dart';
 import '../widgets/card_back.dart';
-import '../widgets/card_icon_bar.dart';
 
 //To adapt to new Flutter 2.8 behavior that does not allow mice to drag - which is our desired behavior here
 class MyCustomScrollBehavior extends ScrollBehavior {
@@ -38,7 +40,13 @@ class _CardsScreenState extends State<CardsScreen> {
   void initState() {
     //initially set here but
     initializePage();
+    initializeSession();
     super.initState();
+  }
+
+  Future<void> initializeSession() async {
+    final session = await AudioSession.instance;
+    await session.configure(AudioSessionConfiguration.speech());
   }
 
   Future<void> initializePage() async {
@@ -142,6 +150,11 @@ class _NameCardsState extends State<NameCards> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     print('Name Cards PageViewBuilder');
 
@@ -199,16 +212,19 @@ class _NameCardsState extends State<NameCards> {
                 },
                 itemCount: namesToShow.length,
                 itemBuilder: (ctx, i) {
+                  AudioPlayer player = AudioPlayer();
+
+                  // Listen to errors during playback.
+                  player.playbackEventStream.listen((event) {
+                    // print(event);
+                  }, onError: (Object e, StackTrace stackTrace) {
+                    print('A stream error occurred: $e');
+                  });
+
                   final cardFront = CardFront(
-                      namesToShow[i],
-                      CardIconBar(namesToShow[i], context),
-                      mediaQuery,
-                      cardPadding);
-                  final cardBack = CardBack(
-                      namesToShow[i],
-                      CardIconBar(namesToShow[i], context),
-                      mediaQuery,
-                      cardPadding);
+                      namesToShow[i], player, mediaQuery, cardPadding);
+                  final cardBack =
+                      CardBack(namesToShow[i], player, mediaQuery, cardPadding);
 
                   // The animation in this app is pretty heavy, so to lighten the load we pass in pre-built elements so they are not rebuilt with each tick of the animation - kind of takes away from the flow of logic for the developer
                   return CardAnimator(
@@ -216,6 +232,7 @@ class _NameCardsState extends State<NameCards> {
                     cardBack: cardBack,
                     mediaQuery: mediaQuery,
                     isPhone: isPhone,
+                    player: player,
                   );
                 }),
           ),

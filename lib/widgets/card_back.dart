@@ -8,19 +8,21 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
 import '../providers/theme.dart';
+import 'package:just_audio/just_audio.dart';
+import 'card_icon_bar.dart';
 
 const darkBackground = AssetImage("assets/images/black-bg-1.jpg");
 const lightBackground = AssetImage("assets/images/white-bg-2.jpg");
 
 class CardBack extends StatelessWidget {
   final DivineName name;
-  final Widget cardIconBar;
+  final AudioPlayer player;
   final MediaQueryData mediaQuery;
   final EdgeInsets cardPadding;
 
   const CardBack(
     this.name,
-    this.cardIconBar,
+    this.player,
     this.mediaQuery,
     this.cardPadding,
   );
@@ -199,7 +201,7 @@ class CardBack extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 20),
-              child: cardIconBar,
+              child: CardIconBar(name, player),
             ),
           ],
         ),
