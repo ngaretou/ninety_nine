@@ -10,6 +10,7 @@ import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
 
 import './about_screen.dart';
+import './cards_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings-screen';
@@ -551,106 +552,118 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
 ///////////////////////////////
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context).settingsTitle,
+        appBar: AppBar(
+          title: Text(
+            AppLocalizations.of(context).settingsTitle,
+          ),
         ),
-      ),
-      //If the width of the screen is greater or equal to 500
-      //show the wide view
-      body: MediaQuery.of(context).size.width >= 730
-          ? Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50),
-              child: ListView(
-                children: [
-                  viewListOfNames(),
-                  settingRow(themeTitle(), themeSettings()),
-                  Divider(),
-                  settingRow(backgroundTitle(), backgroundSettings()),
-                  Divider(),
-                  settingRow(directionTitle(), directionSettings()),
-                  Divider(),
-                  scriptPickerTitle(),
-                  asScriptPicker(),
-                  rsScriptPicker(),
-                  Divider(),
-                  settingRow(showFavsTitle(), showFavsSetting()),
-                  Divider(),
-                  lowPowerModeTitle(),
-                  lowPowerModeChooser(),
-                  Divider(),
-                  settingRow(languageTitle(), languageSetting()),
-                  Divider(),
-                  settingTitle(
-                    AppLocalizations.of(context).settingsAbout,
-                    Icons.question_answer,
-                    () {
-                      Navigator.of(context).pushNamed(AboutScreen.routeName);
-                    },
-                  ),
-                  Divider(),
-                  settingTitle(
-                    AppLocalizations.of(context).settingsContactUs,
-                    Icons.email,
-                    () async {
-                      const url = 'mailto:equipedevmbs@gmail.com';
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    },
-                  ),
-                  Divider(),
-                  settingTitle(AppLocalizations.of(context).settingsViewIntro,
-                      Icons.replay, () {
-                    Navigator.of(context).pushNamed(OnboardingScreen.routeName);
-                  }),
-                ],
-              ),
-            )
-          : ListView(
-              children: [
-                viewListOfNames(),
-                settingColumn(themeTitle(), themeSettings()),
-                settingColumn(backgroundTitle(), backgroundSettings()),
-                settingColumn(directionTitle(), directionSettings()),
-                scriptPickerTitle(),
-                asScriptPicker(),
-                rsScriptPicker(),
-                Divider(),
-                settingColumn(showFavsTitle(), showFavsSetting()),
-                lowPowerModeTitle(),
-                lowPowerModeChooser(),
-                settingColumn(languageTitle(), languageSetting()),
-                settingTitle(
-                  AppLocalizations.of(context).settingsAbout,
-                  Icons.question_answer,
-                  () {
-                    Navigator.of(context).pushNamed(AboutScreen.routeName);
-                  },
-                ),
-                Divider(),
-                settingTitle(
-                  AppLocalizations.of(context).settingsContactUs,
-                  Icons.email,
-                  () async {
-                    const url = 'mailto:equipedevmbs@gmail.com';
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  },
-                ),
-                Divider(),
-                settingTitle(AppLocalizations.of(context).settingsViewIntro,
-                    Icons.replay, () {
-                  Navigator.of(context).pushNamed(OnboardingScreen.routeName);
-                }),
-              ],
-            ),
-      // ),
-    );
+        //If the width of the screen is greater or equal to 500
+        //show the wide view
+        body: ScrollConfiguration(
+            //The 2.8 Flutter behavior is to not have mice grabbing and dragging - but we do want this in the web version of the app, so the custom scroll behavior here
+            behavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
+            child: Center(
+                child: MouseRegion(
+              cursor: SystemMouseCursors.grab,
+              child: MediaQuery.of(context).size.width >= 730
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      child: ListView(
+                        children: [
+                          viewListOfNames(),
+                          settingRow(themeTitle(), themeSettings()),
+                          Divider(),
+                          settingRow(backgroundTitle(), backgroundSettings()),
+                          Divider(),
+                          settingRow(directionTitle(), directionSettings()),
+                          Divider(),
+                          scriptPickerTitle(),
+                          asScriptPicker(),
+                          rsScriptPicker(),
+                          Divider(),
+                          settingRow(showFavsTitle(), showFavsSetting()),
+                          Divider(),
+                          lowPowerModeTitle(),
+                          lowPowerModeChooser(),
+                          Divider(),
+                          settingRow(languageTitle(), languageSetting()),
+                          Divider(),
+                          settingTitle(
+                            AppLocalizations.of(context).settingsAbout,
+                            Icons.question_answer,
+                            () {
+                              Navigator.of(context)
+                                  .pushNamed(AboutScreen.routeName);
+                            },
+                          ),
+                          Divider(),
+                          settingTitle(
+                            AppLocalizations.of(context).settingsContactUs,
+                            Icons.email,
+                            () async {
+                              const url = 'mailto:equipedevmbs@gmail.com';
+                              if (await canLaunch(url)) {
+                                await launch(url);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
+                            },
+                          ),
+                          Divider(),
+                          settingTitle(
+                              AppLocalizations.of(context).settingsViewIntro,
+                              Icons.replay, () {
+                            Navigator.of(context)
+                                .pushNamed(OnboardingScreen.routeName);
+                          }),
+                        ],
+                      ),
+                    )
+                  : ListView(
+                      children: [
+                        viewListOfNames(),
+                        settingColumn(themeTitle(), themeSettings()),
+                        settingColumn(backgroundTitle(), backgroundSettings()),
+                        settingColumn(directionTitle(), directionSettings()),
+                        scriptPickerTitle(),
+                        asScriptPicker(),
+                        rsScriptPicker(),
+                        Divider(),
+                        settingColumn(showFavsTitle(), showFavsSetting()),
+                        lowPowerModeTitle(),
+                        lowPowerModeChooser(),
+                        settingColumn(languageTitle(), languageSetting()),
+                        settingTitle(
+                          AppLocalizations.of(context).settingsAbout,
+                          Icons.question_answer,
+                          () {
+                            Navigator.of(context)
+                                .pushNamed(AboutScreen.routeName);
+                          },
+                        ),
+                        Divider(),
+                        settingTitle(
+                          AppLocalizations.of(context).settingsContactUs,
+                          Icons.email,
+                          () async {
+                            const url = 'mailto:equipedevmbs@gmail.com';
+                            if (await canLaunch(url)) {
+                              await launch(url);
+                            } else {
+                              throw 'Could not launch $url';
+                            }
+                          },
+                        ),
+                        Divider(),
+                        settingTitle(
+                            AppLocalizations.of(context).settingsViewIntro,
+                            Icons.replay, () {
+                          Navigator.of(context)
+                              .pushNamed(OnboardingScreen.routeName);
+                        }),
+                      ],
+                    ),
+              // ),
+            ))));
   }
 }

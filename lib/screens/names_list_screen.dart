@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'cards_screen.dart';
 
 class NamesList extends StatelessWidget {
   static const routeName = 'names-list-screen';
@@ -36,56 +37,66 @@ class NamesList extends StatelessWidget {
         ),
         //If the width of the screen is greater or equal to 500
         //show the wide view
-        body: Padding(
-          padding: mediaQuery.size.width >= 730
-              ? EdgeInsets.symmetric(horizontal: 50)
-              : EdgeInsets.symmetric(horizontal: 10),
-          child: ScrollablePositionedList.builder(
-            itemCount: names.names.length,
-            itemBuilder: (ctx, i) => GestureDetector(
-              child: Card(
-                elevation: 5,
-                color: Theme.of(context).cardColor,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                          flex: 1,
-                          child: Text(names.names[i].wolofName,
-                              style: _rsStyle, textDirection: _ltrText)),
-                      Expanded(
-                        flex: 1,
-                        child: Center(
-                          child: Text(names.names[i].wolofalName,
-                              style: _asStyle, textDirection: _rtlText),
+        body: ScrollConfiguration(
+            //The 2.8 Flutter behavior is to not have mice grabbing and dragging - but we do want this in the web version of the app, so the custom scroll behavior here
+            behavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
+            child: Center(
+                child: MouseRegion(
+                    cursor: SystemMouseCursors.grab,
+                    child: Padding(
+                      padding: mediaQuery.size.width >= 730
+                          ? EdgeInsets.symmetric(horizontal: 50)
+                          : EdgeInsets.symmetric(horizontal: 10),
+                      child: ScrollablePositionedList.builder(
+                        itemCount: names.names.length,
+                        itemBuilder: (ctx, i) => GestureDetector(
+                          child: Card(
+                            elevation: 5,
+                            color: Theme.of(context).cardColor,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 16.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                      flex: 1,
+                                      child: Text(names.names[i].wolofName,
+                                          style: _rsStyle,
+                                          textDirection: _ltrText)),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Center(
+                                      child: Text(names.names[i].wolofalName,
+                                          style: _asStyle,
+                                          textDirection: _rtlText),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Text(names.names[i].arabicName,
+                                        style: _asStyle,
+                                        textDirection: _rtlText),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          onTap: () {
+                            print('tapped');
+                            //Resets to show all cards rather than favs
+                            Provider.of<CardPrefs>(context, listen: false)
+                                .savePref('showFavs', false);
+                            //This is a hacky marker that shows the app we should navigate -
+                            //This is trickier than it sounds as the build gets triggered with all the animation
+                            Provider.of<DivineNames>(context, listen: false)
+                                .moveToName = true;
+                            //Closes this screen and sends index of the chosen name up the tree
+                            Navigator.of(context).pop(i);
+                          },
                         ),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Text(names.names[i].arabicName,
-                            style: _asStyle, textDirection: _rtlText),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              onTap: () {
-                print('tapped');
-                //Resets to show all cards rather than favs
-                Provider.of<CardPrefs>(context, listen: false)
-                    .savePref('showFavs', false);
-                //This is a hacky marker that shows the app we should navigate -
-                //This is trickier than it sounds as the build gets triggered with all the animation
-                Provider.of<DivineNames>(context, listen: false).moveToName =
-                    true;
-                //Closes this screen and sends index of the chosen name up the tree
-                Navigator.of(context).pop(i);
-              },
-            ),
-          ),
-        ));
+                    )))));
   }
 }

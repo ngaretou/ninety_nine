@@ -17,10 +17,32 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final int _totalPages = 4;
-  final PageController _pageController =
-      PageController(initialPage: 0, viewportFraction: 1);
+  late PageController _pageController;
   int _currentPage = 0;
-  EdgeInsets edgePadding = EdgeInsets.all(10);
+  late MediaQueryData mediaQuery;
+  late bool isPhone;
+  late bool isLandscape;
+  late EdgeInsets cardPadding;
+
+  @override
+  void didChangeDependencies() {
+    mediaQuery = MediaQuery.of(context);
+    isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
+    isLandscape =
+        (mediaQuery.orientation == Orientation.landscape) ? true : false;
+    cardPadding = isPhone
+        ? EdgeInsets.all(20)
+        : EdgeInsets.symmetric(
+            horizontal: 70,
+            vertical: 70,
+            // vertical: isLandscape ? 70 : (mediaQuery.size.height - 700) / 2,
+          );
+    _pageController = PageController(
+      initialPage: 0,
+      viewportFraction: isPhone ? 1 : 540 / mediaQuery.size.width,
+    );
+    super.didChangeDependencies();
+  }
 
   @override
   void dispose() {
@@ -37,124 +59,144 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Stack(
-          children: [
-            NotificationListener(
-                onNotification: ((dynamic notification) {
-                  // print(notification.toString());
-                  if (notification is OverscrollNotification) {
-                    // print('in OverscrollNotification true');
-                    Navigator.of(context)
-                        .popAndPushNamed(CardsScreen.routeName);
-                  }
-                  return true;
-                }),
-                child: PageView(
-                  //Small note here on the physics - this must be ClampingScrollPhysics on iOS to
-                  //get the "if you're on the last page of introduction go to main app" function.
-                  //otherwise iOS doesn't throw OverscrollNotification.
-                  //https://github.com/flutter/flutter/issues/17649
-                  physics: ClampingScrollPhysics(),
-                  controller: _pageController,
-                  onPageChanged: (int page) {
-                    _currentPage = page;
-                    setState(() {});
-                  },
-                  children: <Widget>[
-                    _buildPageContent(
-                        isShowImageOnTop: false,
-                        bgimage: 'assets/images/1.jpg',
-                        // image: null,
-                        body: AppLocalizations.of(context).introPage1,
-                        color: Color(0xFFFF7252)),
-                    _buildPageContent(
-                        isShowImageOnTop: true,
-                        bgimage: 'assets/images/2.jpg',
-                        body: AppLocalizations.of(context).introPage2,
-                        color: Color(0xFFFFA131)),
-                    _buildFormattedPageContent(
-                        bgimage: 'assets/images/13.jpg',
-                        body: _page3Body(),
-                        color: Color(0xFF3C60FF)),
-                    _buildFormattedPageContent(
-                        bgimage: 'assets/images/4.jpg',
-                        body: _page4Body(),
-                        color: Color(0xFFFF7252)),
-                  ],
-                )),
-            Positioned(
-              bottom: 40,
-              left: MediaQuery.of(context).size.width * .05,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+      body: ScrollConfiguration(
+        //The 2.8 Flutter behavior is to not have mice grabbing and dragging - but we do want this in the web version of the app, so the custom scroll behavior here
+        behavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
+        child: Center(
+          child: MouseRegion(
+            cursor: SystemMouseCursors.grab,
+            child: Container(
+              child: Stack(
+                alignment: Alignment.center,
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width * .9,
+                  NotificationListener(
+                      onNotification: ((dynamic notification) {
+                        // print(notification.toString());
+                        if (notification is OverscrollNotification) {
+                          // print('in OverscrollNotification true');
+                          //negative overscroll is scrolling past first page in the wrong direction - if positive it's past the last page
+                          if (notification.overscroll > 0)
+                            Navigator.of(context)
+                                .popAndPushNamed(CardsScreen.routeName);
+                        }
+                        return true;
+                      }),
+                      child: PageView(
+                        //Small note here on the physics - this must be ClampingScrollPhysics on iOS to
+                        //get the "if you're on the last page of introduction go to main app" function.
+                        //otherwise iOS doesn't throw OverscrollNotification.
+                        //https://github.com/flutter/flutter/issues/17649
+                        physics: ClampingScrollPhysics(),
+                        controller: _pageController,
+                        onPageChanged: (int page) {
+                          _currentPage = page;
+                          setState(() {});
+                        },
+                        children: <Widget>[
+                          _buildPageContent(
+                              isShowImageOnTop: false,
+                              bgimage: 'assets/images/1.jpg',
+                              // image: null,
+                              body: AppLocalizations.of(context).introPage1,
+                              color: Color(0xFFFF7252)),
+                          _buildPageContent(
+                              isShowImageOnTop: true,
+                              bgimage: 'assets/images/2.jpg',
+                              body: AppLocalizations.of(context).introPage2,
+                              color: Color(0xFFFFA131)),
+                          _buildFormattedPageContent(
+                              bgimage: 'assets/images/13.jpg',
+                              body: _page3Body(),
+                              color: Color(0xFF3C60FF)),
+                          _buildFormattedPageContent(
+                              bgimage: 'assets/images/4.jpg',
+                              body: _page4Body(),
+                              color: Color(0xFFFF7252)),
+                        ],
+                      )),
+                  Positioned(
+                    width: (mediaQuery.size.width *
+                            _pageController.viewportFraction) -
+                        (cardPadding.left * 3),
+                    bottom: cardPadding.bottom,
+                    // left: (mediaQuery.size.width -
+                    //     (mediaQuery.size.width *
+                    //         _pageController.viewportFraction)),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          child: Row(children: [
-                            for (int i = 0; i < _totalPages; i++)
-                              i == _currentPage
-                                  ? _buildPageIndicator(true)
-                                  : _buildPageIndicator(false)
-                          ]),
+                          alignment: Alignment.center,
+                          width: (mediaQuery.size.width *
+                                  _pageController.viewportFraction) -
+                              (cardPadding.left * 3),
+                          child: Row(
+                            children: [
+                              Container(
+                                child: Row(children: [
+                                  for (int i = 0; i < _totalPages; i++)
+                                    i == _currentPage
+                                        ? _buildPageIndicator(true)
+                                        : _buildPageIndicator(false)
+                                ]),
+                              ),
+                              Spacer(),
+                              languageChooser(),
+                              Spacer(),
+                              if (_currentPage != _totalPages - 1)
+                                InkWell(
+                                  onTap: () {
+                                    _pageController.animateToPage(3,
+                                        duration: Duration(milliseconds: 400),
+                                        curve: Curves.linear);
+                                    setState(() {});
+                                  },
+                                  child: Container(
+                                    height: 60,
+                                    // height: Platform.isIOS ? 70 : 60,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      AppLocalizations.of(context).skip,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20),
+                                    ),
+                                  ),
+                                ),
+                              if (_currentPage == _totalPages - 1)
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .popAndPushNamed(CardsScreen.routeName);
+                                    //If you get this far, you've seen the onboarding, so don't show again
+                                    Provider.of<CardPrefs>(context,
+                                            listen: false)
+                                        .savePref('showOnboarding', false);
+                                  },
+                                  child: Container(
+                                    height: 60,
+                                    // height: Platform.isIOS ? 70 : 60,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      AppLocalizations.of(context).start,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20),
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
                         ),
-                        Spacer(),
-                        languageChooser(),
-                        Spacer(),
-                        if (_currentPage != _totalPages - 1)
-                          InkWell(
-                            onTap: () {
-                              _pageController.animateToPage(3,
-                                  duration: Duration(milliseconds: 400),
-                                  curve: Curves.linear);
-                              setState(() {});
-                            },
-                            child: Container(
-                              height: 60,
-                              // height: Platform.isIOS ? 70 : 60,
-                              alignment: Alignment.center,
-                              child: Text(
-                                AppLocalizations.of(context).skip,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20),
-                              ),
-                            ),
-                          ),
-                        if (_currentPage == _totalPages - 1)
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .popAndPushNamed(CardsScreen.routeName);
-                              //If you get this far, you've seen the onboarding, so don't show again
-                              Provider.of<CardPrefs>(context, listen: false)
-                                  .savePref('showOnboarding', false);
-                            },
-                            child: Container(
-                              height: 60,
-                              // height: Platform.isIOS ? 70 : 60,
-                              alignment: Alignment.center,
-                              child: Text(
-                                AppLocalizations.of(context).start,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20),
-                              ),
-                            ),
-                          ),
                       ],
                     ),
-                  ),
+                  )
                 ],
               ),
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
@@ -162,32 +204,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget languageChooser() {
     final themeProvider = Provider.of<ThemeModel>(context, listen: false);
-    int? _value;
-    bool? firstRun =
-        Provider.of<CardPrefs>(context, listen: false).cardPrefs.showOnboarding;
+    late int _value;
+    // bool? firstRun =
+    //     Provider.of<CardPrefs>(context, listen: false).cardPrefs.showOnboarding;
     String? chosenLang =
         Provider.of<ThemeModel>(context, listen: false).userLocale.toString();
-    if (firstRun == true) {
-      _value = 1;
-    } else {
-      switch (chosenLang) {
-        case "fr_CH":
-          {
-            _value = 1;
-            break;
-          }
-        case "fr":
-          {
-            _value = 2;
-            break;
-          }
-        case "en":
-          {
-            _value = 3;
-            break;
-          }
-      }
+    // if (firstRun == true) {
+    //   _value = 1;
+    // } else {
+    switch (chosenLang) {
+      case "fr_CH":
+        {
+          _value = 1;
+          break;
+        }
+      case "fr":
+        {
+          _value = 2;
+          break;
+        }
+      case "en":
+        {
+          _value = 3;
+          break;
+        }
     }
+    // }
 
     TextStyle chooserStyle = TextStyle(color: Colors.black87);
 
@@ -220,29 +262,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ],
             onChanged: (dynamic value) {
+              //no need to setState here as the provider is calling the rebuild with notifyListeners();, although I'm sad to say I don't know where the listen:true is located
               switch (value) {
                 case 1:
                   {
-                    setState(() {
-                      themeProvider.setLocale('fr_CH');
-                      _value = value;
-                    });
+                    themeProvider.setLocale('fr_CH');
                     break;
                   }
                 case 2:
                   {
                     themeProvider.setLocale('fr');
-                    setState(() {
-                      _value = value;
-                    });
                     break;
                   }
                 case 3:
                   {
                     themeProvider.setLocale('en');
-                    setState(() {
-                      _value = value;
-                    });
                     break;
                   }
               }
@@ -258,7 +292,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       Color? color,
       required isShowImageOnTop}) {
     return Padding(
-      padding: edgePadding,
+      padding: cardPadding,
       child: Container(
           decoration: BoxDecoration(
             color: Colors.black54,
@@ -323,7 +357,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       required Widget body,
       Color? color}) {
     return Padding(
-      padding: edgePadding,
+      padding: cardPadding,
       child: Container(
           decoration: BoxDecoration(
             color: Colors.black54,

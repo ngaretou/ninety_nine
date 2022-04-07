@@ -126,7 +126,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "introPage2": "Lorsque vous lisez un verset, posez-vous quatre questions :\n\n1.\tQu'est-ce que ces versets enseignent sur Dieu ?\n\n2.\tQu'est-ce que ces versets enseignent sur les humains ?\n\n3.\tComment puis-je vivre ces versets ?\n\n4.\tQui dans ma vie a besoin d'entendre ces versets ?",
+  "introPage2": "Lorsque vous lisez un verset, posez-vous quatre questions :\n\n1. Qu'est-ce que ces versets enseignent sur Dieu ?\n\n2. Qu'est-ce que ces versets enseignent sur les humains ?\n\n3. Comment puis-je vivre ces versets ?\n\n4. Qui dans ma vie a besoin d'entendre ces versets ?",
   "@introPage2": {
     "description": "DBS questions",
     "type": "text",

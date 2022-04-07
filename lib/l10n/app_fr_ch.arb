@@ -126,7 +126,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "introPage2": "Boo jangee ab aaya, laajal sa bopp ñeenti laaj yi:\n\n1.\tLan la nu aaya yii di xamal ci Yàlla?\n\n2.\tLan la nu aaya yii di xamal ci doom Aadama?\n\n3.\tNaka lañu wara soppee sunu dundin?\n\n4.\tKan nga bëgga seddoo aaya yii?",
+  "introPage2": "Boo jangee ab aaya, laajal sa bopp ñeenti laaj yi:\n\n1. Lan la nu aaya yii di xamal ci Yàlla?\n\n2. Lan la nu aaya yii di xamal ci doom Aadama?\n\n3. Naka lañu wara soppee sunu dundin?\n\n4. Kan nga bëgga seddoo aaya yii?",
   "@introPage2": {
     "description": "DBS questions",
     "type": "text",

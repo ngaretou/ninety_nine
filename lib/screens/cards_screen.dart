@@ -7,6 +7,9 @@ import '../providers/card_prefs.dart';
 
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../providers/fps.dart';
 
 import './settings_screen.dart';
 
@@ -36,12 +39,75 @@ class CardsScreen extends StatefulWidget {
 class _CardsScreenState extends State<CardsScreen> {
   int goToPage = 1;
 
+  int fpsDangerZone = 0;
+  int fpsWorking = 0;
+
   @override
   void initState() {
-    //initially set here but
     initializePage();
     initializeSession();
+
+    //If already on low power setting, don't bother checking;
+    //Also if user has one time chosen a power setting and knows where it is, don't check anymore
+    CardPrefList cardPrefs =
+        Provider.of<CardPrefs>(context, listen: false).cardPrefs;
+
+    if (cardPrefs.shouldTestDevicePerformance) {
+      print('starting fps test');
+      Fps.instance!.start();
+
+      Fps.instance!.addFpsCallback((fpsInfo) {
+        // print(fpsInfo);
+        // Note below format of fpsInfo object
+        // FpsInfo fpsInfo = FpsInfo(fps, totalCount, droppedCount, drawFramesCount);
+
+        //If the reported fps is under 10 fps, not good. Add one observation to danger list, otherwise add one to good list
+        (fpsInfo.fps < 10) ? fpsDangerZone++ : fpsWorking++;
+
+        //If we've observed 10 bad fps settings:
+        if (fpsDangerZone > 10) enableLightAnimation();
+        //If we've observed 15 reports of good working order:
+        if (fpsWorking > 15) disableFpsMonitoring();
+      });
+    }
     super.initState();
+  }
+
+  Future<void> enableLightAnimation() async {
+    print('FPS consistently low: ask to enableLightAnimation');
+    Fps.instance!.stop();
+    //Set the preference
+    Provider.of<CardPrefs>(context, listen: false).savePref('lowPower', true);
+    Provider.of<CardPrefs>(context, listen: false)
+        .savePref('shouldTestDevicePerformance', false);
+
+    setState(() {});
+
+    //Give the user a message and a chance to cancel
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      duration: Duration(seconds: 5),
+      content: Text(
+        AppLocalizations.of(context).lowPowerModeMessage,
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+      action: SnackBarAction(
+          label: AppLocalizations.of(context).cancel,
+          onPressed: () {
+            //undo the lowPower setting
+            Provider.of<CardPrefs>(context, listen: false)
+                .savePref('lowPower', false);
+            setState(() {});
+          }),
+    ));
+  }
+
+  Future<void> disableFpsMonitoring() async {
+    print('FPS consistently good: disable monitoring');
+    Provider.of<CardPrefs>(context, listen: false)
+        .savePref('shouldTestDevicePerformance', false);
+
+    Fps.instance!.stop();
   }
 
   Future<void> initializeSession() async {
@@ -57,6 +123,12 @@ class _CardsScreenState extends State<CardsScreen> {
       print('error caught');
       goToPage = 1;
     }
+  }
+
+  @override
+  void dispose() {
+    Fps.instance!.stop();
+    super.dispose();
   }
 
   @override
@@ -183,7 +255,8 @@ class _NameCardsState extends State<NameCards> {
         ? EdgeInsets.all(20)
         : EdgeInsets.symmetric(
             horizontal: 70,
-            vertical: isLandscape ? 70 : (mediaQuery.size.height - 700) / 2,
+            vertical: 70,
+            // vertical: isLandscape ? 70 : (mediaQuery.size.height - 700) / 2,
           );
 
     return ScrollConfiguration(

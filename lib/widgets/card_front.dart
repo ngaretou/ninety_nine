@@ -68,7 +68,7 @@ class CardFront extends StatelessWidget {
         child: Text(names.wolofName,
             textAlign: TextAlign.center,
             style: TextStyle(
-              height: 1,
+              // height: 1,
               fontFamily: "Harmattan",
               color: Colors.white,
               fontSize: adaptiveFontSize,

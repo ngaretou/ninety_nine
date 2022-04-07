@@ -125,7 +125,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "introPage2": "When you read a verse, ask yourself four questions:\n\n 1.\tWhat do these verses teach about God?\n\n 2.\tWhat do these verses teach about people?\n\n 3.\tHow can I live out these verses?\n\n 4.\tWho in my life needs to hear these verses?",
+  "introPage2": "When you read a verse, ask yourself four questions:\n\n 1. What do these verses teach about God?\n\n 2. What do these verses teach about people?\n\n 3. How can I live out these verses?\n\n 4. Who in my life needs to hear these verses?",
   "@introPage2": {
     "description": "DBS questions",
     "type": "text",
