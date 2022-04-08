@@ -3,6 +3,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'cards_screen.dart';
+
 class AboutScreen extends StatelessWidget {
   static const routeName = 'about-screen';
   const AboutScreen({Key? key}) : super(key: key);
@@ -37,46 +39,61 @@ class AboutScreen extends StatelessWidget {
       );
     }
 
+    double mediaQueryWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
           AppLocalizations.of(context).settingsAbout,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
-        child: ListView(
-          // physics: ClampingScrollPhysics(),
-          children: [
-            ExpansionTile(
-              tilePadding: EdgeInsets.only(left: 8),
-              title: Text('99', style: Theme.of(context).textTheme.headline6),
-              initiallyExpanded: true,
-              children: [
-                htmlSection("assets/html/about.html"),
-              ],
-            ),
-            ExpansionTile(
-              tilePadding: EdgeInsets.only(left: 8),
-              title: Text('Remerciements',
-                  style: Theme.of(context).textTheme.headline6),
-              initiallyExpanded: false,
-              children: [
-                htmlSection("assets/html/thanks.html"),
-              ],
-            ),
-            ExpansionTile(
-              tilePadding: EdgeInsets.only(left: 8),
-              title: Text('Licences',
-                  style: Theme.of(context).textTheme.headline6),
-              initiallyExpanded: false,
-              children: [
-                htmlSection("assets/html/licenses.html"),
-              ],
-            ),
-          ],
-        ),
-      ),
+      body: ScrollConfiguration(
+          //The 2.8 Flutter behavior is to not have mice grabbing and dragging - but we do want this in the web version of the app, so the custom scroll behavior here
+          behavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
+          child: Center(
+              child: MouseRegion(
+                  cursor: SystemMouseCursors.grab,
+                  child: Center(
+                    child: Container(
+                      width: mediaQueryWidth >= 730 ? 730 : mediaQueryWidth,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 10),
+                        child: ListView(
+                          // physics: ClampingScrollPhysics(),
+                          children: [
+                            ExpansionTile(
+                              tilePadding: EdgeInsets.only(left: 8),
+                              title: Text('99',
+                                  style: Theme.of(context).textTheme.headline6),
+                              initiallyExpanded: true,
+                              children: [
+                                htmlSection("assets/html/about.html"),
+                              ],
+                            ),
+                            ExpansionTile(
+                              tilePadding: EdgeInsets.only(left: 8),
+                              title: Text('Remerciements',
+                                  style: Theme.of(context).textTheme.headline6),
+                              initiallyExpanded: false,
+                              children: [
+                                htmlSection("assets/html/thanks.html"),
+                              ],
+                            ),
+                            ExpansionTile(
+                              tilePadding: EdgeInsets.only(left: 8),
+                              title: Text('Licences',
+                                  style: Theme.of(context).textTheme.headline6),
+                              initiallyExpanded: false,
+                              children: [
+                                htmlSection("assets/html/licenses.html"),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )))),
     );
   }
 }

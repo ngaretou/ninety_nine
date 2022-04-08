@@ -551,6 +551,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
 ///////////////////////////////
+    print(MediaQuery.of(context).size.width);
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -566,57 +567,60 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: MouseRegion(
               cursor: SystemMouseCursors.grab,
               child: MediaQuery.of(context).size.width >= 730
-                  ? Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      child: ListView(
-                        children: [
-                          viewListOfNames(),
-                          settingRow(themeTitle(), themeSettings()),
-                          Divider(),
-                          settingRow(backgroundTitle(), backgroundSettings()),
-                          Divider(),
-                          settingRow(directionTitle(), directionSettings()),
-                          Divider(),
-                          scriptPickerTitle(),
-                          asScriptPicker(),
-                          rsScriptPicker(),
-                          Divider(),
-                          settingRow(showFavsTitle(), showFavsSetting()),
-                          Divider(),
-                          lowPowerModeTitle(),
-                          lowPowerModeChooser(),
-                          Divider(),
-                          settingRow(languageTitle(), languageSetting()),
-                          Divider(),
-                          settingTitle(
-                            AppLocalizations.of(context).settingsAbout,
-                            Icons.question_answer,
-                            () {
+                  ? Container(
+                      width: 730,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 50),
+                        child: ListView(
+                          children: [
+                            viewListOfNames(),
+                            settingRow(themeTitle(), themeSettings()),
+                            Divider(),
+                            settingRow(backgroundTitle(), backgroundSettings()),
+                            Divider(),
+                            settingRow(directionTitle(), directionSettings()),
+                            Divider(),
+                            scriptPickerTitle(),
+                            asScriptPicker(),
+                            rsScriptPicker(),
+                            Divider(),
+                            settingRow(showFavsTitle(), showFavsSetting()),
+                            Divider(),
+                            lowPowerModeTitle(),
+                            lowPowerModeChooser(),
+                            Divider(),
+                            settingRow(languageTitle(), languageSetting()),
+                            Divider(),
+                            settingTitle(
+                              AppLocalizations.of(context).settingsAbout,
+                              Icons.info,
+                              () {
+                                Navigator.of(context)
+                                    .pushNamed(AboutScreen.routeName);
+                              },
+                            ),
+                            Divider(),
+                            settingTitle(
+                              AppLocalizations.of(context).settingsContactUs,
+                              Icons.email,
+                              () async {
+                                const url = 'mailto:equipedevmbs@gmail.com';
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  throw 'Could not launch $url';
+                                }
+                              },
+                            ),
+                            Divider(),
+                            settingTitle(
+                                AppLocalizations.of(context).settingsViewIntro,
+                                Icons.replay, () {
                               Navigator.of(context)
-                                  .pushNamed(AboutScreen.routeName);
-                            },
-                          ),
-                          Divider(),
-                          settingTitle(
-                            AppLocalizations.of(context).settingsContactUs,
-                            Icons.email,
-                            () async {
-                              const url = 'mailto:equipedevmbs@gmail.com';
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw 'Could not launch $url';
-                              }
-                            },
-                          ),
-                          Divider(),
-                          settingTitle(
-                              AppLocalizations.of(context).settingsViewIntro,
-                              Icons.replay, () {
-                            Navigator.of(context)
-                                .pushNamed(OnboardingScreen.routeName);
-                          }),
-                        ],
+                                  .pushNamed(OnboardingScreen.routeName);
+                            }),
+                          ],
+                        ),
                       ),
                     )
                   : ListView(

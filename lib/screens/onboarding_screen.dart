@@ -23,6 +23,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   late bool isPhone;
   late bool isLandscape;
   late EdgeInsets cardPadding;
+  late int _value;
 
   @override
   void didChangeDependencies() {
@@ -204,7 +205,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget languageChooser() {
     final themeProvider = Provider.of<ThemeModel>(context, listen: false);
-    late int _value;
+
     // bool? firstRun =
     //     Provider.of<CardPrefs>(context, listen: false).cardPrefs.showOnboarding;
     String? chosenLang =
@@ -266,7 +267,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               switch (value) {
                 case 1:
                   {
-                    themeProvider.setLocale('fr_CH');
+                    // themeProvider.setLocale('fr_CH');
                     break;
                   }
                 case 2:
