@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -85,9 +86,11 @@ class _CardIconBarState extends State<CardIconBar> {
                                       widget.name.wolofVerseRef);
                                 }),
                             TextButton(
-                                child: Text("وࣷلࣷفَلْ",
+                                child: Text(kIsWeb ? " وࣷلࣷفَلْ " : "وࣷلࣷفَلْ",
                                     style: TextStyle(
-                                        fontFamily: "Harmattan", fontSize: 22)),
+                                        fontFamily: "Harmattan",
+                                        fontSize: 22,
+                                        height: .5)),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   Share.share(' يࣵلَّ مࣷويْ' +

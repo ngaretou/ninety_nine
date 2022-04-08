@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'dart:ui' as ui;
@@ -13,7 +14,6 @@ class NamesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final names = Provider.of<DivineNames>(context, listen: false);
-    final mediaQuery = MediaQuery.of(context);
 
     TextStyle _asStyle = TextStyle(
         // height: 1.3,
@@ -26,8 +26,19 @@ class NamesList extends StatelessWidget {
         color: Theme.of(context).textTheme.headline6!.color,
         fontFamily: "Lato",
         fontSize: 22);
+
     ui.TextDirection _rtlText = ui.TextDirection.rtl;
     ui.TextDirection _ltrText = ui.TextDirection.ltr;
+
+    double mediaQueryWidth = MediaQuery.of(context).size.width;
+
+    String insertSpaces(String name) {
+      String nameToReturn = name;
+
+      if (kIsWeb) nameToReturn = name + " ";
+
+      return nameToReturn;
+    }
 
     return Scaffold(
         appBar: AppBar(
@@ -43,10 +54,8 @@ class NamesList extends StatelessWidget {
             child: Center(
                 child: MouseRegion(
                     cursor: SystemMouseCursors.grab,
-                    child: Padding(
-                      padding: mediaQuery.size.width >= 730
-                          ? EdgeInsets.symmetric(horizontal: 50)
-                          : EdgeInsets.symmetric(horizontal: 10),
+                    child: Container(
+                      width: mediaQueryWidth >= 730 ? 730 : mediaQueryWidth,
                       child: ScrollablePositionedList.builder(
                         itemCount: names.names.length,
                         itemBuilder: (ctx, i) => GestureDetector(
@@ -68,9 +77,13 @@ class NamesList extends StatelessWidget {
                                   Expanded(
                                     flex: 1,
                                     child: Center(
-                                      child: Text(names.names[i].wolofalName,
-                                          style: _asStyle,
-                                          textDirection: _rtlText),
+                                      child: Text(
+                                        insertSpaces(
+                                            names.names[i].wolofalName),
+                                        style: _asStyle,
+                                        textDirection: _rtlText,
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
                                   ),
                                   Expanded(
