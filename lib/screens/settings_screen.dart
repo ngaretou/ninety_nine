@@ -25,9 +25,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   //Main Settings screen construction:
   @override
   Widget build(BuildContext context) {
-    final bool _isPhone = (MediaQuery.of(context).size.width +
-            MediaQuery.of(context).size.height) <=
-        1400;
+    MediaQueryData mediaQuery = MediaQuery.of(context);
+
+    final bool _isPhone =
+        (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
 
     ThemeModel themeProvider = Provider.of<ThemeModel>(context, listen: false);
     ThemeComponents? _userTheme = themeProvider.userTheme;
@@ -551,7 +552,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
 ///////////////////////////////
-    print(MediaQuery.of(context).size.width);
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -566,7 +567,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Center(
                 child: MouseRegion(
               cursor: SystemMouseCursors.grab,
-              child: MediaQuery.of(context).size.width >= 730
+              child: mediaQuery.size.width >= 730
                   ? Container(
                       width: 730,
                       child: Padding(

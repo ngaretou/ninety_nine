@@ -263,11 +263,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ],
             onChanged: (dynamic value) {
-              //no need to setState here as the provider is calling the rebuild with notifyListeners();, although I'm sad to say I don't know where the listen:true is located
+              //no need to setState here as the provider is calling the rebuild with notifyListeners();,
+              //although I'm sad to say I don't know where the listen:true is located
               switch (value) {
                 case 1:
                   {
-                    // themeProvider.setLocale('fr_CH');
+                    themeProvider.setLocale('fr_CH');
                     break;
                   }
                 case 2:
