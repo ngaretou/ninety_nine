@@ -7,3 +7,4 @@ An app to display the ninety-nine names in multiple languages/scripts with assoc
 * Flutter framework
 
 Still in pre-release development.
+See current web version at http://99.sng.al
