@@ -64,7 +64,6 @@ class _CardAnimatorState extends State<CardAnimator>
 
   @override
   void dispose() {
-    widget.player.dispose();
     _animationController.dispose();
     super.dispose();
   }

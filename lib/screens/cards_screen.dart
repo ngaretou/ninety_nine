@@ -39,38 +39,52 @@ class CardsScreen extends StatefulWidget {
 class _CardsScreenState extends State<CardsScreen> {
   int goToPage = 1;
 
+  //count of these two events - a danger zone event is less than the given fps rate - a fpsWorking event is when the callback reports a good frame rate.
   int fpsDangerZone = 0;
   int fpsWorking = 0;
 
   @override
   void initState() {
+    CardPrefList cardPrefs =
+        Provider.of<CardPrefs>(context, listen: false).cardPrefs;
+
     initializePage();
     initializeSession();
 
     //If already on low power setting, don't bother checking;
     //Also if user has one time chosen a power setting and knows where it is, don't check anymore
-    CardPrefList cardPrefs =
-        Provider.of<CardPrefs>(context, listen: false).cardPrefs;
 
-    if (cardPrefs.shouldTestDevicePerformance) {
-      print('starting fps test');
-      Fps.instance!.start();
+    // enableFpsMonitoring(); //for testing, always turns on fps monitoring
+    if (cardPrefs.shouldTestDevicePerformance) enableFpsMonitoring();
 
-      Fps.instance!.addFpsCallback((fpsInfo) {
-        // print(fpsInfo);
-        // Note below format of fpsInfo object
-        // FpsInfo fpsInfo = FpsInfo(fps, totalCount, droppedCount, drawFramesCount);
-
-        //If the reported fps is under 10 fps, not good. Add one observation to danger list, otherwise add one to good list
-        (fpsInfo.fps < 10) ? fpsDangerZone++ : fpsWorking++;
-
-        //If we've observed 10 bad fps settings:
-        if (fpsDangerZone > 10) enableLightAnimation();
-        //If we've observed 15 reports of good working order:
-        if (fpsWorking > 15) disableFpsMonitoring();
-      });
-    }
     super.initState();
+  }
+
+  Future<void> enableFpsMonitoring() async {
+    print('starting fps test');
+    Fps.instance!.start();
+
+    Fps.instance!.addFpsCallback((fpsInfo) {
+      // print(fpsInfo);
+      // Note below format of fpsInfo object
+      // FpsInfo fpsInfo = FpsInfo(fps, totalCount, droppedCount, drawFramesCount);
+
+      //If the reported fps is under 10 fps, not good. Add one observation to danger list, otherwise add one to good list
+      (fpsInfo.fps < 10) ? fpsDangerZone++ : fpsWorking++;
+
+      //If we've observed 10 bad fps settings:
+      if (fpsDangerZone > 10) enableLightAnimation();
+      //If we've observed 15 reports of good working order:
+      if (fpsWorking > 15) disableFpsMonitoring();
+    });
+  }
+
+  Future<void> disableFpsMonitoring() async {
+    print('FPS consistently good: disable monitoring');
+    Provider.of<CardPrefs>(context, listen: false)
+        .savePref('shouldTestDevicePerformance', false);
+
+    Fps.instance!.stop();
   }
 
   Future<void> enableLightAnimation() async {
@@ -86,12 +100,14 @@ class _CardsScreenState extends State<CardsScreen> {
     //Give the user a message and a chance to cancel
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      duration: Duration(seconds: 5),
+      duration: Duration(seconds: 15),
       content: Text(
         AppLocalizations.of(context).lowPowerModeMessage,
-        style: Theme.of(context).textTheme.titleLarge,
+        style: TextStyle(fontSize: 18),
       ),
       action: SnackBarAction(
+          //for some reason the action color is not contrasting enough by default
+          textColor: Theme.of(context).colorScheme.background,
           label: AppLocalizations.of(context).cancel,
           onPressed: () {
             //undo the lowPower setting
@@ -100,14 +116,6 @@ class _CardsScreenState extends State<CardsScreen> {
             setState(() {});
           }),
     ));
-  }
-
-  Future<void> disableFpsMonitoring() async {
-    print('FPS consistently good: disable monitoring');
-    Provider.of<CardPrefs>(context, listen: false)
-        .savePref('shouldTestDevicePerformance', false);
-
-    Fps.instance!.stop();
   }
 
   Future<void> initializeSession() async {
@@ -138,30 +146,31 @@ class _CardsScreenState extends State<CardsScreen> {
       floatingActionButton: Builder(
         builder: (context) {
           return FloatingActionButton(
-              onPressed: () {
-                // Scaffold.of(context).openEndDrawer();
-                Navigator.of(context)
-                    //Here settings screen is opened.
-                    .pushNamed(SettingsScreen.routeName)
-                    //The response from Settigns Screen is only in case of the user selecting a name in List View.
-                    //See the settings screen and the list view screen for the chain of commands here.
-                    .then((value) {
-                  if (value != null) {
-                    setState(() {
-                      goToPage = value as int;
-                    });
-                  } else {
-                    setState(() {});
-                  }
-                });
-              },
-              child: Icon(Icons.menu),
-              mini: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ));
+            onPressed: () {
+              // Scaffold.of(context).openEndDrawer();
+              Navigator.of(context)
+                  //Here settings screen is opened.
+                  .pushNamed(SettingsScreen.routeName)
+                  //The response from Settings Screen is only in case of the user selecting a name in List View.
+                  //See the settings screen and the list view screen for the chain of commands here.
+                  .then((value) {
+                if (value != null) {
+                  setState(() {
+                    goToPage = value as int;
+                  });
+                } else {
+                  setState(() {});
+                }
+              });
+            },
+            child: Icon(Icons.menu),
+            mini: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+          );
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
@@ -173,13 +182,15 @@ class _CardsScreenState extends State<CardsScreen> {
 }
 
 /*
-Name Cards PageViewBuilder - the 
+Name Cards PageViewBuilder
  */
 class NameCards extends StatefulWidget {
   final int? goToPage;
   final bool newSession;
+
   const NameCards({Key? key, required this.goToPage, this.newSession = true})
       : super(key: key);
+
   @override
   State<NameCards> createState() => _NameCardsState();
 }
@@ -197,7 +208,6 @@ class _NameCardsState extends State<NameCards> {
 
   @override
   void didChangeDependencies() {
-    print('NameCards didChangeDependencies');
     //Smallest iPhone is UIKit 320 x 480 = 800.
     //Biggest is 428 x 926 = 1354.
     //Android biggest phone I can find is is 480 x 853 = 1333
@@ -284,30 +294,8 @@ class _NameCardsState extends State<NameCards> {
                   // }
                 },
                 itemCount: namesToShow.length,
-                itemBuilder: (ctx, i) {
-                  AudioPlayer player = AudioPlayer();
-
-                  // Listen to errors during playback.
-                  player.playbackEventStream.listen((event) {
-                    // print(event);
-                  }, onError: (Object e, StackTrace stackTrace) {
-                    print('A stream error occurred: $e');
-                  });
-
-                  final cardFront = CardFront(
-                      namesToShow[i], player, mediaQuery, cardPadding);
-                  final cardBack =
-                      CardBack(namesToShow[i], player, mediaQuery, cardPadding);
-
-                  // The animation in this app is pretty heavy, so to lighten the load we pass in pre-built elements so they are not rebuilt with each tick of the animation - kind of takes away from the flow of logic for the developer
-                  return CardAnimator(
-                    cardFront: cardFront,
-                    cardBack: cardBack,
-                    mediaQuery: mediaQuery,
-                    isPhone: isPhone,
-                    player: player,
-                  );
-                }),
+                itemBuilder: (ctx, i) =>
+                    CardPage(namesToShow[i], isPhone, mediaQuery, cardPadding)),
           ),
         ),
       ),
@@ -316,15 +304,56 @@ class _NameCardsState extends State<NameCards> {
 }
 
 class CardPage extends StatefulWidget {
-  const CardPage({Key? key}) : super(key: key);
+  final DivineName name;
+  final bool isPhone;
+  final MediaQueryData mediaQuery;
+  final EdgeInsets cardPadding;
+
+  const CardPage(this.name, this.isPhone, this.mediaQuery, this.cardPadding,
+      {Key? key})
+      : super(key: key);
 
   @override
   State<CardPage> createState() => _CardPageState();
 }
 
 class _CardPageState extends State<CardPage> {
+  late AudioPlayer player;
+
+  @override
+  void initState() {
+    player = AudioPlayer();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    print('disposing');
+    player.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    // Listen to errors during playback.
+    player.playbackEventStream.listen((event) {
+      // print(event);
+    }, onError: (Object e, StackTrace stackTrace) {
+      print('A stream error occurred: $e');
+    });
+
+    final cardFront =
+        CardFront(widget.name, player, widget.mediaQuery, widget.cardPadding);
+    final cardBack =
+        CardBack(widget.name, player, widget.mediaQuery, widget.cardPadding);
+
+    // The animation in this app is pretty heavy, so to lighten the load we pass in pre-built elements so they are not rebuilt with each tick of the animation - kind of takes away from the flow of logic for the developer
+    return CardAnimator(
+      cardFront: cardFront,
+      cardBack: cardBack,
+      mediaQuery: widget.mediaQuery,
+      isPhone: widget.isPhone,
+      player: player,
+    );
   }
 }
