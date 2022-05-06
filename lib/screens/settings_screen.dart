@@ -38,6 +38,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     bool _wolof = cardPrefs.cardPrefs.wolofVerseEnabled;
     bool _wolofal = cardPrefs.cardPrefs.wolofalVerseEnabled;
 
+    final activeSwitchColor = Theme.of(context).colorScheme.primary;
+    final activeControlColor = Theme.of(context).colorScheme.inversePrimary;
+
     //Widgets
     //Main template for all setting titles
     Widget settingTitle(String title, IconData icon, Function? tapHandler) {
@@ -222,6 +225,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               //fr checks for fr or fr_
               //en checks for contains en
               ChoiceChip(
+                selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: userLocale.toString() == 'fr_CH' ? true : false,
                 label: Text(
@@ -233,6 +237,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
               ChoiceChip(
+                selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: userLocale.toString() == 'fr' ||
                         userLocale.toString() == 'fr_'
@@ -247,6 +252,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
               ChoiceChip(
+                selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: userLocale.toString().contains('en') ? true : false,
                 label: Text(
@@ -354,6 +360,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             spacing: 15,
             children: [
               ChoiceChip(
+                selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: cardPrefs.cardPrefs.textDirection ? false : true,
                 avatar: Icon(Icons.arrow_forward),
@@ -367,6 +374,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
               ChoiceChip(
+                selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: cardPrefs.cardPrefs.textDirection ? true : false,
                 avatar: Icon(Icons.arrow_back),
@@ -406,6 +414,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
+                  activeColor: activeSwitchColor,
+                  activeTrackColor: activeControlColor,
                   value: _wolofal,
                   onChanged: (_) {
                     cardPrefs.savePref('wolofalVerseEnabled', !_wolofal);
@@ -440,6 +450,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
+                  activeColor: activeSwitchColor,
+                  activeTrackColor: activeControlColor,
                   value: _wolof,
                   onChanged: (_) {
                     cardPrefs.savePref('wolofVerseEnabled', !_wolof);
@@ -462,6 +474,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             spacing: 15,
             children: [
               ChoiceChip(
+                selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: cardPrefs.cardPrefs.showFavs ? true : false,
                 avatar: Icon(Icons.favorite),
@@ -505,6 +518,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
               ChoiceChip(
+                selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: cardPrefs.cardPrefs.showFavs ? false : true,
                 avatar: Icon(Icons.all_inclusive),
@@ -544,6 +558,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
+                  activeColor: activeSwitchColor,
+                  activeTrackColor: activeControlColor,
                   value: cardPrefs.cardPrefs.lowPower,
                   onChanged: (_) {
                     cardPrefs.savePref(
