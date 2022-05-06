@@ -92,6 +92,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     //Now individual implementations of it
+    Widget viewListOfNames() {
+      return settingTitle(
+        AppLocalizations.of(context).listView,
+        Icons.list,
+        () {
+          //Part of the names list navigation - this opens the NamesLIst, then gets and then passes on the value from the popped screen
+          Navigator.of(context).pushNamed(NamesList.routeName).then((value) {
+            Navigator.of(context).pop(value);
+          });
+        },
+      );
+    }
+
     Widget themeTitle() {
       return settingTitle(AppLocalizations.of(context).settingsTheme,
           Icons.settings_brightness, null);
@@ -102,16 +115,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
         // Colors.red,
         // Colors.deepOrange,
         // Colors.amber,
-        // Colors.lightGreen,
+        Colors.lightGreen,
         Colors.green,
         Colors.teal,
         Colors.cyan,
         Colors.blue,
-        // Colors.indigo,
-        // Colors.deepPurple,
-        // Colors.blueGrey,
-        // Colors.brown,
-        // Colors.grey
+        Colors.indigo,
+        Colors.deepPurple,
+        Colors.blueGrey,
+        Colors.brown,
+        Colors.grey
       ];
 
       List<DropdownMenuItem<String>> menuItems = [];
@@ -194,6 +207,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
+    print(userLocale.toString());
     Widget languageSetting() {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -202,6 +216,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             direction: Axis.horizontal,
             spacing: 15,
             children: [
+              //Note that userLocale.toString() evaluates to for example 'fr' in Android/iOS but on the web 'fr_' with the underscore.
+              //So three slightly different checks for the three langs:
+              //fr_CH checks for fr_CH only
+              //fr checks for fr or fr_
+              //en checks for contains en
               ChoiceChip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: userLocale.toString() == 'fr_CH' ? true : false,
@@ -215,7 +234,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               ChoiceChip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: userLocale.toString() == 'fr' ? true : false,
+                selected: userLocale.toString() == 'fr' ||
+                        userLocale.toString() == 'fr_'
+                    ? true
+                    : false,
                 label: Text(
                   "Français",
                   style: Theme.of(context).textTheme.subtitle1,
@@ -226,7 +248,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               ChoiceChip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: userLocale.toString() == 'en' ? true : false,
+                selected: userLocale.toString().contains('en') ? true : false,
                 label: Text(
                   "English",
                   style: Theme.of(context).textTheme.subtitle1,
@@ -349,7 +371,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selected: cardPrefs.cardPrefs.textDirection ? true : false,
                 avatar: Icon(Icons.arrow_back),
                 label: Text(
-                  "(بݖد)",
+                  "(بدف)",
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 onSelected: (bool selected) {
@@ -538,17 +560,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
-    Widget viewListOfNames() {
+    Widget aboutWidget() {
       return settingTitle(
-        AppLocalizations.of(context).listView,
-        Icons.list,
+        AppLocalizations.of(context).settingsAbout,
+        Icons.info,
         () {
-          //Part of the names list navigation - this opens the NamesLIst, then gets and then passes on the value from the popped screen
-          Navigator.of(context).pushNamed(NamesList.routeName).then((value) {
-            Navigator.of(context).pop(value);
-          });
+          Navigator.of(context).pushNamed(AboutScreen.routeName);
         },
       );
+    }
+
+    Widget contactUsWidget() {
+      return settingTitle(
+        AppLocalizations.of(context).settingsContactUs,
+        Icons.email,
+        () async {
+          const url = 'mailto:equipedevmbs@gmail.com';
+          if (await canLaunch(url)) {
+            await launch(url);
+          } else {
+            throw 'Could not launch $url';
+          }
+        },
+      );
+    }
+
+    Widget showIntroWidget() {
+      return settingTitle(
+          AppLocalizations.of(context).settingsViewIntro, Icons.replay, () {
+        Navigator.of(context).pushNamed(OnboardingScreen.routeName);
+      });
     }
 
 ///////////////////////////////
@@ -592,34 +633,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             Divider(),
                             settingRow(languageTitle(), languageSetting()),
                             Divider(),
-                            settingTitle(
-                              AppLocalizations.of(context).settingsAbout,
-                              Icons.info,
-                              () {
-                                Navigator.of(context)
-                                    .pushNamed(AboutScreen.routeName);
-                              },
-                            ),
+                            aboutWidget(),
                             Divider(),
-                            settingTitle(
-                              AppLocalizations.of(context).settingsContactUs,
-                              Icons.email,
-                              () async {
-                                const url = 'mailto:equipedevmbs@gmail.com';
-                                if (await canLaunch(url)) {
-                                  await launch(url);
-                                } else {
-                                  throw 'Could not launch $url';
-                                }
-                              },
-                            ),
+                            contactUsWidget(),
                             Divider(),
-                            settingTitle(
-                                AppLocalizations.of(context).settingsViewIntro,
-                                Icons.replay, () {
-                              Navigator.of(context)
-                                  .pushNamed(OnboardingScreen.routeName);
-                            }),
+                            showIntroWidget()
                           ],
                         ),
                       ),
@@ -637,35 +655,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         settingColumn(showFavsTitle(), showFavsSetting()),
                         lowPowerModeTitle(),
                         lowPowerModeChooser(),
+                        Divider(),
                         settingColumn(languageTitle(), languageSetting()),
-                        settingTitle(
-                          AppLocalizations.of(context).settingsAbout,
-                          Icons.question_answer,
-                          () {
-                            Navigator.of(context)
-                                .pushNamed(AboutScreen.routeName);
-                          },
-                        ),
+                        aboutWidget(),
                         Divider(),
-                        settingTitle(
-                          AppLocalizations.of(context).settingsContactUs,
-                          Icons.email,
-                          () async {
-                            const url = 'mailto:equipedevmbs@gmail.com';
-                            if (await canLaunch(url)) {
-                              await launch(url);
-                            } else {
-                              throw 'Could not launch $url';
-                            }
-                          },
-                        ),
+                        contactUsWidget(),
                         Divider(),
-                        settingTitle(
-                            AppLocalizations.of(context).settingsViewIntro,
-                            Icons.replay, () {
-                          Navigator.of(context)
-                              .pushNamed(OnboardingScreen.routeName);
-                        }),
+                        showIntroWidget()
                       ],
                     ),
               // ),
