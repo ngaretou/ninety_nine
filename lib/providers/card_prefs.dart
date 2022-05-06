@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'dart:core';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+
+const darkBackground = AssetImage("assets/images/black-bg-1.jpg");
+const lightBackground = AssetImage("assets/images/white-bg-2.jpg");
+const assetImage1 = AssetImage("assets/images/1.jpg");
+const assetImage2 = AssetImage("assets/images/2.jpg");
+const assetImage3 = AssetImage("assets/images/3.jpg");
+const assetImage4 = AssetImage("assets/images/4.jpg");
+const assetImage5 = AssetImage("assets/images/5.jpg");
+const assetImage6 = AssetImage("assets/images/6.jpg");
+const assetImage7 = AssetImage("assets/images/7.jpg");
+const assetImage8 = AssetImage("assets/images/8.jpg");
+const assetImage9 = AssetImage("assets/images/9.jpg");
+const assetImage10 = AssetImage("assets/images/10.jpg");
+const assetImage11 = AssetImage("assets/images/11.jpg");
+const assetImage12 = AssetImage("assets/images/12.jpg");
+const assetImage13 = AssetImage("assets/images/13.jpg");
+const assetImage14 = AssetImage("assets/images/14.jpg");
 
 class CardPrefList {
   bool textDirection;

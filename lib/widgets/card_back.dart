@@ -11,8 +11,8 @@ import '../providers/theme.dart';
 import 'package:just_audio/just_audio.dart';
 import 'card_icon_bar.dart';
 
-const darkBackground = AssetImage("assets/images/black-bg-1.jpg");
-const lightBackground = AssetImage("assets/images/white-bg-2.jpg");
+// const darkBackground = AssetImage("assets/images/black-bg-1.jpg");
+// const lightBackground = AssetImage("assets/images/white-bg-2.jpg");
 
 class CardBack extends StatelessWidget {
   final DivineName name;

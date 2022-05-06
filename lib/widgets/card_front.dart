@@ -89,6 +89,85 @@ class CardFront extends StatelessWidget {
             width: 2,
             color: Theme.of(context).colorScheme.outline));
 
+    //Using consts for images.
+    //Keeping a limited number of images in memory
+    //rather than constanly reloading them
+    //seems to offer some performance and memory improvements.
+    late AssetImage assetImage;
+    switch (name.img) {
+      case '1':
+        {
+          assetImage = assetImage1;
+        }
+        break;
+      case '2':
+        {
+          assetImage = assetImage2;
+        }
+        break;
+      case '3':
+        {
+          assetImage = assetImage3;
+        }
+        break;
+      case '4':
+        {
+          assetImage = assetImage4;
+        }
+        break;
+      case '5':
+        {
+          assetImage = assetImage5;
+        }
+        break;
+      case '6':
+        {
+          assetImage = assetImage6;
+        }
+        break;
+      case '7':
+        {
+          assetImage = assetImage7;
+        }
+        break;
+      case '8':
+        {
+          assetImage = assetImage8;
+        }
+        break;
+      case '9':
+        {
+          assetImage = assetImage9;
+        }
+        break;
+      case '10':
+        {
+          assetImage = assetImage10;
+        }
+        break;
+      case '11':
+        {
+          assetImage = assetImage11;
+        }
+        break;
+      case '12':
+        {
+          assetImage = assetImage12;
+        }
+        break;
+      case '13':
+        {
+          assetImage = assetImage13;
+        }
+        break;
+      case '14':
+        {
+          assetImage = assetImage14;
+        }
+        break;
+      default:
+    }
+
     return Container(
       //This is important as it dictates the outer boundaries for what follows
       height: mediaQuery.size.height,
@@ -104,9 +183,11 @@ class CardFront extends StatelessWidget {
                   color: Colors.black54,
                   borderRadius: BorderRadius.circular(20.0),
                   image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage("assets/images/${name.img}.jpg"),
-                  ),
+                      fit: BoxFit.cover,
+
+                      //This is the original - now using consts
+                      // image: AssetImage("assets/images/${name.img}.jpg"),
+                      image: assetImage),
                 )
               : null,
           child: Container(
