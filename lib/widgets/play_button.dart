@@ -20,7 +20,7 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     _initialized = false;
     super.initState();
   }
@@ -100,7 +100,7 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

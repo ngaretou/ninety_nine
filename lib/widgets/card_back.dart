@@ -184,8 +184,8 @@ class CardBack extends StatelessWidget {
                           ),
                           onPressed: () async {
                             const String url = 'https://sng.al/chrono';
-                            if (await canLaunch(url)) {
-                              await launch(url);
+                            if (await canLaunchUrl(Uri.parse(url))) {
+                              await launchUrl(Uri.parse(url));
                             } else {
                               throw 'Could not launch $url';
                             }
