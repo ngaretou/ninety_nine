@@ -38,8 +38,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     bool _wolof = cardPrefs.cardPrefs.wolofVerseEnabled;
     bool _wolofal = cardPrefs.cardPrefs.wolofalVerseEnabled;
 
-    final activeSwitchColor = Theme.of(context).colorScheme.primary;
     final activeControlColor = Theme.of(context).colorScheme.inversePrimary;
+    final activeSwitchColor = Theme.of(context).colorScheme.primary;
 
     //Widgets
     //Main template for all setting titles
@@ -592,8 +592,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         Icons.email,
         () async {
           const url = 'mailto:equipedevmbs@gmail.com';
-          if (await canLaunch(url)) {
-            await launch(url);
+          if (await canLaunchUrl(Uri.parse(url))) {
+            await launchUrl(Uri.parse(url));
           } else {
             throw 'Could not launch $url';
           }
