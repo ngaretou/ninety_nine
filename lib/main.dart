@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './providers/card_prefs.dart';
 import './providers/names.dart';
 import './providers/theme.dart';
-import './providers/player_manager.dart';
 
 import './screens/settings_screen.dart';
 import './screens/about_screen.dart';

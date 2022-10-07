@@ -176,7 +176,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   )
                 : null,
             style: ElevatedButton.styleFrom(
-              primary: Colors.white,
+              backgroundColor: Colors.white,
               padding: EdgeInsets.all(0),
               shape: CircleBorder(),
             ),
@@ -195,7 +195,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   )
                 : null,
             style: ElevatedButton.styleFrom(
-              primary: Colors.black,
+              backgroundColor: Colors.black,
               padding: EdgeInsets.all(0),
               shape: CircleBorder(),
             ),
@@ -313,7 +313,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     color: Colors.black,
                   ),
             style: ElevatedButton.styleFrom(
-              primary: Colors.white70,
+              backgroundColor: Colors.white70,
               padding: EdgeInsets.all(0),
               shape: CircleBorder(),
             ),

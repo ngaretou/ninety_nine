@@ -94,6 +94,7 @@ class _CardIconBarState extends State<CardIconBar> {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   Share.share(' يࣵلَّ مࣷويْ' +
+                                      " " +
                                       widget.name.wolofalName +
                                       ":  " +
                                       widget.name.wolofalVerse +
