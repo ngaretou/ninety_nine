@@ -10,24 +10,24 @@
       "program": "lib/main.dart",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "release",
-      "args": ["--bundle-sksl-path flutter_01.sksl.json"]
+      "flutterMode": "release"
+      // "args": ["--bundle-sksl-path flutter_01.sksl.json"]
     },
     {
       "name": "Flutter profile",
       "program": "lib/main.dart",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "profile",
-      "args": ["--bundle-sksl-path flutter_01.sksl.json"]
+      "flutterMode": "profile"
+      // "args": ["--bundle-sksl-path flutter_01.sksl.json"]
     },
     {
       "name": "Flutter debug",
       "program": "lib/main.dart",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "debug",
-      "args": ["--bundle-sksl-path flutter_01.sksl.json"]
+      "flutterMode": "debug"
+      // "args": ["--bundle-sksl-path flutter_01.sksl.json"]
     }
   ]
 }
