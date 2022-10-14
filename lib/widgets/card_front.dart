@@ -165,6 +165,36 @@ class CardFront extends StatelessWidget {
           assetImage = assetImage14;
         }
         break;
+      case '15':
+        {
+          assetImage = assetImage15;
+        }
+        break;
+      case '16':
+        {
+          assetImage = assetImage16;
+        }
+        break;
+      case '17':
+        {
+          assetImage = assetImage17;
+        }
+        break;
+      case '18':
+        {
+          assetImage = assetImage18;
+        }
+        break;
+      case '19':
+        {
+          assetImage = assetImage19;
+        }
+        break;
+      case '20':
+        {
+          assetImage = assetImage20;
+        }
+        break;
       default:
     }
 

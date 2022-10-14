@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const darkBackground = AssetImage("assets/images/black-bg-1.jpg");
-const lightBackground = AssetImage("assets/images/white-bg-2.jpg");
+const lightBackground = AssetImage("assets/images/white-bg-5.jpg");
 const assetImage1 = AssetImage("assets/images/1.jpg");
 const assetImage2 = AssetImage("assets/images/2.jpg");
 const assetImage3 = AssetImage("assets/images/3.jpg");
@@ -20,6 +20,12 @@ const assetImage11 = AssetImage("assets/images/11.jpg");
 const assetImage12 = AssetImage("assets/images/12.jpg");
 const assetImage13 = AssetImage("assets/images/13.jpg");
 const assetImage14 = AssetImage("assets/images/14.jpg");
+const assetImage15 = AssetImage("assets/images/15.jpg");
+const assetImage16 = AssetImage("assets/images/16.jpg");
+const assetImage17 = AssetImage("assets/images/17.jpg");
+const assetImage18 = AssetImage("assets/images/18.jpg");
+const assetImage19 = AssetImage("assets/images/19.jpg");
+const assetImage20 = AssetImage("assets/images/20.jpg");
 
 class CardPrefList {
   bool textDirection;

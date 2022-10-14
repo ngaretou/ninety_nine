@@ -172,6 +172,10 @@ class CardBack extends StatelessWidget {
                             : SizedBox(width: 20),
                         SizedBox(height: 60),
                         TextButton(
+                          // style: TextButton.styleFrom(
+                          //     backgroundColor: Theme.of(context)
+                          //         .colorScheme
+                          //         .tertiaryContainer),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

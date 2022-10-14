@@ -64,7 +64,7 @@ class DivineNames with ChangeNotifier {
   //This is to select random numbers until the pictures are gone, then loop again, but not in same order.
   String get randomNumber {
     //set max to the last int of the number of pics that we ship with the app
-    int numberOfPicsAvailable = 14;
+    int numberOfPicsAvailable = 20;
     String r;
     Random rnd = new Random();
 

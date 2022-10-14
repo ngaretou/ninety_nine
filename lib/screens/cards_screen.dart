@@ -100,7 +100,7 @@ class _CardsScreenState extends State<CardsScreen> {
     //Give the user a message and a chance to cancel
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      duration: Duration(seconds: 15),
+      duration: Duration(seconds: 8),
       content: Text(
         AppLocalizations.of(context).lowPowerModeMessage,
         style: TextStyle(fontSize: 18),
