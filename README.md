@@ -6,5 +6,7 @@ An app to display the ninety-nine names in multiple languages/scripts with assoc
 * Multilingual menus
 * Flutter framework
 
-Still in pre-release development.
-See current web version at http://99.sng.al
+Landing page at http://sng.al/99
+
+
+Todo: 'copy' in addition to 'share'
