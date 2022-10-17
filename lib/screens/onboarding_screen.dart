@@ -31,13 +31,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
     isLandscape =
         (mediaQuery.orientation == Orientation.landscape) ? true : false;
-    cardPadding = isPhone
-        ? EdgeInsets.all(20)
-        : EdgeInsets.symmetric(
-            horizontal: 70,
-            vertical: 70,
-            // vertical: isLandscape ? 70 : (mediaQuery.size.height - 700) / 2,
-          );
+
+    if (isPhone) {
+      cardPadding = EdgeInsets.all(20);
+    } else {
+      if (mediaQuery.size.height < 900) {
+        cardPadding = EdgeInsets.symmetric(
+          horizontal: 70,
+          vertical: 70,
+          // vertical: isLandscape ? 70 : (mediaQuery.size.height - 700) / 2,
+        );
+      } else {
+        cardPadding = EdgeInsets.symmetric(
+          horizontal: 70,
+          vertical: (mediaQuery.size.height - 760) / 2,
+          // vertical: isLandscape ? 70 : (mediaQuery.size.height - 700) / 2,
+        );
+      }
+    }
     _pageController = PageController(
       initialPage: 0,
       viewportFraction: isPhone ? 1 : 540 / mediaQuery.size.width,

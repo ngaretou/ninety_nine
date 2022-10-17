@@ -73,7 +73,7 @@ class _CardsScreenState extends State<CardsScreen> {
       (fpsInfo.fps < 10) ? fpsDangerZone++ : fpsWorking++;
 
       //If we've observed 10 bad fps settings:
-      if (fpsDangerZone > 10) enableLightAnimation();
+      if (fpsDangerZone > 5) enableLightAnimation();
       //If we've observed 15 reports of good working order:
       if (fpsWorking > 15) disableFpsMonitoring();
     });
@@ -213,6 +213,8 @@ class _NameCardsState extends State<NameCards> {
     //Android biggest phone I can find is is 480 x 853 = 1333
     //For tablets the smallest I can find is 768 x 1024
     mediaQuery = MediaQuery.of(context);
+    print('${mediaQuery.size.width} x ${mediaQuery.size.height}');
+
     isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
     isLandscape =
         (mediaQuery.orientation == Orientation.landscape) ? true : false;
@@ -225,6 +227,7 @@ class _NameCardsState extends State<NameCards> {
               ? 0
               : Provider.of<DivineNames>(context, listen: false).lastNameViewed,
       viewportFraction: isPhone ? 1 : 540 / mediaQuery.size.width,
+      // viewportFraction: isPhone ? 1 : 540 / mediaQuery.size.width,
       //540 = 400 min card width + 70 on each side padding
       keepPage: false,
     );
@@ -238,6 +241,7 @@ class _NameCardsState extends State<NameCards> {
 
   @override
   Widget build(BuildContext context) {
+    mediaQuery = MediaQuery.of(context);
     print('Name Cards PageViewBuilder');
 
     //We need to get this in the build so it updates when rebuilding on setState
@@ -261,13 +265,25 @@ class _NameCardsState extends State<NameCards> {
       divineNames.moveToName = false;
     }
 
-    EdgeInsets cardPadding = isPhone
-        ? EdgeInsets.all(20)
-        : EdgeInsets.symmetric(
-            horizontal: 70,
-            vertical: 70,
-            // vertical: isLandscape ? 70 : (mediaQuery.size.height - 700) / 2,
-          );
+    late EdgeInsets cardPadding;
+
+    if (isPhone) {
+      cardPadding = EdgeInsets.all(20);
+    } else {
+      if (mediaQuery.size.height < 900) {
+        cardPadding = EdgeInsets.symmetric(
+          horizontal: 70,
+          vertical: 70,
+          // vertical: isLandscape ? 70 : (mediaQuery.size.height - 700) / 2,
+        );
+      } else {
+        cardPadding = EdgeInsets.symmetric(
+          horizontal: 70,
+          vertical: (mediaQuery.size.height - 760) / 2,
+          // vertical: isLandscape ? 70 : (mediaQuery.size.height - 700) / 2,
+        );
+      }
+    }
 
     return ScrollConfiguration(
       //The 2.8 Flutter behavior is to not have mice grabbing and dragging - but we do want this in the web version of the app, so the custom scroll behavior here
@@ -328,7 +344,7 @@ class _CardPageState extends State<CardPage> {
 
   @override
   void dispose() {
-    print('disposing');
+    // print('disposing');
     player.dispose();
     super.dispose();
   }

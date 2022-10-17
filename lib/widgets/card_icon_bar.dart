@@ -77,13 +77,19 @@ class _CardIconBarState extends State<CardIconBar> {
                             TextButton(
                                 child: Text("Wolof"),
                                 onPressed: () {
+                                  final Size size = MediaQuery.of(context).size;
+
                                   Navigator.of(context).pop();
-                                  Share.share('Yàlla mooy ' +
-                                      widget.name.wolofName +
-                                      ":  " +
-                                      widget.name.wolofVerse +
-                                      " -- " +
-                                      widget.name.wolofVerseRef);
+                                  Share.share(
+                                    'Yàlla mooy ' +
+                                        widget.name.wolofName +
+                                        ":  " +
+                                        widget.name.wolofVerse +
+                                        " -- " +
+                                        widget.name.wolofVerseRef,
+                                    sharePositionOrigin: Rect.fromLTWH(
+                                        0, 0, size.width, size.height / 2),
+                                  );
                                 }),
                             TextButton(
                                 child: Text(" وࣷلࣷفَلْ ",
@@ -92,14 +98,20 @@ class _CardIconBarState extends State<CardIconBar> {
                                         fontSize: 22,
                                         height: .5)),
                                 onPressed: () {
+                                  final Size size = MediaQuery.of(context).size;
+
                                   Navigator.of(context).pop();
-                                  Share.share(' يࣵلَّ مࣷويْ' +
-                                      " " +
-                                      widget.name.wolofalName +
-                                      ":  " +
-                                      widget.name.wolofalVerse +
-                                      " -- " +
-                                      widget.name.wolofalVerseRef);
+                                  Share.share(
+                                    ' يࣵلَّ مࣷويْ' +
+                                        " " +
+                                        widget.name.wolofalName +
+                                        ":  " +
+                                        widget.name.wolofalVerse +
+                                        " -- " +
+                                        widget.name.wolofalVerseRef,
+                                    sharePositionOrigin: Rect.fromLTWH(
+                                        0, 0, size.width, size.height / 2),
+                                  );
                                 }),
                             TextButton(
                                 child: Text(
