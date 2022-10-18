@@ -33,7 +33,7 @@ class DivineName with ChangeNotifier {
 }
 
 class DivineNames with ChangeNotifier {
-  late int _lastNameViewed;
+  int _lastNameViewed = 0;
   List<int> _pictureIds = [];
   List<DivineName> _names = [];
   bool _moveToName = false;
@@ -206,15 +206,15 @@ class DivineNames with ChangeNotifier {
     prefs.setString('lastNameViewed', jsonData);
   }
 
-  Future<int> getLastNameViewed() async {
+  Future<void> getLastNameViewed() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('lastNameViewed')) {
       _lastNameViewed = 0;
-      return _lastNameViewed;
+      return;
     } else {
       String storedValue = json.decode(prefs.getString('lastNameViewed')!);
       _lastNameViewed = int.parse(storedValue);
-      return _lastNameViewed;
+      return;
     }
   }
 

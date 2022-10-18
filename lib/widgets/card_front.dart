@@ -93,7 +93,7 @@ class CardFront extends StatelessWidget {
     //Keeping a limited number of images in memory
     //rather than constanly reloading them
     //seems to offer some performance and memory improvements.
-    late AssetImage assetImage;
+    AssetImage assetImage = assetImage1;
     switch (name.img) {
       case '1':
         {
@@ -210,26 +210,26 @@ class CardFront extends StatelessWidget {
                   .cardPrefs
                   .imageEnabled
               ? BoxDecoration(
-                  color: Colors.black54,
                   borderRadius: BorderRadius.circular(20.0),
                   image: DecorationImage(
                       fit: BoxFit.cover,
 
                       //This is the original - now using consts
-                      // image: AssetImage("assets/images/${name.img}.jpg"),
-                      image: assetImage),
+                      image: AssetImage("assets/images/${name.img}.jpg")),
+                  // image: assetImage),
+                  // image:AssetImage("assets/images/1.jpg"))
                 )
               : null,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
-              gradient: LinearGradient(
-                begin: Alignment.bottomRight,
-                colors: [
-                  Colors.black.withOpacity(.9),
-                  Colors.black.withOpacity(.3)
-                ],
-              ),
+              // gradient: LinearGradient(
+              //   begin: Alignment.bottomRight,
+              //   colors: [
+              //     Colors.black.withOpacity(.9),
+              //     Colors.black.withOpacity(.3)
+              //   ],
+              // ),
             ),
 
             //Card text

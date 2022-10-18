@@ -100,7 +100,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         AppLocalizations.of(context).listView,
         Icons.list,
         () {
-          //Part of the names list navigation - this opens the NamesLIst, then gets and then passes on the value from the popped screen
+          //Part of the names list navigation - this opens the NamesList, then gets and then passes on the value from the popped screen
           Navigator.of(context).pushNamed(NamesList.routeName).then((value) {
             Navigator.of(context).pop(value);
           });

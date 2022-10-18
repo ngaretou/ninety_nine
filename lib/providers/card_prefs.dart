@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/foundation.dart';
 import 'dart:core';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const darkBackground = AssetImage("assets/images/black-bg-1.jpg");
 const lightBackground = AssetImage("assets/images/white-bg-5.jpg");
+
 const assetImage1 = AssetImage("assets/images/1.jpg");
 const assetImage2 = AssetImage("assets/images/2.jpg");
 const assetImage3 = AssetImage("assets/images/3.jpg");

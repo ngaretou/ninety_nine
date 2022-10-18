@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,14 +49,19 @@ class _CardsScreenState extends State<CardsScreen> {
     CardPrefList cardPrefs =
         Provider.of<CardPrefs>(context, listen: false).cardPrefs;
 
-    initializePage();
+    goToPage = Provider.of<DivineNames>(context, listen: false).lastNameViewed;
     initializeSession();
 
     //If already on low power setting, don't bother checking;
     //Also if user has one time chosen a power setting and knows where it is, don't check anymore
 
-    // enableFpsMonitoring(); //for testing, always turns on fps monitoring
-    if (cardPrefs.shouldTestDevicePerformance) enableFpsMonitoring();
+    // enableFpsMonitoring(); //for testing; always turns on fps monitoring
+
+    if (kIsWeb) {
+      disableFpsMonitoring();
+    } else {
+      if (cardPrefs.shouldTestDevicePerformance) enableFpsMonitoring();
+    }
 
     super.initState();
   }
@@ -123,15 +129,15 @@ class _CardsScreenState extends State<CardsScreen> {
     await session.configure(AudioSessionConfiguration.speech());
   }
 
-  Future<void> initializePage() async {
-    try {
-      goToPage =
-          Provider.of<DivineNames>(context, listen: false).lastNameViewed;
-    } catch (e) {
-      print('error caught');
-      goToPage = 1;
-    }
-  }
+  // Future<void> initializePage() async {
+  //   try {
+  //     goToPage =
+  //         Provider.of<DivineNames>(context, listen: false).lastNameViewed;
+  //   } catch (e) {
+  //     print('error caught - lastNameViewed not initialized');
+  //     goToPage = 1;
+  //   }
+  // }
 
   @override
   void dispose() {
