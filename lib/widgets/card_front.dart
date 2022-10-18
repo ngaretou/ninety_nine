@@ -223,7 +223,7 @@ class CardFront extends StatelessWidget {
 
       if (kIsWeb) {
         _boxDecoration = BoxDecoration(
-          color: Colors.black.withOpacity(.3),
+          color: Colors.black.withOpacity(.4),
           borderRadius: BorderRadius.circular(20.0),
           // gradient: LinearGradient(
           //   begin: Alignment.bottomRight,

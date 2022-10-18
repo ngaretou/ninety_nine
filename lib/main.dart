@@ -116,48 +116,50 @@ class _MyAppState extends State<MyApp> {
 
     ThemeData? _currentTheme = Provider.of<ThemeModel>(context).currentTheme;
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: _currentTheme == null ? ThemeData.light() : _currentTheme,
-      title: '99',
-      home: FutureBuilder(
-        future: _initialization,
-        builder: (ctx, snapshot) =>
-            snapshot.connectionState == ConnectionState.waiting
-                ? Center(child: CircularProgressIndicator())
-                : Provider.of<CardPrefs>(context, listen: false)
-                        .cardPrefs
-                        .showOnboarding
-                    ? OnboardingScreen()
-                    : CardsScreen(),
-      ),
-      routes: {
-        CardsScreen.routeName: (ctx) => CardsScreen(),
-        SettingsScreen.routeName: (ctx) => SettingsScreen(),
-        AboutScreen.routeName: (ctx) => AboutScreen(),
-        OnboardingScreen.routeName: (ctx) => OnboardingScreen(),
-        NamesList.routeName: (ctx) => NamesList(),
-      },
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        const Locale('en', ''),
-        const Locale('fr', 'FR'),
-        // Unfortunately there is a ton of setup to add a new language
-        // to Flutter post version 2.0 and intl 0.17.
-        // The most doable way to stick with the official Flutter l10n method
-        // is to use Swiss French as the main source for the translations
-        // and add in the Wolof to the app_fr_ch.arb in the l10n folder.
-        // So when we switch locale to fr_CH, that's Wolof.
-        const Locale('fr', 'CH'),
-      ],
-      locale: Provider.of<ThemeModel>(context, listen: false).userLocale == null
-          ? Locale('fr', 'CH')
-          : Provider.of<ThemeModel>(context, listen: false).userLocale,
+    return FutureBuilder(
+      future: _initialization,
+      builder: (ctx, snapshot) => snapshot.connectionState ==
+              ConnectionState.waiting
+          ? Center(child: CircularProgressIndicator())
+          : MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: _currentTheme == null ? ThemeData.light() : _currentTheme,
+              title: '99',
+              home: Provider.of<CardPrefs>(context, listen: false)
+                      .cardPrefs
+                      .showOnboarding
+                  ? OnboardingScreen()
+                  : CardsScreen(),
+              routes: {
+                CardsScreen.routeName: (ctx) => CardsScreen(),
+                SettingsScreen.routeName: (ctx) => SettingsScreen(),
+                AboutScreen.routeName: (ctx) => AboutScreen(),
+                OnboardingScreen.routeName: (ctx) => OnboardingScreen(),
+                NamesList.routeName: (ctx) => NamesList(),
+              },
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: [
+                const Locale('en', ''),
+                const Locale('fr', 'FR'),
+                // Unfortunately there is a ton of setup to add a new language
+                // to Flutter post version 2.0 and intl 0.17.
+                // The most doable way to stick with the official Flutter l10n method
+                // is to use Swiss French as the main source for the translations
+                // and add in the Wolof to the app_fr_ch.arb in the l10n folder.
+                // So when we switch locale to fr_CH, that's Wolof.
+                const Locale('fr', 'CH'),
+              ],
+              locale: Provider.of<ThemeModel>(context, listen: false)
+                          .userLocale ==
+                      null
+                  ? Locale('fr', 'CH')
+                  : Provider.of<ThemeModel>(context, listen: false).userLocale,
+            ),
     );
   }
 }

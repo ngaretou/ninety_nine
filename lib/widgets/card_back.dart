@@ -56,7 +56,7 @@ class CardBack extends StatelessWidget {
     Widget textAS(String input, double fontReduction) {
       String textToRender = input;
 
-      //This is to fix a problem not in regular web but in mobile web, 
+      //This is to fix a problem not in regular web but in mobile web,
       //but is identical in regular desktop web
       if (kIsWeb) {
         textToRender = input.replaceAll(RegExp(r'-'), '-\u200f');
@@ -71,7 +71,7 @@ class CardBack extends StatelessWidget {
           fontFamily: "Harmattan",
           fontSize: 40 - fontReduction,
         ),
-        // textDirection: rtlText,
+        textDirection: rtlText,
       );
     }
 
