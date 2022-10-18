@@ -1,11 +1,12 @@
 import 'dart:ui' as ui;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
 import 'card_icon_bar.dart';
-import 'package:just_audio/just_audio.dart';
 
 class CardFront extends StatelessWidget {
   final DivineName name;
@@ -198,6 +199,54 @@ class CardFront extends StatelessWidget {
       default:
     }
 
+    /*
+    Flutter web *on mobile* has a transparency in gradients problem
+    when the high powered (normal) animation is activated in card_animator.
+    low power animation fixes this. But for some reason - resources? - 
+    when high power is on the card front does not want to display the gradient. 
+    To get around this, we have to do this check and make this hack: 
+
+    mobile web:
+          color: Colors.black.withOpacity(.3),
+           ),
+    app:
+        gradient: LinearGradient(
+                begin: Alignment.bottomRight,
+                colors: [
+                  Colors.black.withOpacity(.9),
+                  Colors.black.withOpacity(.3)
+                ],
+    web on desktop works fine! but just taking this into account. 
+    */
+    BoxDecoration webTransparencyHack() {
+      late BoxDecoration _boxDecoration;
+
+      if (kIsWeb) {
+        _boxDecoration = BoxDecoration(
+          color: Colors.black.withOpacity(.3),
+          borderRadius: BorderRadius.circular(20.0),
+          // gradient: LinearGradient(
+          //   begin: Alignment.bottomRight,
+          //   colors: [Colors.black.withOpacity(1), Colors.black.withOpacity(.3)],
+          // ),
+        );
+      } else {
+        _boxDecoration = BoxDecoration(
+          // color: Colors.black.withOpacity(.3),
+          borderRadius: BorderRadius.circular(20.0),
+          gradient: LinearGradient(
+            begin: Alignment.bottomRight,
+            colors: [
+              Colors.black.withOpacity(.9),
+              Colors.black.withOpacity(.3)
+            ],
+          ),
+        );
+      }
+
+      return _boxDecoration;
+    }
+
     return Container(
       //This is important as it dictates the outer boundaries for what follows
       height: mediaQuery.size.height,
@@ -210,7 +259,6 @@ class CardFront extends StatelessWidget {
                   .cardPrefs
                   .imageEnabled
               ? BoxDecoration(
-                  color: Colors.black54,
                   borderRadius: BorderRadius.circular(20.0),
                   image: DecorationImage(
                       fit: BoxFit.cover,
@@ -221,17 +269,7 @@ class CardFront extends StatelessWidget {
                 )
               : null,
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              gradient: LinearGradient(
-                begin: Alignment.bottomRight,
-                colors: [
-                  Colors.black.withOpacity(.9),
-                  Colors.black.withOpacity(.3)
-                ],
-              ),
-            ),
-
+            decoration: webTransparencyHack(),
             //Card text
             child: Padding(
               padding: EdgeInsets.all(20.0),

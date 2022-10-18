@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
@@ -52,16 +53,25 @@ class CardBack extends StatelessWidget {
       );
     }
 
-    Widget textAS(input, double fontReduction) {
+    Widget textAS(String input, double fontReduction) {
+      String textToRender = input;
+
+      //This is to fix a problem not in regular web but in mobile web, 
+      //but is identical in regular desktop web
+      if (kIsWeb) {
+        textToRender = input.replaceAll(RegExp(r'-'), '-\u200f');
+        textToRender = textToRender.replaceAll(RegExp(r'،'), '،\u200f');
+      }
+
       return Text(
-        input,
+        textToRender,
         textAlign: TextAlign.center,
         style: TextStyle(
           color: _fontColor,
           fontFamily: "Harmattan",
           fontSize: 40 - fontReduction,
         ),
-        textDirection: rtlText,
+        // textDirection: rtlText,
       );
     }
 
@@ -72,13 +82,8 @@ class CardBack extends StatelessWidget {
           .cardPrefs
           .imageEnabled) {
         _boxDecoration = BoxDecoration(
-          color: Colors.yellow[50],
           borderRadius:
               _isPhone ? BorderRadius.circular(0) : BorderRadius.circular(20.0),
-          gradient: LinearGradient(begin: Alignment.bottomRight, colors: [
-            Colors.black.withOpacity(.3),
-            Colors.black.withOpacity(.0)
-          ]),
           image: DecorationImage(
             fit: BoxFit.cover,
             image: _isDark ? darkBackground : lightBackground,
@@ -86,12 +91,11 @@ class CardBack extends StatelessWidget {
         );
       } else {
         _boxDecoration = BoxDecoration(
-          color: Colors.yellow[50],
           borderRadius:
               _isPhone ? BorderRadius.circular(0) : BorderRadius.circular(20.0),
           gradient: LinearGradient(begin: Alignment.bottomRight, colors: [
             Colors.black.withOpacity(.3),
-            Colors.black.withOpacity(.0)
+            Colors.black.withOpacity(.1)
           ]),
         );
       }
