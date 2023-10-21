@@ -94,7 +94,7 @@ class ThemeModel extends ChangeNotifier {
         brightness: theme.brightness,
         colorSchemeSeed: theme.color,
         fontFamily: 'Lato');
-    //send it for storage
+  //send it for storage
     saveThemeToDisk(theme);
     if (refresh == true || refresh == null) {
       notifyListeners();

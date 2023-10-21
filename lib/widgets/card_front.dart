@@ -94,6 +94,9 @@ class CardFront extends StatelessWidget {
     //Keeping a limited number of images in memory
     //rather than constanly reloading them
     //seems to offer some performance and memory improvements.
+
+
+
     late AssetImage assetImage;
     switch (name.img) {
       case '1':

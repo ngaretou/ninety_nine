@@ -60,7 +60,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "settingsVerseinWolof": "Aaya yi ci Wolofal",
+  "settingsVerseinWolof": "Aaya yi ci Wolof",
   "@settingsVerseinWolof": {
     "description": "settingsVerseinWolof",
     "type": "text",
@@ -203,7 +203,7 @@
     "description": "List View",
     "type": "text",
     "placeholders": {}
-  }, 
+  },
   "powerMode": "Mode performance",
   "@powerMode": {
     "description": "",
@@ -215,7 +215,8 @@
     "description": "Low power mode on",
     "type": "text",
     "placeholders": {}
-    },  "lowPowerModeMessage": "Passage en mode basse performance.",
+  },
+  "lowPowerModeMessage": "Passage en mode basse performance.",
   "@lowPowerModeMessage": {
     "description": "lowPowerModeMessage",
     "type": "text",

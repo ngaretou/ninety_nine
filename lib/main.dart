@@ -113,6 +113,7 @@ class _MyAppState extends State<MyApp> {
     //Good on three-button Android - you can swipe down to see nav buttons etc but they go away
     //This not perfect perhaps but probably best compromise
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    
 
     ThemeData? _currentTheme = Provider.of<ThemeModel>(context).currentTheme;
 
@@ -120,7 +121,7 @@ class _MyAppState extends State<MyApp> {
       future: _initialization,
       builder: (ctx, snapshot) => snapshot.connectionState ==
               ConnectionState.waiting
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: _currentTheme == null ? ThemeData.light() : _currentTheme,

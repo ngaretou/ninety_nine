@@ -1,0 +1,79 @@
+Target dependency graph (22 targets)
+PromisesObjC in Pods, no dependencies
+GoogleUtilities in Pods, depends on:
+PromisesObjC in Pods (explicit)
+nanopb in Pods, no dependencies
+GoogleDataTransport in Pods, depends on:
+GoogleUtilities in Pods (explicit)
+PromisesObjC in Pods (explicit)
+nanopb in Pods (explicit)
+FirebaseCoreDiagnostics in Pods, depends on:
+GoogleDataTransport in Pods (explicit)
+GoogleUtilities in Pods (explicit)
+nanopb in Pods (explicit)
+FirebaseCoreInternal in Pods, depends on:
+GoogleUtilities in Pods (explicit)
+FirebaseCore in Pods, depends on:
+FirebaseCoreDiagnostics in Pods (explicit)
+FirebaseCoreInternal in Pods (explicit)
+GoogleUtilities in Pods (explicit)
+FirebaseInstallations in Pods, depends on:
+FirebaseCore in Pods (explicit)
+GoogleUtilities in Pods (explicit)
+PromisesObjC in Pods (explicit)
+GoogleAppMeasurement in Pods, depends on:
+GoogleUtilities in Pods (explicit)
+nanopb in Pods (explicit)
+FirebaseAnalytics in Pods, depends on:
+FirebaseCore in Pods (explicit)
+FirebaseInstallations in Pods (explicit)
+GoogleAppMeasurement in Pods (explicit)
+GoogleUtilities in Pods (explicit)
+nanopb in Pods (explicit)
+Firebase in Pods, depends on:
+FirebaseAnalytics in Pods (explicit)
+FirebaseCore in Pods (explicit)
+FlutterMacOS in Pods, no dependencies
+audio_session in Pods, depends on:
+FlutterMacOS in Pods (explicit)
+firebase_core in Pods, depends on:
+Firebase in Pods (explicit)
+FlutterMacOS in Pods (explicit)
+firebase_analytics in Pods, depends on:
+Firebase in Pods (explicit)
+FlutterMacOS in Pods (explicit)
+firebase_core in Pods (explicit)
+just_audio in Pods, depends on:
+FlutterMacOS in Pods (explicit)
+path_provider_macos in Pods, depends on:
+FlutterMacOS in Pods (explicit)
+share_plus_macos in Pods, depends on:
+FlutterMacOS in Pods (explicit)
+shared_preferences_macos in Pods, depends on:
+FlutterMacOS in Pods (explicit)
+url_launcher_macos in Pods, depends on:
+FlutterMacOS in Pods (explicit)
+wakelock_macos in Pods, depends on:
+FlutterMacOS in Pods (explicit)
+Pods-Runner in Pods, depends on:
+Firebase in Pods (explicit)
+FirebaseAnalytics in Pods (explicit)
+FirebaseCore in Pods (explicit)
+FirebaseCoreDiagnostics in Pods (explicit)
+FirebaseCoreInternal in Pods (explicit)
+FirebaseInstallations in Pods (explicit)
+FlutterMacOS in Pods (explicit)
+GoogleAppMeasurement in Pods (explicit)
+GoogleDataTransport in Pods (explicit)
+GoogleUtilities in Pods (explicit)
+PromisesObjC in Pods (explicit)
+audio_session in Pods (explicit)
+firebase_analytics in Pods (explicit)
+firebase_core in Pods (explicit)
+just_audio in Pods (explicit)
+nanopb in Pods (explicit)
+path_provider_macos in Pods (explicit)
+share_plus_macos in Pods (explicit)
+shared_preferences_macos in Pods (explicit)
+url_launcher_macos in Pods (explicit)
+wakelock_macos in Pods (explicit)

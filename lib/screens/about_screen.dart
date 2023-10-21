@@ -28,8 +28,8 @@ class AboutScreen extends StatelessWidget {
             //this is actually where the business happens; HTML just takes the data and renders it
             : Html(
                 data: snapshot.data.toString(),
-                onLinkTap: (String? url, RenderContext context,
-                    Map<String, String> attributes, element) async {
+                onLinkTap: (String? url, Map<String, String> attributes,
+                    element) async {
                   if (url != null) {
                     await canLaunchUrl(Uri.parse(url))
                         ? await launchUrl(Uri.parse(url))
