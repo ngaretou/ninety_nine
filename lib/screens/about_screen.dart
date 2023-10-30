@@ -65,7 +65,7 @@ class AboutScreen extends StatelessWidget {
                             ExpansionTile(
                               tilePadding: EdgeInsets.only(left: 8),
                               title: Text('99',
-                                  style: Theme.of(context).textTheme.headline6),
+                                  style: Theme.of(context).textTheme.titleLarge),
                               initiallyExpanded: true,
                               children: [
                                 htmlSection("assets/html/about.html"),
@@ -74,7 +74,7 @@ class AboutScreen extends StatelessWidget {
                             ExpansionTile(
                               tilePadding: EdgeInsets.only(left: 8),
                               title: Text('Remerciements',
-                                  style: Theme.of(context).textTheme.headline6),
+                                  style: Theme.of(context).textTheme.titleLarge),
                               initiallyExpanded: false,
                               children: [
                                 htmlSection("assets/html/thanks.html"),
@@ -83,7 +83,7 @@ class AboutScreen extends StatelessWidget {
                             ExpansionTile(
                               tilePadding: EdgeInsets.only(left: 8),
                               title: Text('Licences',
-                                  style: Theme.of(context).textTheme.headline6),
+                                  style: Theme.of(context).textTheme.titleLarge),
                               initiallyExpanded: false,
                               children: [
                                 htmlSection("assets/html/licenses.html"),

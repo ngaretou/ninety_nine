@@ -17,13 +17,13 @@ class NamesList extends StatelessWidget {
 
     TextStyle _asStyle = TextStyle(
         // height: 1.3,
-        color: Theme.of(context).textTheme.headline6!.color,
+        color: Theme.of(context).textTheme.titleLarge!.color,
         fontFamily: "Harmattan",
         fontSize: 32);
 
     TextStyle _rsStyle = TextStyle(
         // height: 1.3,
-        color: Theme.of(context).textTheme.headline6!.color,
+        color: Theme.of(context).textTheme.titleLarge!.color,
         fontFamily: "Lato",
         fontSize: 22);
 

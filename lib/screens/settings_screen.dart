@@ -60,7 +60,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     SizedBox(width: 25),
                     Expanded(
                         child: Text(title,
-                            style: Theme.of(context).textTheme.headline6)),
+                            style: Theme.of(context).textTheme.titleLarge)),
                   ],
                 ))),
       );
@@ -230,7 +230,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selected: userLocale.toString() == 'fr_CH' ? true : false,
                 label: Text(
                   "Wolof",
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onSelected: (bool selected) {
                   themeProvider.setLocale('fr_CH');
@@ -245,7 +245,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     : false,
                 label: Text(
                   "Français",
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onSelected: (bool selected) {
                   themeProvider.setLocale('fr');
@@ -257,7 +257,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selected: userLocale.toString().contains('en') ? true : false,
                 label: Text(
                   "English",
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onSelected: (bool selected) {
                   themeProvider.setLocale('en');
@@ -366,7 +366,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 avatar: Icon(Icons.arrow_forward),
                 label: Text(
                   "(abc)",
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onSelected: (bool selected) {
                   cardPrefs.savePref('textDirection', false);
@@ -380,7 +380,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 avatar: Icon(Icons.arrow_back),
                 label: Text(
                   "(بدف)",
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onSelected: (bool selected) {
                   cardPrefs.savePref('textDirection', true);
@@ -405,7 +405,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Row(children: [
                     // Expanded(child:
                     Text(AppLocalizations.of(context).settingsVerseinWolofal,
-                        style: Theme.of(context).textTheme.subtitle1),
+                        style: Theme.of(context).textTheme.titleMedium),
                   ]))),
           Expanded(
             child: Row(
@@ -441,7 +441,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Row(children: [
                     // Expanded(child:
                     Text(AppLocalizations.of(context).settingsVerseinWolof,
-                        style: Theme.of(context).textTheme.subtitle1),
+                        style: Theme.of(context).textTheme.titleMedium),
                   ]))),
           Expanded(
             child: Row(
@@ -480,7 +480,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 avatar: Icon(Icons.favorite),
                 label: Text(
                   AppLocalizations.of(context).settingsFavorites,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onSelected: (bool selected) async {
                   print('in fav selector');
@@ -524,7 +524,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 avatar: Icon(Icons.all_inclusive),
                 label: Text(
                   AppLocalizations.of(context).settingsTextAll,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onSelected: (bool selected) {
                   cardPrefs.savePref('showFavs', false);
@@ -549,7 +549,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Row(children: [
                     Expanded(
                         child: Text(AppLocalizations.of(context).lowPowerMode,
-                            style: Theme.of(context).textTheme.subtitle1)),
+                            style: Theme.of(context).textTheme.titleMedium)),
                   ]))),
           Expanded(
             child: Row(
