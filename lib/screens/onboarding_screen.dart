@@ -109,12 +109,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               isShowImageOnTop: false,
                               bgimage: 'assets/images/1.jpg',
                               // image: null,
-                              body: AppLocalizations.of(context).introPage1,
+                              body: AppLocalizations.of(context)!.introPage1,
                               color: Color(0xFFFF7252)),
                           _buildPageContent(
                               isShowImageOnTop: true,
                               bgimage: 'assets/images/2.jpg',
-                              body: AppLocalizations.of(context).introPage2,
+                              body: AppLocalizations.of(context)!.introPage2,
                               color: Color(0xFFFFA131)),
                           _buildFormattedPageContent(
                               bgimage: 'assets/images/13.jpg',
@@ -168,7 +168,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     // height: Platform.isIOS ? 70 : 60,
                                     alignment: Alignment.center,
                                     child: Text(
-                                      AppLocalizations.of(context).skip,
+                                      AppLocalizations.of(context)!.skip,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600,
@@ -191,7 +191,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     // height: Platform.isIOS ? 70 : 60,
                                     alignment: Alignment.center,
                                     child: Text(
-                                      AppLocalizations.of(context).start,
+                                      AppLocalizations.of(context)!.start,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600,
@@ -406,11 +406,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       text: TextSpan(
         children: [
           TextSpan(
-            text: '${AppLocalizations.of(context).introPage3a} \n\n',
+            text: '${AppLocalizations.of(context)!.introPage3a} \n\n',
             style: introStyle,
           ),
           TextSpan(
-              text: AppLocalizations.of(context).introPage3b,
+              text: AppLocalizations.of(context)!.introPage3b,
               style: introStyle.copyWith(
                 fontWeight: FontWeight.w900,
                 fontStyle: FontStyle.italic,
@@ -446,16 +446,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppLocalizations.of(context).introPage4a,
+        Text(AppLocalizations.of(context)!.introPage4a,
             style: introStyle, textAlign: TextAlign.left),
         SizedBox(height: 20),
         instructionRow(
-            Icons.play_arrow, AppLocalizations.of(context).introPage4b),
+            Icons.play_arrow, AppLocalizations.of(context)!.introPage4b),
         SizedBox(height: 10),
-        instructionRow(Icons.share, AppLocalizations.of(context).introPage4c),
+        instructionRow(Icons.share, AppLocalizations.of(context)!.introPage4c),
         SizedBox(height: 10),
         instructionRow(
-            Icons.favorite_border, AppLocalizations.of(context).introPage4d)
+            Icons.favorite_border, AppLocalizations.of(context)!.introPage4d)
       ],
     );
   }

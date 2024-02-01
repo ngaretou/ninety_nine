@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.1+7
+version: 1.0.2+8
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
@@ -40,6 +40,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.4
+  package_info_plus: ^5.0.1
 
 dev_dependencies:
   flutter_test:
@@ -47,12 +48,21 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   # flutter_lints: ^2.0.0
 
-flutter_icons:
+flutter_launcher_icons:
+  # Run:
+  # flutter pub get && dart run flutter_launcher_icons
+  image_path_android: "dev_assets/icons/icon_3android.png"
+  image_path_ios: "dev_assets/icons/icon_3_ios_1024.png"
   android: true
   ios: true
-  image_path: "dev_assets/icons/99-1024.png"
+  image_path: "dev_assets/icons/icon_3_ios_1024.png"
   adaptive_icon_background: "#191919"
-  adaptive_icon_foreground: "dev_assets/icons/99-1024.png"
+  adaptive_icon_foreground: "dev_assets/icons/icon_3android.png"
+  web:
+    generate: true
+    image_path: "dev_assets/icons/icon_3_ios_1024.png"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -68,6 +78,7 @@ flutter:
   assets:
     - assets/names.json
     - assets/images/
+    - assets/images/icons/
     - assets/html/
     - assets/audio/
     - assets/audio/verses/

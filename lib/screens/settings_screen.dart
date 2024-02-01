@@ -3,6 +3,7 @@ import 'package:ninety_nine/screens/names_list_screen.dart';
 import 'package:ninety_nine/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/names.dart';
@@ -37,6 +38,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     CardPrefs cardPrefs = Provider.of<CardPrefs>(context, listen: false);
     bool _wolof = cardPrefs.cardPrefs.wolofVerseEnabled;
     bool _wolofal = cardPrefs.cardPrefs.wolofalVerseEnabled;
+
+    if (!_wolof && !_wolofal) {
+      _wolof = true;
+      _wolofal = true;
+      cardPrefs.savePref('wolofVerseEnabled', true);
+      cardPrefs.savePref('wolofalVerseEnabled', true);
+    }
 
     final activeControlColor = Theme.of(context).colorScheme.inversePrimary;
     final activeSwitchColor = Theme.of(context).colorScheme.primary;
@@ -97,7 +105,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     //Now individual implementations of it
     Widget viewListOfNames() {
       return settingTitle(
-        AppLocalizations.of(context).listView,
+        AppLocalizations.of(context)!.listView,
         Icons.list,
         () {
           //Part of the names list navigation - this opens the NamesLIst, then gets and then passes on the value from the popped screen
@@ -109,7 +117,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     Widget themeTitle() {
-      return settingTitle(AppLocalizations.of(context).settingsTheme,
+      return settingTitle(AppLocalizations.of(context)!.settingsTheme,
           Icons.settings_brightness, null);
     }
 
@@ -210,7 +218,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
-    print(userLocale.toString());
     Widget languageSetting() {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -270,33 +277,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     Widget backgroundTitle() {
-      return settingTitle(AppLocalizations.of(context).settingsCardBackground,
+      return settingTitle(AppLocalizations.of(context)!.settingsCardBackground,
           Icons.image, null);
     }
 
     Widget directionTitle() {
-      return settingTitle(AppLocalizations.of(context).settingsCardDirection,
+      return settingTitle(AppLocalizations.of(context)!.settingsCardDirection,
           Icons.compare_arrows, null);
     }
 
     Widget scriptPickerTitle() {
-      return settingTitle(AppLocalizations.of(context).settingsVerseDisplay,
+      return settingTitle(AppLocalizations.of(context)!.settingsVerseDisplay,
           Icons.format_quote, null);
     }
 
     Widget showFavsTitle() {
       return settingTitle(
-          AppLocalizations.of(context).settingsShowFavs, Icons.favorite, null);
+          AppLocalizations.of(context)!.settingsShowFavs, Icons.favorite, null);
     }
 
     Widget lowPowerModeTitle() {
       return settingTitle(
-          AppLocalizations.of(context).powerMode, Icons.bolt, null);
+          AppLocalizations.of(context)!.powerMode, Icons.bolt, null);
     }
 
     Widget languageTitle() {
-      return settingTitle(
-          AppLocalizations.of(context).settingsLanguage, Icons.translate, null);
+      return settingTitle(AppLocalizations.of(context)!.settingsLanguage,
+          Icons.translate, null);
     }
 
     Widget backgroundSettings() {
@@ -363,11 +370,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: cardPrefs.cardPrefs.textDirection ? false : true,
-                avatar: Icon(Icons.arrow_forward),
-                label: Text(
-                  "(abc)",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
+                label: Row(children: [
+                  Text(
+                    "(abc)",
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(Icons.arrow_forward),
+                ]),
                 onSelected: (bool selected) {
                   cardPrefs.savePref('textDirection', false);
                   setState(() {});
@@ -377,10 +389,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: cardPrefs.cardPrefs.textDirection ? true : false,
-                avatar: Icon(Icons.arrow_back),
-                label: Text(
-                  "(بدف)",
-                  style: Theme.of(context).textTheme.titleMedium,
+                label: Row(
+                  children: [
+                    Text(
+                      "(بدف)",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(Icons.arrow_back),
+                  ],
                 ),
                 onSelected: (bool selected) {
                   cardPrefs.savePref('textDirection', true);
@@ -403,8 +422,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Padding(
                   padding: EdgeInsets.only(left: 80),
                   child: Row(children: [
-                    // Expanded(child:
-                    Text(AppLocalizations.of(context).settingsVerseinWolofal,
+                    Text(AppLocalizations.of(context)!.settingsVerseinWolofal,
                         style: Theme.of(context).textTheme.titleMedium),
                   ]))),
           Expanded(
@@ -418,7 +436,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   activeTrackColor: activeControlColor,
                   value: _wolofal,
                   onChanged: (_) {
-                    cardPrefs.savePref('wolofalVerseEnabled', !_wolofal);
+                    if (_wolof) {
+                      cardPrefs.savePref('wolofalVerseEnabled', !_wolofal);
+                      //but if wolof is not on and you're trying to turn of wolofal, turn on wolof.
+                    } else if (!_wolof && _wolofal) {
+                      cardPrefs.savePref('wolofalVerseEnabled', false);
+                      cardPrefs.savePref('wolofVerseEnabled', true);
+                    }
+
                     setState(() {});
                   },
                 ),
@@ -440,7 +465,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   padding: EdgeInsets.only(left: 80),
                   child: Row(children: [
                     // Expanded(child:
-                    Text(AppLocalizations.of(context).settingsVerseinWolof,
+                    Text(AppLocalizations.of(context)!.settingsVerseinWolof,
                         style: Theme.of(context).textTheme.titleMedium),
                   ]))),
           Expanded(
@@ -454,7 +479,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   activeTrackColor: activeControlColor,
                   value: _wolof,
                   onChanged: (_) {
-                    cardPrefs.savePref('wolofVerseEnabled', !_wolof);
+                    if (_wolofal) {
+                      cardPrefs.savePref('wolofVerseEnabled', !_wolof);
+                      //but if wolof is not on and you're trying to turn of wolofal, turn on wolof.
+                    } else if (_wolof && !_wolofal) {
+                      cardPrefs.savePref('wolofalVerseEnabled', true);
+                      cardPrefs.savePref('wolofVerseEnabled', false);
+                    }
+
                     setState(() {});
                   },
                 ),
@@ -477,13 +509,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: cardPrefs.cardPrefs.showFavs ? true : false,
-                avatar: Icon(Icons.favorite),
+                // avatar: Icon(Icons.favorite),
                 label: Text(
-                  AppLocalizations.of(context).settingsFavorites,
+                  AppLocalizations.of(context)!.settingsFavorites,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onSelected: (bool selected) async {
-                  print('in fav selector');
                   if (Provider.of<DivineNames>(context, listen: false)
                           .favoriteNames
                           .length ==
@@ -493,16 +524,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text(
-                            AppLocalizations.of(context).favsNoneYet,
+                            AppLocalizations.of(context)!.favsNoneYet,
                           ),
                           content: Text(
-                            AppLocalizations.of(context)
+                            AppLocalizations.of(context)!
                                 .favsNoneYetInstructions,
                           ),
                           actions: [
                             TextButton(
                                 child: Text(
-                                  AppLocalizations.of(context).ok,
+                                  AppLocalizations.of(context)!.ok,
                                 ),
                                 onPressed: () {
                                   Navigator.of(context).pop();
@@ -521,9 +552,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: cardPrefs.cardPrefs.showFavs ? false : true,
-                avatar: Icon(Icons.all_inclusive),
+                // avatar: Icon(Icons.all_inclusive),
                 label: Text(
-                  AppLocalizations.of(context).settingsTextAll,
+                  AppLocalizations.of(context)!.settingsTextAll,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onSelected: (bool selected) {
@@ -548,7 +579,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   padding: EdgeInsets.only(left: 80),
                   child: Row(children: [
                     Expanded(
-                        child: Text(AppLocalizations.of(context).lowPowerMode,
+                        child: Text(AppLocalizations.of(context)!.lowPowerMode,
                             style: Theme.of(context).textTheme.titleMedium)),
                   ]))),
           Expanded(
@@ -578,17 +609,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     Widget aboutWidget() {
       return settingTitle(
-        AppLocalizations.of(context).settingsAbout,
+        AppLocalizations.of(context)!.settingsAbout,
         Icons.info,
         () {
-          Navigator.of(context).pushNamed(AboutScreen.routeName);
+          showAbout(context);
+          // Navigator.of(context).pushNamed(AboutScreen.routeName);
         },
       );
     }
 
     Widget contactUsWidget() {
       return settingTitle(
-        AppLocalizations.of(context).settingsContactUs,
+        AppLocalizations.of(context)!.settingsContactUs,
         Icons.email,
         () async {
           const url = 'mailto:equipedevmbs@gmail.com';
@@ -603,7 +635,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     Widget showIntroWidget() {
       return settingTitle(
-          AppLocalizations.of(context).settingsViewIntro, Icons.replay, () {
+          AppLocalizations.of(context)!.settingsViewIntro, Icons.replay, () {
         Navigator.of(context).pushNamed(OnboardingScreen.routeName);
       });
     }
@@ -613,7 +645,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            AppLocalizations.of(context).settingsTitle,
+            AppLocalizations.of(context)!.settingsTitle,
           ),
         ),
         //If the width of the screen is greater or equal to 500
@@ -625,6 +657,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: MouseRegion(
               cursor: SystemMouseCursors.grab,
               child: mediaQuery.size.width >= 730
+                  // tablet
                   ? Container(
                       width: 730,
                       child: Padding(
@@ -647,7 +680,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             lowPowerModeTitle(),
                             lowPowerModeChooser(),
                             Divider(),
-                            settingRow(languageTitle(), languageSetting()),
+                            languageTitle(),
+                            languageSetting(),
                             Divider(),
                             aboutWidget(),
                             Divider(),
@@ -658,6 +692,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       ),
                     )
+                  // phone
                   : ListView(
                       children: [
                         viewListOfNames(),
@@ -683,4 +718,144 @@ class _SettingsScreenState extends State<SettingsScreen> {
               // ),
             ))));
   }
+
+  void showAbout(BuildContext context) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    if (!mounted) return;
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // title: Text(packageInfo.appName),
+            content: SingleChildScrollView(
+                child: ListBody(children: [
+              Row(
+                children: [
+                  Container(
+                    // child: Image.asset('assets/icons/icon.png'),
+                    width: 50,
+                    height: 50,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image:
+                            AssetImage("assets/images/icons/99-icon-round.png"),
+                      ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 200),
+                        child: Text(
+                          "99",
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ),
+                      Text(
+                          'Version ${packageInfo.version} (${packageInfo.buildNumber})'),
+                    ],
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              RichText(
+                  text: TextSpan(
+                children: [
+                  TextSpan(
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(fontStyle: FontStyle.italic),
+                    text: 'Kàddug Yàlla',
+                  ),
+                  TextSpan(
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    text: ' copyright © 2024 La MBS.',
+                  ),
+                ],
+              )),
+              RichText(
+                  text: TextSpan(
+                children: [
+                  TextSpan(
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    text: 'Appli © 2024 Foundational LLC.',
+                  ),
+                ],
+              )),
+            ])),
+
+            actions: <Widget>[
+              OutlinedButton(
+                child: const Text('Copyrights'),
+                onPressed: () {
+                  // Navigator.of(context).pushNamed(AboutScreen.routeName);
+                  clearPage(Widget page) => PageRouteBuilder(
+                        opaque: false,
+                        pageBuilder: (BuildContext context, _, __) => page,
+                      );
+                  Navigator.push(
+                    context,
+                    clearPage(const AboutScreen()),
+                  );
+                },
+              ),
+              OutlinedButton(
+                child: const Text('Licenses'),
+                onPressed: () {
+                  // Navigator.of(context).pop();
+                  showLicenses(context,
+                      appName: packageInfo.appName,
+                      appVersion:
+                          '${packageInfo.version} (${packageInfo.buildNumber})');
+                },
+              ),
+              OutlinedButton(
+                child: Text(AppLocalizations.of(context)!.ok),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+}
+
+void showLicenses(BuildContext context, {String? appName, String? appVersion}) {
+  void showLicensePage({
+    required BuildContext context,
+    String? applicationName,
+    String? applicationVersion,
+    Widget? applicationIcon,
+    String? applicationLegalese,
+    bool useRootNavigator = false,
+  }) {
+    // assert(context != null);
+    // assert(useRootNavigator != null);
+    Navigator.of(context, rootNavigator: useRootNavigator)
+        .push(MaterialPageRoute<void>(
+      builder: (BuildContext context) => LicensePage(
+        applicationName: applicationName,
+        applicationVersion: applicationVersion,
+        applicationIcon: applicationIcon,
+        applicationLegalese: applicationLegalese,
+      ),
+    ));
+  }
+
+  showLicensePage(
+      context: context,
+      applicationVersion: appVersion,
+      applicationName: appName,
+      useRootNavigator: true);
 }

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-08-07T19:54:38.584472",
+  "@@locale": "fr",
   "settingsTitle": "Paramètres",
   "@settingsTitle": {
     "description": "Settings screen title",
@@ -203,7 +203,7 @@
     "description": "List View",
     "type": "text",
     "placeholders": {}
-  }, 
+  },
   "powerMode": "Mode performance",
   "@powerMode": {
     "description": "",
@@ -215,11 +215,11 @@
     "description": "Low power mode on",
     "type": "text",
     "placeholders": {}
-  },  "lowPowerModeMessage": "Passage en mode basse performance.",
+  },
+  "lowPowerModeMessage": "Passage en mode basse performance.",
   "@lowPowerModeMessage": {
     "description": "lowPowerModeMessage",
     "type": "text",
     "placeholders": {}
   }
-
 }

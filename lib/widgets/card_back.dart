@@ -184,7 +184,7 @@ class CardBack extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                  AppLocalizations.of(context)
+                                  AppLocalizations.of(context)!
                                       .clickHereToReadMore,
                                   style: TextStyle(color: _fontColor)),
                               Icon(Icons.arrow_forward, color: _fontColor),

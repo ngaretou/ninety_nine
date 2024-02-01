@@ -102,13 +102,13 @@ class _CardsScreenState extends State<CardsScreen> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       duration: Duration(seconds: 8),
       content: Text(
-        AppLocalizations.of(context).lowPowerModeMessage,
+        AppLocalizations.of(context)!.lowPowerModeMessage,
         style: TextStyle(fontSize: 18),
       ),
       action: SnackBarAction(
           //for some reason the action color is not contrasting enough by default
           textColor: Theme.of(context).colorScheme.background,
-          label: AppLocalizations.of(context).cancel,
+          label: AppLocalizations.of(context)!.cancel,
           onPressed: () {
             //undo the lowPower setting
             Provider.of<CardPrefs>(context, listen: false)

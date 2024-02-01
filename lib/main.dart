@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:ninety_nine/providers/player_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
@@ -90,15 +91,18 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> callInititalization() async {
+    //do the work
     await Provider.of<DivineNames>(context, listen: false).getDivineNames();
     await Provider.of<ThemeModel>(context, listen: false).setupTheme();
     await Provider.of<CardPrefs>(context, listen: false).setupCardPrefs();
     await setupLang();
+    //this clears out old audio files
+    await AudioPlayer.clearAssetCache();
     //This gives the flutter UI a second to complete these above initialization processes
     //These should wait and this be unnecessary but the build happens before all these inits finish,
     //so this is a hack that helps
     // await Future.delayed(Duration(milliseconds: 3000));
-    print('returning future from initialization');
+    // print('returning future from initialization');
     return;
   }
 
@@ -113,7 +117,6 @@ class _MyAppState extends State<MyApp> {
     //Good on three-button Android - you can swipe down to see nav buttons etc but they go away
     //This not perfect perhaps but probably best compromise
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    
 
     ThemeData? _currentTheme = Provider.of<ThemeModel>(context).currentTheme;
 

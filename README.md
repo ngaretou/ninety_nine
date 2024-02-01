@@ -14,4 +14,5 @@ Fixed:
 
 Todo:
 - 'copy' in addition to 'share'
+- audio share - the arnames are not in the same mp3 encoding - 96 kbps 44.1khz mono
 

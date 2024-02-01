@@ -43,7 +43,7 @@ class NamesList extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            AppLocalizations.of(context).listView,
+            AppLocalizations.of(context)!.listView,
           ),
         ),
         //If the width of the screen is greater or equal to 500

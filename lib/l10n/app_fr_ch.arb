@@ -1,12 +1,12 @@
 {
-  "@@last_modified": "2020-08-07T19:54:38.584472",
-  "settingsTitle": "Kërale yi",
+  "@@locale": "fr_CH",
+  "settingsTitle": "Ponki jekk-jekkal",
   "@settingsTitle": {
     "description": "Settings screen title",
     "type": "text",
     "placeholders": {}
   },
-  "settingsTheme": "Melow wërale bi",
+  "settingsTheme": "Meloy miir bi",
   "@settingsTheme": {
     "description": "settings: Theme section",
     "type": "text",
@@ -54,13 +54,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "settingsVerseinWolofal": "Aaya yi ci Wolofal",
+  "settingsVerseinWolofal": "Aaya yi ci wolofal",
   "@settingsVerseinWolofal": {
     "description": "settingsVerseinWolofal",
     "type": "text",
     "placeholders": {}
   },
-  "settingsVerseinWolof": "Aaya yi ci Wolof",
+  "settingsVerseinWolof": "Aaya yi ci wolof",
   "@settingsVerseinWolof": {
     "description": "settingsVerseinWolof",
     "type": "text",
@@ -90,7 +90,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "settingsViewIntro": "Xoolat ubbite gi",
+  "settingsViewIntro": "Xoolaat ubbite gi",
   "@settingsViewIntro": {
     "description": "settingsViewIntro",
     "type": "text",
@@ -144,7 +144,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "introPage4a": "Ci kart bu nekk man nga:",
+  "introPage4a": "Ci kàrt bu nekk man nga:",
   "@introPage4a": {
     "description": "On each card you can",
     "type": "text",
@@ -204,19 +204,19 @@
     "type": "text",
     "placeholders": {}
   },
-  "powerMode": "Mode performance",
+  "powerMode": "Dooley appli bi",
   "@powerMode": {
     "description": "",
     "type": "text",
     "placeholders": {}
   },
-  "lowPowerMode": "Activer le mode basse performance",
+  "lowPowerMode": "Wàññi doole bi appli bi laaj, ngir xarale bi man koo àttan",
   "@lowPowerMode": {
     "description": "Low power mode on",
     "type": "text",
     "placeholders": {}
   },
-  "lowPowerModeMessage": "Passage en mode basse performance.",
+  "lowPowerModeMessage": "Appli baangiy wàññi dooleem ngir xarale bi àttan ko.",
   "@lowPowerModeMessage": {
     "description": "lowPowerModeMessage",
     "type": "text",

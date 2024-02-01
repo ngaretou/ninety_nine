@@ -44,7 +44,7 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppLocalizations.of(context).settingsAbout,
+          AppLocalizations.of(context)!.settingsAbout,
         ),
       ),
       body: ScrollConfiguration(
@@ -65,7 +65,8 @@ class AboutScreen extends StatelessWidget {
                             ExpansionTile(
                               tilePadding: EdgeInsets.only(left: 8),
                               title: Text('99',
-                                  style: Theme.of(context).textTheme.titleLarge),
+                                  style:
+                                      Theme.of(context).textTheme.titleLarge),
                               initiallyExpanded: true,
                               children: [
                                 htmlSection("assets/html/about.html"),
@@ -74,52 +75,11 @@ class AboutScreen extends StatelessWidget {
                             ExpansionTile(
                               tilePadding: EdgeInsets.only(left: 8),
                               title: Text('Remerciements',
-                                  style: Theme.of(context).textTheme.titleLarge),
-                              initiallyExpanded: false,
+                                  style:
+                                      Theme.of(context).textTheme.titleLarge),
+                              initiallyExpanded: true,
                               children: [
                                 htmlSection("assets/html/thanks.html"),
-                              ],
-                            ),
-                            ExpansionTile(
-                              tilePadding: EdgeInsets.only(left: 8),
-                              title: Text('Licences',
-                                  style: Theme.of(context).textTheme.titleLarge),
-                              initiallyExpanded: false,
-                              children: [
-                                htmlSection("assets/html/licenses.html"),
-                                TextButton(
-                                    onPressed: () {
-                                      void showLicensePage({
-                                        required BuildContext context,
-                                        String? applicationName,
-                                        String? applicationVersion,
-                                        Widget? applicationIcon,
-                                        String? applicationLegalese,
-                                        bool useRootNavigator = false,
-                                      }) {
-                                        // assert(context != null);
-                                        // assert(useRootNavigator != null);
-                                        Navigator.of(context,
-                                                rootNavigator: useRootNavigator)
-                                            .push(MaterialPageRoute<void>(
-                                          builder: (BuildContext context) =>
-                                              LicensePage(
-                                            applicationName: applicationName,
-                                            applicationVersion:
-                                                applicationVersion,
-                                            applicationIcon: applicationIcon,
-                                            applicationLegalese:
-                                                applicationLegalese,
-                                          ),
-                                        ));
-                                      }
-
-                                      showLicensePage(
-                                          context: context,
-                                          applicationName: '99',
-                                          useRootNavigator: true);
-                                    },
-                                    child: Text('Licenses')),
                               ],
                             ),
                           ],
