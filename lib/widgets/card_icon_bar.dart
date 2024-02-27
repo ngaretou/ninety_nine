@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../providers/names.dart';
 import '../widgets/play_button.dart';
@@ -31,10 +32,12 @@ class _CardIconBarState extends State<CardIconBar> {
 
     String rsTextToShare = 'Yàlla mooy ' +
         widget.name.wolofName +
-        ":  " +
+        ' :\r\n' +
         widget.name.wolofVerse +
-        " -- " +
-        widget.name.wolofVerseRef;
+        '\r\n'
+            " -- " +
+        widget.name.wolofVerseRef +
+        '\r\n\r\nhttp://sng.al/99';
 
     audioShare() async {
       // unpack the mp3s into Uint8Lists...
@@ -96,6 +99,24 @@ class _CardIconBarState extends State<CardIconBar> {
       }
     }
 
+    textShare(String shareText) async {
+      if (!kIsWeb) {
+        Share.share(
+          shareText,
+          sharePositionOrigin:
+              Rect.fromLTWH(0, 0, size.width, size.height * .33),
+        );
+      } else {
+        String url = "mailto:?subject=99&body=$shareText";
+
+        if (await canLaunchUrl(Uri.parse(url))) {
+          await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+        } else {
+          throw 'Could not launch $url';
+        }
+      }
+    }
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: Material(
@@ -147,7 +168,8 @@ class _CardIconBarState extends State<CardIconBar> {
                               Text(AppLocalizations.of(context)!.sharingMsg),
                           actions: [
                             TextButton(
-                                child: Text("Ojjo"),
+                                child: Text(AppLocalizations.of(context)!
+                                    .audioForSharing),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   audioShare();
@@ -156,11 +178,7 @@ class _CardIconBarState extends State<CardIconBar> {
                                 child: Text("Wolof"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
-                                  Share.share(
-                                    rsTextToShare,
-                                    sharePositionOrigin: Rect.fromLTWH(
-                                        0, 0, size.width, size.height / 2),
-                                  );
+                                  textShare(rsTextToShare);
                                 }),
                             TextButton(
                                 child: Text(" وࣷلࣷفَلْ ",
@@ -169,20 +187,18 @@ class _CardIconBarState extends State<CardIconBar> {
                                         fontSize: 22,
                                         height: .5)),
                                 onPressed: () {
-                                  final Size size = MediaQuery.of(context).size;
-
                                   Navigator.of(context).pop();
-                                  Share.share(
-                                    ' يࣵلَّ مࣷويْ' +
-                                        " " +
-                                        widget.name.wolofalName +
-                                        ":  " +
-                                        widget.name.wolofalVerse +
-                                        " -- " +
-                                        widget.name.wolofalVerseRef,
-                                    sharePositionOrigin: Rect.fromLTWH(
-                                        0, 0, size.width, size.height / 2),
-                                  );
+
+                                  String rtlText = ' يࣵلَّ مࣷويْ' +
+                                      " " +
+                                      widget.name.wolofalName +
+                                      ": \r\n" +
+                                      widget.name.wolofalVerse +
+                                      "\r\n -- " +
+                                      widget.name.wolofalVerseRef +
+                                      '\r\n\r\nhttp://sng.al/99';
+
+                                  textShare(rtlText);
                                 }),
                             TextButton(
                                 child: Text(

@@ -4,6 +4,8 @@ import 'package:ninety_nine/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:share_plus/share_plus.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/names.dart';
@@ -633,6 +635,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
+    Widget shareAppWidget() {
+      return settingTitle(
+        AppLocalizations.of(context)!.shareAppLink,
+        Icons.share,
+        () async {
+          Navigator.of(context).pop();
+          if (!kIsWeb) {
+            Share.share(
+              'https://sng.al/99',
+              sharePositionOrigin: Rect.fromLTWH(
+                  0, 0, mediaQuery.size.width, mediaQuery.size.height * .33),
+            );
+          } else {
+            const url =
+                "mailto:?subject=99&body=Xoolal appli bi: https://sng.al/99";
+
+            if (await canLaunchUrl(Uri.parse(url))) {
+              await launchUrl(Uri.parse(url),
+                  mode: LaunchMode.externalApplication);
+            } else {
+              throw 'Could not launch $url';
+            }
+          }
+        },
+      );
+    }
+
     Widget showIntroWidget() {
       return settingTitle(
           AppLocalizations.of(context)!.settingsViewIntro, Icons.replay, () {
@@ -683,6 +712,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             languageTitle(),
                             languageSetting(),
                             Divider(),
+                            shareAppWidget(),
+                            Divider(),
                             aboutWidget(),
                             Divider(),
                             contactUsWidget(),
@@ -708,6 +739,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         lowPowerModeChooser(),
                         Divider(),
                         settingColumn(languageTitle(), languageSetting()),
+                        shareAppWidget(),
+                        Divider(),
                         aboutWidget(),
                         Divider(),
                         contactUsWidget(),
