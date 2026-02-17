@@ -226,7 +226,7 @@ class CardFront extends StatelessWidget {
 
       if (kIsWeb) {
         _boxDecoration = BoxDecoration(
-          color: Colors.black.withOpacity(.4),
+          color: Colors.black.withAlpha(102),
           borderRadius: BorderRadius.circular(20.0),
           // gradient: LinearGradient(
           //   begin: Alignment.bottomRight,
@@ -240,8 +240,8 @@ class CardFront extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.bottomRight,
             colors: [
-              Colors.black.withOpacity(.9),
-              Colors.black.withOpacity(.3)
+              Colors.black.withAlpha(230),
+              Colors.black.withAlpha(100)
             ],
           ),
         );

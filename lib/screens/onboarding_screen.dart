@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter/foundation.dart' show kIsWeb;
 import './cards_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization method
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
 
@@ -321,8 +321,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               gradient: LinearGradient(
                 begin: Alignment.bottomRight,
                 colors: [
-                  Colors.black.withOpacity(.9),
-                  Colors.black.withOpacity(.4)
+                  Colors.black.withAlpha(230),
+                  Colors.black.withAlpha(100)
                 ],
               ),
             ),
@@ -386,8 +386,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               gradient: LinearGradient(
                 begin: Alignment.bottomRight,
                 colors: [
-                  Colors.black.withOpacity(.9),
-                  Colors.black.withOpacity(.4)
+                  Colors.black.withAlpha(230),
+                  Colors.black.withAlpha(100)
                 ],
               ),
             ),

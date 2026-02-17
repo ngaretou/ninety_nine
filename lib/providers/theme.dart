@@ -71,7 +71,7 @@ class ThemeModel extends ChangeNotifier {
         }
         //We save the color this way so have to convert it to Color:
         int _colorValue = int.parse(_savedTheme![1]);
-        Color color = Color(_colorValue).withOpacity(1);
+        Color color = Color(_colorValue);
 
         ThemeComponents _componentsToSet =
             ThemeComponents(brightness: _brightness, color: color);
@@ -94,7 +94,7 @@ class ThemeModel extends ChangeNotifier {
         brightness: theme.brightness,
         colorSchemeSeed: theme.color,
         fontFamily: 'Lato');
-  //send it for storage
+    //send it for storage
     saveThemeToDisk(theme);
     if (refresh == true || refresh == null) {
       notifyListeners();
@@ -108,6 +108,24 @@ class ThemeModel extends ChangeNotifier {
     // final _userTheme = json.encode(theme);
 
     await prefs.setStringList('userTheme',
-        <String>[theme.brightness.toString(), theme.color.value.toString()]);
+        <String>[theme.brightness.toString(), colorToInt(theme.color).toString()]);
   }
+}
+
+Color colorFromInt(int value) {
+  final int alpha = (value >> 24) & 0xFF;
+  final int red = (value >> 16) & 0xFF;
+  final int green = (value >> 8) & 0xFF;
+  final int blue = value & 0xFF;
+
+  return Color.fromARGB(alpha, red, green, blue);
+}
+
+int colorToInt(Color color) {
+  final a = (color.a * 255.0).round().clamp(0, 255);
+  final r = (color.r * 255.0).round().clamp(0, 255);
+  final g = (color.g * 255.0).round().clamp(0, 255);
+  final b = (color.b * 255.0).round().clamp(0, 255);
+
+  return (a << 24) | (r << 16) | (g << 8) | b;
 }

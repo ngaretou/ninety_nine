@@ -7,7 +7,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:share_plus/share_plus.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization method
 import '../providers/names.dart';
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
@@ -76,7 +76,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
-//Main section layout types
+    //Main section layout types
     Widget settingRow(title, setting) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -153,7 +153,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 width: 36,
               ),
             ),
-            value: color.value.toString()));
+            value: colorToInt(color).toString()));
       }
 
       return Row(
@@ -162,12 +162,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
           DropdownButton(
               itemHeight: 48,
               underline: SizedBox(),
-              value: _userTheme!.color.value.toString(),
+              value: colorToInt(_userTheme!.color).toString(),
               items: menuItems,
               onChanged: (response) {
                 int _colorValue = int.parse(response.toString());
 
-                Color color = Color(_colorValue).withOpacity(1);
+                Color color = colorFromInt(_colorValue);
 
                 ThemeComponents _themeToSet = ThemeComponents(
                     brightness: _userTheme.brightness, color: color);
@@ -434,7 +434,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
-                  activeColor: activeSwitchColor,
+                  activeThumbColor: activeSwitchColor,
                   activeTrackColor: activeControlColor,
                   value: _wolofal,
                   onChanged: (_) {
@@ -477,7 +477,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
-                  activeColor: activeSwitchColor,
+                  activeThumbColor: activeSwitchColor,
                   activeTrackColor: activeControlColor,
                   value: _wolof,
                   onChanged: (_) {
@@ -591,7 +591,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
-                  activeColor: activeSwitchColor,
+                  activeThumbColor: activeSwitchColor,
                   activeTrackColor: activeControlColor,
                   value: cardPrefs.cardPrefs.lowPower,
                   onChanged: (_) {
@@ -669,7 +669,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       });
     }
 
-///////////////////////////////
+    ///////////////////////////////
 
     return Scaffold(
         appBar: AppBar(
@@ -754,7 +754,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void showAbout(BuildContext context) async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    if (!mounted) return;
+    if (!context.mounted) return;
     showDialog(
         context: context,
         builder: (BuildContext context) {

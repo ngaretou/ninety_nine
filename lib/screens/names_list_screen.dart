@@ -5,7 +5,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'dart:ui' as ui;
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization method
 import 'cards_screen.dart';
 
 class NamesList extends StatelessWidget {

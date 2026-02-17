@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization method
 
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
@@ -93,10 +93,9 @@ class CardBack extends StatelessWidget {
         _boxDecoration = BoxDecoration(
           borderRadius:
               _isPhone ? BorderRadius.circular(0) : BorderRadius.circular(20.0),
-          gradient: LinearGradient(begin: Alignment.bottomRight, colors: [
-            Colors.black.withOpacity(.3),
-            Colors.black.withOpacity(.1)
-          ]),
+          gradient: LinearGradient(
+              begin: Alignment.bottomRight,
+              colors: [Colors.black.withAlpha(77), Colors.black.withAlpha(25)]),
         );
       }
       return _boxDecoration;
@@ -123,8 +122,8 @@ class CardBack extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.bottomRight,
                     colors: [
-                      Colors.black.withOpacity(.3),
-                      Colors.black.withOpacity(.0)
+                      Colors.black.withAlpha(77),
+                      Colors.black.withAlpha(25)
                     ],
                   ),
                 ),

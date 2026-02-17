@@ -7,7 +7,7 @@ import '../providers/card_prefs.dart';
 
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization method
 
 import '../providers/fps.dart';
 
@@ -107,7 +107,7 @@ class _CardsScreenState extends State<CardsScreen> {
       ),
       action: SnackBarAction(
           //for some reason the action color is not contrasting enough by default
-          textColor: Theme.of(context).colorScheme.background,
+          textColor: Theme.of(context).colorScheme.surface,
           label: AppLocalizations.of(context)!.cancel,
           onPressed: () {
             //undo the lowPower setting
@@ -128,7 +128,7 @@ class _CardsScreenState extends State<CardsScreen> {
       goToPage =
           Provider.of<DivineNames>(context, listen: false).lastNameViewed;
     } catch (e) {
-      print('error caught');
+      print('error caught in initializePage');
       goToPage = 1;
     }
   }

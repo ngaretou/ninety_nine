@@ -5,7 +5,7 @@ import 'package:ninety_nine/providers/player_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'l10n/app_localizations.dart'; // the new Flutter 3.x localization method
 import 'package:shared_preferences/shared_preferences.dart';
 
 import './providers/card_prefs.dart';
