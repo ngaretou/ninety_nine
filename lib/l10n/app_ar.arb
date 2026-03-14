@@ -1,0 +1,158 @@
+
+{
+  "@@locale": "ar",
+  "settingsTitle": "ݒࣷنڪِ جࣹڪّ-جࣹڪَّلْ",
+  "@settingsTitle": {
+    "description": "Settings screen title"
+  },
+  "settingsTheme": "مࣹلࣷيْ مِيرْ بِ",
+  "@settingsTheme": {
+    "description": "settings: Theme section"
+  },
+  "settingsCardBackground": "مࣹلࣷوْ ڪࣵرتّ يِ",
+  "@settingsCardBackground": {
+    "description": "settings: CardBackground section"
+  },
+  "settingsLanguage": "لࣵڪُّ تࣹگْتَلْ يِ",
+  "@settingsLanguage": {
+    "description": "settingsLanguage"
+  },
+  "settingsAbout": "ݖِ مبِرُمْ اَݒّلِ بِ",
+  "@settingsAbout": {
+    "description": "settingsAbout"
+  },
+  "settingsCardDirection": "ڪࣵرتّ يِ مَنْ نَݧُ جࣴمْ:‏ ",
+  "@settingsCardDirection": {
+    "description": "settingsCardDirection"
+  },
+  "settingsLTR": "ندࣹيْجࣷورْ",
+  "@settingsLTR": {
+    "description": "settingsLTR"
+  },
+  "settingsRTL": "ݖࣵمّࣷݧْ",
+  "@settingsRTL": {
+    "description": "settingsRTL"
+  },
+  "settingsVerseDisplay": "آيَ يِ نگَ بࣴگَّ گِسْ:‏ ",
+  "@settingsVerseDisplay": {
+    "description": "settingsVerseDisplay"
+  },
+  "settingsVerseinWolofal": "آيَ يِ ݖِ وࣷلࣷفَلْ",
+  "@settingsVerseinWolofal": {
+    "description": "settingsVerseinWolofal"
+  },
+  "settingsVerseinWolof": "آيَ يِ ݖِ وࣷلࣷفْ",
+  "@settingsVerseinWolof": {
+    "description": "settingsVerseinWolof"
+  },
+  "settingsShowFavs": "وࣷنࣹيلْ تُرْ:‏ ",
+  "@settingsShowFavs": {
+    "description": "settingsShowFavs"
+  },
+  "settingsFavorites": "يِ مَ تࣵنّ",
+  "@settingsFavorites": {
+    "description": "settingsFavorites"
+  },
+  "settingsTextAll": "يࣺݒّ",
+  "@settingsTextAll": {
+    "description": "settingsTextAll"
+  },
+  "settingsContactUs": "يٗنّࣹي نُ اࣹمَِلْ",
+  "@settingsContactUs": {
+    "description": "settingsContactUs"
+  },
+  "settingsViewIntro": "خࣷولاَتْ اُبِّتࣹ گِ",
+  "@settingsViewIntro": {
+    "description": "settingsViewIntro"
+  },
+  "sharingTitle": "سࣺدّࣷو اَبْ آيَ",
+  "@sharingTitle": {
+    "description": "sharingTitle"
+  },
+  "sharingMsg": "ݖِ بَنْ مبِنْدِنْ نگَ بࣴگَّ سࣺدّࣷو؟",
+  "@sharingMsg": {
+    "description": "sharingMsg"
+  },
+  "cancel": "فࣷمّ",
+  "@cancel": {
+    "description": "cancel"
+  },
+  "clickHereToReadMore": "بࣴسَلْ فِي نگِرْ يࣷڪّ سَ نجࣵنگّ:‏ ",
+  "@clickHereToReadMore": {
+    "description": "clickHereToReadMore"
+  },
+  "introPage1": "اَݒّلِ بِي دَا اࣴمبّ 99 تُرُ يࣵلَّ يِ ݖِ اَرَابْ، وࣷلࣷفَلْ، اَڪْ اَلْفَ.\n\nجࣵنگَلْ تࣹ خَلاَتْ ݖِ آيَ يِ نࣹڪّ ݖِ گَنَّاوْ ڪَرتّ يِ، نگِرْ نگَ گࣴنَ خَمْ يࣵلَّ اَڪْ ݖࣷوبَرࣹمْ.",
+  "@introPage1": {
+    "description": "General introductory words"
+  },
+  "introPage2": "بࣷو جَنگࣹي اَبْ آيَ، لاَجَلْ سَ بࣷݒّ ݧࣹينْتِ لاَجْ يِ:‏\n\n1. لَنْ لَ نُ آيَ يِي دِ خَمَلْ ݖِ يࣵلَّ؟\n\n2. لَنْ لَ نُ آيَ يِي دِ خَمَلْ ݖِ دࣷومْ آدَمَ؟\n\n3. نَڪَ لَݧُ وَرَ سࣷݒّࣹي سُنُ دُنْدِنْ؟\n\n4. ڪَنْ نگَ بࣴگَّ سࣹدّࣷو آيَ يِي؟",
+  "@introPage2": {
+    "description": "DBS questions"
+  },
+  "introPage3a": "بࣷويْ جࣵنگَتْ ڪࣵدُّگْ يࣵلَّ گِ ݖِ اَݒّلِ بِ، دِنگَ گࣴنَ سࣷݒّ يࣵلَّ.\n\nݖِ ڪَدُّ يُ خࣹلُ، سَارْ 8 آيَ 17، يࣵلَّ دَا نࣹ:‏",
+  "@introPage3a": {
+    "description": "Motivation for DBS"
+  },
+  "introPage3b": "مَا سࣷݒّ ڪُ مَ سࣷݒّ، ڪُ مَ سࣹيتْ تِگِ، گِسْ مَ.",
+  "@introPage3b": {
+    "description": "Motivation for DBS: bible verse"
+  },
+  "introPage4a": "ݖِ ڪࣵرتّ بُ نࣹڪّ مَنْ نگَ:‏",
+  "@introPage4a": {
+    "description": "On each card you can"
+  },
+  "introPage4b": "دࣹگْلُ نُ جࣵنگَلْ لَ آيَ بِ،",
+  "@introPage4b": {
+    "description": "hear the verse read,"
+  },
+  "introPage4c": "سࣹدّࣷو آيَ بِ اَڪْ سَ وٗلّࣴرࣹ يِ،",
+  "@introPage4c": {
+    "description": "share the verse with your friends,"
+  },
+  "introPage4d": "تَنّ تُرْ يِ نگَ گࣴنَ بࣴگّ.",
+  "@introPage4d": {
+    "description": "and choose your favorites."
+  },
+  "favsNoneYet": "تࣵنَّگُلࣷو بࣹنّ تُرْ",
+  "@favsNoneYet": {
+    "description": "favsNoneYet"
+  },
+  "favsNoneYetInstructions": "بࣴسَلْ ݖِ خࣷلْ بِ ݖِ تُرْ يِ نگَ گࣴنَ بࣴگّ.",
+  "@favsNoneYetInstructions": {
+    "description": "favsNoneYetInstructions"
+  },
+  "ok": "وڪ",
+  "@ok": {
+    "description": "OK"
+  },
+  "skip": "تࣴبَّلْ",
+  "@skip": {
+    "description": "Skip on onboarding screen"
+  },
+  "start": "اَيْوَ",
+  "@start": {
+    "description": "Start on onboarding screen"
+  },
+  "listView": "لِمࣹيفُ تُرْ يِ",
+  "@listView": {
+    "description": "List View"
+  },
+  "powerMode": "دࣷولࣹيْ اَݒّلِ بِ",
+  "@powerMode": {},
+  "lowPowerMode": "وࣵݧِّ دࣷولࣹ بِ اَݒّلِ بِ لاَجْ، نگِرْ خَرَلࣹ بِ مَنْ ڪࣷو اࣵتَّنْ",
+  "@lowPowerMode": {
+    "description": "Low power mode on"
+  },
+  "lowPowerModeMessage": "اَݒّلِ بَانگِيْ وࣵݧِّ دࣷولࣹيمْ نگِرْ خَرَلࣹ بِ اࣵتَّنْ ڪࣷ.",
+  "@lowPowerModeMessage": {
+    "description": "lowPowerModeMessage"
+  },
+  "audioForSharing": "اࣷجّࣷ",
+  "@audioForSharing": {
+    "description": "when sharing, audio"
+  },
+  "shareAppLink": "سࣺدّࣷو اَݒّلِ بِ",
+  "@shareAppLink": {
+    "description": "Share link to app on app store"
+  }
+}

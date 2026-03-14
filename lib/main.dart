@@ -157,6 +157,8 @@ class _MyAppState extends State<MyApp> {
                 // and add in the Wolof to the app_fr_ch.arb in the l10n folder.
                 // So when we switch locale to fr_CH, that's Wolof.
                 const Locale('fr', 'CH'),
+                // wolofal 2026
+                const Locale('ar', ''),
               ],
               locale: Provider.of<ThemeModel>(context, listen: false)
                           .userLocale ==

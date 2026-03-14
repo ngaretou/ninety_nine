@@ -34,6 +34,10 @@ class ThemeModel extends ChangeNotifier {
         userLocale = Locale('fr', 'CH');
         notifyListeners();
         break;
+      case 'ar':
+        userLocale = Locale('ar', '');
+        notifyListeners();
+        break;
       default:
     }
     return;
@@ -107,8 +111,10 @@ class ThemeModel extends ChangeNotifier {
     //save _themeName to disk
     // final _userTheme = json.encode(theme);
 
-    await prefs.setStringList('userTheme',
-        <String>[theme.brightness.toString(), colorToInt(theme.color).toString()]);
+    await prefs.setStringList('userTheme', <String>[
+      theme.brightness.toString(),
+      colorToInt(theme.color).toString()
+    ]);
   }
 }
 

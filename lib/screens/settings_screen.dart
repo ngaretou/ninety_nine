@@ -57,22 +57,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
       return InkWell(
         onTap: tapHandler as void Function()?,
         child: Container(
-            width: 300,
-            child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    Icon(
-                      icon,
-                      size: 27,
-                      color: Theme.of(context).iconTheme.color,
-                    ),
-                    SizedBox(width: 25),
-                    Expanded(
-                        child: Text(title,
-                            style: Theme.of(context).textTheme.titleLarge)),
-                  ],
-                ))),
+          width: 300,
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Row(
+              children: [
+                Icon(icon, size: 27, color: Theme.of(context).iconTheme.color),
+                SizedBox(width: 25),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       );
     }
 
@@ -84,9 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           title,
           VerticalDivider(width: 10, color: Colors.white),
-          Expanded(
-            child: setting,
-          )
+          Expanded(child: setting),
           // setting,
         ],
       );
@@ -96,31 +95,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
       return Column(
         //This aligns titles to the left
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          title,
-          setting,
-          Divider(),
-        ],
+        children: [title, setting, Divider()],
       );
     }
 
     //Now individual implementations of it
     Widget viewListOfNames() {
-      return settingTitle(
-        AppLocalizations.of(context)!.listView,
-        Icons.list,
-        () {
-          //Part of the names list navigation - this opens the NamesLIst, then gets and then passes on the value from the popped screen
-          Navigator.of(context).pushNamed(NamesList.routeName).then((value) {
-            Navigator.of(context).pop(value);
-          });
-        },
-      );
+      return settingTitle(AppLocalizations.of(context)!.listView, Icons.list, () {
+        //Part of the names list navigation - this opens the NamesLIst, then gets and then passes on the value from the popped screen
+        Navigator.of(context).pushNamed(NamesList.routeName).then((value) {
+          Navigator.of(context).pop(value);
+        });
+      });
     }
 
     Widget themeTitle() {
-      return settingTitle(AppLocalizations.of(context)!.settingsTheme,
-          Icons.settings_brightness, null);
+      return settingTitle(
+        AppLocalizations.of(context)!.settingsTheme,
+        Icons.settings_brightness,
+        null,
+      );
     }
 
     Widget themeSettings() {
@@ -137,13 +131,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         Colors.deepPurple,
         Colors.blueGrey,
         Colors.brown,
-        Colors.grey
+        Colors.grey,
       ];
 
       List<DropdownMenuItem<String>> menuItems = [];
 
       for (var color in themeColors) {
-        menuItems.add(DropdownMenuItem(
+        menuItems.add(
+          DropdownMenuItem(
             child: Material(
               shape: CircleBorder(side: BorderSide.none),
               elevation: 2,
@@ -153,37 +148,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 width: 36,
               ),
             ),
-            value: colorToInt(color).toString()));
+            value: colorToInt(color).toString(),
+          ),
+        );
       }
 
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           DropdownButton(
-              itemHeight: 48,
-              underline: SizedBox(),
-              value: colorToInt(_userTheme!.color).toString(),
-              items: menuItems,
-              onChanged: (response) {
-                int _colorValue = int.parse(response.toString());
+            itemHeight: 48,
+            underline: SizedBox(),
+            value: colorToInt(_userTheme!.color).toString(),
+            items: menuItems,
+            onChanged: (response) {
+              int _colorValue = int.parse(response.toString());
 
-                Color color = colorFromInt(_colorValue);
+              Color color = colorFromInt(_colorValue);
 
-                ThemeComponents _themeToSet = ThemeComponents(
-                    brightness: _userTheme.brightness, color: color);
+              ThemeComponents _themeToSet = ThemeComponents(
+                brightness: _userTheme.brightness,
+                color: color,
+              );
 
-                themeProvider.setTheme(_themeToSet);
-              }),
+              themeProvider.setTheme(_themeToSet);
+            },
+          ),
           Container(
-              height: 45,
-              width: 1,
-              color: Theme.of(context).colorScheme.outline),
+            height: 45,
+            width: 1,
+            color: Theme.of(context).colorScheme.outline,
+          ),
           ElevatedButton(
             child: _userTheme.brightness == Brightness.light
-                ? Icon(
-                    Icons.check,
-                    color: Colors.black,
-                  )
+                ? Icon(Icons.check, color: Colors.black)
                 : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
@@ -192,17 +190,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             onPressed: () {
               ThemeComponents _themeToSet = ThemeComponents(
-                  brightness: Brightness.light, color: _userTheme.color);
+                brightness: Brightness.light,
+                color: _userTheme.color,
+              );
 
               themeProvider.setTheme(_themeToSet);
             },
           ),
           ElevatedButton(
             child: _userTheme.brightness == Brightness.dark
-                ? Icon(
-                    Icons.check,
-                    color: Colors.white,
-                  )
+                ? Icon(Icons.check, color: Colors.white)
                 : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black,
@@ -211,7 +208,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             onPressed: () {
               ThemeComponents _themeToSet = ThemeComponents(
-                  brightness: Brightness.dark, color: _userTheme.color);
+                brightness: Brightness.dark,
+                color: _userTheme.color,
+              );
 
               themeProvider.setTheme(_themeToSet);
             },
@@ -248,7 +247,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ChoiceChip(
                 selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: userLocale.toString() == 'fr' ||
+                selected: userLocale.toString() == 'ar' ? true : false,
+                label: Text(
+                  "وࣷلࣷفَلْ",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                onSelected: (bool selected) {
+                  themeProvider.setLocale('ar');
+                },
+              ),
+              ChoiceChip(
+                selectedColor: activeControlColor,
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                selected:
+                    userLocale.toString() == 'fr' ||
                         userLocale.toString() == 'fr_'
                     ? true
                     : false,
@@ -279,33 +291,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     Widget backgroundTitle() {
-      return settingTitle(AppLocalizations.of(context)!.settingsCardBackground,
-          Icons.image, null);
+      return settingTitle(
+        AppLocalizations.of(context)!.settingsCardBackground,
+        Icons.image,
+        null,
+      );
     }
 
     Widget directionTitle() {
-      return settingTitle(AppLocalizations.of(context)!.settingsCardDirection,
-          Icons.compare_arrows, null);
+      return settingTitle(
+        AppLocalizations.of(context)!.settingsCardDirection,
+        Icons.compare_arrows,
+        null,
+      );
     }
 
     Widget scriptPickerTitle() {
-      return settingTitle(AppLocalizations.of(context)!.settingsVerseDisplay,
-          Icons.format_quote, null);
+      return settingTitle(
+        AppLocalizations.of(context)!.settingsVerseDisplay,
+        Icons.format_quote,
+        null,
+      );
     }
 
     Widget showFavsTitle() {
       return settingTitle(
-          AppLocalizations.of(context)!.settingsShowFavs, Icons.favorite, null);
+        AppLocalizations.of(context)!.settingsShowFavs,
+        Icons.favorite,
+        null,
+      );
     }
 
     Widget lowPowerModeTitle() {
       return settingTitle(
-          AppLocalizations.of(context)!.powerMode, Icons.bolt, null);
+        AppLocalizations.of(context)!.powerMode,
+        Icons.bolt,
+        null,
+      );
     }
 
     Widget languageTitle() {
-      return settingTitle(AppLocalizations.of(context)!.settingsLanguage,
-          Icons.translate, null);
+      return settingTitle(
+        AppLocalizations.of(context)!.settingsLanguage,
+        Icons.translate,
+        null,
+      );
     }
 
     Widget backgroundSettings() {
@@ -317,10 +347,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ElevatedButton(
             child: cardPrefs.cardPrefs.imageEnabled
                 ? null
-                : Icon(
-                    Icons.check,
-                    color: Colors.black,
-                  ),
+                : Icon(Icons.check, color: Colors.black),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white70,
               padding: EdgeInsets.all(0),
@@ -372,16 +399,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: cardPrefs.cardPrefs.textDirection ? false : true,
-                label: Row(children: [
-                  Text(
-                    "(abc)",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Icon(Icons.arrow_forward),
-                ]),
+                label: Row(
+                  children: [
+                    Text(
+                      "(abc)",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    SizedBox(width: 10),
+                    Icon(Icons.arrow_forward),
+                  ],
+                ),
                 onSelected: (bool selected) {
                   cardPrefs.savePref('textDirection', false);
                   setState(() {});
@@ -397,9 +424,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       "(بدف)",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
+                    SizedBox(width: 10),
                     Icon(Icons.arrow_back),
                   ],
                 ),
@@ -420,17 +445,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-              width: 300,
-              child: Padding(
-                  padding: EdgeInsets.only(left: 80),
-                  child: Row(children: [
-                    Text(AppLocalizations.of(context)!.settingsVerseinWolofal,
-                        style: Theme.of(context).textTheme.titleMedium),
-                  ]))),
+            width: 300,
+            child: Padding(
+              padding: EdgeInsets.only(left: 80),
+              child: Row(
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.settingsVerseinWolofal,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ],
+              ),
+            ),
+          ),
           Expanded(
             child: Row(
-              mainAxisAlignment:
-                  _isPhone ? MainAxisAlignment.end : MainAxisAlignment.center,
+              mainAxisAlignment: _isPhone
+                  ? MainAxisAlignment.end
+                  : MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
@@ -462,18 +494,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-              width: 300,
-              child: Padding(
-                  padding: EdgeInsets.only(left: 80),
-                  child: Row(children: [
-                    // Expanded(child:
-                    Text(AppLocalizations.of(context)!.settingsVerseinWolof,
-                        style: Theme.of(context).textTheme.titleMedium),
-                  ]))),
+            width: 300,
+            child: Padding(
+              padding: EdgeInsets.only(left: 80),
+              child: Row(
+                children: [
+                  // Expanded(child:
+                  Text(
+                    AppLocalizations.of(context)!.settingsVerseinWolof,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ],
+              ),
+            ),
+          ),
           Expanded(
             child: Row(
-              mainAxisAlignment:
-                  _isPhone ? MainAxisAlignment.end : MainAxisAlignment.center,
+              mainAxisAlignment: _isPhone
+                  ? MainAxisAlignment.end
+                  : MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
@@ -517,9 +556,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 onSelected: (bool selected) async {
-                  if (Provider.of<DivineNames>(context, listen: false)
-                          .favoriteNames
-                          .length ==
+                  if (Provider.of<DivineNames>(
+                        context,
+                        listen: false,
+                      ).favoriteNames.length ==
                       0) {
                     showDialog(
                       context: context,
@@ -529,17 +569,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             AppLocalizations.of(context)!.favsNoneYet,
                           ),
                           content: Text(
-                            AppLocalizations.of(context)!
-                                .favsNoneYetInstructions,
+                            AppLocalizations.of(
+                              context,
+                            )!.favsNoneYetInstructions,
                           ),
                           actions: [
                             TextButton(
-                                child: Text(
-                                  AppLocalizations.of(context)!.ok,
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                }),
+                              child: Text(AppLocalizations.of(context)!.ok),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
                           ],
                         );
                       },
@@ -576,18 +616,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-              width: 300,
-              child: Padding(
-                  padding: EdgeInsets.only(left: 80),
-                  child: Row(children: [
-                    Expanded(
-                        child: Text(AppLocalizations.of(context)!.lowPowerMode,
-                            style: Theme.of(context).textTheme.titleMedium)),
-                  ]))),
+            width: 300,
+            child: Padding(
+              padding: EdgeInsets.only(left: 80),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      AppLocalizations.of(context)!.lowPowerMode,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Expanded(
             child: Row(
-              mainAxisAlignment:
-                  _isPhone ? MainAxisAlignment.end : MainAxisAlignment.center,
+              mainAxisAlignment: _isPhone
+                  ? MainAxisAlignment.end
+                  : MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Switch(
@@ -596,7 +644,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   value: cardPrefs.cardPrefs.lowPower,
                   onChanged: (_) {
                     cardPrefs.savePref(
-                        'lowPower', !cardPrefs.cardPrefs.lowPower);
+                      'lowPower',
+                      !cardPrefs.cardPrefs.lowPower,
+                    );
                     //This makes it so if the user chooses a setting, we won't ask them again to set to low power, they know where the setting is
                     cardPrefs.savePref('shouldTestDevicePerformance', false);
                     setState(() {});
@@ -645,15 +695,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Share.share(
               'https://sng.al/99',
               sharePositionOrigin: Rect.fromLTWH(
-                  0, 0, mediaQuery.size.width, mediaQuery.size.height * .33),
+                0,
+                0,
+                mediaQuery.size.width,
+                mediaQuery.size.height * .33,
+              ),
             );
           } else {
             const url =
                 "mailto:?subject=99&body=Xoolal appli bi: https://sng.al/99";
 
             if (await canLaunchUrl(Uri.parse(url))) {
-              await launchUrl(Uri.parse(url),
-                  mode: LaunchMode.externalApplication);
+              await launchUrl(
+                Uri.parse(url),
+                mode: LaunchMode.externalApplication,
+              );
             } else {
               throw 'Could not launch $url';
             }
@@ -664,168 +720,173 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     Widget showIntroWidget() {
       return settingTitle(
-          AppLocalizations.of(context)!.settingsViewIntro, Icons.replay, () {
-        Navigator.of(context).pushNamed(OnboardingScreen.routeName);
-      });
+        AppLocalizations.of(context)!.settingsViewIntro,
+        Icons.replay,
+        () {
+          Navigator.of(context).pushNamed(OnboardingScreen.routeName);
+        },
+      );
     }
 
     ///////////////////////////////
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            AppLocalizations.of(context)!.settingsTitle,
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.settingsTitle)),
+      //If the width of the screen is greater or equal to 500
+      //show the wide view
+      body: ScrollConfiguration(
+        //The 2.8 Flutter behavior is to not have mice grabbing and dragging - but we do want this in the web version of the app, so the custom scroll behavior here
+        behavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
+        child: Center(
+          child: MouseRegion(
+            cursor: SystemMouseCursors.grab,
+            child: mediaQuery.size.width >= 730
+                // tablet
+                ? Container(
+                    width: 730,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      child: ListView(
+                        children: [
+                          viewListOfNames(),
+                          settingRow(themeTitle(), themeSettings()),
+                          Divider(),
+                          settingRow(backgroundTitle(), backgroundSettings()),
+                          Divider(),
+                          settingRow(directionTitle(), directionSettings()),
+                          Divider(),
+                          scriptPickerTitle(),
+                          asScriptPicker(),
+                          rsScriptPicker(),
+                          Divider(),
+                          settingRow(showFavsTitle(), showFavsSetting()),
+                          Divider(),
+                          lowPowerModeTitle(),
+                          lowPowerModeChooser(),
+                          Divider(),
+                          languageTitle(),
+                          languageSetting(),
+                          Divider(),
+                          shareAppWidget(),
+                          Divider(),
+                          aboutWidget(),
+                          Divider(),
+                          contactUsWidget(),
+                          Divider(),
+                          showIntroWidget(),
+                        ],
+                      ),
+                    ),
+                  )
+                // phone
+                : ListView(
+                    children: [
+                      viewListOfNames(),
+                      settingColumn(themeTitle(), themeSettings()),
+                      settingColumn(backgroundTitle(), backgroundSettings()),
+                      settingColumn(directionTitle(), directionSettings()),
+                      scriptPickerTitle(),
+                      asScriptPicker(),
+                      rsScriptPicker(),
+                      Divider(),
+                      settingColumn(showFavsTitle(), showFavsSetting()),
+                      lowPowerModeTitle(),
+                      lowPowerModeChooser(),
+                      Divider(),
+                      settingColumn(languageTitle(), languageSetting()),
+                      shareAppWidget(),
+                      Divider(),
+                      aboutWidget(),
+                      Divider(),
+                      contactUsWidget(),
+                      Divider(),
+                      showIntroWidget(),
+                    ],
+                  ),
+            // ),
           ),
         ),
-        //If the width of the screen is greater or equal to 500
-        //show the wide view
-        body: ScrollConfiguration(
-            //The 2.8 Flutter behavior is to not have mice grabbing and dragging - but we do want this in the web version of the app, so the custom scroll behavior here
-            behavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
-            child: Center(
-                child: MouseRegion(
-              cursor: SystemMouseCursors.grab,
-              child: mediaQuery.size.width >= 730
-                  // tablet
-                  ? Container(
-                      width: 730,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        child: ListView(
-                          children: [
-                            viewListOfNames(),
-                            settingRow(themeTitle(), themeSettings()),
-                            Divider(),
-                            settingRow(backgroundTitle(), backgroundSettings()),
-                            Divider(),
-                            settingRow(directionTitle(), directionSettings()),
-                            Divider(),
-                            scriptPickerTitle(),
-                            asScriptPicker(),
-                            rsScriptPicker(),
-                            Divider(),
-                            settingRow(showFavsTitle(), showFavsSetting()),
-                            Divider(),
-                            lowPowerModeTitle(),
-                            lowPowerModeChooser(),
-                            Divider(),
-                            languageTitle(),
-                            languageSetting(),
-                            Divider(),
-                            shareAppWidget(),
-                            Divider(),
-                            aboutWidget(),
-                            Divider(),
-                            contactUsWidget(),
-                            Divider(),
-                            showIntroWidget()
-                          ],
-                        ),
-                      ),
-                    )
-                  // phone
-                  : ListView(
-                      children: [
-                        viewListOfNames(),
-                        settingColumn(themeTitle(), themeSettings()),
-                        settingColumn(backgroundTitle(), backgroundSettings()),
-                        settingColumn(directionTitle(), directionSettings()),
-                        scriptPickerTitle(),
-                        asScriptPicker(),
-                        rsScriptPicker(),
-                        Divider(),
-                        settingColumn(showFavsTitle(), showFavsSetting()),
-                        lowPowerModeTitle(),
-                        lowPowerModeChooser(),
-                        Divider(),
-                        settingColumn(languageTitle(), languageSetting()),
-                        shareAppWidget(),
-                        Divider(),
-                        aboutWidget(),
-                        Divider(),
-                        contactUsWidget(),
-                        Divider(),
-                        showIntroWidget()
-                      ],
-                    ),
-              // ),
-            ))));
+      ),
+    );
   }
 
   void showAbout(BuildContext context) async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     if (!context.mounted) return;
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Directionality(
+          textDirection: .ltr,
+          child: AlertDialog(
             // title: Text(packageInfo.appName),
             content: SingleChildScrollView(
-                child: ListBody(children: [
-              Row(
+              child: ListBody(
                 children: [
-                  Container(
-                    // child: Image.asset('assets/icons/icon.png'),
-                    width: 50,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image:
-                            AssetImage("assets/images/icons/99-icon-round.png"),
-                      ),
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 200),
-                        child: Text(
-                          "99",
-                          style: Theme.of(context).textTheme.headlineSmall,
+                      Container(
+                        // child: Image.asset('assets/icons/icon.png'),
+                        width: 50,
+                        height: 50,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              "assets/images/icons/99-icon-round.png",
+                            ),
+                          ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
                         ),
                       ),
-                      Text(
-                          'Version ${packageInfo.version} (${packageInfo.buildNumber})'),
+                      const SizedBox(width: 10),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 200),
+                            child: Text(
+                              "99",
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            ),
+                          ),
+                          Text(
+                            'Version ${packageInfo.version} (${packageInfo.buildNumber})',
+                          ),
+                        ],
+                      ),
                     ],
-                  )
+                  ),
+                  const SizedBox(height: 10),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(fontStyle: FontStyle.italic),
+                          text: 'Kàddug Yàlla',
+                        ),
+                        TextSpan(
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          text: ' copyright © 2024 La MBS.',
+                        ),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          text: 'Appli © 2024 Foundational LLC.',
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              RichText(
-                  text: TextSpan(
-                children: [
-                  TextSpan(
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(fontStyle: FontStyle.italic),
-                    text: 'Kàddug Yàlla',
-                  ),
-                  TextSpan(
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    text: ' copyright © 2024 La MBS.',
-                  ),
-                ],
-              )),
-              RichText(
-                  text: TextSpan(
-                children: [
-                  TextSpan(
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    text: 'Appli © 2024 Foundational LLC.',
-                  ),
-                ],
-              )),
-            ])),
+            ),
 
             actions: <Widget>[
               OutlinedButton(
@@ -833,23 +894,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onPressed: () {
                   // Navigator.of(context).pushNamed(AboutScreen.routeName);
                   clearPage(Widget page) => PageRouteBuilder(
-                        opaque: false,
-                        pageBuilder: (BuildContext context, _, __) => page,
-                      );
-                  Navigator.push(
-                    context,
-                    clearPage(const AboutScreen()),
+                    opaque: false,
+                    pageBuilder: (BuildContext context, _, __) => page,
                   );
+                  Navigator.push(context, clearPage(const AboutScreen()));
                 },
               ),
               OutlinedButton(
                 child: const Text('Licenses'),
                 onPressed: () {
                   // Navigator.of(context).pop();
-                  showLicenses(context,
-                      appName: packageInfo.appName,
-                      appVersion:
-                          '${packageInfo.version} (${packageInfo.buildNumber})');
+                  showLicenses(
+                    context,
+                    appName: packageInfo.appName,
+                    appVersion:
+                        '${packageInfo.version} (${packageInfo.buildNumber})',
+                  );
                 },
               ),
               OutlinedButton(
@@ -859,8 +919,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
             ],
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -875,20 +937,22 @@ void showLicenses(BuildContext context, {String? appName, String? appVersion}) {
   }) {
     // assert(context != null);
     // assert(useRootNavigator != null);
-    Navigator.of(context, rootNavigator: useRootNavigator)
-        .push(MaterialPageRoute<void>(
-      builder: (BuildContext context) => LicensePage(
-        applicationName: applicationName,
-        applicationVersion: applicationVersion,
-        applicationIcon: applicationIcon,
-        applicationLegalese: applicationLegalese,
+    Navigator.of(context, rootNavigator: useRootNavigator).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => LicensePage(
+          applicationName: applicationName,
+          applicationVersion: applicationVersion,
+          applicationIcon: applicationIcon,
+          applicationLegalese: applicationLegalese,
+        ),
       ),
-    ));
+    );
   }
 
   showLicensePage(
-      context: context,
-      applicationVersion: appVersion,
-      applicationName: appName,
-      useRootNavigator: true);
+    context: context,
+    applicationVersion: appVersion,
+    applicationName: appName,
+    useRootNavigator: true,
+  );
 }
