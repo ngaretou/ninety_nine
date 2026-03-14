@@ -21,32 +21,29 @@ class CardBack extends StatelessWidget {
   final MediaQueryData mediaQuery;
   final EdgeInsets cardPadding;
 
-  const CardBack(
-    this.name,
-    this.player,
-    this.mediaQuery,
-    this.cardPadding,
-  );
+  const CardBack(this.name, this.player, this.mediaQuery, this.cardPadding, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    print('card back build ' + name.id.toString());
-    CardPrefList cardPrefs =
-        Provider.of<CardPrefs>(context, listen: false).cardPrefs;
-    final bool _isDark =
+    debugPrint('card back build ${name.id}');
+    CardPrefList cardPrefs = Provider.of<CardPrefs>(
+      context,
+      listen: false,
+    ).cardPrefs;
+    final bool isDark =
         Provider.of<ThemeModel>(context, listen: false).userTheme!.brightness ==
-            Brightness.dark;
+        Brightness.dark;
     final ui.TextDirection rtlText = ui.TextDirection.rtl;
-    final Color _fontColor = _isDark ? Colors.white : Colors.black;
+    final Color fontColor = isDark ? Colors.white : Colors.black;
 
-    bool _isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
+    bool isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
 
     Widget textRS(input, double fontReduction) {
       return Text(
         input,
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: _fontColor,
+          color: fontColor,
           fontFamily: "Charis",
           fontSize: 30 - fontReduction,
         ),
@@ -67,7 +64,7 @@ class CardBack extends StatelessWidget {
         textToRender,
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: _fontColor,
+          color: fontColor,
           fontFamily: "Harmattan",
           fontSize: 40 - fontReduction,
         ),
@@ -76,134 +73,135 @@ class CardBack extends StatelessWidget {
     }
 
     BoxDecoration adaptiveBackground() {
-      late BoxDecoration _boxDecoration;
+      late BoxDecoration boxDecoration;
 
-      if (Provider.of<CardPrefs>(context, listen: false)
-          .cardPrefs
-          .imageEnabled) {
-        _boxDecoration = BoxDecoration(
-          borderRadius:
-              _isPhone ? BorderRadius.circular(0) : BorderRadius.circular(20.0),
+      if (Provider.of<CardPrefs>(
+        context,
+        listen: false,
+      ).cardPrefs.imageEnabled) {
+        boxDecoration = BoxDecoration(
+          borderRadius: isPhone
+              ? BorderRadius.circular(0)
+              : BorderRadius.circular(20.0),
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: _isDark ? darkBackground : lightBackground,
+            image: isDark ? darkBackground : lightBackground,
           ),
         );
       } else {
-        _boxDecoration = BoxDecoration(
-          borderRadius:
-              _isPhone ? BorderRadius.circular(0) : BorderRadius.circular(20.0),
+        boxDecoration = BoxDecoration(
+          borderRadius: isPhone
+              ? BorderRadius.circular(0)
+              : BorderRadius.circular(20.0),
           gradient: LinearGradient(
-              begin: Alignment.bottomRight,
-              colors: [Colors.black.withAlpha(77), Colors.black.withAlpha(25)]),
+            begin: Alignment.bottomRight,
+            colors: [Colors.black.withAlpha(77), Colors.black.withAlpha(25)],
+          ),
         );
       }
-      return _boxDecoration;
+      return boxDecoration;
     }
 
     //Card back does not have alternate layouts for portrait and landscape
-    return Container(
+    return SizedBox(
       //This Container and height seems superfluous but must be here to help the low animation not go weird
       height: mediaQuery.size.height,
       child: Padding(
-        padding: _isPhone ? EdgeInsets.all(0) : cardPadding,
+        padding: isPhone ? EdgeInsets.all(0) : cardPadding,
         child: Stack(
           children: [
             Container(
-              height: _isPhone
+              height: isPhone
                   ? mediaQuery.size.height
                   : mediaQuery.size.height - (cardPadding.top * 2),
               decoration: adaptiveBackground(),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: _isPhone
+                  borderRadius: isPhone
                       ? BorderRadius.circular(0.0)
                       : BorderRadius.circular(20.0),
                   gradient: LinearGradient(
                     begin: Alignment.bottomRight,
                     colors: [
                       Colors.black.withAlpha(77),
-                      Colors.black.withAlpha(25)
+                      Colors.black.withAlpha(25),
                     ],
                   ),
                 ),
                 child: Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: [
-                        // children: [
-                        //Name Header
-                        Row(
+                  padding: EdgeInsets.all(20.0),
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      // children: [
+                      //Name Header
+                      Row(
+                        children: [
+                          Expanded(child: textRS(name.wolofName, 0)),
+                          VerticalDivider(
+                            color: Theme.of(context).primaryColor,
+                            thickness: 3,
+                          ),
+                          Expanded(child: textAS(name.wolofalName, 0)),
+                        ],
+                      ),
+                      // Wolofal verse section
+                      cardPrefs.wolofalVerseEnabled
+                          ? Column(
+                              children: [
+                                Divider(
+                                  color: Theme.of(context).primaryColor,
+                                  thickness: 3,
+                                ),
+                                textAS(name.wolofalVerse, 0.0),
+                                textAS(name.wolofalVerseRef, 10.0),
+                              ],
+                            )
+                          : SizedBox(width: 20),
+                      //Wolof verse section
+                      cardPrefs.wolofVerseEnabled
+                          ? Column(
+                              children: [
+                                Divider(
+                                  color: Theme.of(context).primaryColor,
+                                  thickness: 3,
+                                ),
+                                textRS(name.wolofVerse, 0.0),
+                                SizedBox(height: 20),
+                                textRS(name.wolofVerseRef, 10.0),
+                              ],
+                            )
+                          : SizedBox(width: 20),
+                      SizedBox(height: 60),
+                      TextButton(
+                        // style: TextButton.styleFrom(
+                        //     backgroundColor: Theme.of(context)
+                        //         .colorScheme
+                        //         .tertiaryContainer),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(child: textRS(name.wolofName, 0)),
-                            VerticalDivider(
-                              color: Theme.of(context).primaryColor,
-                              thickness: 3,
+                            Text(
+                              AppLocalizations.of(context)!.clickHereToReadMore,
+                              style: TextStyle(color: fontColor),
                             ),
-                            Expanded(
-                              child: textAS(name.wolofalName, 0),
-                            ),
+                            Icon(Icons.arrow_forward, color: fontColor),
                           ],
                         ),
-                        // Wolofal verse section
-                        cardPrefs.wolofalVerseEnabled
-                            ? Column(
-                                children: [
-                                  Divider(
-                                    color: Theme.of(context).primaryColor,
-                                    thickness: 3,
-                                  ),
-                                  textAS(name.wolofalVerse, 0.0),
-                                  textAS(name.wolofalVerseRef, 10.0)
-                                ],
-                              )
-                            : SizedBox(width: 20),
-                        //Wolof verse section
-                        cardPrefs.wolofVerseEnabled
-                            ? Column(
-                                children: [
-                                  Divider(
-                                    color: Theme.of(context).primaryColor,
-                                    thickness: 3,
-                                  ),
-                                  textRS(name.wolofVerse, 0.0),
-                                  SizedBox(height: 20),
-                                  textRS(name.wolofVerseRef, 10.0),
-                                ],
-                              )
-                            : SizedBox(width: 20),
-                        SizedBox(height: 60),
-                        TextButton(
-                          // style: TextButton.styleFrom(
-                          //     backgroundColor: Theme.of(context)
-                          //         .colorScheme
-                          //         .tertiaryContainer),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                  AppLocalizations.of(context)!
-                                      .clickHereToReadMore,
-                                  style: TextStyle(color: _fontColor)),
-                              Icon(Icons.arrow_forward, color: _fontColor),
-                            ],
-                          ),
-                          onPressed: () async {
-                            const String url = 'https://sng.al/chrono';
-                            if (await canLaunchUrl(Uri.parse(url))) {
-                              await launchUrl(Uri.parse(url));
-                            } else {
-                              throw 'Could not launch $url';
-                            }
-                          },
-                        ),
-                        SizedBox(
-                          height: 70,
-                        ),
-                        // ],
-                      ],
-                    )),
+                        onPressed: () async {
+                          const String url = 'https://sng.al/chrono';
+                          if (await canLaunchUrl(Uri.parse(url))) {
+                            await launchUrl(Uri.parse(url));
+                          } else {
+                            throw 'Could not launch $url';
+                          }
+                        },
+                      ),
+                      SizedBox(height: 70),
+                      // ],
+                    ],
+                  ),
+                ),
               ),
             ),
             Padding(

@@ -14,13 +14,17 @@ class CardFront extends StatelessWidget {
   final MediaQueryData mediaQuery;
   final EdgeInsets cardPadding;
 
-  const CardFront(this.name, this.player, this.mediaQuery, this.cardPadding,
-      {Key? key})
-      : super(key: key);
+  const CardFront(
+    this.name,
+    this.player,
+    this.mediaQuery,
+    this.cardPadding, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    print('card front build ' + name.id.toString());
+    debugPrint('card front build ${name.id}');
 
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     const double adaptiveFontSize = 70;
@@ -31,7 +35,7 @@ class CardFront extends StatelessWidget {
     //Biggest is 414 x 896 = 1310.
     //Android biggest phone I can find is is 480 x 853 = 1333
     //For tablets the smallest I can find is 768 x 1024
-    bool _isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
+    bool isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
 
     //Note that the + " " in the arabicName and wolofalName is a hack -
     //otherwise as of Sep 24 2020 teh end of the line gets cut off
@@ -39,26 +43,30 @@ class CardFront extends StatelessWidget {
 
     Widget arabicNameFront(names) {
       return FittedBox(
-        child: Text(" " + names.arabicName + " ",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                // height: 1.3,
-                color: Colors.white,
-                fontFamily: "Harmattan",
-                fontSize: adaptiveFontSize),
-            textDirection: rtlText),
+        child: Text(
+          " ${names.arabicName} ",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            // height: 1.3,
+            color: Colors.white,
+            fontFamily: "Harmattan",
+            fontSize: adaptiveFontSize,
+          ),
+          textDirection: rtlText,
+        ),
       );
     }
 
     Widget wolofalNameFront(names) {
       return FittedBox(
         child: Text(
-          " " + names.wolofalName + " ",
+          " ${names.wolofalName} ",
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Colors.white,
-              fontFamily: "Harmattan",
-              fontSize: adaptiveFontSize),
+            color: Colors.white,
+            fontFamily: "Harmattan",
+            fontSize: adaptiveFontSize,
+          ),
           textDirection: rtlText,
         ),
       );
@@ -66,15 +74,17 @@ class CardFront extends StatelessWidget {
 
     Widget wolofNameFront(names) {
       return FittedBox(
-        child: Text(names.wolofName,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              // height: 1,
-              fontFamily: "Harmattan",
-              color: Colors.white,
-              fontSize: adaptiveFontSize,
-            ),
-            textDirection: ltrText),
+        child: Text(
+          names.wolofName,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            // height: 1,
+            fontFamily: "Harmattan",
+            color: Colors.white,
+            fontSize: adaptiveFontSize,
+          ),
+          textDirection: ltrText,
+        ),
       );
     }
 
@@ -84,18 +94,18 @@ class CardFront extends StatelessWidget {
     // horizontal: 70);
 
     Widget verticalDivider = Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30),
-        child: Container(
-            height: 150,
-            width: 2,
-            color: Theme.of(context).colorScheme.outline));
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Container(
+        height: 150,
+        width: 2,
+        color: Theme.of(context).colorScheme.outline,
+      ),
+    );
 
     //Using consts for images.
     //Keeping a limited number of images in memory
     //rather than constanly reloading them
     //seems to offer some performance and memory improvements.
-
-
 
     late AssetImage assetImage;
     switch (name.img) {
@@ -222,10 +232,10 @@ class CardFront extends StatelessWidget {
     web on desktop works fine! but just taking this into account. 
     */
     BoxDecoration webTransparencyHack() {
-      late BoxDecoration _boxDecoration;
+      late BoxDecoration boxDecoration;
 
       if (kIsWeb) {
-        _boxDecoration = BoxDecoration(
+        boxDecoration = BoxDecoration(
           color: Colors.black.withAlpha(102),
           borderRadius: BorderRadius.circular(20.0),
           // gradient: LinearGradient(
@@ -234,23 +244,20 @@ class CardFront extends StatelessWidget {
           // ),
         );
       } else {
-        _boxDecoration = BoxDecoration(
+        boxDecoration = BoxDecoration(
           // color: Colors.black.withOpacity(.3),
           borderRadius: BorderRadius.circular(20.0),
           gradient: LinearGradient(
             begin: Alignment.bottomRight,
-            colors: [
-              Colors.black.withAlpha(230),
-              Colors.black.withAlpha(100)
-            ],
+            colors: [Colors.black.withAlpha(230), Colors.black.withAlpha(100)],
           ),
         );
       }
 
-      return _boxDecoration;
+      return boxDecoration;
     }
 
-    return Container(
+    return SizedBox(
       //This is important as it dictates the outer boundaries for what follows
       height: mediaQuery.size.height,
       // width: _isPhone ? mediaQuery.size.width : mediaQuery.size.height / 3,
@@ -258,17 +265,20 @@ class CardFront extends StatelessWidget {
         padding: cardPadding,
         child: Container(
           //with background image or not?
-          decoration: Provider.of<CardPrefs>(context, listen: false)
-                  .cardPrefs
-                  .imageEnabled
+          decoration:
+              Provider.of<CardPrefs>(
+                context,
+                listen: false,
+              ).cardPrefs.imageEnabled
               ? BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
                   image: DecorationImage(
-                      fit: BoxFit.cover,
+                    fit: BoxFit.cover,
 
-                      //This is the original - now using consts
-                      // image: AssetImage("assets/images/${name.img}.jpg"),
-                      image: assetImage),
+                    //This is the original - now using consts
+                    // image: AssetImage("assets/images/${name.img}.jpg"),
+                    image: assetImage,
+                  ),
                 )
               : null,
           child: Container(
@@ -276,7 +286,7 @@ class CardFront extends StatelessWidget {
             //Card text
             child: Padding(
               padding: EdgeInsets.all(20.0),
-              child: isLandscape && _isPhone
+              child: isLandscape && isPhone
                   // Landscape on phone version
                   ? Column(
                       children: [
@@ -289,18 +299,12 @@ class CardFront extends StatelessWidget {
                             verticalDivider,
                             Expanded(child: arabicNameFront(name)),
                             verticalDivider,
-                            Expanded(
-                              child: wolofalNameFront(name),
-                            ),
+                            Expanded(child: wolofalNameFront(name)),
                           ],
                         ),
-                        Expanded(
-                          flex: 7,
-                          child: CardIconBar(name, player),
-                        ),
+                        Expanded(flex: 7, child: CardIconBar(name, player)),
                       ],
                     )
-
                   //Portrait/phone version
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -308,33 +312,33 @@ class CardFront extends StatelessWidget {
                       children: [
                         Expanded(child: SizedBox(width: 20)),
                         Expanded(
-                            flex: 2,
-                            //This Align widget aligns vertically here
-                            child: Align(
-                                alignment: Alignment.center,
-                                child: arabicNameFront(name))),
-                        Divider(
-                          thickness: 2,
+                          flex: 2,
+                          //This Align widget aligns vertically here
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: arabicNameFront(name),
+                          ),
                         ),
+                        Divider(thickness: 2),
                         Expanded(
-                            flex: 2,
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  child: wolofalNameFront(name)),
-                            )),
-                        Divider(
-                          thickness: 2,
+                          flex: 2,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: wolofalNameFront(name),
+                            ),
+                          ),
                         ),
+                        Divider(thickness: 2),
                         Expanded(
-                            flex: 2,
-                            child: Align(
-                                alignment: Alignment.center,
-                                child: wolofNameFront(name))),
-                        Expanded(
-                          child: CardIconBar(name, player),
+                          flex: 2,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: wolofNameFront(name),
+                          ),
                         ),
+                        Expanded(child: CardIconBar(name, player)),
                       ],
                     ),
             ),

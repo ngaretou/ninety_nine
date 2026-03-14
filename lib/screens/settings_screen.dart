@@ -18,32 +18,37 @@ import './cards_screen.dart';
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings-screen';
 
+  const SettingsScreen({super.key});
+
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
+  SettingsScreenState createState() => SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class SettingsScreenState extends State<SettingsScreen> {
   //The individual setting headings
 
   //Main Settings screen construction:
   @override
   Widget build(BuildContext context) {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
+    // MediaQueryData mediaQuery = MediaQuery.of(context);
+    Size mediaQuerySize = MediaQuery.sizeOf(context);
 
-    final bool _isPhone =
-        (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
+    final bool isPhone = (mediaQuerySize.width + mediaQuerySize.height) <= 1400;
 
     ThemeModel themeProvider = Provider.of<ThemeModel>(context, listen: false);
-    ThemeComponents? _userTheme = themeProvider.userTheme;
+    ThemeComponents? userTheme = themeProvider.userTheme;
     Locale userLocale = themeProvider.userLocale!;
 
     CardPrefs cardPrefs = Provider.of<CardPrefs>(context, listen: false);
-    bool _wolof = cardPrefs.cardPrefs.wolofVerseEnabled;
-    bool _wolofal = cardPrefs.cardPrefs.wolofalVerseEnabled;
+    bool wolof = cardPrefs.cardPrefs.wolofVerseEnabled;
+    bool wolofal = cardPrefs.cardPrefs.wolofalVerseEnabled;
 
-    if (!_wolof && !_wolofal) {
-      _wolof = true;
-      _wolofal = true;
+    TextStyle titleStyle = Theme.of(context).textTheme.titleMedium!;
+    TextStyle optionsStyle = Theme.of(context).textTheme.titleSmall!;
+
+    if (!wolof && !wolofal) {
+      wolof = true;
+      wolofal = true;
       cardPrefs.savePref('wolofVerseEnabled', true);
       cardPrefs.savePref('wolofalVerseEnabled', true);
     }
@@ -56,7 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     Widget settingTitle(String title, IconData icon, Function? tapHandler) {
       return InkWell(
         onTap: tapHandler as void Function()?,
-        child: Container(
+        child: SizedBox(
           width: 300,
           child: Padding(
             padding: EdgeInsets.all(20),
@@ -64,12 +69,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 Icon(icon, size: 27, color: Theme.of(context).iconTheme.color),
                 SizedBox(width: 25),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ),
+                Expanded(child: Text(title, style: titleStyle)),
               ],
             ),
           ),
@@ -104,6 +104,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       return settingTitle(AppLocalizations.of(context)!.listView, Icons.list, () {
         //Part of the names list navigation - this opens the NamesLIst, then gets and then passes on the value from the popped screen
         Navigator.of(context).pushNamed(NamesList.routeName).then((value) {
+          if (!context.mounted) return;
           Navigator.of(context).pop(value);
         });
       });
@@ -139,6 +140,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       for (var color in themeColors) {
         menuItems.add(
           DropdownMenuItem(
+            value: colorToInt(color).toString(),
             child: Material(
               shape: CircleBorder(side: BorderSide.none),
               elevation: 2,
@@ -148,7 +150,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 width: 36,
               ),
             ),
-            value: colorToInt(color).toString(),
           ),
         );
       }
@@ -159,19 +160,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
           DropdownButton(
             itemHeight: 48,
             underline: SizedBox(),
-            value: colorToInt(_userTheme!.color).toString(),
+            value: colorToInt(userTheme!.color).toString(),
             items: menuItems,
             onChanged: (response) {
-              int _colorValue = int.parse(response.toString());
+              int colorValue = int.parse(response.toString());
 
-              Color color = colorFromInt(_colorValue);
+              Color color = colorFromInt(colorValue);
 
-              ThemeComponents _themeToSet = ThemeComponents(
-                brightness: _userTheme.brightness,
+              ThemeComponents themeToSet = ThemeComponents(
+                brightness: userTheme.brightness,
                 color: color,
               );
 
-              themeProvider.setTheme(_themeToSet);
+              themeProvider.setTheme(themeToSet);
             },
           ),
           Container(
@@ -180,40 +181,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
             color: Theme.of(context).colorScheme.outline,
           ),
           ElevatedButton(
-            child: _userTheme.brightness == Brightness.light
-                ? Icon(Icons.check, color: Colors.black)
-                : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
               padding: EdgeInsets.all(0),
               shape: CircleBorder(),
             ),
             onPressed: () {
-              ThemeComponents _themeToSet = ThemeComponents(
+              ThemeComponents themeToSet = ThemeComponents(
                 brightness: Brightness.light,
-                color: _userTheme.color,
+                color: userTheme.color,
               );
 
-              themeProvider.setTheme(_themeToSet);
+              themeProvider.setTheme(themeToSet);
             },
+            child: userTheme.brightness == Brightness.light
+                ? Icon(Icons.check, color: Colors.black)
+                : null,
           ),
           ElevatedButton(
-            child: _userTheme.brightness == Brightness.dark
-                ? Icon(Icons.check, color: Colors.white)
-                : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black,
               padding: EdgeInsets.all(0),
               shape: CircleBorder(),
             ),
             onPressed: () {
-              ThemeComponents _themeToSet = ThemeComponents(
+              ThemeComponents themeToSet = ThemeComponents(
                 brightness: Brightness.dark,
-                color: _userTheme.color,
+                color: userTheme.color,
               );
 
-              themeProvider.setTheme(_themeToSet);
+              themeProvider.setTheme(themeToSet);
             },
+            child: userTheme.brightness == Brightness.dark
+                ? Icon(Icons.check, color: Colors.white)
+                : null,
           ),
         ],
       );
@@ -224,7 +225,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Wrap(
-            direction: Axis.horizontal,
+            crossAxisAlignment: .center,
+            direction: mediaQuerySize.width > 390
+                ? Axis.horizontal
+                : Axis.vertical,
             spacing: 15,
             children: [
               //Note that userLocale.toString() evaluates to for example 'fr' in Android/iOS but on the web 'fr_' with the underscore.
@@ -236,10 +240,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: userLocale.toString() == 'fr_CH' ? true : false,
-                label: Text(
-                  "Wolof",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
+                label: Text("Wolof", style: optionsStyle),
                 onSelected: (bool selected) {
                   themeProvider.setLocale('fr_CH');
                 },
@@ -248,10 +249,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: userLocale.toString() == 'ar' ? true : false,
-                label: Text(
-                  "وࣷلࣷفَلْ",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
+                label: Text("وࣷلࣷفَلْ", style: optionsStyle),
                 onSelected: (bool selected) {
                   themeProvider.setLocale('ar');
                 },
@@ -264,10 +262,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         userLocale.toString() == 'fr_'
                     ? true
                     : false,
-                label: Text(
-                  "Français",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
+                label: Text("Français", style: optionsStyle),
                 onSelected: (bool selected) {
                   themeProvider.setLocale('fr');
                 },
@@ -276,10 +271,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: userLocale.toString().contains('en') ? true : false,
-                label: Text(
-                  "English",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
+                label: Text("English", style: optionsStyle),
                 onSelected: (bool selected) {
                   themeProvider.setLocale('en');
                 },
@@ -345,9 +337,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ElevatedButton(
-            child: cardPrefs.cardPrefs.imageEnabled
-                ? null
-                : Icon(Icons.check, color: Colors.black),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white70,
               padding: EdgeInsets.all(0),
@@ -357,6 +346,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               cardPrefs.savePref('imageEnabled', false);
               setState(() {});
             },
+            child: cardPrefs.cardPrefs.imageEnabled
+                ? null
+                : Icon(Icons.check, color: Colors.black),
           ),
           Material(
             shape: CircleBorder(),
@@ -368,9 +360,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 setState(() {});
               },
               child: Container(
-                child: cardPrefs.cardPrefs.imageEnabled
-                    ? Icon(Icons.check, color: Colors.white)
-                    : null,
                 height: 40.0,
                 width: 40.0,
                 decoration: BoxDecoration(
@@ -380,6 +369,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   shape: BoxShape.circle,
                 ),
+                child: cardPrefs.cardPrefs.imageEnabled
+                    ? Icon(Icons.check, color: Colors.white)
+                    : null,
               ),
             ),
           ),
@@ -401,10 +393,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selected: cardPrefs.cardPrefs.textDirection ? false : true,
                 label: Row(
                   children: [
-                    Text(
-                      "(abc)",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
+                    Text("(abc)", style: optionsStyle),
                     SizedBox(width: 10),
                     Icon(Icons.arrow_forward),
                   ],
@@ -420,10 +409,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 selected: cardPrefs.cardPrefs.textDirection ? true : false,
                 label: Row(
                   children: [
-                    Text(
-                      "(بدف)",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
+                    Text("(بدف)", style: optionsStyle),
                     SizedBox(width: 10),
                     Icon(Icons.arrow_back),
                   ],
@@ -444,23 +430,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             width: 300,
-            child: Padding(
-              padding: EdgeInsets.only(left: 80),
-              child: Row(
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.settingsVerseinWolofal,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ],
-              ),
+            child: Row(
+              children: [
+                SizedBox(width: 80),
+                Text(
+                  AppLocalizations.of(context)!.settingsVerseinWolofal,
+                  style: optionsStyle,
+                ),
+              ],
             ),
           ),
           Expanded(
             child: Row(
-              mainAxisAlignment: _isPhone
+              mainAxisAlignment: isPhone
                   ? MainAxisAlignment.end
                   : MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -468,12 +452,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Switch(
                   activeThumbColor: activeSwitchColor,
                   activeTrackColor: activeControlColor,
-                  value: _wolofal,
+                  value: wolofal,
                   onChanged: (_) {
-                    if (_wolof) {
-                      cardPrefs.savePref('wolofalVerseEnabled', !_wolofal);
+                    if (wolof) {
+                      cardPrefs.savePref('wolofalVerseEnabled', !wolofal);
                       //but if wolof is not on and you're trying to turn of wolofal, turn on wolof.
-                    } else if (!_wolof && _wolofal) {
+                    } else if (!wolof && wolofal) {
                       cardPrefs.savePref('wolofalVerseEnabled', false);
                       cardPrefs.savePref('wolofVerseEnabled', true);
                     }
@@ -493,24 +477,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             width: 300,
-            child: Padding(
-              padding: EdgeInsets.only(left: 80),
-              child: Row(
-                children: [
-                  // Expanded(child:
-                  Text(
-                    AppLocalizations.of(context)!.settingsVerseinWolof,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ],
-              ),
+            child: Row(
+              children: [
+                SizedBox(width: 80),
+                Text(
+                  AppLocalizations.of(context)!.settingsVerseinWolof,
+                  style: optionsStyle,
+                ),
+              ],
             ),
           ),
           Expanded(
             child: Row(
-              mainAxisAlignment: _isPhone
+              mainAxisAlignment: isPhone
                   ? MainAxisAlignment.end
                   : MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -518,12 +499,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Switch(
                   activeThumbColor: activeSwitchColor,
                   activeTrackColor: activeControlColor,
-                  value: _wolof,
+                  value: wolof,
                   onChanged: (_) {
-                    if (_wolofal) {
-                      cardPrefs.savePref('wolofVerseEnabled', !_wolof);
+                    if (wolofal) {
+                      cardPrefs.savePref('wolofVerseEnabled', !wolof);
                       //but if wolof is not on and you're trying to turn of wolofal, turn on wolof.
-                    } else if (_wolof && !_wolofal) {
+                    } else if (wolof && !wolofal) {
                       cardPrefs.savePref('wolofalVerseEnabled', true);
                       cardPrefs.savePref('wolofVerseEnabled', false);
                     }
@@ -553,14 +534,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 // avatar: Icon(Icons.favorite),
                 label: Text(
                   AppLocalizations.of(context)!.settingsFavorites,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: optionsStyle,
                 ),
                 onSelected: (bool selected) async {
                   if (Provider.of<DivineNames>(
-                        context,
-                        listen: false,
-                      ).favoriteNames.length ==
-                      0) {
+                    context,
+                    listen: false,
+                  ).favoriteNames.isEmpty) {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -597,7 +577,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 // avatar: Icon(Icons.all_inclusive),
                 label: Text(
                   AppLocalizations.of(context)!.settingsTextAll,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: optionsStyle,
                 ),
                 onSelected: (bool selected) {
                   cardPrefs.savePref('showFavs', false);
@@ -615,25 +595,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             width: 300,
-            child: Padding(
-              padding: EdgeInsets.only(left: 80),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      AppLocalizations.of(context)!.lowPowerMode,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
+            child: Row(
+              children: [
+                SizedBox(width: 80),
+                Expanded(
+                  child: Text(
+                    AppLocalizations.of(context)!.lowPowerMode,
+                    style: optionsStyle,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
+
           Expanded(
             child: Row(
-              mainAxisAlignment: _isPhone
+              mainAxisAlignment: isPhone
                   ? MainAxisAlignment.end
                   : MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -697,8 +676,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               sharePositionOrigin: Rect.fromLTWH(
                 0,
                 0,
-                mediaQuery.size.width,
-                mediaQuery.size.height * .33,
+                mediaQuerySize.width,
+                mediaQuerySize.height * .33,
               ),
             );
           } else {
@@ -740,9 +719,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Center(
           child: MouseRegion(
             cursor: SystemMouseCursors.grab,
-            child: mediaQuery.size.width >= 730
+            child: mediaQuerySize.width >= 730
                 // tablet
-                ? Container(
+                ? SizedBox(
                     width: 730,
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 50),
@@ -813,6 +792,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void showAbout(BuildContext context) async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     if (!context.mounted) return;
+    Widget dialogButton(String title) {
+      return SizedBox(width: 75, child: Text(title, textAlign: .center));
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -869,7 +852,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                         TextSpan(
                           style: Theme.of(context).textTheme.bodyLarge,
-                          text: ' copyright © 2024 La MBS.',
+                          text: ' copyright © 2025 La MBS.',
                         ),
                       ],
                     ),
@@ -879,7 +862,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: [
                         TextSpan(
                           style: Theme.of(context).textTheme.bodyLarge,
-                          text: 'Appli © 2024 Foundational LLC.',
+                          text: 'Appli © 2022-2026 Foundational LLC.',
                         ),
                       ],
                     ),
@@ -889,19 +872,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
 
             actions: <Widget>[
-              OutlinedButton(
-                child: const Text('Copyrights'),
+              ElevatedButton(
+                child: dialogButton('Copyrights'),
                 onPressed: () {
                   // Navigator.of(context).pushNamed(AboutScreen.routeName);
                   clearPage(Widget page) => PageRouteBuilder(
                     opaque: false,
-                    pageBuilder: (BuildContext context, _, __) => page,
+                    pageBuilder: (BuildContext context, _, _) => page,
                   );
                   Navigator.push(context, clearPage(const AboutScreen()));
                 },
               ),
-              OutlinedButton(
-                child: const Text('Licenses'),
+              SizedBox(height: 6),
+              ElevatedButton(
+                child: dialogButton('Licenses'),
                 onPressed: () {
                   // Navigator.of(context).pop();
                   showLicenses(
@@ -912,8 +896,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   );
                 },
               ),
-              OutlinedButton(
-                child: Text(AppLocalizations.of(context)!.ok),
+              SizedBox(height: 6),
+              ElevatedButton(
+                child: dialogButton('OK'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

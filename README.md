@@ -12,6 +12,10 @@ Landing page at http://sng.al/99
 Fixed: 
 - 'Wolofal' in both display verses spots - corrected to Wolofal/Wolof
 
+1.0.2
+- Added Wolofal menus and display text
+
+
 Todo:
 - 'copy' in addition to 'share'
 - audio share - the arnames are not in the same mp3 encoding - 96 kbps 44.1khz mono

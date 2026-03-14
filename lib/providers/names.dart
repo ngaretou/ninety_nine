@@ -66,11 +66,11 @@ class DivineNames with ChangeNotifier {
     //set max to the last int of the number of pics that we ship with the app
     int numberOfPicsAvailable = 20;
     String r;
-    Random rnd = new Random();
+    Random rnd = Random();
 
     //If this is first run, no pics yet, put all possible pics in
     //It can also be after all pictures are assigned
-    if (_pictureIds.length == 0) {
+    if (_pictureIds.isEmpty) {
       //i is index, so + 1 on each as it will start with 0
       _pictureIds = List<int>.generate(numberOfPicsAvailable, (i) => i + 1);
     }
@@ -84,12 +84,12 @@ class DivineNames with ChangeNotifier {
     //grabs the element at the random index we just generated and gets rid of it in the list
     //so we don't grab that picture again until all pics have been used
     r = _pictureIds.removeAt(indexToGrab).toString();
-    // print(r);
+    // debugPrint(r);
     return r;
   }
 
   Future<void> getDivineNames() async {
-    print('getDivineNames');
+    debugPrint('getDivineNames');
 
     String linebreakInLongNames(String nameToBreak) {
       String returnString = nameToBreak;
@@ -97,7 +97,7 @@ class DivineNames with ChangeNotifier {
       String addLinebreak(int pos) {
         String firstLine = nameToBreak.substring(0, pos);
         String secondLine = nameToBreak.substring(pos + 1);
-        return firstLine + '\n' + secondLine;
+        return '$firstLine\n$secondLine';
       }
 
       //holder for list of indexes of spaces in the range we want to check
@@ -117,15 +117,16 @@ class DivineNames with ChangeNotifier {
           //If you find a space then make a note in the list of spaces
           if (nameToBreak[i] == " ") {
             spaces.add(i);
-            if (punct.hasMatch(nameToBreak[i - 1]))
+            if (punct.hasMatch(nameToBreak[i - 1])) {
               punctBeforeSpaces.add(i - 1);
+            }
           }
         }
         //If you did this and didn't find spaces in the middle third, just do nothing, it will return the original name as-is
-        if (spaces.length != 0) {
+        if (spaces.isNotEmpty) {
           //If just one space found or you have more than one space but no punctuation, that's the easy case, split it there.
           if (spaces.length == 1 ||
-              (spaces.length > 1 && punctBeforeSpaces.length == 0)) {
+              (spaces.length > 1 && punctBeforeSpaces.isEmpty)) {
             returnString = addLinebreak(spaces[0]);
           } else {
             //You have a long name with multiple spaces in the region we're looking for and there's a punctuation mark -
@@ -134,9 +135,7 @@ class DivineNames with ChangeNotifier {
           }
         }
       } catch (e) {
-        print(nameToBreak +
-            " Error adding carriage returns to names: " +
-            e.toString());
+        debugPrint("$nameToBreak Error adding carriage returns to names: $e");
       }
 
       return returnString;
@@ -161,45 +160,47 @@ class DivineNames with ChangeNotifier {
     int maxLength = 20;
 
     _names = jsonResponse
-        .map((name) => DivineName(
-              id: name['id'].toString(),
-              arabicName: name['arabicName'].length > maxLength
-                  ? linebreakInLongNames(name['arabicName'])
-                  : name['arabicName'],
-              wolofName: name['wolofName'].length > maxLength
-                  ? linebreakInLongNames(name['wolofName'])
-                  : name['wolofName'],
-              wolofalName: name['wolofName'].length > maxLength
-                  ? linebreakInLongNames(name['wolofalName'])
-                  : name['wolofalName'],
-              wolofVerse: name['wolofVerse'],
-              wolofVerseRef: name['wolofVerseRef'],
-              wolofalVerse: name['wolofalVerse'],
-              wolofalVerseRef: name['wolofalVerseRef'],
-              img: randomNumber,
-            ))
+        .map(
+          (name) => DivineName(
+            id: name['id'].toString(),
+            arabicName: name['arabicName'].length > maxLength
+                ? linebreakInLongNames(name['arabicName'])
+                : name['arabicName'],
+            wolofName: name['wolofName'].length > maxLength
+                ? linebreakInLongNames(name['wolofName'])
+                : name['wolofName'],
+            wolofalName: name['wolofName'].length > maxLength
+                ? linebreakInLongNames(name['wolofalName'])
+                : name['wolofalName'],
+            wolofVerse: name['wolofVerse'],
+            wolofVerseRef: name['wolofVerseRef'],
+            wolofalVerse: name['wolofalVerse'],
+            wolofalVerseRef: name['wolofalVerseRef'],
+            img: randomNumber,
+          ),
+        )
         .toList();
 
     //The names come from the names.json but the favs come from sharedprefs,
     //so we populate the copy of names that lives in session memory with the user's info here
 
     //Get the user's favorite list from sharedprefs
-    late List _favList;
+    late List favList;
     final prefs = await SharedPreferences.getInstance();
     //If there is no list of favs, set the list to empty, or if there are favs, load them into the list
     !prefs.containsKey('favList')
-        ? _favList = []
-        : _favList = json.decode(prefs.getString('favList')!) as List;
+        ? favList = []
+        : favList = json.decode(prefs.getString('favList')!) as List;
 
     //Loop over the names list and fill in the values
-    _names.forEach((name) {
-      _favList.contains(name.id) ? name.isFav = true : name.isFav = false;
-    });
+    for (var name in _names) {
+      favList.contains(name.id) ? name.isFav = true : name.isFav = false;
+    }
 
-    print('end getDivineNames');
+    debugPrint('end getDivineNames');
   }
 
-  Future<void> saveLastNameViewed(lastNameViewed) async {
+  Future<void> saveLastNameViewed(int lastNameViewed) async {
     _lastNameViewed = lastNameViewed;
     final prefs = await SharedPreferences.getInstance();
     final jsonData = json.encode(lastNameViewed.toString());
@@ -218,29 +219,29 @@ class DivineNames with ChangeNotifier {
     }
   }
 
-  Future<void> toggleFavoriteStatus(id) async {
-    List<dynamic>? _favList;
+  Future<void> toggleFavoriteStatus(String id) async {
+    List<dynamic>? favList;
     //Get the favorites list from disk
     final prefs = await SharedPreferences.getInstance();
     //check if this is the first time a user has set prefs - if so empty list
     if (!prefs.containsKey('favList')) {
-      _favList = [];
+      favList = [];
     } else {
       //or if the user does have favs get that list in memory so we can use it
-      _favList = json.decode(prefs.getString('favList')!) as List<dynamic>?;
+      favList = json.decode(prefs.getString('favList')!) as List<dynamic>?;
     }
     var currentName = _names.firstWhere((name) => name.id == id);
     //set the model in memory to true or false and also add the id of the current name to the list or remove it
     if (currentName.isFav) {
       currentName.isFav = false;
-      _favList!.remove(id);
+      favList!.remove(id);
     } else if (!currentName.isFav) {
       currentName.isFav = true;
-      _favList!.add(id);
+      favList!.add(id);
     }
     // notifyListeners();
     //Now store the list back to disk
-    final favList = json.encode(_favList);
-    prefs.setString('favList', favList);
+    final favListJson = json.encode(favList);
+    prefs.setString('favList', favListJson);
   }
 }

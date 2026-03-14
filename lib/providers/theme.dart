@@ -8,10 +8,7 @@ class ThemeComponents {
   Brightness brightness;
   Color color;
 
-  ThemeComponents({
-    required this.brightness,
-    required this.color,
-  });
+  ThemeComponents({required this.brightness, required this.color});
 }
 
 class ThemeModel extends ChangeNotifier {
@@ -44,50 +41,54 @@ class ThemeModel extends ChangeNotifier {
   }
 
   Future<void> setupTheme() async {
-    ThemeComponents _defaultTheme =
-        ThemeComponents(brightness: Brightness.light, color: Colors.teal);
-    print('setupTheme');
+    ThemeComponents defaultTheme = ThemeComponents(
+      brightness: Brightness.light,
+      color: Colors.teal,
+    );
+    debugPrint('setupTheme');
 
     //get the prefs
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     //if there's no userTheme, it's the first time they've run the app, so give them lightTheme with teal
     if (!prefs.containsKey('userTheme')) {
-      setTheme(_defaultTheme, refresh: false);
+      setTheme(defaultTheme, refresh: false);
     } else {
-      final List<String>? _savedTheme = prefs.getStringList('userTheme');
-      late Brightness _brightness;
+      final List<String>? savedTheme = prefs.getStringList('userTheme');
+      late Brightness brightness;
       //Try this out - if there's a version problem where the variable doesn't fit,
       //the default theme is used
       try {
-        switch (_savedTheme?[0]) {
+        switch (savedTheme?[0]) {
           case "Brightness.light":
             {
-              _brightness = Brightness.light;
+              brightness = Brightness.light;
               break;
             }
 
           case "Brightness.dark":
             {
-              _brightness = Brightness.dark;
+              brightness = Brightness.dark;
               break;
             }
         }
         //We save the color this way so have to convert it to Color:
-        int _colorValue = int.parse(_savedTheme![1]);
-        Color color = Color(_colorValue);
+        int colorValue = int.parse(savedTheme![1]);
+        Color color = Color(colorValue);
 
-        ThemeComponents _componentsToSet =
-            ThemeComponents(brightness: _brightness, color: color);
+        ThemeComponents componentsToSet = ThemeComponents(
+          brightness: brightness,
+          color: color,
+        );
 
-        setTheme(_componentsToSet, refresh: false);
+        setTheme(componentsToSet, refresh: false);
       } catch (e) {
         //If something goes wrong, set default theme
-        setTheme(_defaultTheme, refresh: false);
+        setTheme(defaultTheme, refresh: false);
       }
     }
 
-    print('end of setup theme');
+    debugPrint('end of setup theme');
     return;
   }
 
@@ -95,9 +96,10 @@ class ThemeModel extends ChangeNotifier {
     //Set incoming theme
     userTheme = theme;
     currentTheme = ThemeData(
-        brightness: theme.brightness,
-        colorSchemeSeed: theme.color,
-        fontFamily: 'Lato');
+      brightness: theme.brightness,
+      colorSchemeSeed: theme.color,
+      fontFamily: 'Lato',
+    );
     //send it for storage
     saveThemeToDisk(theme);
     if (refresh == true || refresh == null) {
@@ -113,7 +115,7 @@ class ThemeModel extends ChangeNotifier {
 
     await prefs.setStringList('userTheme', <String>[
       theme.brightness.toString(),
-      colorToInt(theme.color).toString()
+      colorToInt(theme.color).toString(),
     ]);
   }
 }

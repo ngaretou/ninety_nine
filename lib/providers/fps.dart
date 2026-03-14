@@ -28,9 +28,7 @@ class Fps {
   static Fps? _instance;
 
   static Fps? get instance {
-    if (_instance == null) {
-      _instance = Fps._();
-    }
+    _instance ??= Fps._();
     return _instance;
   }
 
@@ -49,10 +47,10 @@ class Fps {
   }
 
   bool _started = false;
-  List<FpsCallback> _fpsCallbacks = [];
+  final List<FpsCallback> _fpsCallbacks = [];
 
-  static const int _queue_capacity = 120;
-  final ListQueue framesQueue = ListQueue<FrameTiming>(_queue_capacity);
+  static const int queueCapacity = 120;
+  final ListQueue framesQueue = ListQueue<FrameTiming>(queueCapacity);
 
   void addFpsCallback(FpsCallback callback) {
     _fpsCallbacks.add(callback);
@@ -77,12 +75,12 @@ class Fps {
     }
   }
 
-  _onTimingsCallback(List<FrameTiming> timings) async {
+  void _onTimingsCallback(List<FrameTiming> timings) async {
     if (_fpsCallbacks.isNotEmpty) {
       for (FrameTiming timing in timings) {
         framesQueue.addFirst(timing);
       }
-      while (framesQueue.length > _queue_capacity) {
+      while (framesQueue.length > queueCapacity) {
         framesQueue.removeLast();
       }
 
@@ -116,9 +114,9 @@ class Fps {
       int droppedCount = totalCount - drawFramesCount;
       double fps = drawFramesCount / totalCount * _refreshRate;
       FpsInfo fpsInfo = FpsInfo(fps, totalCount, droppedCount, drawFramesCount);
-      _fpsCallbacks.forEach((callBack) {
+      for (var callBack in _fpsCallbacks) {
         callBack(fpsInfo);
-      });
+      }
     }
   }
 }

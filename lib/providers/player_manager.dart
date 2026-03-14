@@ -12,9 +12,9 @@ class PlayerManager with ChangeNotifier {
 
     // Listen to errors during playback.
     // player.playbackEventStream.listen((event) {
-    //   // print(event);
+    //   // debugPrint(event);
     // }, onError: (Object e, StackTrace stackTrace) {
-    //   print('A stream error occurred: $e');
+    //   debugPrint('A stream error occurred: $e');
     // });
   }
 

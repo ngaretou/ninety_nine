@@ -10,12 +10,13 @@ import '../providers/card_prefs.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const routeName = '/onboarding-screen';
-  OnboardingScreen({Key? key}) : super(key: key);
+  const OnboardingScreen({super.key});
 
-  _OnboardingScreenState createState() => _OnboardingScreenState();
+  @override
+  OnboardingScreenState createState() => OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class OnboardingScreenState extends State<OnboardingScreen> {
   final int _totalPages = 4;
   late PageController _pageController;
   int _currentPage = 0;
@@ -79,152 +80,149 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Center(
           child: MouseRegion(
             cursor: SystemMouseCursors.grab,
-            child: Container(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  NotificationListener(
-                    onNotification: ((dynamic notification) {
-                      // print(notification.toString());
-                      if (notification is OverscrollNotification) {
-                        // print('in OverscrollNotification true');
-                        //negative overscroll is scrolling past first page in the wrong direction - if positive it's past the last page
-                        if (notification.overscroll > 0)
-                          Navigator.of(
-                            context,
-                          ).popAndPushNamed(CardsScreen.routeName);
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                NotificationListener(
+                  onNotification: ((dynamic notification) {
+                    // debugPrint(notification.toString());
+                    if (notification is OverscrollNotification) {
+                      // debugPrint('in OverscrollNotification true');
+                      //negative overscroll is scrolling past first page in the wrong direction - if positive it's past the last page
+                      if (notification.overscroll > 0) {
+                        Navigator.of(
+                          context,
+                        ).popAndPushNamed(CardsScreen.routeName);
                       }
-                      return true;
-                    }),
-                    child: PageView(
-                      //Small note here on the physics - this must be ClampingScrollPhysics on iOS to
-                      //get the "if you're on the last page of introduction go to main app" function.
-                      //otherwise iOS doesn't throw OverscrollNotification.
-                      //https://github.com/flutter/flutter/issues/17649
-                      physics: ClampingScrollPhysics(),
-                      controller: _pageController,
-                      onPageChanged: (int page) {
-                        _currentPage = page;
-                        setState(() {});
-                      },
-                      children: <Widget>[
-                        _buildPageContent(
-                          isShowImageOnTop: false,
-                          bgimage: 'assets/images/1.jpg',
-                          // image: null,
-                          body: AppLocalizations.of(context)!.introPage1,
-                          color: Color(0xFFFF7252),
-                        ),
-                        _buildPageContent(
-                          isShowImageOnTop: true,
-                          bgimage: 'assets/images/2.jpg',
-                          body: AppLocalizations.of(context)!.introPage2,
-                          color: Color(0xFFFFA131),
-                        ),
-                        _buildFormattedPageContent(
-                          bgimage: 'assets/images/13.jpg',
-                          body: _page3Body(),
-                          color: Color(0xFF3C60FF),
-                        ),
-                        _buildFormattedPageContent(
-                          bgimage: 'assets/images/4.jpg',
-                          body: _page4Body(),
-                          color: Color(0xFFFF7252),
-                        ),
-                      ],
-                    ),
+                    }
+                    return true;
+                  }),
+                  child: PageView(
+                    //Small note here on the physics - this must be ClampingScrollPhysics on iOS to
+                    //get the "if you're on the last page of introduction go to main app" function.
+                    //otherwise iOS doesn't throw OverscrollNotification.
+                    //https://github.com/flutter/flutter/issues/17649
+                    physics: ClampingScrollPhysics(),
+                    controller: _pageController,
+                    onPageChanged: (int page) {
+                      _currentPage = page;
+                      setState(() {});
+                    },
+                    children: <Widget>[
+                      _buildPageContent(
+                        isShowImageOnTop: false,
+                        bgimage: 'assets/images/1.jpg',
+                        // image: null,
+                        body: AppLocalizations.of(context)!.introPage1,
+                        color: Color(0xFFFF7252),
+                      ),
+                      _buildPageContent(
+                        isShowImageOnTop: true,
+                        bgimage: 'assets/images/2.jpg',
+                        body: AppLocalizations.of(context)!.introPage2,
+                        color: Color(0xFFFFA131),
+                      ),
+                      _buildFormattedPageContent(
+                        bgimage: 'assets/images/13.jpg',
+                        body: _page3Body(),
+                        color: Color(0xFF3C60FF),
+                      ),
+                      _buildFormattedPageContent(
+                        bgimage: 'assets/images/4.jpg',
+                        body: _page4Body(),
+                        color: Color(0xFFFF7252),
+                      ),
+                    ],
                   ),
-                  Positioned(
-                    width:
-                        (mediaQuery.size.width *
-                            _pageController.viewportFraction) -
-                        (cardPadding.left * 3),
-                    bottom: cardPadding.bottom,
-                    // left: (mediaQuery.size.width -
-                    //     (mediaQuery.size.width *
-                    //         _pageController.viewportFraction)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          width:
-                              (mediaQuery.size.width *
-                                  _pageController.viewportFraction) -
-                              (cardPadding.left * 3),
-                          child: Row(
-                            children: [
-                              Container(
-                                child: Row(
-                                  children: [
-                                    for (int i = 0; i < _totalPages; i++)
-                                      i == _currentPage
-                                          ? _buildPageIndicator(true)
-                                          : _buildPageIndicator(false),
-                                  ],
+                ),
+                Positioned(
+                  width:
+                      (mediaQuery.size.width *
+                          _pageController.viewportFraction) -
+                      (cardPadding.left * 3),
+                  bottom: cardPadding.bottom,
+                  // left: (mediaQuery.size.width -
+                  //     (mediaQuery.size.width *
+                  //         _pageController.viewportFraction)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        width:
+                            (mediaQuery.size.width *
+                                _pageController.viewportFraction) -
+                            (cardPadding.left * 3),
+                        child: Row(
+                          children: [
+                            Row(
+                              children: [
+                                for (int i = 0; i < _totalPages; i++)
+                                  i == _currentPage
+                                      ? _buildPageIndicator(true)
+                                      : _buildPageIndicator(false),
+                              ],
+                            ),
+                            Spacer(),
+                            languageChooser(),
+                            Spacer(),
+                            if (_currentPage != _totalPages - 1)
+                              InkWell(
+                                onTap: () {
+                                  _pageController.animateToPage(
+                                    3,
+                                    duration: Duration(milliseconds: 400),
+                                    curve: Curves.linear,
+                                  );
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  height: 60,
+                                  // height: Platform.isIOS ? 70 : 60,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    AppLocalizations.of(context)!.skip,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20,
+                                    ),
+                                  ),
                                 ),
                               ),
-                              Spacer(),
-                              languageChooser(),
-                              Spacer(),
-                              if (_currentPage != _totalPages - 1)
-                                InkWell(
-                                  onTap: () {
-                                    _pageController.animateToPage(
-                                      3,
-                                      duration: Duration(milliseconds: 400),
-                                      curve: Curves.linear,
-                                    );
-                                    setState(() {});
-                                  },
-                                  child: Container(
-                                    height: 60,
-                                    // height: Platform.isIOS ? 70 : 60,
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      AppLocalizations.of(context)!.skip,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20,
-                                      ),
+                            if (_currentPage == _totalPages - 1)
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(
+                                    context,
+                                  ).popAndPushNamed(CardsScreen.routeName);
+                                  //If you get this far, you've seen the onboarding, so don't show again
+                                  Provider.of<CardPrefs>(
+                                    context,
+                                    listen: false,
+                                  ).savePref('showOnboarding', false);
+                                },
+                                child: Container(
+                                  height: 60,
+                                  // height: Platform.isIOS ? 70 : 60,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    AppLocalizations.of(context)!.start,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20,
                                     ),
                                   ),
                                 ),
-                              if (_currentPage == _totalPages - 1)
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.of(
-                                      context,
-                                    ).popAndPushNamed(CardsScreen.routeName);
-                                    //If you get this far, you've seen the onboarding, so don't show again
-                                    Provider.of<CardPrefs>(
-                                      context,
-                                      listen: false,
-                                    ).savePref('showOnboarding', false);
-                                  },
-                                  child: Container(
-                                    height: 60,
-                                    // height: Platform.isIOS ? 70 : 60,
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      AppLocalizations.of(context)!.start,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          ),
+                              ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -271,6 +269,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     TextStyle chooserStyle = TextStyle(color: Colors.black87);
 
     return Container(
+      alignment: .center,
       padding: EdgeInsets.only(left: 10),
       width: 105,
       decoration: BoxDecoration(
@@ -279,30 +278,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
-          alignment: .center,
+          alignment: Alignment.center,
           dropdownColor: Colors.white,
           value: _value,
           items: [
             DropdownMenuItem(
-              child: Container(
-                child: Text("Wolof", style: chooserStyle),
-                color: Colors.white,
-              ),
-
               value: 1,
+              child: Container(
+                color: Colors.white,
+                child: Text("Wolof", style: chooserStyle),
+              ),
             ),
             DropdownMenuItem(
-              child: Text("وࣷلࣷفَلْ", style: chooserStyle),
-              // alignment: .center,
               value: 4,
+              child: Text("وࣷلࣷفَلْ", style: chooserStyle),
             ),
             DropdownMenuItem(
-              child: Text("Français", style: chooserStyle),
               value: 2,
+              child: Text("Français", style: chooserStyle),
             ),
             DropdownMenuItem(
-              child: Text("English", style: chooserStyle),
               value: 3,
+              child: Text("English", style: chooserStyle),
             ),
           ],
           onChanged: (dynamic value) {
@@ -374,13 +371,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       // child: Image.asset(image),
                     ),
                     SizedBox(height: 50),
-                    Container(
-                      child: Text(
-                        body!,
-                        textAlign: TextAlign.center,
-                        style: introStyle,
-                      ),
-                    ),
+                    Text(body!, textAlign: TextAlign.center, style: introStyle),
                   ],
                 ),
               if (isShowImageOnTop)
@@ -388,9 +379,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   children: [
                     Text(body!, textAlign: TextAlign.center, style: introStyle),
                     SizedBox(height: 50),
-                    Center(
-                      // child: Image.asset(image),
-                    ),
                   ],
                 ),
             ],
@@ -469,10 +457,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               borderRadius: BorderRadius.circular(20.0),
               color: Colors.black54,
             ),
-            child: Icon(icon, color: Colors.white),
             width: 40,
             height: 40,
             alignment: Alignment.center,
+            child: Icon(icon, color: Colors.white),
           ),
           SizedBox(width: 20),
           Expanded(child: Text(instruction, style: introStyle)),

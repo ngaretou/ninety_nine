@@ -75,7 +75,7 @@ class CardPrefs with ChangeNotifier {
       //Set in-memory copy of prefs
       _cardPrefs = defaultCardPrefs;
       //Save prefs to disk
-      final _defaultCardPrefs = json.encode({
+      final defaultCardPrefsJson = json.encode({
         'textDirection': defaultCardPrefs.textDirection,
         'imageEnabled': defaultCardPrefs.imageEnabled,
         'wolofVerseEnabled': defaultCardPrefs.wolofVerseEnabled,
@@ -86,7 +86,7 @@ class CardPrefs with ChangeNotifier {
         'shouldTestDevicePerformance':
             defaultCardPrefs.shouldTestDevicePerformance,
       });
-      prefs.setString('cardPrefs', _defaultCardPrefs);
+      prefs.setString('cardPrefs', defaultCardPrefsJson);
     }
 
     if (!prefs.containsKey('cardPrefs')) {
@@ -120,7 +120,7 @@ class CardPrefs with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     final jsonResponse =
         json.decode(prefs.getString('cardPrefs')!) as Map<String, dynamic>;
-    var _tempCardPrefs = CardPrefList(
+    var tempCardPrefs = CardPrefList(
       textDirection: jsonResponse['textDirection'] as bool,
       imageEnabled: jsonResponse['imageEnabled'] as bool,
       wolofVerseEnabled: jsonResponse['wolofVerseEnabled'] as bool,
@@ -136,61 +136,61 @@ class CardPrefs with ChangeNotifier {
     switch (setting) {
       case 'textDirection':
         {
-          _tempCardPrefs.textDirection = userPref;
+          tempCardPrefs.textDirection = userPref;
         }
         break;
       case 'imageEnabled':
         {
-          _tempCardPrefs.imageEnabled = userPref;
+          tempCardPrefs.imageEnabled = userPref;
         }
         break;
       case 'wolofVerseEnabled':
         {
-          _tempCardPrefs.wolofVerseEnabled = userPref;
+          tempCardPrefs.wolofVerseEnabled = userPref;
         }
         break;
       case 'wolofalVerseEnabled':
         {
-          _tempCardPrefs.wolofalVerseEnabled = userPref;
+          tempCardPrefs.wolofalVerseEnabled = userPref;
         }
         break;
       case 'showFavs':
         {
-          _tempCardPrefs.showFavs = userPref;
+          tempCardPrefs.showFavs = userPref;
         }
         break;
       case 'showOnboarding':
         {
-          _tempCardPrefs.showOnboarding = userPref;
+          tempCardPrefs.showOnboarding = userPref;
         }
         break;
       case 'lowPower':
         {
-          _tempCardPrefs.lowPower = userPref;
+          tempCardPrefs.lowPower = userPref;
         }
         break;
       case 'shouldTestDevicePerformance':
         {
-          _tempCardPrefs.shouldTestDevicePerformance = userPref;
+          tempCardPrefs.shouldTestDevicePerformance = userPref;
         }
         break;
     }
 
     //now set it in memory
-    _cardPrefs = _tempCardPrefs;
+    _cardPrefs = tempCardPrefs;
     // notifyListeners();
     //now save it to disk
-    final _userPrefs = json.encode({
-      'textDirection': _tempCardPrefs.textDirection,
-      'imageEnabled': _tempCardPrefs.imageEnabled,
-      'wolofVerseEnabled': _tempCardPrefs.wolofVerseEnabled,
-      'wolofalVerseEnabled': _tempCardPrefs.wolofalVerseEnabled,
-      'showFavs': _tempCardPrefs.showFavs,
-      'showOnboarding': _tempCardPrefs.showOnboarding,
-      'lowPower': _tempCardPrefs.lowPower,
-      'shouldTestDevicePerformance': _tempCardPrefs.shouldTestDevicePerformance,
+    final userPrefs = json.encode({
+      'textDirection': tempCardPrefs.textDirection,
+      'imageEnabled': tempCardPrefs.imageEnabled,
+      'wolofVerseEnabled': tempCardPrefs.wolofVerseEnabled,
+      'wolofalVerseEnabled': tempCardPrefs.wolofalVerseEnabled,
+      'showFavs': tempCardPrefs.showFavs,
+      'showOnboarding': tempCardPrefs.showOnboarding,
+      'lowPower': tempCardPrefs.lowPower,
+      'shouldTestDevicePerformance': tempCardPrefs.shouldTestDevicePerformance,
     });
-    prefs.setString('cardPrefs', _userPrefs);
+    prefs.setString('cardPrefs', userPrefs);
     notifyListeners();
   }
 }

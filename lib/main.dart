@@ -22,18 +22,10 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (ctx) => CardPrefs(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => ThemeModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => DivineNames(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => PlayerManager(),
-        ),
+        ChangeNotifierProvider(create: (ctx) => CardPrefs()),
+        ChangeNotifierProvider(create: (ctx) => ThemeModel()),
+        ChangeNotifierProvider(create: (ctx) => DivineNames()),
+        ChangeNotifierProvider(create: (ctx) => PlayerManager()),
       ],
       child: MyApp(),
     ),
@@ -41,22 +33,25 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  MyApp();
+  const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   //A Future for the future builder
-  late Future<void> _initialization = callInititalization();
+  late Future<void> initialization = callInititalization();
 
   //Language code: Initialize the locale
   Future<void> setupLang() async {
-    print('setupLang()');
+    debugPrint('setupLang()');
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    Function setLocale =
-        Provider.of<ThemeModel>(context, listen: false).setLocale;
+    if (!mounted) return;
+    Function setLocale = Provider.of<ThemeModel>(
+      context,
+      listen: false,
+    ).setLocale;
 
     //If there is no lang pref (i.e. first run), set lang to Wolof
     if (!prefs.containsKey('userLang')) {
@@ -69,7 +64,7 @@ class _MyAppState extends State<MyApp> {
 
       await setLocale(savedUserLang);
     }
-    print('end setupLang()');
+    debugPrint('end setupLang()');
     //end language code
   }
 
@@ -85,16 +80,19 @@ class _MyAppState extends State<MyApp> {
     In order to prevent that, we make sure that the Future is obtained in the initState() and not in the build() 
     method itself. This is something which you may notice in a lot of tutorials online where they assign the 
     Future method directly to the FutureBuilder and it’s factually wrong."*/
-    // print('before _initialization');
+    // debugPrint('before _initialization');
     // _initialization = callInititalization();
-    // print('after _initialization');
+    // debugPrint('after _initialization');
   }
 
   Future<void> callInititalization() async {
     //do the work
     await Provider.of<DivineNames>(context, listen: false).getDivineNames();
+    if (!mounted) return;
     await Provider.of<ThemeModel>(context, listen: false).setupTheme();
+    if (!mounted) return;
     await Provider.of<CardPrefs>(context, listen: false).setupCardPrefs();
+
     await setupLang();
     //this clears out old audio files
     await AudioPlayer.clearAssetCache();
@@ -102,13 +100,13 @@ class _MyAppState extends State<MyApp> {
     //These should wait and this be unnecessary but the build happens before all these inits finish,
     //so this is a hack that helps
     // await Future.delayed(Duration(milliseconds: 3000));
-    // print('returning future from initialization');
+    // debugPrint('returning future from initialization');
     return;
   }
 
   @override
   Widget build(BuildContext context) {
-    print('main.dart build');
+    debugPrint('main.dart build');
 
     //No good on three-button Android
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
@@ -118,20 +116,22 @@ class _MyAppState extends State<MyApp> {
     //This not perfect perhaps but probably best compromise
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-    ThemeData? _currentTheme = Provider.of<ThemeModel>(context).currentTheme;
+    ThemeData? currentTheme = Provider.of<ThemeModel>(context).currentTheme;
 
     return FutureBuilder(
-      future: _initialization,
-      builder: (ctx, snapshot) => snapshot.connectionState ==
-              ConnectionState.waiting
+      future: initialization,
+      builder: (ctx, snapshot) =>
+          snapshot.connectionState == ConnectionState.waiting
           ? const Center(child: CircularProgressIndicator())
           : MaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: _currentTheme == null ? ThemeData.light() : _currentTheme,
+              theme: currentTheme ?? ThemeData.light(),
               title: '99',
-              home: Provider.of<CardPrefs>(context, listen: false)
-                      .cardPrefs
-                      .showOnboarding
+              home:
+                  Provider.of<CardPrefs>(
+                    context,
+                    listen: false,
+                  ).cardPrefs.showOnboarding
                   ? OnboardingScreen()
                   : CardsScreen(),
               routes: {
@@ -160,11 +160,8 @@ class _MyAppState extends State<MyApp> {
                 // wolofal 2026
                 const Locale('ar', ''),
               ],
-              locale: Provider.of<ThemeModel>(context, listen: false)
-                          .userLocale ==
-                      null
-                  ? Locale('fr', 'CH')
-                  : Provider.of<ThemeModel>(context, listen: false).userLocale,
+              locale:
+                  Provider.of<ThemeModel>(context, listen: false).userLocale ?? Locale('fr', 'CH'),
             ),
     );
   }
