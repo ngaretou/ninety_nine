@@ -46,6 +46,7 @@ class NamesList extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.listView)),
+      backgroundColor: Theme.of(context).colorScheme.surfaceDim,
       //If the width of the screen is greater or equal to 500
       //show the wide view
       body: Directionality(
@@ -63,7 +64,8 @@ class NamesList extends StatelessWidget {
                   itemBuilder: (ctx, i) => GestureDetector(
                     child: Card(
                       elevation: 5,
-                      color: Theme.of(context).cardColor,
+
+                      // color: Theme.of(context).cardColor,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 8.0,

@@ -224,19 +224,19 @@ abstract class AppLocalizations {
   /// General introductory words
   ///
   /// In en, this message translates to:
-  /// **'This app contains 99 names of God in Arabic, Wolofal, and Wolof.\n\nRead and reflect on the verses found on the back of the cards to know God better and understand how he wants us to live.'**
+  /// **'This app contains 99 names of God in Arabic, Wolofal, and Wolof.\nRead and reflect on the verses found on the back of the cards to know God better and understand how he wants us to live.'**
   String get introPage1;
 
   /// DBS questions
   ///
   /// In en, this message translates to:
-  /// **'When you read a verse, ask yourself four questions:\n\n 1. What do these verses teach about God?\n\n 2. What do these verses teach about people?\n\n 3. How can I live out these verses?\n\n 4. Who in my life needs to hear these verses?'**
+  /// **'When you read a verse, ask yourself four questions:\n 1. What do these verses teach about God?\n 2. What do these verses teach about people?\n 3. How can I live out these verses?\n 4. Who in my life needs to hear these verses?'**
   String get introPage2;
 
   /// Motivation for DBS
   ///
   /// In en, this message translates to:
-  /// **'As you meditate on God’s Word, you will see your love for him grow.\n\nGod says in Proverbs 8:17:'**
+  /// **'As you meditate on God’s Word, you will see your love for him grow.\nGod says in Proverbs 8:17:'**
   String get introPage3a;
 
   /// Motivation for DBS: bible verse

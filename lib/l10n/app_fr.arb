@@ -120,19 +120,19 @@
     "type": "text",
     "placeholders": {}
   },
-  "introPage1": "Cette application contient les 99 noms de Dieu en arab, en wolofal, et en wolof.\n\nLisez et réfléchissez aux versets qui se trouvent au dos des cartes pour mieux connaître Dieu et comprendre comment il veut que nous vivions.",
+  "introPage1": "Cette application contient les 99 noms de Dieu en arab, en wolofal, et en wolof.\nLisez et réfléchissez aux versets qui se trouvent au dos des cartes pour mieux connaître Dieu et comprendre comment il veut que nous vivions.",
   "@introPage1": {
     "description": "General introductory words",
     "type": "text",
     "placeholders": {}
   },
-  "introPage2": "Lorsque vous lisez un verset, posez-vous quatre questions :\n\n1. Qu'est-ce que ces versets enseignent sur Dieu ?\n\n2. Qu'est-ce que ces versets enseignent sur les humains ?\n\n3. Comment puis-je vivre ces versets ?\n\n4. Qui dans ma vie a besoin d'entendre ces versets ?",
+  "introPage2": "Lorsque vous lisez un verset, posez-vous quatre questions :\n1. Qu'est-ce que ces versets enseignent sur Dieu ?\n2. Qu'est-ce que ces versets enseignent sur les humains ?\n3. Comment puis-je vivre ces versets ?\n4. Qui dans ma vie a besoin d'entendre ces versets ?",
   "@introPage2": {
     "description": "DBS questions",
     "type": "text",
     "placeholders": {}
   },
-  "introPage3a": "En méditant sur la Parole de Dieu, vous verrez grandir votre amour pour lui.\n\nDieu dit en Proverbes 8:17 :",
+  "introPage3a": "En méditant sur la Parole de Dieu, vous verrez grandir votre amour pour lui.\nDieu dit en Proverbes 8:17 :",
   "@introPage3a": {
     "description": "Motivation for DBS",
     "type": "text",

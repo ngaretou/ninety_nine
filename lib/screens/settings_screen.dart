@@ -15,6 +15,8 @@ import '../providers/card_prefs.dart';
 import './about_screen.dart';
 import './cards_screen.dart';
 
+const double indentWidth = 300;
+
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings-screen';
 
@@ -43,8 +45,28 @@ class SettingsScreenState extends State<SettingsScreen> {
     bool wolof = cardPrefs.cardPrefs.wolofVerseEnabled;
     bool wolofal = cardPrefs.cardPrefs.wolofalVerseEnabled;
 
-    TextStyle titleStyle = Theme.of(context).textTheme.titleMedium!;
-    TextStyle optionsStyle = Theme.of(context).textTheme.titleSmall!;
+    TextStyle titleStyle = TextStyle();
+    TextStyle optionsStyle = TextStyle();
+
+    bool isArabic = userLocale.toString() == 'ar';
+
+    TextStyle titleStyleAs = Theme.of(
+      context,
+    ).textTheme.titleMedium!.copyWith(fontFamily: 'Harmattan', fontSize: 24);
+    TextStyle optionsStyleAs = Theme.of(
+      context,
+    ).textTheme.titleSmall!.copyWith(fontFamily: 'Harmattan', fontSize: 20);
+
+    TextStyle titleStyleRs = Theme.of(context).textTheme.titleMedium!;
+    TextStyle optionsStyleRs = Theme.of(context).textTheme.titleSmall!;
+
+    if (isArabic) {
+      titleStyle = titleStyleAs;
+      optionsStyle = optionsStyleAs;
+    } else {
+      titleStyle = titleStyleRs;
+      optionsStyle = optionsStyleRs;
+    }
 
     if (!wolof && !wolofal) {
       wolof = true;
@@ -61,17 +83,16 @@ class SettingsScreenState extends State<SettingsScreen> {
     Widget settingTitle(String title, IconData icon, Function? tapHandler) {
       return InkWell(
         onTap: tapHandler as void Function()?,
-        child: SizedBox(
-          width: 300,
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Icon(icon, size: 27, color: Theme.of(context).iconTheme.color),
-                SizedBox(width: 25),
-                Expanded(child: Text(title, style: titleStyle)),
-              ],
-            ),
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Icon(icon, size: 27, color: Theme.of(context).iconTheme.color),
+              SizedBox(width: 25),
+              // Expanded(child:
+              Text(title, style: titleStyle),
+              // ),
+            ],
           ),
         ),
       );
@@ -220,68 +241,6 @@ class SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
-    Widget languageSetting() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Wrap(
-            crossAxisAlignment: .center,
-            direction: mediaQuerySize.width > 390
-                ? Axis.horizontal
-                : Axis.vertical,
-            spacing: 15,
-            children: [
-              //Note that userLocale.toString() evaluates to for example 'fr' in Android/iOS but on the web 'fr_' with the underscore.
-              //So three slightly different checks for the three langs:
-              //fr_CH checks for fr_CH only
-              //fr checks for fr or fr_
-              //en checks for contains en
-              ChoiceChip(
-                selectedColor: activeControlColor,
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: userLocale.toString() == 'fr_CH' ? true : false,
-                label: Text("Wolof", style: optionsStyle),
-                onSelected: (bool selected) {
-                  themeProvider.setLocale('fr_CH');
-                },
-              ),
-              ChoiceChip(
-                selectedColor: activeControlColor,
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: userLocale.toString() == 'ar' ? true : false,
-                label: Text("وࣷلࣷفَلْ", style: optionsStyle),
-                onSelected: (bool selected) {
-                  themeProvider.setLocale('ar');
-                },
-              ),
-              ChoiceChip(
-                selectedColor: activeControlColor,
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                selected:
-                    userLocale.toString() == 'fr' ||
-                        userLocale.toString() == 'fr_'
-                    ? true
-                    : false,
-                label: Text("Français", style: optionsStyle),
-                onSelected: (bool selected) {
-                  themeProvider.setLocale('fr');
-                },
-              ),
-              ChoiceChip(
-                selectedColor: activeControlColor,
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                selected: userLocale.toString().contains('en') ? true : false,
-                label: Text("English", style: optionsStyle),
-                onSelected: (bool selected) {
-                  themeProvider.setLocale('en');
-                },
-              ),
-            ],
-          ),
-        ],
-      );
-    }
-
     Widget backgroundTitle() {
       return settingTitle(
         AppLocalizations.of(context)!.settingsCardBackground,
@@ -394,7 +353,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                 label: Row(
                   children: [
                     Text("(abc)", style: optionsStyle),
-                    SizedBox(width: 10),
+                    SizedBox(width: 6),
                     Icon(Icons.arrow_forward),
                   ],
                 ),
@@ -410,7 +369,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                 label: Row(
                   children: [
                     Text("(بدف)", style: optionsStyle),
-                    SizedBox(width: 10),
+                    SizedBox(width: 6),
                     Icon(Icons.arrow_back),
                   ],
                 ),
@@ -425,97 +384,62 @@ class SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
-    Widget asScriptPicker() {
+    Widget switchRow({
+      required String label,
+      required bool value,
+      required void Function(bool)? onChanged,
+    }) {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: .start,
+        crossAxisAlignment: .center,
         children: [
-          SizedBox(
-            width: 300,
-            child: Row(
-              children: [
-                SizedBox(width: 80),
-                Text(
-                  AppLocalizations.of(context)!.settingsVerseinWolofal,
-                  style: optionsStyle,
-                ),
-              ],
-            ),
+          SizedBox(width: 80),
+          Expanded(child: Text(label, style: optionsStyle)),
+          SizedBox(width: 8),
+          Switch(
+            activeThumbColor: activeSwitchColor,
+            activeTrackColor: activeControlColor,
+            value: value,
+            onChanged: onChanged,
           ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: isPhone
-                  ? MainAxisAlignment.end
-                  : MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Switch(
-                  activeThumbColor: activeSwitchColor,
-                  activeTrackColor: activeControlColor,
-                  value: wolofal,
-                  onChanged: (_) {
-                    if (wolof) {
-                      cardPrefs.savePref('wolofalVerseEnabled', !wolofal);
-                      //but if wolof is not on and you're trying to turn of wolofal, turn on wolof.
-                    } else if (!wolof && wolofal) {
-                      cardPrefs.savePref('wolofalVerseEnabled', false);
-                      cardPrefs.savePref('wolofVerseEnabled', true);
-                    }
-
-                    setState(() {});
-                  },
-                ),
-              ],
-            ),
-          ),
+          isPhone ? SizedBox(width: 8) : SizedBox(width: 80),
         ],
       );
     }
 
-    Widget rsScriptPicker() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 300,
-            child: Row(
-              children: [
-                SizedBox(width: 80),
-                Text(
-                  AppLocalizations.of(context)!.settingsVerseinWolof,
-                  style: optionsStyle,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: isPhone
-                  ? MainAxisAlignment.end
-                  : MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Switch(
-                  activeThumbColor: activeSwitchColor,
-                  activeTrackColor: activeControlColor,
-                  value: wolof,
-                  onChanged: (_) {
-                    if (wolofal) {
-                      cardPrefs.savePref('wolofVerseEnabled', !wolof);
-                      //but if wolof is not on and you're trying to turn of wolofal, turn on wolof.
-                    } else if (wolof && !wolofal) {
-                      cardPrefs.savePref('wolofalVerseEnabled', true);
-                      cardPrefs.savePref('wolofVerseEnabled', false);
-                    }
+    Widget asScriptPicker() {
+      return switchRow(
+        label: AppLocalizations.of(context)!.settingsVerseinWolofal,
+        value: wolofal,
+        onChanged: (_) {
+          if (wolof) {
+            cardPrefs.savePref('wolofalVerseEnabled', !wolofal);
+            //but if wolof is not on and you're trying to turn of wolofal, turn on wolof.
+          } else if (!wolof && wolofal) {
+            cardPrefs.savePref('wolofalVerseEnabled', false);
+            cardPrefs.savePref('wolofVerseEnabled', true);
+          }
 
-                    setState(() {});
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
+          setState(() {});
+        },
+      );
+    }
+
+    Widget rsScriptPicker() {
+      return switchRow(
+        label: AppLocalizations.of(context)!.settingsVerseinWolof,
+        value: wolof,
+        onChanged: (_) {
+          if (wolofal) {
+            cardPrefs.savePref('wolofVerseEnabled', !wolof);
+            //but if wolof is not on and you're trying to turn of wolofal, turn on wolof.
+          } else if (wolof && !wolofal) {
+            cardPrefs.savePref('wolofalVerseEnabled', true);
+            cardPrefs.savePref('wolofVerseEnabled', false);
+          }
+
+          setState(() {});
+        },
       );
     }
 
@@ -591,51 +515,107 @@ class SettingsScreenState extends State<SettingsScreen> {
     }
 
     Widget lowPowerModeChooser() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 300,
-            child: Row(
-              children: [
-                SizedBox(width: 80),
-                Expanded(
-                  child: Text(
-                    AppLocalizations.of(context)!.lowPowerMode,
-                    style: optionsStyle,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          Expanded(
-            child: Row(
-              mainAxisAlignment: isPhone
-                  ? MainAxisAlignment.end
-                  : MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Switch(
-                  activeThumbColor: activeSwitchColor,
-                  activeTrackColor: activeControlColor,
-                  value: cardPrefs.cardPrefs.lowPower,
-                  onChanged: (_) {
-                    cardPrefs.savePref(
-                      'lowPower',
-                      !cardPrefs.cardPrefs.lowPower,
-                    );
-                    //This makes it so if the user chooses a setting, we won't ask them again to set to low power, they know where the setting is
-                    cardPrefs.savePref('shouldTestDevicePerformance', false);
-                    setState(() {});
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
+      return switchRow(
+        label: AppLocalizations.of(context)!.lowPowerMode,
+        value: cardPrefs.cardPrefs.lowPower,
+        onChanged: (_) {
+          cardPrefs.savePref('lowPower', !cardPrefs.cardPrefs.lowPower);
+          //This makes it so if the user chooses a setting, we won't ask them again to set to low power, they know where the setting is
+          cardPrefs.savePref('shouldTestDevicePerformance', false);
+          setState(() {});
+        },
       );
+    }
+
+    Widget languageSetting() {
+      final narrow = mediaQuerySize.width > 575;
+
+      Widget aligner({required Widget child}) {
+        return Align(alignment: narrow ? .center : .centerStart, child: child);
+      }
+
+      List<Widget> languageChips = [
+        //Note that userLocale.toString() evaluates to for example 'fr' in Android/iOS but on the web 'fr_' with the underscore.
+        //So three slightly different checks for the three langs:
+        //fr_CH checks for fr_CH only
+        //fr checks for fr or fr_
+        //en checks for contains en
+        aligner(
+          child: ChoiceChip(
+            selectedColor: activeControlColor,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            selected: userLocale.toString() == 'fr_CH' ? true : false,
+            label: Text("Wolof", style: optionsStyleRs),
+            onSelected: (bool selected) {
+              themeProvider.setLocale('fr_CH');
+            },
+          ),
+        ),
+        aligner(
+          child: ChoiceChip(
+            selectedColor: activeControlColor,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            selected: userLocale.toString() == 'ar' ? true : false,
+            label: Text("وࣷلࣷفَلْ", style: optionsStyleAs),
+            onSelected: (bool selected) {
+              themeProvider.setLocale('ar');
+            },
+          ),
+        ),
+        aligner(
+          child: ChoiceChip(
+            selectedColor: activeControlColor,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            selected:
+                userLocale.toString() == 'fr' || userLocale.toString() == 'fr_'
+                ? true
+                : false,
+            label: Text("Français", style: optionsStyleRs),
+            onSelected: (bool selected) {
+              themeProvider.setLocale('fr');
+            },
+          ),
+        ),
+        aligner(
+          child: ChoiceChip(
+            selectedColor: activeControlColor,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            selected: userLocale.toString().contains('en') ? true : false,
+            label: Text("English", style: optionsStyleRs),
+            onSelected: (bool selected) {
+              themeProvider.setLocale('en');
+            },
+          ),
+        ),
+      ];
+
+      return Padding(
+        padding: userLocale.toString() == 'ar'
+            ? const EdgeInsets.only(right: 80.0)
+            : const EdgeInsets.only(left: 80.0),
+        child: GridView.count(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          crossAxisCount: narrow ? 4 : 2,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 15,
+          childAspectRatio: 3.2,
+          children: languageChips,
+        ),
+      );
+
+      // return Wrap(
+      //   spacing: 15,
+      //   runSpacing: 12, // space BETWEEN rows
+      //   alignment: .center,
+      //   crossAxisAlignment: .center,
+      //   direction: Axis.horizontal,
+
+      //   // mediaQuerySize.width > 390
+      //   //     ? Axis.horizontal
+      //   //     : Axis.vertical,
+      //   children: languageChips
+      // );
     }
 
     Widget aboutWidget() {
@@ -710,7 +690,17 @@ class SettingsScreenState extends State<SettingsScreen> {
     ///////////////////////////////
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.settingsTitle)),
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.of(context)!.settingsTitle,
+          style: isArabic
+              ? Theme.of(context).textTheme.titleLarge!.copyWith(
+                  fontFamily: 'Harmattan',
+                  fontSize: 26,
+                )
+              : Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
       //If the width of the screen is greater or equal to 500
       //show the wide view
       body: ScrollConfiguration(
@@ -735,6 +725,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                           settingRow(directionTitle(), directionSettings()),
                           Divider(),
                           scriptPickerTitle(),
+
                           asScriptPicker(),
                           rsScriptPicker(),
                           Divider(),

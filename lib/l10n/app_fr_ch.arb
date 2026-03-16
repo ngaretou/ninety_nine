@@ -120,19 +120,19 @@
     "type": "text",
     "placeholders": {}
   },
-  "introPage1": "Appli bii daa ëmb 99 turu Yàlla yi ci araab, wolofal, ak alfa.\n\nJàngal te xalaat ci aaya yi nekk ci gannaaw kart yi, ngir nga gëna xam Yàlla ak coobarem.",
+  "introPage1": "Appli bii daa ëmb 99 turu Yàlla yi ci araab, wolofal, ak alfa.\nJàngal te xalaat ci aaya yi nekk ci gannaaw kart yi, ngir nga gëna xam Yàlla ak coobarem.",
   "@introPage1": {
     "description": "General introductory words",
     "type": "text",
     "placeholders": {}
   },
-  "introPage2": "Boo jangee ab aaya, laajal sa bopp ñeenti laaj yi:\n\n1. Lan la nu aaya yii di xamal ci Yàlla?\n\n2. Lan la nu aaya yii di xamal ci doom Aadama?\n\n3. Naka lañu wara soppee sunu dundin?\n\n4. Kan nga bëgga seddoo aaya yii?",
+  "introPage2": "Boo jangee ab aaya, laajal sa bopp ñeenti laaj yi:\n1. Lan la nu aaya yii di xamal ci Yàlla\n2. Lan la nu aaya yii di xamal ci doom Aadama?\n3. Naka lañu wara soppee sunu dundin?\n4. Kan nga bëgga seddoo aaya yii?",
   "@introPage2": {
     "description": "DBS questions",
     "type": "text",
     "placeholders": {}
   },
-  "introPage3a": "Booy jàngat kàddug Yàlla gi ci appli bi, dinga gëna sopp Yàlla.\n\nCi Kaddu yu Xelu, saar 8 aaya 17, Yàlla daa ne:",
+  "introPage3a": "Booy jàngat kàddug Yàlla gi ci appli bi, dinga gëna sopp Yàlla.\nCi Kaddu yu Xelu, saar 8 aaya 17, Yàlla daa ne:",
   "@introPage3a": {
     "description": "Motivation for DBS",
     "type": "text",

@@ -8,6 +8,8 @@ import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization met
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
 
+const double spaceBetweenParagraphs = 12;
+
 class OnboardingScreen extends StatefulWidget {
   static const routeName = '/onboarding-screen';
   const OnboardingScreen({super.key});
@@ -64,15 +66,132 @@ class OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
-  TextStyle introStyle = TextStyle(
+  TextStyle introRsStyle = TextStyle(
     fontFamily: 'Lato',
     fontSize: 24,
+
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+  TextStyle introAsStyle = TextStyle(
+    fontFamily: 'Harmattan',
+    fontSize: 34,
     fontWeight: FontWeight.w600,
     color: Colors.white,
   );
 
   @override
   Widget build(BuildContext context) {
+    bool isArabic =
+        Provider.of<ThemeModel>(context).userLocale == Locale('ar', '');
+
+    List<Widget> bodyWidgets(String bodyString) {
+      final paragraphText = bodyString.split('\n');
+      List<Widget> paragraphs = [];
+      for (final p in paragraphText) {
+        paragraphs.add(
+          Padding(
+            padding: const EdgeInsets.only(bottom: spaceBetweenParagraphs),
+            child: Text(
+              p,
+              textAlign: TextAlign.center,
+              style: isArabic ? introAsStyle : introRsStyle,
+            ),
+          ),
+        );
+      }
+      return paragraphs;
+    }
+
+    List<Widget> page3Body() {
+      TextStyle pageThreeStyle = TextStyle();
+      TextStyle pageThreeStyleBold = TextStyle();
+
+      if (isArabic) {
+        pageThreeStyle = introAsStyle;
+        pageThreeStyleBold = introAsStyle.copyWith(
+          fontWeight: FontWeight.w900,
+          fontSize: introAsStyle.fontSize! + 6,
+        );
+      } else {
+        pageThreeStyle = introRsStyle;
+        pageThreeStyleBold = introRsStyle.copyWith(
+          fontWeight: FontWeight.w700,
+          fontStyle: FontStyle.italic,
+          fontSize: introRsStyle.fontSize! + 4,
+        );
+      }
+
+      final paragraphText = AppLocalizations.of(
+        context,
+      )!.introPage3a.split('\n');
+      List<Widget> paragraphs = [];
+      for (final p in paragraphText) {
+        paragraphs.add(
+          Padding(
+            padding: const EdgeInsets.only(bottom: spaceBetweenParagraphs),
+            child: Text(p, textAlign: TextAlign.center, style: pageThreeStyle),
+          ),
+        );
+      }
+      paragraphs.add(
+        Text(
+          AppLocalizations.of(context)!.introPage3b,
+          textAlign: TextAlign.center,
+          style: pageThreeStyleBold,
+        ),
+      );
+      return paragraphs;
+    }
+
+    List<Widget> page4Body() {
+      Widget instructionRow(icon, String instruction) {
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Colors.black54,
+              ),
+              width: 40,
+              height: 40,
+              alignment: Alignment.center,
+              child: Icon(icon, color: Colors.white),
+            ),
+            SizedBox(width: 20),
+            Expanded(
+              child: Text(
+                instruction,
+                style: isArabic ? introAsStyle : introRsStyle,
+              ),
+            ),
+          ],
+        );
+      }
+
+      return [
+        Text(
+          AppLocalizations.of(context)!.introPage4a,
+          style: isArabic ? introAsStyle : introRsStyle,
+          textAlign: TextAlign.left,
+        ),
+        SizedBox(height: 20),
+        instructionRow(
+          Icons.play_arrow,
+          AppLocalizations.of(context)!.introPage4b,
+        ),
+        SizedBox(height: 10),
+        instructionRow(Icons.share, AppLocalizations.of(context)!.introPage4c),
+        SizedBox(height: 10),
+        instructionRow(
+          Icons.favorite_border,
+          AppLocalizations.of(context)!.introPage4d,
+        ),
+      ];
+    }
+
     return Scaffold(
       body: ScrollConfiguration(
         //The 2.8 Flutter behavior is to not have mice grabbing and dragging - but we do want this in the web version of the app, so the custom scroll behavior here
@@ -110,27 +229,33 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                     },
                     children: <Widget>[
                       _buildPageContent(
-                        isShowImageOnTop: false,
                         bgimage: 'assets/images/1.jpg',
                         // image: null,
-                        body: AppLocalizations.of(context)!.introPage1,
+                        body: bodyWidgets(
+                          AppLocalizations.of(context)!.introPage1,
+                        ),
                         color: Color(0xFFFF7252),
+                        isArabic: isArabic,
                       ),
                       _buildPageContent(
-                        isShowImageOnTop: true,
                         bgimage: 'assets/images/2.jpg',
-                        body: AppLocalizations.of(context)!.introPage2,
+                        body: bodyWidgets(
+                          AppLocalizations.of(context)!.introPage2,
+                        ),
                         color: Color(0xFFFFA131),
+                        isArabic: isArabic,
                       ),
-                      _buildFormattedPageContent(
+                      _buildPageContent(
                         bgimage: 'assets/images/13.jpg',
-                        body: _page3Body(),
+                        body: page3Body(),
                         color: Color(0xFF3C60FF),
+                        isArabic: isArabic,
                       ),
-                      _buildFormattedPageContent(
+                      _buildPageContent(
                         bgimage: 'assets/images/4.jpg',
-                        body: _page4Body(),
+                        body: page4Body(),
                         color: Color(0xFFFF7252),
+                        isArabic: isArabic,
                       ),
                     ],
                   ),
@@ -182,11 +307,20 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                                   alignment: Alignment.center,
                                   child: Text(
                                     AppLocalizations.of(context)!.skip,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20,
-                                    ),
+                                    style: isArabic
+                                        ? introAsStyle.copyWith(
+                                            fontSize: 28,
+                                            fontWeight: FontWeight.normal,
+                                          )
+                                        : introRsStyle.copyWith(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                    // TextStyle(
+                                    //   color: Colors.white,
+                                    //   fontWeight: FontWeight.w600,
+                                    //   fontSize: 20,
+                                    // ),
                                   ),
                                 ),
                               ),
@@ -266,7 +400,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
     }
     // }
 
-    TextStyle chooserStyle = TextStyle(color: Colors.black87);
+    TextStyle chooserStyle = TextStyle(color: Colors.black87, fontSize: 16);
 
     return Container(
       alignment: .center,
@@ -291,7 +425,13 @@ class OnboardingScreenState extends State<OnboardingScreen> {
             ),
             DropdownMenuItem(
               value: 4,
-              child: Text("وࣷلࣷفَلْ", style: chooserStyle),
+              child: Text(
+                "وࣷلࣷفَلْ",
+                style: chooserStyle.copyWith(
+                  fontFamily: "Harmattan",
+                  fontSize: 22,
+                ),
+              ),
             ),
             DropdownMenuItem(
               value: 2,
@@ -335,10 +475,9 @@ class OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _buildPageContent({
     required String bgimage,
-    // String image,
-    String? body,
+    required List<Widget> body,
     Color? color,
-    required isShowImageOnTop,
+    required bool isArabic,
   }) {
     return Padding(
       padding: cardPadding,
@@ -363,132 +502,10 @@ class OnboardingScreenState extends State<OnboardingScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              if (!isShowImageOnTop)
-                Column(
-                  children: [
-                    Center(
-                      // child: Image.asset(image),
-                    ),
-                    SizedBox(height: 50),
-                    Text(body!, textAlign: TextAlign.center, style: introStyle),
-                  ],
-                ),
-              if (isShowImageOnTop)
-                Column(
-                  children: [
-                    Text(body!, textAlign: TextAlign.center, style: introStyle),
-                    SizedBox(height: 50),
-                  ],
-                ),
-            ],
+            children: body,
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildFormattedPageContent({
-    required String bgimage,
-    // String image,
-    required Widget body,
-    Color? color,
-  }) {
-    return Padding(
-      padding: cardPadding,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black54,
-          borderRadius: BorderRadius.circular(20.0),
-          image: DecorationImage(fit: BoxFit.cover, image: AssetImage(bgimage)),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            gradient: LinearGradient(
-              begin: Alignment.bottomRight,
-              colors: [
-                Colors.black.withAlpha(230),
-                Colors.black.withAlpha(100),
-              ],
-            ),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[body],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _page3Body() {
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-            text: '${AppLocalizations.of(context)!.introPage3a} \n\n',
-            style: introStyle,
-          ),
-          TextSpan(
-            text: AppLocalizations.of(context)!.introPage3b,
-            style: introStyle.copyWith(
-              fontWeight: FontWeight.w900,
-              fontStyle: FontStyle.italic,
-              fontSize: introStyle.fontSize! + 4,
-            ),
-          ),
-        ],
-      ),
-      textAlign: TextAlign.center,
-    );
-  }
-
-  Widget _page4Body() {
-    Widget instructionRow(icon, String instruction) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              color: Colors.black54,
-            ),
-            width: 40,
-            height: 40,
-            alignment: Alignment.center,
-            child: Icon(icon, color: Colors.white),
-          ),
-          SizedBox(width: 20),
-          Expanded(child: Text(instruction, style: introStyle)),
-        ],
-      );
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppLocalizations.of(context)!.introPage4a,
-          style: introStyle,
-          textAlign: TextAlign.left,
-        ),
-        SizedBox(height: 20),
-        instructionRow(
-          Icons.play_arrow,
-          AppLocalizations.of(context)!.introPage4b,
-        ),
-        SizedBox(height: 10),
-        instructionRow(Icons.share, AppLocalizations.of(context)!.introPage4c),
-        SizedBox(height: 10),
-        instructionRow(
-          Icons.favorite_border,
-          AppLocalizations.of(context)!.introPage4d,
-        ),
-      ],
     );
   }
 

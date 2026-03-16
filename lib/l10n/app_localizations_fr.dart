@@ -71,15 +71,15 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get introPage1 =>
-      'Cette application contient les 99 noms de Dieu en arab, en wolofal, et en wolof.\n\nLisez et réfléchissez aux versets qui se trouvent au dos des cartes pour mieux connaître Dieu et comprendre comment il veut que nous vivions.';
+      'Cette application contient les 99 noms de Dieu en arab, en wolofal, et en wolof.\nLisez et réfléchissez aux versets qui se trouvent au dos des cartes pour mieux connaître Dieu et comprendre comment il veut que nous vivions.';
 
   @override
   String get introPage2 =>
-      'Lorsque vous lisez un verset, posez-vous quatre questions :\n\n1. Qu\'est-ce que ces versets enseignent sur Dieu ?\n\n2. Qu\'est-ce que ces versets enseignent sur les humains ?\n\n3. Comment puis-je vivre ces versets ?\n\n4. Qui dans ma vie a besoin d\'entendre ces versets ?';
+      'Lorsque vous lisez un verset, posez-vous quatre questions :\n1. Qu\'est-ce que ces versets enseignent sur Dieu ?\n2. Qu\'est-ce que ces versets enseignent sur les humains ?\n3. Comment puis-je vivre ces versets ?\n4. Qui dans ma vie a besoin d\'entendre ces versets ?';
 
   @override
   String get introPage3a =>
-      'En méditant sur la Parole de Dieu, vous verrez grandir votre amour pour lui.\n\nDieu dit en Proverbes 8:17 :';
+      'En méditant sur la Parole de Dieu, vous verrez grandir votre amour pour lui.\nDieu dit en Proverbes 8:17 :';
 
   @override
   String get introPage3b =>
@@ -198,15 +198,15 @@ class AppLocalizationsFrCh extends AppLocalizationsFr {
 
   @override
   String get introPage1 =>
-      'Appli bii daa ëmb 99 turu Yàlla yi ci araab, wolofal, ak alfa.\n\nJàngal te xalaat ci aaya yi nekk ci gannaaw kart yi, ngir nga gëna xam Yàlla ak coobarem.';
+      'Appli bii daa ëmb 99 turu Yàlla yi ci araab, wolofal, ak alfa.\nJàngal te xalaat ci aaya yi nekk ci gannaaw kart yi, ngir nga gëna xam Yàlla ak coobarem.';
 
   @override
   String get introPage2 =>
-      'Boo jangee ab aaya, laajal sa bopp ñeenti laaj yi:\n\n1. Lan la nu aaya yii di xamal ci Yàlla?\n\n2. Lan la nu aaya yii di xamal ci doom Aadama?\n\n3. Naka lañu wara soppee sunu dundin?\n\n4. Kan nga bëgga seddoo aaya yii?';
+      'Boo jangee ab aaya, laajal sa bopp ñeenti laaj yi:\n1. Lan la nu aaya yii di xamal ci Yàlla\n2. Lan la nu aaya yii di xamal ci doom Aadama?\n3. Naka lañu wara soppee sunu dundin?\n4. Kan nga bëgga seddoo aaya yii?';
 
   @override
   String get introPage3a =>
-      'Booy jàngat kàddug Yàlla gi ci appli bi, dinga gëna sopp Yàlla.\n\nCi Kaddu yu Xelu, saar 8 aaya 17, Yàlla daa ne:';
+      'Booy jàngat kàddug Yàlla gi ci appli bi, dinga gëna sopp Yàlla.\nCi Kaddu yu Xelu, saar 8 aaya 17, Yàlla daa ne:';
 
   @override
   String get introPage3b => 'Maa sopp ku ma sopp, ku ma seet tigi, gis ma.';
