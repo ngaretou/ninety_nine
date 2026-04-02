@@ -67,7 +67,6 @@ class PlayButtonState extends State<PlayButton> with WidgetsBindingObserver {
           useLazyPreparation: true, // default
           // Customise the shuffle algorithm.
           shuffleOrder: DefaultShuffleOrder(), // default
-
           // Specify the items in the playlist.
           children: source,
         ),

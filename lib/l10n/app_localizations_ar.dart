@@ -66,7 +66,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cancel => 'فࣷمّ';
 
   @override
-  String get clickHereToReadMore => 'بࣴسَلْ فِي نگِرْ يࣷڪّ سَ نجࣵنگّ:‏ ';
+  String get clickHereToReadMore => 'بࣴسَلْ فِي نگِرْ يࣷڪّ سَ نجࣵنگّ';
 
   @override
   String get introPage1 =>

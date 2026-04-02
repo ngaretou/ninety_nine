@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:ninety_nine/main.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
@@ -21,30 +22,38 @@ class CardBack extends StatelessWidget {
   final MediaQueryData mediaQuery;
   final EdgeInsets cardPadding;
 
-  const CardBack(this.name, this.player, this.mediaQuery, this.cardPadding, {super.key});
+  const CardBack(
+    this.name,
+    this.player,
+    this.mediaQuery,
+    this.cardPadding, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     debugPrint('card back build ${name.id}');
+    // debugPrint('card padding bottom ${cardPadding.bottom}');
     CardPrefList cardPrefs = Provider.of<CardPrefs>(
       context,
       listen: false,
     ).cardPrefs;
-    final bool isDark =
-        Provider.of<ThemeModel>(context, listen: false).userTheme!.brightness ==
-        Brightness.dark;
+    final themeModel = Provider.of<ThemeModel>(context, listen: false);
+    final bool isDark = themeModel.userTheme!.brightness == Brightness.dark;
+    final String chosenLang = themeModel.userLocale.toString();
     final ui.TextDirection rtlText = ui.TextDirection.rtl;
     final Color fontColor = isDark ? Colors.white : Colors.black;
 
     bool isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
 
-    Widget textRS(input, double fontReduction) {
+    Widget textRS(input, double fontReduction, {String fontFamily = 'Charis'}) {
       return Text(
         input,
+        textDirection: .ltr,
         textAlign: TextAlign.center,
         style: TextStyle(
           color: fontColor,
-          fontFamily: "Charis",
+          fontFamily: fontFamily,
           fontSize: 30 - fontReduction,
         ),
       );
@@ -62,6 +71,7 @@ class CardBack extends StatelessWidget {
 
       return Text(
         textToRender,
+
         textAlign: TextAlign.center,
         style: TextStyle(
           color: fontColor,
@@ -129,83 +139,114 @@ class CardBack extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      // children: [
-                      //Name Header
-                      Row(
-                        children: [
-                          Expanded(child: textRS(name.wolofName, 0)),
-                          VerticalDivider(
-                            color: Theme.of(context).primaryColor,
-                            thickness: 3,
-                          ),
-                          Expanded(child: textAS(name.wolofalName, 0)),
-                        ],
-                      ),
-                      // Wolofal verse section
-                      cardPrefs.wolofalVerseEnabled
-                          ? Column(
-                              children: [
-                                Divider(
-                                  color: Theme.of(context).primaryColor,
-                                  thickness: 3,
-                                ),
-                                textAS(name.wolofalVerse, 0.0),
-                                textAS(name.wolofalVerseRef, 10.0),
-                              ],
-                            )
-                          : SizedBox(width: 20),
-                      //Wolof verse section
-                      cardPrefs.wolofVerseEnabled
-                          ? Column(
-                              children: [
-                                Divider(
-                                  color: Theme.of(context).primaryColor,
-                                  thickness: 3,
-                                ),
-                                textRS(name.wolofVerse, 0.0),
-                                SizedBox(height: 20),
-                                textRS(name.wolofVerseRef, 10.0),
-                              ],
-                            )
-                          : SizedBox(width: 20),
-                      SizedBox(height: 60),
-                      TextButton(
-                        // style: TextButton.styleFrom(
-                        //     backgroundColor: Theme.of(context)
-                        //         .colorScheme
-                        //         .tertiaryContainer),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                  padding: isAndroid
+                      ? EdgeInsets.only(
+                          left: 20.0,
+                          right: 20.0,
+                          // this prevents the text from going behind the status bar
+                          top: isPhone ? cardPadding.top : 0,
+                        )
+                      : EdgeInsets.symmetric(horizontal: 20.0),
+                  // On Android, a ListView (and CustomScrollView, SingleChildScrollView, etc.)
+                  // automatically applies MediaQuery padding at the top to avoid the status bar and system UI.
+                  // To get the names to line up at the top but then have the Padding enable it to slide into invisibility,
+                  // remove the auto padding
+                  child: MediaQuery.removePadding(
+                    context: context,
+                    removeTop: isAndroid ? true : false,
+                    child: ListView(
+                      children: [
+                        //Name Header
+                        // web/android/ios - the mobile platforms have some built-in
+                        // padding for status bars, but web needs this
+                        if (kIsWeb || !isPhone) SizedBox(height: 30),
+                        Row(
                           children: [
-                            Text(
-                              AppLocalizations.of(context)!.clickHereToReadMore,
-                              style: TextStyle(color: fontColor),
+                            Expanded(child: textRS(name.wolofName, 0)),
+                            VerticalDivider(
+                              color: Theme.of(context).primaryColor,
+                              thickness: 1,
                             ),
-                            Icon(Icons.arrow_forward, color: fontColor),
+                            Expanded(child: textAS(name.wolofalName, 0)),
                           ],
                         ),
-                        onPressed: () async {
-                          const String url = 'https://sng.al/chrono';
-                          if (await canLaunchUrl(Uri.parse(url))) {
-                            await launchUrl(Uri.parse(url));
-                          } else {
-                            throw 'Could not launch $url';
-                          }
-                        },
-                      ),
-                      SizedBox(height: 70),
-                      // ],
-                    ],
+                        // Wolofal verse section
+                        cardPrefs.wolofalVerseEnabled
+                            ? Column(
+                                children: [
+                                  Divider(
+                                    color: Theme.of(context).primaryColor,
+                                    thickness: 1,
+                                  ),
+                                  textAS(name.wolofalVerse, 0.0),
+                                  textAS(name.wolofalVerseRef, 10.0),
+                                ],
+                              )
+                            : SizedBox(width: 20),
+                        //Wolof verse section
+                        cardPrefs.wolofVerseEnabled
+                            ? Column(
+                                children: [
+                                  Divider(
+                                    color: Theme.of(context).primaryColor,
+                                    thickness: 1,
+                                  ),
+                                  textRS(name.wolofVerse, 0.0),
+                                  SizedBox(height: 20),
+                                  textRS(name.wolofVerseRef, 10.0),
+                                ],
+                              )
+                            : SizedBox(width: 20),
+                        SizedBox(height: 60),
+                        TextButton(
+                          // style: TextButton.styleFrom(
+                          //     backgroundColor: Theme.of(context)
+                          //         .colorScheme
+                          //         .tertiaryContainer),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              chosenLang == 'ar'
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: textAS(
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.clickHereToReadMore,
+                                        16.0,
+                                      ),
+                                    )
+                                  : textRS(
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.clickHereToReadMore,
+                                      10.0,
+                                      fontFamily: 'Harmattan',
+                                    ),
+                              Icon(Icons.arrow_forward, color: fontColor),
+                            ],
+                          ),
+                          onPressed: () async {
+                            const String url = 'https://sng.al/chrono';
+                            if (await canLaunchUrl(Uri.parse(url))) {
+                              await launchUrl(Uri.parse(url));
+                            } else {
+                              throw 'Could not launch $url';
+                            }
+                          },
+                        ),
+                        SizedBox(height: 90),
+                        // ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: 20),
+              padding: isPhone
+                  ? EdgeInsets.only(bottom: cardPadding.bottom + 8)
+                  : EdgeInsets.only(bottom: 20),
               child: CardIconBar(name, player),
             ),
           ],

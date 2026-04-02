@@ -127,6 +127,8 @@ class CardIconBarState extends State<CardIconBar> {
       }
     }
 
+   
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: Material(

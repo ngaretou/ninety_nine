@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ninety_nine/screens/names_list_screen.dart';
 import 'package:ninety_nine/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,8 @@ import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization met
 import '../providers/names.dart';
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
+
+import '../main.dart';
 
 import './about_screen.dart';
 import './cards_screen.dart';
@@ -27,6 +30,25 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class SettingsScreenState extends State<SettingsScreen> {
+  @override
+  void initState() {
+    if (!isAndroid) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    }
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (!isAndroid) {
+      SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom],
+      );
+    }
+    super.dispose();
+  }
   //The individual setting headings
 
   //Main Settings screen construction:
@@ -35,7 +57,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     // MediaQueryData mediaQuery = MediaQuery.of(context);
     Size mediaQuerySize = MediaQuery.sizeOf(context);
 
-    final bool isPhone = (mediaQuerySize.width + mediaQuerySize.height) <= 1400;
+    final bool isWide = mediaQuerySize.width >= 730;
 
     ThemeModel themeProvider = Provider.of<ThemeModel>(context, listen: false);
     ThemeComponents? userTheme = themeProvider.userTheme;
@@ -52,13 +74,13 @@ class SettingsScreenState extends State<SettingsScreen> {
 
     TextStyle titleStyleAs = Theme.of(
       context,
-    ).textTheme.titleMedium!.copyWith(fontFamily: 'Harmattan', fontSize: 24);
+    ).textTheme.titleMedium!.copyWith(fontFamily: 'Harmattan', fontSize: 28);
     TextStyle optionsStyleAs = Theme.of(
       context,
-    ).textTheme.titleSmall!.copyWith(fontFamily: 'Harmattan', fontSize: 20);
+    ).textTheme.titleSmall!.copyWith(fontFamily: 'Harmattan', fontSize: 24);
 
-    TextStyle titleStyleRs = Theme.of(context).textTheme.titleMedium!;
-    TextStyle optionsStyleRs = Theme.of(context).textTheme.titleSmall!;
+    TextStyle titleStyleRs = Theme.of(context).textTheme.titleLarge!;
+    TextStyle optionsStyleRs = Theme.of(context).textTheme.titleMedium!;
 
     if (isArabic) {
       titleStyle = titleStyleAs;
@@ -82,6 +104,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     //Main template for all setting titles
     Widget settingTitle(String title, IconData icon, Function? tapHandler) {
       return InkWell(
+        hoverColor: Theme.of(context).colorScheme.secondary.withAlpha(10),
         onTap: tapHandler as void Function()?,
         child: Padding(
           padding: EdgeInsets.all(20),
@@ -116,7 +139,7 @@ class SettingsScreenState extends State<SettingsScreen> {
       return Column(
         //This aligns titles to the left
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [title, setting, Divider()],
+        children: [title, setting, Divider(height: 32, thickness: 1)],
       );
     }
 
@@ -179,6 +202,9 @@ class SettingsScreenState extends State<SettingsScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           DropdownButton(
+            focusColor: Theme.of(context).colorScheme.surface,
+            dropdownColor: Theme.of(context).colorScheme.surface,
+            borderRadius: .circular(12),
             itemHeight: 48,
             underline: SizedBox(),
             value: colorToInt(userTheme!.color).toString(),
@@ -340,8 +366,9 @@ class SettingsScreenState extends State<SettingsScreen> {
 
     Widget directionSettings() {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: .start,
         children: [
+          if (!isWide) SizedBox(width: 80),
           Wrap(
             direction: Axis.horizontal,
             spacing: 15,
@@ -350,12 +377,16 @@ class SettingsScreenState extends State<SettingsScreen> {
                 selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: cardPrefs.cardPrefs.textDirection ? false : true,
-                label: Row(
-                  children: [
-                    Text("(abc)", style: optionsStyle),
-                    SizedBox(width: 6),
-                    Icon(Icons.arrow_forward),
-                  ],
+                label: SizedBox(
+                  width: 80,
+                  child: Row(
+                    mainAxisAlignment: .center,
+                    children: [
+                      Text("(abc)", style: optionsStyle),
+                      SizedBox(width: 6),
+                      Icon(Icons.arrow_forward),
+                    ],
+                  ),
                 ),
                 onSelected: (bool selected) {
                   cardPrefs.savePref('textDirection', false);
@@ -366,12 +397,16 @@ class SettingsScreenState extends State<SettingsScreen> {
                 selectedColor: activeControlColor,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 selected: cardPrefs.cardPrefs.textDirection ? true : false,
-                label: Row(
-                  children: [
-                    Text("(بدف)", style: optionsStyle),
-                    SizedBox(width: 6),
-                    Icon(Icons.arrow_back),
-                  ],
+                label: SizedBox(
+                  width: 80,
+                  child: Row(
+                    mainAxisAlignment: .center,
+                    children: [
+                      Text("(بدف)", style: optionsStyle),
+                      SizedBox(width: 6),
+                      Icon(Icons.arrow_back),
+                    ],
+                  ),
                 ),
                 onSelected: (bool selected) {
                   cardPrefs.savePref('textDirection', true);
@@ -402,7 +437,7 @@ class SettingsScreenState extends State<SettingsScreen> {
             value: value,
             onChanged: onChanged,
           ),
-          isPhone ? SizedBox(width: 8) : SizedBox(width: 80),
+          isWide ? SizedBox(width: 8) : SizedBox(width: 80),
         ],
       );
     }
@@ -445,8 +480,9 @@ class SettingsScreenState extends State<SettingsScreen> {
 
     Widget showFavsSetting() {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: .start,
         children: [
+          SizedBox(width: 80),
           Wrap(
             direction: Axis.horizontal,
             spacing: 15,
@@ -528,13 +564,14 @@ class SettingsScreenState extends State<SettingsScreen> {
     }
 
     Widget languageSetting() {
-      final narrow = mediaQuerySize.width > 575;
+      const double spacing = 12;
+      bool wide = mediaQuerySize.width > 575;
 
       Widget aligner({required Widget child}) {
-        return Align(alignment: narrow ? .center : .centerStart, child: child);
+        return Align(alignment: wide ? .center : .centerStart, child: child);
       }
 
-      List<Widget> languageChips = [
+      List<Widget> wolofLanguageChips = [
         //Note that userLocale.toString() evaluates to for example 'fr' in Android/iOS but on the web 'fr_' with the underscore.
         //So three slightly different checks for the three langs:
         //fr_CH checks for fr_CH only
@@ -542,8 +579,8 @@ class SettingsScreenState extends State<SettingsScreen> {
         //en checks for contains en
         aligner(
           child: ChoiceChip(
+            padding: .all(12),
             selectedColor: activeControlColor,
-            padding: EdgeInsets.symmetric(horizontal: 10),
             selected: userLocale.toString() == 'fr_CH' ? true : false,
             label: Text("Wolof", style: optionsStyleRs),
             onSelected: (bool selected) {
@@ -554,7 +591,7 @@ class SettingsScreenState extends State<SettingsScreen> {
         aligner(
           child: ChoiceChip(
             selectedColor: activeControlColor,
-            padding: EdgeInsets.symmetric(horizontal: 10),
+
             selected: userLocale.toString() == 'ar' ? true : false,
             label: Text("وࣷلࣷفَلْ", style: optionsStyleAs),
             onSelected: (bool selected) {
@@ -562,10 +599,14 @@ class SettingsScreenState extends State<SettingsScreen> {
             },
           ),
         ),
+      ];
+
+      List<Widget> otherLanguageChips = [
         aligner(
           child: ChoiceChip(
+            padding: .all(12),
             selectedColor: activeControlColor,
-            padding: EdgeInsets.symmetric(horizontal: 10),
+
             selected:
                 userLocale.toString() == 'fr' || userLocale.toString() == 'fr_'
                 ? true
@@ -578,8 +619,9 @@ class SettingsScreenState extends State<SettingsScreen> {
         ),
         aligner(
           child: ChoiceChip(
+            padding: .all(12),
             selectedColor: activeControlColor,
-            padding: EdgeInsets.symmetric(horizontal: 10),
+
             selected: userLocale.toString().contains('en') ? true : false,
             label: Text("English", style: optionsStyleRs),
             onSelected: (bool selected) {
@@ -593,15 +635,31 @@ class SettingsScreenState extends State<SettingsScreen> {
         padding: userLocale.toString() == 'ar'
             ? const EdgeInsets.only(right: 80.0)
             : const EdgeInsets.only(left: 80.0),
-        child: GridView.count(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          crossAxisCount: narrow ? 4 : 2,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 15,
-          childAspectRatio: 3.2,
-          children: languageChips,
-        ),
+        child: wide
+            // wide view as in browser
+            ? Row(
+                spacing: spacing,
+                children: [...wolofLanguageChips, ...otherLanguageChips],
+              )
+            // narrow/phone view
+            : Row(
+                mainAxisAlignment: .start,
+                spacing: spacing,
+                children: [
+                  Column(
+                    crossAxisAlignment: .start,
+                    spacing: spacing,
+                    children: wolofLanguageChips,
+                  ),
+                  Column(
+                    crossAxisAlignment: .start,
+                    spacing: spacing,
+                    children: otherLanguageChips,
+                  ),
+                ],
+              ),
+
+        
       );
 
       // return Wrap(
@@ -682,7 +740,7 @@ class SettingsScreenState extends State<SettingsScreen> {
         AppLocalizations.of(context)!.settingsViewIntro,
         Icons.replay,
         () {
-          Navigator.of(context).pushNamed(OnboardingScreen.routeName);
+          Navigator.of(context).popAndPushNamed(OnboardingScreen.routeName);
         },
       );
     }
@@ -709,7 +767,7 @@ class SettingsScreenState extends State<SettingsScreen> {
         child: Center(
           child: MouseRegion(
             cursor: SystemMouseCursors.grab,
-            child: mediaQuerySize.width >= 730
+            child: isWide
                 // tablet
                 ? SizedBox(
                     width: 730,

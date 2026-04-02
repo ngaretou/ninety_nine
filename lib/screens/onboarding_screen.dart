@@ -1,5 +1,4 @@
-// import 'dart:io';
-
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter/foundation.dart' show kIsWeb;
@@ -7,6 +6,7 @@ import './cards_screen.dart';
 import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization method
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
+import '../main.dart';
 
 const double spaceBetweenParagraphs = 12;
 
@@ -35,9 +35,19 @@ class OnboardingScreenState extends State<OnboardingScreen> {
     isLandscape = (mediaQuery.orientation == Orientation.landscape)
         ? true
         : false;
+    final double topPadding = max(mediaQuery.padding.top, 20);
+    final double bottomPadding = max(
+      isAndroid ? mediaQuery.padding.bottom + 8 : mediaQuery.padding.bottom,
+      20,
+    );
 
     if (isPhone) {
-      cardPadding = EdgeInsets.all(20);
+      cardPadding = EdgeInsets.only(
+        top: topPadding,
+        bottom: bottomPadding,
+        left: 20,
+        right: 20,
+      );
     } else {
       if (mediaQuery.size.height < 900) {
         cardPadding = EdgeInsets.symmetric(
@@ -342,11 +352,15 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                                   alignment: Alignment.center,
                                   child: Text(
                                     AppLocalizations.of(context)!.start,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20,
-                                    ),
+                                    style: isArabic
+                                        ? introAsStyle.copyWith(
+                                            fontSize: 28,
+                                            fontWeight: FontWeight.normal,
+                                          )
+                                        : introRsStyle.copyWith(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.normal,
+                                          ),
                                   ),
                                 ),
                               ),
@@ -418,10 +432,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
           items: [
             DropdownMenuItem(
               value: 1,
-              child: Container(
-                color: Colors.white,
-                child: Text("Wolof", style: chooserStyle),
-              ),
+              child: Text("Wolof", style: chooserStyle),
             ),
             DropdownMenuItem(
               value: 4,

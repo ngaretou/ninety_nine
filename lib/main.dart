@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:ninety_nine/providers/player_manager.dart';
@@ -17,6 +19,16 @@ import './screens/about_screen.dart';
 import './screens/cards_screen.dart';
 import './screens/onboarding_screen.dart';
 import './screens/names_list_screen.dart';
+
+bool get isAndroid {
+  if (kIsWeb) {
+    return false;
+  } else if (Platform.isAndroid) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 void main() {
   runApp(
@@ -83,6 +95,14 @@ class MyAppState extends State<MyApp> {
     // debugPrint('before _initialization');
     // _initialization = callInititalization();
     // debugPrint('after _initialization');
+    if (isAndroid) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    } else {
+      SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom],
+      );
+    }
   }
 
   Future<void> callInititalization() async {
@@ -108,13 +128,21 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     debugPrint('main.dart build');
 
-    //No good on three-button Android
+    // These options are going away as of SDK 36 - so go ahead and figure it out.
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+    // this edgeToEdge option will be enforced from 36, so go ahead and use this.
 
-    //Good on three-button Android - you can swipe down to see nav buttons etc but they go away
-    //This not perfect perhaps but probably best compromise
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    // final Brightness brightness = MediaQuery.platformBrightnessOf(context);
+
+    // SystemChrome.setSystemUIOverlayStyle(
+    //   SystemUiOverlayStyle(
+    //     statusBarIconBrightness: brightness == Brightness.dark
+    //         ? Brightness.light
+    //         : Brightness.dark,
+
+    //   ),
+    // );
 
     ThemeData? currentTheme = Provider.of<ThemeModel>(context).currentTheme;
 
@@ -161,7 +189,8 @@ class MyAppState extends State<MyApp> {
                 const Locale('ar', ''),
               ],
               locale:
-                  Provider.of<ThemeModel>(context, listen: false).userLocale ?? Locale('fr', 'CH'),
+                  Provider.of<ThemeModel>(context, listen: false).userLocale ??
+                  Locale('fr', 'CH'),
             ),
     );
   }

@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,8 @@ import 'package:audio_session/audio_session.dart';
 import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization method
 
 import '../providers/fps.dart';
+
+import '../main.dart';
 
 import './settings_screen.dart';
 
@@ -160,29 +163,33 @@ class CardsScreenState extends State<CardsScreen> {
     return Scaffold(
       floatingActionButton: Builder(
         builder: (context) {
-          return FloatingActionButton(
-            onPressed: () {
-              // Scaffold.of(context).openEndDrawer();
-              Navigator.of(context)
-                  //Here settings screen is opened.
-                  .pushNamed(SettingsScreen.routeName)
-                  //The response from Settings Screen is only in case of the user selecting a name in List View.
-                  //See the settings screen and the list view screen for the chain of commands here.
-                  .then((value) {
-                    if (value != null) {
-                      setState(() {
-                        goToPage = value as int;
-                      });
-                    } else {
-                      setState(() {});
-                    }
-                  });
-            },
-            mini: true,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+          return SafeArea(
+            child: FloatingActionButton(
+              elevation: 3,
+              backgroundColor: Theme.of(context).colorScheme.surfaceDim,
+              onPressed: () {
+                // Scaffold.of(context).openEndDrawer();
+                Navigator.of(context)
+                    //Here settings screen is opened.
+                    .pushNamed(SettingsScreen.routeName)
+                    //The response from Settings Screen is only in case of the user selecting a name in List View.
+                    //See the settings screen and the list view screen for the chain of commands here.
+                    .then((value) {
+                      if (value != null) {
+                        setState(() {
+                          goToPage = value as int;
+                        });
+                      } else {
+                        setState(() {});
+                      }
+                    });
+              },
+              mini: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Icon(Icons.menu),
             ),
-            child: Icon(Icons.menu),
           );
         },
       ),
@@ -254,7 +261,13 @@ class _NameCardsState extends State<NameCards> {
 
   @override
   Widget build(BuildContext context) {
-    mediaQuery = MediaQuery.of(context);
+    final mediaQuery = MediaQuery.of(context);
+    final double topPadding = max(mediaQuery.padding.top, 20);
+    final double bottomPadding = max(
+      isAndroid ? mediaQuery.padding.bottom + 8 : mediaQuery.padding.bottom,
+      20,
+    );
+
     debugPrint('Name Cards PageViewBuilder');
 
     //We need to get this in the build so it updates when rebuilding on setState
@@ -281,10 +294,15 @@ class _NameCardsState extends State<NameCards> {
       divineNames.moveToName = false;
     }
 
-    late EdgeInsets cardPadding;
+    EdgeInsets cardPadding = EdgeInsets.all(20);
 
     if (isPhone) {
-      cardPadding = EdgeInsets.all(20);
+      cardPadding = EdgeInsets.only(
+        top: topPadding,
+        bottom: bottomPadding,
+        left: 20,
+        right: 20,
+      );
     } else {
       if (mediaQuery.size.height < 900) {
         cardPadding = EdgeInsets.symmetric(

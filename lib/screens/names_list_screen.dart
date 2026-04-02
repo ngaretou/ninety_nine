@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'dart:ui' as ui;
 import '../providers/card_prefs.dart';
 import '../providers/names.dart';
@@ -59,13 +58,31 @@ class NamesList extends StatelessWidget {
               cursor: SystemMouseCursors.grab,
               child: SizedBox(
                 width: mediaQueryWidth >= 730 ? 730 : mediaQueryWidth,
-                child: ScrollablePositionedList.builder(
+                child: ListView.separated(
+                  separatorBuilder: (_, _) => const Divider(height: 1),
                   itemCount: names.names.length,
-                  itemBuilder: (ctx, i) => GestureDetector(
-                    child: Card(
-                      elevation: 5,
-
-                      // color: Theme.of(context).cardColor,
+                  itemBuilder: (ctx, i) => Material(
+                    color: Theme.of(context).cardColor,
+                    child: InkWell(
+                      hoverColor: Theme.of(
+                        context,
+                      ).colorScheme.secondary.withAlpha(20),
+                      onTap: () {
+                        debugPrint('tapped');
+                        //Resets to show all cards rather than favs
+                        Provider.of<CardPrefs>(
+                          context,
+                          listen: false,
+                        ).savePref('showFavs', false);
+                        //This is a hacky marker that shows the app we should navigate -
+                        //This is trickier than it sounds as the build gets triggered with all the animation
+                        Provider.of<DivineNames>(
+                          context,
+                          listen: false,
+                        ).moveToName = true;
+                        //Closes this screen and sends index of the chosen name up the tree
+                        Navigator.of(context).pop(i);
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 8.0,
@@ -105,22 +122,6 @@ class NamesList extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onTap: () {
-                      debugPrint('tapped');
-                      //Resets to show all cards rather than favs
-                      Provider.of<CardPrefs>(
-                        context,
-                        listen: false,
-                      ).savePref('showFavs', false);
-                      //This is a hacky marker that shows the app we should navigate -
-                      //This is trickier than it sounds as the build gets triggered with all the animation
-                      Provider.of<DivineNames>(
-                        context,
-                        listen: false,
-                      ).moveToName = true;
-                      //Closes this screen and sends index of the chosen name up the tree
-                      Navigator.of(context).pop(i);
-                    },
                   ),
                 ),
               ),

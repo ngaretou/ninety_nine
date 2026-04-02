@@ -114,7 +114,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "clickHereToReadMore": "Bësal fii ngir yokk sa njàng: ",
+  "clickHereToReadMore": "Bësal fii ngir yokk sa njàng",
   "@clickHereToReadMore": {
     "description": "clickHereToReadMore",
     "type": "text",

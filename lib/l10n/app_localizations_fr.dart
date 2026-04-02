@@ -194,7 +194,7 @@ class AppLocalizationsFrCh extends AppLocalizationsFr {
   String get cancel => 'Fomm';
 
   @override
-  String get clickHereToReadMore => 'Bësal fii ngir yokk sa njàng: ';
+  String get clickHereToReadMore => 'Bësal fii ngir yokk sa njàng';
 
   @override
   String get introPage1 =>
