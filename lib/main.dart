@@ -20,9 +20,11 @@ import './screens/cards_screen.dart';
 import './screens/onboarding_screen.dart';
 import './screens/names_list_screen.dart';
 
-bool get isAndroid {
+bool showStatusBar({required bool isPhone}) {
   if (kIsWeb) {
     return false;
+  } else if (!isPhone) {
+    return true;
   } else if (Platform.isAndroid) {
     return true;
   } else {
@@ -81,8 +83,8 @@ class MyAppState extends State<MyApp> {
   }
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     /* https://blog.devgenius.io/understanding-futurebuilder-in-flutter-491501526373
     "Now you must be wondering why we are doing this right? Can’t we directly assign _getContacts() 
     to the FutureBuilder directly instead of introducing another variable?
@@ -95,7 +97,9 @@ class MyAppState extends State<MyApp> {
     // debugPrint('before _initialization');
     // _initialization = callInititalization();
     // debugPrint('after _initialization');
-    if (isAndroid) {
+    MediaQueryData mediaQuery = MediaQuery.of(context);
+    bool isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
+    if (showStatusBar(isPhone: isPhone)) {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     } else {
       SystemChrome.setEnabledSystemUIMode(

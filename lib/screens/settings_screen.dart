@@ -30,18 +30,22 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class SettingsScreenState extends State<SettingsScreen> {
+  late bool isPhone;
   @override
-  void initState() {
-    if (!isAndroid) {
+  void didChangeDependencies() {
+    MediaQueryData mediaQuery = MediaQuery.of(context);
+    isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
+
+    if (!showStatusBar(isPhone: isPhone)) {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     }
 
-    super.initState();
+    super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    if (!isAndroid) {
+    if (!showStatusBar(isPhone: isPhone)) {
       SystemChrome.setEnabledSystemUIMode(
         SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom],
@@ -658,8 +662,6 @@ class SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ],
               ),
-
-        
       );
 
       // return Wrap(
@@ -707,7 +709,6 @@ class SettingsScreenState extends State<SettingsScreen> {
         AppLocalizations.of(context)!.shareAppLink,
         Icons.share,
         () async {
-          Navigator.of(context).pop();
           if (!kIsWeb) {
             Share.share(
               'https://sng.al/99',
@@ -715,7 +716,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                 0,
                 0,
                 mediaQuerySize.width,
-                mediaQuerySize.height * .33,
+                mediaQuerySize.height,
               ),
             );
           } else {

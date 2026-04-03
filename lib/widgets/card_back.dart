@@ -139,7 +139,7 @@ class CardBack extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: isAndroid
+                  padding: showStatusBar(isPhone: isPhone)
                       ? EdgeInsets.only(
                           left: 20.0,
                           right: 20.0,
@@ -153,7 +153,7 @@ class CardBack extends StatelessWidget {
                   // remove the auto padding
                   child: MediaQuery.removePadding(
                     context: context,
-                    removeTop: isAndroid ? true : false,
+                    removeTop: showStatusBar(isPhone: isPhone) ? true : false,
                     child: ListView(
                       children: [
                         //Name Header

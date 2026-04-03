@@ -166,7 +166,9 @@ class CardsScreenState extends State<CardsScreen> {
           return SafeArea(
             child: FloatingActionButton(
               elevation: 3,
-              backgroundColor: Theme.of(context).colorScheme.surfaceDim,
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHigh,
               onPressed: () {
                 // Scaffold.of(context).openEndDrawer();
                 Navigator.of(context)
@@ -264,7 +266,9 @@ class _NameCardsState extends State<NameCards> {
     final mediaQuery = MediaQuery.of(context);
     final double topPadding = max(mediaQuery.padding.top, 20);
     final double bottomPadding = max(
-      isAndroid ? mediaQuery.padding.bottom + 8 : mediaQuery.padding.bottom,
+      showStatusBar(isPhone: isPhone)
+          ? mediaQuery.padding.bottom + 8
+          : mediaQuery.padding.bottom,
       20,
     );
 

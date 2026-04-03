@@ -37,7 +37,9 @@ class OnboardingScreenState extends State<OnboardingScreen> {
         : false;
     final double topPadding = max(mediaQuery.padding.top, 20);
     final double bottomPadding = max(
-      isAndroid ? mediaQuery.padding.bottom + 8 : mediaQuery.padding.bottom,
+      showStatusBar(isPhone: isPhone)
+          ? mediaQuery.padding.bottom + 8
+          : mediaQuery.padding.bottom,
       20,
     );
 
