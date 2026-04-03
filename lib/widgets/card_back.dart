@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:ninety_nine/main.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
@@ -139,11 +138,11 @@ class CardBack extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: showStatusBar(isPhone: isPhone)
+                  padding: isPhone
                       ? EdgeInsets.only(
                           left: 20.0,
                           right: 20.0,
-                          // this prevents the text from going behind the status bar
+                          // TODO this prevents the text from going behind the status bar
                           top: isPhone ? cardPadding.top : 0,
                         )
                       : EdgeInsets.symmetric(horizontal: 20.0),
@@ -153,7 +152,7 @@ class CardBack extends StatelessWidget {
                   // remove the auto padding
                   child: MediaQuery.removePadding(
                     context: context,
-                    removeTop: showStatusBar(isPhone: isPhone) ? true : false,
+                    removeTop: isPhone ? true : false,
                     child: ListView(
                       children: [
                         //Name Header

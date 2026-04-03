@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:ninety_nine/screens/names_list_screen.dart';
 import 'package:ninety_nine/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +12,6 @@ import '../providers/names.dart';
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
 
-import '../main.dart';
 
 import './about_screen.dart';
 import './cards_screen.dart';
@@ -31,28 +29,7 @@ class SettingsScreen extends StatefulWidget {
 
 class SettingsScreenState extends State<SettingsScreen> {
   late bool isPhone;
-  @override
-  void didChangeDependencies() {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
 
-    if (!showStatusBar(isPhone: isPhone)) {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    }
-
-    super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    if (!showStatusBar(isPhone: isPhone)) {
-      SystemChrome.setEnabledSystemUIMode(
-        SystemUiMode.manual,
-        overlays: [SystemUiOverlay.bottom],
-      );
-    }
-    super.dispose();
-  }
   //The individual setting headings
 
   //Main Settings screen construction:

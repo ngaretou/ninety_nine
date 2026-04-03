@@ -12,8 +12,6 @@ import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization met
 
 import '../providers/fps.dart';
 
-import '../main.dart';
-
 import './settings_screen.dart';
 
 import '../widgets/card_animator.dart';
@@ -112,7 +110,8 @@ class CardsScreenState extends State<CardsScreen> {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 8),
+        duration: Duration(seconds: 5),
+        persist: false,
         content: Text(
           AppLocalizations.of(context)!.lowPowerModeMessage,
           style: TextStyle(fontSize: 18),
@@ -257,18 +256,11 @@ class _NameCardsState extends State<NameCards> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final double topPadding = max(mediaQuery.padding.top, 20);
     final double bottomPadding = max(
-      showStatusBar(isPhone: isPhone)
-          ? mediaQuery.padding.bottom + 8
-          : mediaQuery.padding.bottom,
+      isPhone ? mediaQuery.padding.bottom + 8 : mediaQuery.padding.bottom,
       20,
     );
 

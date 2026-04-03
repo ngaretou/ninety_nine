@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:ninety_nine/providers/player_manager.dart';
@@ -19,18 +17,6 @@ import './screens/about_screen.dart';
 import './screens/cards_screen.dart';
 import './screens/onboarding_screen.dart';
 import './screens/names_list_screen.dart';
-
-bool showStatusBar({required bool isPhone}) {
-  if (kIsWeb) {
-    return false;
-  } else if (!isPhone) {
-    return true;
-  } else if (Platform.isAndroid) {
-    return true;
-  } else {
-    return false;
-  }
-}
 
 void main() {
   runApp(
@@ -55,7 +41,7 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   //A Future for the future builder
-  late Future<void> initialization = callInititalization();
+  late Future<void> initialization;
 
   //Language code: Initialize the locale
   Future<void> setupLang() async {
@@ -83,8 +69,8 @@ class MyAppState extends State<MyApp> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
     /* https://blog.devgenius.io/understanding-futurebuilder-in-flutter-491501526373
     "Now you must be wondering why we are doing this right? Can’t we directly assign _getContacts() 
     to the FutureBuilder directly instead of introducing another variable?
@@ -94,19 +80,7 @@ class MyAppState extends State<MyApp> {
     In order to prevent that, we make sure that the Future is obtained in the initState() and not in the build() 
     method itself. This is something which you may notice in a lot of tutorials online where they assign the 
     Future method directly to the FutureBuilder and it’s factually wrong."*/
-    // debugPrint('before _initialization');
-    // _initialization = callInititalization();
-    // debugPrint('after _initialization');
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    bool isPhone = (mediaQuery.size.width + mediaQuery.size.height) <= 1400;
-    if (showStatusBar(isPhone: isPhone)) {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    } else {
-      SystemChrome.setEnabledSystemUIMode(
-        SystemUiMode.manual,
-        overlays: [SystemUiOverlay.bottom],
-      );
-    }
+    initialization = callInititalization();
   }
 
   Future<void> callInititalization() async {
@@ -132,23 +106,33 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     debugPrint('main.dart build');
 
-    // These options are going away as of SDK 36 - so go ahead and figure it out.
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    ThemeData? currentTheme = Provider.of<ThemeModel>(context).currentTheme;
+
+    // The other options are going away on Android as of SDK 36 - so go ahead and figure it out.
+    // iOS can still handle them, but not worth the headaches to carve out the cases
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     // this edgeToEdge option will be enforced from 36, so go ahead and use this.
 
-    // final Brightness brightness = MediaQuery.platformBrightnessOf(context);
+    final Brightness brightness = Theme.of(context).brightness;
 
-    // SystemChrome.setSystemUIOverlayStyle(
-    //   SystemUiOverlayStyle(
-    //     statusBarIconBrightness: brightness == Brightness.dark
-    //         ? Brightness.light
-    //         : Brightness.dark,
-
-    //   ),
-    // );
-
-    ThemeData? currentTheme = Provider.of<ThemeModel>(context).currentTheme;
+    // This has no effect on Android 14+ and ambiguous effect on 13 but on prev versions it can be necessary
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        // top status bar
+        statusBarIconBrightness: brightness == Brightness.dark
+            ? Brightness.light
+            : Brightness.dark,
+        statusBarColor: Colors.transparent,
+        // bottom nav bar
+        systemNavigationBarColor: brightness == Brightness.dark
+            ? Colors.black
+            : Colors.white,
+        systemNavigationBarIconBrightness: brightness == Brightness.dark
+            ? Brightness.light
+            : Brightness.dark,
+      ),
+    );
 
     return FutureBuilder(
       future: initialization,

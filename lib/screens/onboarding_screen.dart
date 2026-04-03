@@ -6,7 +6,6 @@ import './cards_screen.dart';
 import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization method
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
-import '../main.dart';
 
 const double spaceBetweenParagraphs = 12;
 
@@ -37,9 +36,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
         : false;
     final double topPadding = max(mediaQuery.padding.top, 20);
     final double bottomPadding = max(
-      showStatusBar(isPhone: isPhone)
-          ? mediaQuery.padding.bottom + 8
-          : mediaQuery.padding.bottom,
+      isPhone ? mediaQuery.padding.bottom + 8 : mediaQuery.padding.bottom,
       20,
     );
 
