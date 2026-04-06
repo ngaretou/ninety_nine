@@ -15,8 +15,23 @@ Fixed:
 1.0.2
 - Added Wolofal menus and display text
 
+1.0.4
+- Added Arabic menus and display text
+
 
 Todo:
 - 'copy' in addition to 'share'
 - audio share - the arnames are not in the same mp3 encoding - 96 kbps 44.1khz mono
 
+## Web release
+>>increment build number in pubspec.yaml
+```
+rm -rf build/web
+flutter build web 
+cd build/web
+HASH=$( (cat main.dart.js; date +%s) | sha256sum | cut -c1-8 )
+mv main.dart.js main.dart.$HASH.js
+sed -i .bak "s/main.dart.js/main.dart.$HASH.js/g" flutter_bootstrap.js 
+rm flutter_bootstrap.js.bak 
+cd ../..
+```

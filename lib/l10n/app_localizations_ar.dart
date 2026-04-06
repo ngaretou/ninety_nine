@@ -51,7 +51,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsTextAll => 'يࣺݒّ';
 
   @override
-  String get settingsContactUs => 'يٗنّࣹي نُ اࣹمَِلْ';
+  String get settingsContactUs => 'يٗنِّ نُ اَبْ بَتَاخَلْ';
 
   @override
   String get settingsViewIntro => 'خࣷولاَتْ اُبِّتࣹ گِ';

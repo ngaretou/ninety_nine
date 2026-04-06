@@ -84,7 +84,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "settingsContactUs": "Yónnee nu email",
+  "settingsContactUs": "Yónnee nu ab bataaxal",
   "@settingsContactUs": {
     "description": "settingsContactUs",
     "type": "text",

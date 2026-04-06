@@ -179,7 +179,7 @@ class AppLocalizationsFrCh extends AppLocalizationsFr {
   String get settingsTextAll => 'Yépp';
 
   @override
-  String get settingsContactUs => 'Yónnee nu email';
+  String get settingsContactUs => 'Yónnee nu ab bataaxal';
 
   @override
   String get settingsViewIntro => 'Xoolaat ubbite gi';

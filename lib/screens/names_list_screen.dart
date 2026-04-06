@@ -6,6 +6,7 @@ import '../providers/card_prefs.dart';
 import '../providers/names.dart';
 import '../l10n/app_localizations.dart'; // the new Flutter 3.x localization method
 import 'cards_screen.dart';
+import '../providers/theme.dart';
 
 class NamesList extends StatelessWidget {
   static const routeName = 'names-list-screen';
@@ -14,6 +15,11 @@ class NamesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeModel themeProvider = Provider.of<ThemeModel>(context, listen: false);
+
+    Locale userLocale = themeProvider.userLocale!;
+
+    bool isArabic = userLocale.toString() == 'ar';
     final names = Provider.of<DivineNames>(context, listen: false);
 
     TextStyle asStyle = TextStyle(
@@ -44,7 +50,12 @@ class NamesList extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.listView)),
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.of(context)!.listView,
+          style: isArabic ? asStyle : rsStyle,
+        ),
+      ),
       backgroundColor: Theme.of(context).colorScheme.surfaceDim,
       //If the width of the screen is greater or equal to 500
       //show the wide view

@@ -142,8 +142,8 @@ class CardBack extends StatelessWidget {
                       ? EdgeInsets.only(
                           left: 20.0,
                           right: 20.0,
-                          // TODO this prevents the text from going behind the status bar
-                          top: isPhone ? cardPadding.top : 0,
+                          // this prevents the text from going behind the status bar
+                          top: cardPadding.top,
                         )
                       : EdgeInsets.symmetric(horizontal: 20.0),
                   // On Android, a ListView (and CustomScrollView, SingleChildScrollView, etc.)
@@ -156,9 +156,7 @@ class CardBack extends StatelessWidget {
                     child: ListView(
                       children: [
                         //Name Header
-                        // web/android/ios - the mobile platforms have some built-in
-                        // padding for status bars, but web needs this
-                        if (kIsWeb || !isPhone) SizedBox(height: 30),
+                        SizedBox(height: 30),
                         Row(
                           children: [
                             Expanded(child: textRS(name.wolofName, 0)),
