@@ -12,7 +12,6 @@ import '../providers/names.dart';
 import '../providers/theme.dart';
 import '../providers/card_prefs.dart';
 
-
 import './about_screen.dart';
 import './cards_screen.dart';
 
@@ -42,7 +41,7 @@ class SettingsScreenState extends State<SettingsScreen> {
 
     ThemeModel themeProvider = Provider.of<ThemeModel>(context, listen: false);
     ThemeComponents? userTheme = themeProvider.userTheme;
-    Locale userLocale = themeProvider.userLocale!;
+    Locale userLocale = themeProvider.userLocale ?? Locale('fr_CH', '');
 
     CardPrefs cardPrefs = Provider.of<CardPrefs>(context, listen: false);
     bool wolof = cardPrefs.cardPrefs.wolofVerseEnabled;

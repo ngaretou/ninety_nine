@@ -53,18 +53,25 @@ class MyAppState extends State<MyApp> {
       listen: false,
     ).setLocale;
 
-    //If there is no lang pref (i.e. first run), set lang to Wolof
-    if (!prefs.containsKey('userLang')) {
-      // fr_CH is our Flutter 2.x stand-in for Wolof
-      await setLocale('fr_CH');
-    } else {
-      //otherwise grab the saved setting
-      String savedUserLang =
-          json.decode(prefs.getString('userLang')!) as String;
+    try {
+      //If there is no lang pref (i.e. first run), set lang to Wolof
+      if (!prefs.containsKey('userLocale')) {
+        // fr_CH is our Flutter 2.x stand-in for Wolof
+        await setLocale('fr_CH');
+      } else {
+        //otherwise grab the saved setting
 
-      await setLocale(savedUserLang);
+        String savedUserLang = prefs.getString('userLocale')!;
+
+        await setLocale(savedUserLang);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      await setLocale('fr_CH');
     }
+
     debugPrint('end setupLang()');
+
     //end language code
   }
 

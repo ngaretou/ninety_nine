@@ -18,6 +18,8 @@ class ThemeModel extends ChangeNotifier {
   Locale? userLocale;
 
   Future<void> setLocale(String incomingLocale) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userLocale', incomingLocale);
     switch (incomingLocale) {
       case 'en':
         userLocale = Locale('en', '');
